@@ -1,17 +1,17 @@
-const T = 15;
+const T = 16;
 let cur = 0;
 let busy = false;
 let goTimer = null;
 
 const ch = {
   0:'cyph', 1:'founders', 2:'crisis', 3:'crisis', 4:'solution', 5:'solution',
-  6:'underground', 7:'underground', 8:'arena', 9:'touchgrass',
-  10:'business', 11:'business', 12:'business', 13:'business', 14:'close'
+  6:'underground', 7:'underground', 8:'underground', 9:'arena', 10:'touchgrass',
+  11:'business', 12:'business', 13:'business', 14:'business', 15:'close'
 };
 
 const bars = [
   [10,10,5,5],[12,12,5,5],[15,15,5,8],[18,18,5,10],[22,22,8,12],
-  [25,25,10,15],[60,30,12,18],[80,35,15,20],[82,55,18,25],
+  [25,25,10,15],[60,30,12,18],[70,32,13,17],[80,35,15,20],[82,55,18,25],
   [88,70,22,60],[90,72,70,65],[90,75,72,68],[92,80,75,72],[95,88,82,80],
   [100,100,100,100]
 ];
@@ -37,10 +37,10 @@ function applySlide(i) {
   });
 
   document.getElementById('citySil').classList[nc === 'arena' ? 'add' : 'remove']('show');
-  document.getElementById('hudCtr').textContent = String(i + 1).padStart(2, '0') + '/15';
-  document.getElementById('bhudCtr').textContent = String(i + 1).padStart(2, '0') + '/15';
+  document.getElementById('hudCtr').textContent = String(i + 1).padStart(2, '0') + '/16';
+  document.getElementById('bhudCtr').textContent = String(i + 1).padStart(2, '0') + '/16';
 
-  const p = Math.round((i / 14) * 100);
+  const p = Math.round((i / 15) * 100);
   const f = document.getElementById('xpFill');
   f.style.width = p + '%';
   if (nc === 'underground') f.style.background = '#EC4E20';
@@ -111,9 +111,9 @@ function goTo(i) {
         ? '1' : '0';
   });
   document.getElementById('citySil').classList[nc === 'arena' ? 'add' : 'remove']('show');
-  document.getElementById('hudCtr').textContent = String(i + 1).padStart(2, '0') + '/15';
-  document.getElementById('bhudCtr').textContent = String(i + 1).padStart(2, '0') + '/15';
-  var p = Math.round((i / 14) * 100);
+  document.getElementById('hudCtr').textContent = String(i + 1).padStart(2, '0') + '/16';
+  document.getElementById('bhudCtr').textContent = String(i + 1).padStart(2, '0') + '/16';
+  var p = Math.round((i / 15) * 100);
   var f = document.getElementById('xpFill');
   f.style.width = p + '%';
   if (nc === 'underground') f.style.background = '#EC4E20';
