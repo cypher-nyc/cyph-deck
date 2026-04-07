@@ -453,6 +453,7 @@ body>*{position:relative;z-index:1}
 }
 .crisis-card{
   flex:1;
+  min-width:0;
   padding:20px;
   background:rgba(0,0,0,0.7);
   backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
@@ -486,6 +487,7 @@ a.crisis-card:hover{
   height:40px;width:auto;opacity:0.8;
 }
 
+#s12 .crisis-card h3,#s12 .crisis-card .crisis-quote{white-space:normal}
 /* ═══ CRISIS (legacy — unused) ═══ */
 .crisis-panel{
   width:780px;border-radius:18px;overflow:hidden;
