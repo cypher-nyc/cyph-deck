@@ -186,45 +186,41 @@
 <h1 style="font-size:82px;color:#13293D;white-space:nowrap">we're today's underground arena.</h1>
 </div>
 
-<!-- LEVEL 5: HOW WE DO IT -->
+<!-- LEVEL 5: HOW WE DO IT — ISOMETRIC LAYER STACK -->
 <div class="slide" id="s5">
 <h2>how it works</h2>
-<div class="clockwork" style="position:relative;width:720px;height:460px;margin-top:24px">
-<svg viewBox="0 0 720 460" style="position:absolute;top:0;left:0;width:100%;height:100%" fill="none">
-<defs>
-<marker id="arr-og" viewBox="0 0 10 8" refX="9" refY="4" markerWidth="7" markerHeight="5" orient="auto"><path d="M0,0.5 L9,4 L0,7.5" fill="none" stroke="#EC4E20" stroke-width="1.5"/></marker>
-<marker id="arr-bl" viewBox="0 0 10 8" refX="9" refY="4" markerWidth="7" markerHeight="5" orient="auto"><path d="M0,0.5 L9,4 L0,7.5" fill="none" stroke="#608FE6" stroke-width="1.5"/></marker>
-<marker id="arr-yl" viewBox="0 0 10 8" refX="9" refY="4" markerWidth="7" markerHeight="5" orient="auto"><path d="M0,0.5 L9,4 L0,7.5" fill="none" stroke="#FBAF00" stroke-width="1.5"/></marker>
-</defs>
-<!-- guide ring -->
-<circle cx="360" cy="225" r="148" stroke="rgba(0,0,0,0.04)" stroke-width="1.5" stroke-dasharray="6 4"/>
-<!-- arc: underground → arena (clockwise, top to bottom-right) -->
-<path d="M395,82 A148,148 0 0,1 488,348" stroke="#EC4E20" stroke-width="2" opacity="0.35" marker-end="url(#arr-og)"/>
-<!-- arc: arena → irl (clockwise, bottom-right to bottom-left) -->
-<path d="M472,365 A148,148 0 0,1 240,365" stroke="#608FE6" stroke-width="2" opacity="0.35" marker-end="url(#arr-bl)"/>
-<!-- arc: irl → underground (clockwise, bottom-left to top) -->
-<path d="M222,348 A148,148 0 0,1 325,82" stroke="#FBAF00" stroke-width="2" opacity="0.35" marker-end="url(#arr-yl)"/>
-</svg>
-<!-- center label -->
-<div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center">
-<span style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:2px;color:#13293D">underground deepens / arena sharpens / irl grounds</span>
+<div style="display:flex;align-items:center;justify-content:center;gap:56px;width:100%;height:100%;padding:40px 0">
+
+  <!-- Stacked isometric layers -->
+  <div class="layer-stack">
+    <div class="iso-layer" id="isoL3">
+      <img class="lyr-color" src="assets/layers/l3-color.png">
+      <img class="lyr-bw" src="assets/layers/l3-bw.png">
+    </div>
+    <div class="iso-layer" id="isoL2">
+      <img class="lyr-color" src="assets/layers/l2-color.png">
+      <img class="lyr-bw" src="assets/layers/l2-bw.png">
+    </div>
+    <div class="iso-layer" id="isoL1">
+      <img class="lyr-color" src="assets/layers/l1-color.png">
+      <img class="lyr-bw" src="assets/layers/l1-bw.png">
+    </div>
+  </div>
+
+  <!-- Annotation panel -->
+  <div class="layer-anno" id="layerAnno" style="opacity:0">
+    <span class="layer-anno-num" id="layerNum">01</span>
+    <h3 class="layer-anno-title" id="layerTitle">underground</h3>
+    <p class="layer-anno-desc" id="layerDesc">where users become dangerous with human-produced yet suppressed artifacts.</p>
+    <div class="layer-dots">
+      <span class="layer-dot active" id="ldot1"></span>
+      <span class="layer-dot" id="ldot2"></span>
+      <span class="layer-dot" id="ldot3"></span>
+      <span class="layer-dot" id="ldot4"></span>
+    </div>
+  </div>
 </div>
-<!-- underground (top center) -->
-<div style="position:absolute;top:0;left:50%;transform:translateX(-50%);text-align:center;width:260px">
-<h3 style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:700;font-size:16px;color:var(--charcoal);margin-bottom:3px">underground</h3>
-<p style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13px;color:var(--charcoal-muted);line-height:1.45">where users become dangerous with human-produced yet suppressed artifacts.</p>
 </div>
-<!-- arena (bottom-right) -->
-<div style="position:absolute;bottom:28px;right:20px;text-align:center;width:240px">
-<h3 style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:700;font-size:16px;color:var(--charcoal);margin-bottom:3px">arena</h3>
-<p style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13px;color:var(--charcoal-muted);line-height:1.45">step into the arena where ideas get forged, tested, and sparred.</p>
-</div>
-<!-- irl (bottom-left) -->
-<div style="position:absolute;bottom:28px;left:20px;text-align:center;width:240px">
-<h3 style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:700;font-size:16px;color:var(--charcoal);margin-bottom:3px">irl</h3>
-<p style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13px;color:var(--charcoal-muted);line-height:1.45">the arena closes. get off the screen and connect IRL.</p>
-</div>
-</div></div>
 
 
 <!-- LEVEL 6: UNDERGROUND TRANSIT MAP -->
@@ -381,31 +377,25 @@
 <div class="slide" id="s9">
 <h2>you've done the reading. now wrestle with the world's most underground thinkers.</h2>
 
-<div style="display:flex;gap:60px;width:1100px;align-items:start;margin-top:20px">
+<div style="display:flex;gap:60px;width:1100px;align-items:start;margin-top:20px;justify-content:center">
 
 <!-- LEFT: live -->
-<div style="flex:1">
-<div style="display:flex;align-items:baseline;gap:10px;margin-bottom:16px"><span style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:700;font-size:14px;color:var(--charcoal);text-transform:uppercase;letter-spacing:1px">live</span><span style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14px;color:var(--charcoal-muted)">topics sourced from API's & real-time cultural listening.</span></div>
-<div style="position:relative;height:420px">
-  <img src="assets/moments/l6.png" style="position:absolute;top:0;left:10px;width:150px;height:200px;z-index:2;object-fit:cover;border-radius:4px;animation:drift1 9s ease-in-out infinite">
-  <img src="assets/moments/l7.png" style="position:absolute;top:15px;left:180px;width:140px;height:180px;z-index:1;object-fit:cover;border-radius:4px;animation:drift2 11s ease-in-out infinite">
-  <img src="assets/moments/l8.png" style="position:absolute;top:5px;right:10px;width:130px;height:190px;z-index:3;object-fit:cover;border-radius:4px;animation:drift3 10s ease-in-out infinite">
-  <img src="assets/moments/l1.png" style="position:absolute;top:210px;left:30px;width:160px;height:185px;z-index:2;object-fit:cover;border-radius:4px;animation:drift4 12s ease-in-out infinite">
-  <img src="assets/moments/l2.png" style="position:absolute;top:220px;left:210px;width:135px;height:175px;z-index:1;object-fit:cover;border-radius:4px;animation:drift5 8s ease-in-out infinite">
-  <img src="assets/moments/l3.png" style="position:absolute;top:195px;right:20px;width:145px;height:195px;z-index:3;object-fit:cover;border-radius:4px;animation:drift6 10.5s ease-in-out infinite">
+<div class="arena-section" id="arenaLive">
+<div style="display:flex;align-items:baseline;gap:10px;margin-bottom:16px;justify-content:center"><span style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:700;font-size:14px;color:var(--charcoal);text-transform:uppercase;letter-spacing:1px">live</span><span style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14px;color:var(--charcoal-muted)">topics sourced from API's & real-time cultural listening.</span></div>
+<div class="card-stack" id="stackLive">
+  <img class="stack-card" id="lc1" src="assets/cards/live1.jpeg">
+  <img class="stack-card" id="lc2" src="assets/cards/live2.jpeg">
+  <img class="stack-card" id="lc3" src="assets/cards/live3.jpeg">
 </div>
 </div>
 
 <!-- RIGHT: conceptual -->
-<div style="flex:1">
-<div style="display:flex;align-items:baseline;gap:10px;margin-bottom:16px"><span style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:700;font-size:14px;color:var(--charcoal);text-transform:uppercase;letter-spacing:1px">conceptual</span><span style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14px;color:var(--charcoal-muted)">ideas surfaced from pulses in deep research.</span></div>
-<div style="position:relative;height:420px">
-  <img src="assets/moments/c3.png" style="position:absolute;top:8px;left:5px;width:145px;height:195px;z-index:1;object-fit:cover;border-radius:4px;animation:drift3 10s ease-in-out infinite">
-  <img src="assets/moments/c7.png" style="position:absolute;top:0;left:170px;width:155px;height:185px;z-index:3;object-fit:cover;border-radius:4px;animation:drift1 9.5s ease-in-out infinite">
-  <img src="assets/moments/c1.png" style="position:absolute;top:12px;right:15px;width:135px;height:200px;z-index:2;object-fit:cover;border-radius:4px;animation:drift5 11s ease-in-out infinite">
-  <img src="assets/moments/c9.png" style="position:absolute;top:215px;left:20px;width:140px;height:180px;z-index:3;object-fit:cover;border-radius:4px;animation:drift2 8.5s ease-in-out infinite">
-  <img src="assets/moments/c5.png" style="position:absolute;top:205px;left:185px;width:150px;height:190px;z-index:1;object-fit:cover;border-radius:4px;animation:drift6 12s ease-in-out infinite">
-  <img src="assets/moments/c10.png" style="position:absolute;top:225px;right:5px;width:130px;height:170px;z-index:2;object-fit:cover;border-radius:4px;animation:drift4 9s ease-in-out infinite">
+<div class="arena-section" id="arenaConcept">
+<div style="display:flex;align-items:baseline;gap:10px;margin-bottom:16px;justify-content:center"><span style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:700;font-size:14px;color:var(--charcoal);text-transform:uppercase;letter-spacing:1px">conceptual</span><span style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14px;color:var(--charcoal-muted)">ideas surfaced from pulses in deep research.</span></div>
+<div class="card-stack" id="stackConcept">
+  <img class="stack-card" id="cc1" src="assets/cards/concept1.jpeg">
+  <img class="stack-card" id="cc2" src="assets/cards/concept2.jpeg">
+  <img class="stack-card" id="cc3" src="assets/cards/concept3.jpeg">
 </div>
 </div>
 
