@@ -7,7 +7,7 @@ The investor pitch deck for Cyph (smack.live) — the underground arena to wrest
 Three extensions, one platform:
 - **Underground** — where users become dangerous. A living world of buried artifacts, suppressed ideas, and unexplored intellectual territory. Human-produced content only, never AI. Includes portraits (intellectual maps), taste engine, auto-generated syllabi, and a real-time citation engine.
 - **Arena** — live intellectual war rooms. Two kinds: LIVE (real-time cultural topics) and CONCEPTUAL (deep research). Matched by productive tension. Room types: open mics, office hours, supper clubs, debates.
-- **IRL (Touch Grass)** — monthly residencies with venue partners, weekly drops. The arena closes daily so users bring the underground into real life. Partnered with Unschooled (IRL intellectual salon).
+- **IRL** — monthly residencies with venue partners, weekly drops. The arena closes daily so users bring the underground into real life. Partnered with Unschooled (IRL intellectual salon).
 
 The cycle: underground deepens / arena sharpens / IRL grounds.
 

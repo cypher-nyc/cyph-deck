@@ -1,4 +1,4 @@
-const T = 16;
+const T = 15;
 let cur = 0;
 let busy = false;
 let goTimer = null;
@@ -9,10 +9,10 @@ let _prevCur = 0;
 /* ── isometric layer stack data (s5) ── */
 const layerInfo = [
   null,
-  { ids:['isoL1'], num:'01', title:'underground', desc:'where users become dangerous with human-produced yet suppressed artifacts.', color:'#EC4E20' },
-  { ids:['isoL2'], num:'02', title:'arena', desc:'step into the arena where ideas get forged, tested, and sparred.', color:'#608FE6' },
-  { ids:['isoL3'], num:'03', title:'irl', desc:'the arena closes. get off the screen and connect IRL.', color:'#FBAF00' },
-  { ids:['isoL1','isoL2','isoL3'], num:'—', title:'the loop', desc:'underground deepens. arena sharpens. irl grounds. the three layers feed each other.', color:'var(--charcoal)' }
+  { ids:['isoL1'], num:'01', title:'underground', desc:'where you become dangerous. a living, interactive underground world that immerses users in buried artifacts, suppressed ideas, and unexplored intellectual territory — and maps how it all changes you over time.', color:'#EC4E20' },
+  { ids:['isoL2'], num:'02', title:'cyph', desc:'where ideas get forged, debated, tested, and sparred. a live intellectual war room that pulls you out of the echo chamber by matching you with thinkers with productive tension, and cognitive sparks.', color:'#608FE6' },
+  { ids:['isoL3'], num:'03', title:'irl', desc:'where everything built underground and tested in the cyph finds its fullest expression: the tangible world, the human face, the conversation that changes our inward being.', color:'#FBAF00' },
+  { ids:['isoL1','isoL2','isoL3'], num:'—', title:'the loop', desc:'underground deepens. cyph sharpens. irl grounds. the three layers feed each other.', color:'var(--charcoal)' }
 ];
 
 function updateLayerStack(step) {
@@ -70,13 +70,13 @@ function setStackPositions(ids, activeIdx) {
 
 const ch = {
   0:'cyph', 1:'founders', 2:'crisis', 3:'crisis', 4:'solution', 5:'solution',
-  6:'underground', 7:'underground', 8:'underground', 9:'arena', 10:'touchgrass',
-  11:'business', 12:'business', 13:'business', 14:'business', 15:'close'
+  6:'underground', 7:'underground', 8:'arena', 9:'irl',
+  10:'business', 11:'business', 12:'business', 13:'business', 14:'close'
 };
 
 const bars = [
   [10,10,5,5],[12,12,5,5],[15,15,5,8],[18,18,5,10],[22,22,8,12],
-  [25,25,10,15],[60,30,12,18],[70,32,13,17],[80,35,15,20],[82,55,18,25],
+  [25,25,10,15],[60,30,12,18],[80,35,15,20],[82,55,18,25],
   [88,70,22,60],[90,72,70,65],[90,75,72,68],[92,80,75,72],[95,88,82,80],
   [100,100,100,100]
 ];
@@ -84,7 +84,7 @@ const bars = [
 const bgMap = {
   cyph:'shell', founders:'shell', crisis:'shell', solution:'shell',
   underground:'underground', arena:'arena',
-  touchgrass:'touchgrass', business:'nextsteps', close:'nextsteps'
+  irl:'irl', business:'nextsteps', close:'nextsteps'
 };
 
 /* ── update backgrounds, HUD, bars for slide i ── */
@@ -94,7 +94,7 @@ function applySlide(i) {
   const nc = ch[i];
   const activeBg = bgMap[nc] || 'shell';
 
-  ['shell','underground','arena','touchgrass','nextsteps'].forEach(c => {
+  ['shell','underground','arena','irl','nextsteps'].forEach(c => {
     const el = document.getElementById('bg-' + c);
     if (el) el.style.opacity =
       (c === activeBg || ((c === 'shell' || c === 'nextsteps') && (activeBg === 'shell' || activeBg === 'nextsteps')))
@@ -102,15 +102,15 @@ function applySlide(i) {
   });
 
   document.getElementById('citySil').classList[nc === 'arena' ? 'add' : 'remove']('show');
-  document.getElementById('hudCtr').textContent = String(i + 1).padStart(2, '0') + '/16';
-  document.getElementById('bhudCtr').textContent = String(i + 1).padStart(2, '0') + '/16';
+  document.getElementById('hudCtr').textContent = String(i + 1).padStart(2, '0') + '/15';
+  document.getElementById('bhudCtr').textContent = String(i + 1).padStart(2, '0') + '/15';
 
-  const p = Math.round((i / 15) * 100);
+  const p = Math.round((i / 14) * 100);
   const f = document.getElementById('xpFill');
   f.style.width = p + '%';
   if (nc === 'underground') f.style.background = '#EC4E20';
   else if (nc === 'arena') f.style.background = '#608FE6';
-  else if (nc === 'touchgrass') f.style.background = '#6D1A36';
+  else if (nc === 'irl') f.style.background = '#6D1A36';
   else if (nc === 'crisis') f.style.background = '#EC4E20';
   else f.style.background = '#FBAF00';
 
@@ -123,7 +123,7 @@ function applySlide(i) {
 }
 
 /* ── highlight the active nav button for the current chapter ── */
-const btnChapterMap = {'cyph':'cyph','founders':'founders','problem':'crisis','solution':'solution','underground':'underground','arena':'arena','touch grass':'touchgrass','business':'business','close':'close'};
+const btnChapterMap = {'cyph':'cyph','founders':'founders','problem':'crisis','solution':'solution','underground':'underground','the cyph':'arena','irl':'irl','business':'business','close':'close'};
 function updateNav(chapter) {
   document.querySelectorAll('.hud-nav-btn').forEach(btn => {
     if (btnChapterMap[btn.textContent.trim()] === chapter) {
@@ -143,8 +143,8 @@ function go(i) {
     if (i > cur && layerStep < 4) { layerStep++; updateLayerStack(layerStep); return; }
     if (i < cur && layerStep > 1) { layerStep--; updateLayerStack(layerStep); return; }
   }
-  /* sub-step: arena cards on slide 9 */
-  if (cur === 9) {
+  /* sub-step: arena cards on slide 8 */
+  if (cur === 8) {
     if (i > cur && arenaStep < 6) { arenaStep++; updateArenaCards(arenaStep); return; }
     if (i < cur && arenaStep > 1) { arenaStep--; updateArenaCards(arenaStep); return; }
   }
@@ -181,21 +181,21 @@ function goTo(i) {
   // Update backgrounds, HUD, bars
   var nc = ch[i];
   var activeBg = bgMap[nc] || 'shell';
-  ['shell','underground','arena','touchgrass','nextsteps'].forEach(function(c) {
+  ['shell','underground','arena','irl','nextsteps'].forEach(function(c) {
     var el = document.getElementById('bg-' + c);
     if (el) el.style.opacity =
       (c === activeBg || ((c === 'shell' || c === 'nextsteps') && (activeBg === 'shell' || activeBg === 'nextsteps')))
         ? '1' : '0';
   });
   document.getElementById('citySil').classList[nc === 'arena' ? 'add' : 'remove']('show');
-  document.getElementById('hudCtr').textContent = String(i + 1).padStart(2, '0') + '/16';
-  document.getElementById('bhudCtr').textContent = String(i + 1).padStart(2, '0') + '/16';
-  var p = Math.round((i / 15) * 100);
+  document.getElementById('hudCtr').textContent = String(i + 1).padStart(2, '0') + '/15';
+  document.getElementById('bhudCtr').textContent = String(i + 1).padStart(2, '0') + '/15';
+  var p = Math.round((i / 14) * 100);
   var f = document.getElementById('xpFill');
   f.style.width = p + '%';
   if (nc === 'underground') f.style.background = '#EC4E20';
   else if (nc === 'arena') f.style.background = '#608FE6';
-  else if (nc === 'touchgrass') f.style.background = '#6D1A36';
+  else if (nc === 'irl') f.style.background = '#6D1A36';
   else if (nc === 'crisis') f.style.background = '#EC4E20';
   else f.style.background = '#FBAF00';
   updateNav(nc);
@@ -333,7 +333,7 @@ function runA(i) {
       anime({ targets: '.arena-col.conceptual .arena-card', translateX: [20, 0], opacity: [0, 1], duration: 400, delay: anime.stagger(80), easing: B });
       break;
     case 9: {
-      var fromFutureA = _prevCur > 9;
+      var fromFutureA = _prevCur > 8;
       arenaStep = fromFutureA ? 6 : 1;
       updateArenaCards(arenaStep);
       anime({ targets: '.card-stack', opacity: [0, 1], translateY: [20, 0], duration: 500, easing: B });
