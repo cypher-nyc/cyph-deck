@@ -438,7 +438,7 @@ body {
 /* s9 (touch grass) overrides */
 #s9,
 #s9 p,
-#s9 span:not([style*="EC4E20"]),
+#s9 span:not([style*="ec4e20"]):not([style*="EC4E20"]),
 #s9 div {
   color: #fff !important;
 }
