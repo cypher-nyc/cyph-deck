@@ -2,6 +2,71 @@ const T = 16;
 let cur = 0;
 let busy = false;
 let goTimer = null;
+let layerStep = 0;
+let arenaStep = 0;
+let _prevCur = 0;
+
+/* ── isometric layer stack data (s5) ── */
+const layerInfo = [
+  null,
+  { ids:['isoL1'], num:'01', title:'underground', desc:'where users become dangerous with human-produced yet suppressed artifacts.', color:'#EC4E20' },
+  { ids:['isoL2'], num:'02', title:'arena', desc:'step into the arena where ideas get forged, tested, and sparred.', color:'#608FE6' },
+  { ids:['isoL3'], num:'03', title:'irl', desc:'the arena closes. get off the screen and connect IRL.', color:'#FBAF00' },
+  { ids:['isoL1','isoL2','isoL3'], num:'—', title:'the loop', desc:'underground deepens. arena sharpens. irl grounds. the three layers feed each other.', color:'var(--charcoal)' }
+];
+
+function updateLayerStack(step) {
+  busy = true;
+  ['isoL1','isoL2','isoL3'].forEach(function(id){ document.getElementById(id).classList.remove('active'); });
+  ['ldot1','ldot2','ldot3','ldot4'].forEach(function(id){ document.getElementById(id).classList.remove('active'); });
+  if (step >= 1 && step <= 4) {
+    var d = layerInfo[step];
+    d.ids.forEach(function(id){ document.getElementById(id).classList.add('active'); });
+    document.getElementById('ldot' + step).classList.add('active');
+    document.getElementById('layerNum').textContent = d.num;
+    document.getElementById('layerNum').style.color = d.color;
+    document.getElementById('layerTitle').textContent = d.title;
+    document.getElementById('layerTitle').style.color = d.color;
+    document.getElementById('layerDesc').textContent = d.desc;
+    document.getElementById('layerAnno').style.opacity = '1';
+  }
+  setTimeout(function(){ busy = false; }, 400);
+}
+
+/* ── arena card stack (s9): steps 1-3 = live, 4-6 = conceptual ── */
+function updateArenaCards(step) {
+  busy = true;
+  var live = document.getElementById('arenaLive');
+  var concept = document.getElementById('arenaConcept');
+  var liveCards = ['lc1','lc2','lc3'];
+  var conceptCards = ['cc1','cc2','cc3'];
+
+  if (step <= 3) {
+    live.classList.remove('muted'); concept.classList.add('muted');
+    setStackPositions(liveCards, step - 1);
+    setStackPositions(conceptCards, 0);
+  } else {
+    concept.classList.remove('muted'); live.classList.add('muted');
+    setStackPositions(conceptCards, step - 4);
+    setStackPositions(liveCards, 2);
+  }
+  setTimeout(function(){ busy = false; }, 400);
+}
+
+function setStackPositions(ids, activeIdx) {
+  var positions = ['pos-front','pos-mid','pos-back'];
+  ids.forEach(function(id, i) {
+    var el = document.getElementById(id);
+    el.classList.remove('pos-front','pos-mid','pos-back');
+    if (i === activeIdx) {
+      el.classList.add('pos-front');
+    } else {
+      /* distribute remaining cards to mid/back */
+      var behind = (i < activeIdx) ? 'pos-back' : (i === activeIdx + 1 ? 'pos-mid' : 'pos-back');
+      el.classList.add(behind);
+    }
+  });
+}
 
 const ch = {
   0:'cyph', 1:'founders', 2:'crisis', 3:'crisis', 4:'solution', 5:'solution',
@@ -73,12 +138,23 @@ function updateNav(chapter) {
 const SKIP = []; // hidden slides
 function go(i) {
   if (busy || i < 0 || i >= T || i === cur) return;
+  /* sub-step: layer stack on slide 5 */
+  if (cur === 5) {
+    if (i > cur && layerStep < 4) { layerStep++; updateLayerStack(layerStep); return; }
+    if (i < cur && layerStep > 1) { layerStep--; updateLayerStack(layerStep); return; }
+  }
+  /* sub-step: arena cards on slide 9 */
+  if (cur === 9) {
+    if (i > cur && arenaStep < 6) { arenaStep++; updateArenaCards(arenaStep); return; }
+    if (i < cur && arenaStep > 1) { arenaStep--; updateArenaCards(arenaStep); return; }
+  }
   if (SKIP.includes(i)) { i += (i > cur ? 1 : -1); if (i < 0 || i >= T) return; }
   doGo(i);
 }
 
 function doGo(i) {
   busy = true;
+  _prevCur = cur;
   applySlide(i);
   goTimer = setTimeout(() => {
     goTimer = null;
@@ -93,6 +169,7 @@ function doGo(i) {
 function goTo(i) {
   if (i < 0 || i >= T || i === cur) return;
   if (goTimer) { clearTimeout(goTimer); goTimer = null; }
+  _prevCur = cur;
   busy = false;
 
   // Remove active from ALL slides
@@ -198,9 +275,14 @@ function runA(i) {
       anime({ targets: '#s4 h1', translateY: [-20, 0], opacity: [0, 1], duration: 600, easing: B });
       anime({ targets: '#s4 .sub', translateY: [12, 0], opacity: [0, 1], duration: 500, delay: 150, easing: C });
       break;
-    case 5:
-      anime({ targets: '#s5 .step-card', translateY: [20, 0], opacity: [0, 1], duration: 500, delay: anime.stagger(120), easing: B });
+    case 5: {
+      var fromFuture = _prevCur > 5;
+      layerStep = fromFuture ? 4 : 1;
+      anime({ targets: '.iso-layer', translateY: [40, 0], opacity: [0, 1], duration: 500, delay: anime.stagger(120, { from: 'last' }), easing: B });
+      anime({ targets: '#layerAnno', opacity: [0, 1], translateX: [20, 0], duration: 500, delay: 500, easing: C });
+      setTimeout(function(){ updateLayerStack(layerStep); }, 100);
       break;
+    }
     case 6: {
       const rts = ['philosophy', 'sports', 'theology', 'architecture'];
       const clrs = { philosophy: '#FBAF00', sports: '#EC4E20', theology: '#6D1A36', architecture: '#608FE6' };
@@ -250,9 +332,13 @@ function runA(i) {
       anime({ targets: '.arena-col.live .arena-card', translateX: [-20, 0], opacity: [0, 1], duration: 400, delay: anime.stagger(80), easing: B });
       anime({ targets: '.arena-col.conceptual .arena-card', translateX: [20, 0], opacity: [0, 1], duration: 400, delay: anime.stagger(80), easing: B });
       break;
-    case 9:
-      anime({ targets: '#s9 .park-card', translateY: [-25, 0], opacity: [0, 1], duration: 600, delay: anime.stagger(140, { start: 100 }), easing: B });
+    case 9: {
+      var fromFutureA = _prevCur > 9;
+      arenaStep = fromFutureA ? 6 : 1;
+      updateArenaCards(arenaStep);
+      anime({ targets: '.card-stack', opacity: [0, 1], translateY: [20, 0], duration: 500, easing: B });
       break;
+    }
     case 10:
       anime({ targets: '#s10 .game-panel', opacity: [0, 1], scale: [0.95, 1], duration: 500, easing: B });
       anime({ targets: '#s10 .biz-main', scale: [0.9, 1], opacity: [0, 1], duration: 550, delay: 200, easing: B });
