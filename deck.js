@@ -355,23 +355,59 @@ function goTo(i) {
 function computeFitScale() {
   return Math.min(window.innerWidth / 1440, window.innerHeight / 900);
 }
+function isPortraitMobile() {
+  /* matches the CSS media query that hides the deck and shows the rotate prompt */
+  return window.matchMedia("(orientation: portrait) and (max-width: 900px)")
+    .matches;
+}
+function isDeckHidden() {
+  return isPortraitMobile() && !document.body.classList.contains("force-portrait");
+}
 function applyFitScale() {
   var shell = document.getElementById("game-shell");
   if (!shell) return;
-  shell.style.transform = "scale(" + computeFitScale() + ")";
+  var portrait = isPortraitMobile();
+  var forced = document.body.classList.contains("force-portrait");
+  if (portrait && forced) {
+    /* rotated -90deg → visual dims are 900x1440; fit those into the viewport */
+    var s = Math.min(window.innerWidth / 900, window.innerHeight / 1440);
+    shell.style.transform =
+      "translate(-50%, -50%) rotate(-90deg) scale(" + s + ")";
+  } else {
+    if (forced && !portrait) {
+      /* user physically rotated phone to landscape — exit forced mode so the
+         deck snaps back to its native orientation */
+      document.body.classList.remove("force-portrait");
+    }
+    shell.style.transform = "scale(" + computeFitScale() + ")";
+  }
 }
 window.addEventListener("resize", applyFitScale);
+window.addEventListener("orientationchange", applyFitScale);
+
+/* ── user dismissed the rotate prompt — flip into rotated full-bleed view ── */
+function dismissRotatePrompt() {
+  document.body.classList.add("force-portrait");
+  applyFitScale();
+}
 
 /* ── init ── */
 document.addEventListener("DOMContentLoaded", () => {
-  var fitScale = computeFitScale();
-  anime({
-    targets: "#game-shell",
-    scale: [0, fitScale],
-    duration: 800,
-    easing: "easeOutBack",
-    complete: () => runA(0),
-  });
+  if (isDeckHidden()) {
+    /* deck is hidden behind the rotate-device prompt — skip the bouncy
+       entrance so anime tweens don't fight applyFitScale on rotation */
+    applyFitScale();
+    runA(0);
+  } else {
+    var fitScale = computeFitScale();
+    anime({
+      targets: "#game-shell",
+      scale: [0, fitScale],
+      duration: 800,
+      easing: "easeOutBack",
+      complete: () => runA(0),
+    });
+  }
 
   const s = document.getElementById("citySil");
   [
