@@ -352,50 +352,26 @@ function goTo(i) {
 }
 
 /* ── fit-to-viewport scaling ── */
-function isPortraitMobile() {
-  var w = window.innerWidth;
-  var h = window.innerHeight;
-  return h > w && Math.min(w, h) < 768;
-}
 function computeFitScale() {
-  var w = window.innerWidth;
-  var h = window.innerHeight;
-  if (isPortraitMobile()) {
-    /* shell will be rotated -90deg, so its visual dims are 900x1440 */
-    return Math.min(w / 900, h / 1440);
-  }
-  return Math.min(w / 1440, h / 900);
+  return Math.min(window.innerWidth / 1440, window.innerHeight / 900);
 }
 function applyFitScale() {
   var shell = document.getElementById("game-shell");
   if (!shell) return;
-  var s = computeFitScale();
-  if (isPortraitMobile()) {
-    shell.style.transform = "rotate(-90deg) scale(" + s + ")";
-  } else {
-    shell.style.transform = "scale(" + s + ")";
-  }
+  shell.style.transform = "scale(" + computeFitScale() + ")";
 }
 window.addEventListener("resize", applyFitScale);
-window.addEventListener("orientationchange", applyFitScale);
 
 /* ── init ── */
 document.addEventListener("DOMContentLoaded", () => {
-  if (isPortraitMobile()) {
-    /* skip the bouncy entrance on portrait mobile — applying a rotated
-       transform mid-anime gets messy; just snap into place */
-    applyFitScale();
-    runA(0);
-  } else {
-    var fitScale = computeFitScale();
-    anime({
-      targets: "#game-shell",
-      scale: [0, fitScale],
-      duration: 800,
-      easing: "easeOutBack",
-      complete: () => runA(0),
-    });
-  }
+  var fitScale = computeFitScale();
+  anime({
+    targets: "#game-shell",
+    scale: [0, fitScale],
+    duration: 800,
+    easing: "easeOutBack",
+    complete: () => runA(0),
+  });
 
   const s = document.getElementById("citySil");
   [
