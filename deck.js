@@ -351,11 +351,23 @@ function goTo(i) {
   runA(i);
 }
 
+/* ── fit-to-viewport scaling ── */
+function computeFitScale() {
+  return Math.min(window.innerWidth / 1440, window.innerHeight / 900);
+}
+function applyFitScale() {
+  var shell = document.getElementById("game-shell");
+  if (!shell) return;
+  shell.style.transform = "scale(" + computeFitScale() + ")";
+}
+window.addEventListener("resize", applyFitScale);
+
 /* ── init ── */
 document.addEventListener("DOMContentLoaded", () => {
+  var fitScale = computeFitScale();
   anime({
     targets: "#game-shell",
-    scale: [0, 1],
+    scale: [0, fitScale],
     duration: 800,
     easing: "easeOutBack",
     complete: () => runA(0),
@@ -904,198 +916,3 @@ function toggleLock() {
   }
 }
 
-/* ═══ PDF EXPORT ═══ */
-var pdfBusy = false;
-
-function exportPDF() {
-  if (pdfBusy) return;
-  pdfBusy = true;
-
-  var btn = document.getElementById("pdf-btn");
-  btn.textContent = "...";
-  btn.style.opacity = "0.9";
-
-  /* ensure lock is on */
-  if (!lockActive) toggleLock();
-
-  var shell = document.getElementById("game-shell");
-  var controls = document.getElementById("deck-controls");
-  var savedSlide = cur;
-  var pages = [];
-
-  /* hide controls during capture */
-  controls.style.display = "none";
-
-  /* hide nav arrows and bottom HUD elements that shouldn't be in PDF */
-  var navGel = document.querySelector(".nav-gel");
-  var bhud = document.querySelector(".bhud-counter");
-  if (navGel) navGel.style.display = "none";
-  if (bhud) bhud.style.display = "none";
-
-  function captureSlide(idx) {
-    return new Promise(function (resolve) {
-      /* show only this slide */
-      for (var j = 0; j < T; j++) {
-        var sl = document.getElementById("s" + j);
-        if (sl) sl.classList.remove("active");
-      }
-      var target = document.getElementById("s" + idx);
-      if (target) target.classList.add("active");
-
-      /* update backgrounds for this slide */
-      var nc = ch[idx];
-      var activeBg = bgMap[nc] || "shell";
-      ["shell", "underground", "arena", "irl", "nextsteps"].forEach(
-        function (c) {
-          var el = document.getElementById("bg-" + c);
-          if (el)
-            el.style.opacity =
-              c === activeBg ||
-              ((c === "shell" || c === "nextsteps") &&
-                (activeBg === "shell" || activeBg === "nextsteps"))
-                ? "1"
-                : "0";
-        },
-      );
-      document
-        .getElementById("citySil")
-        .classList[nc === "arena" ? "add" : "remove"]("show");
-
-      /* update HUD counter */
-      document.getElementById("hudCtr").textContent =
-        String(idx + 1).padStart(2, "0") + "/15";
-
-      /* update XP bar */
-      var p = Math.round((idx / 14) * 100);
-      var f = document.getElementById("xpFill");
-      f.style.width = p + "%";
-      if (nc === "underground") f.style.background = "#EC4E20";
-      else if (nc === "arena") f.style.background = "#608FE6";
-      else if (nc === "irl") f.style.background = "#6D1A36";
-      else if (nc === "crisis") f.style.background = "#EC4E20";
-      else f.style.background = "#FBAF00";
-
-      updateNav(nc);
-
-      var b = bars[idx];
-      ["bar0", "bar1", "bar2", "bar3"].forEach(function (id, j) {
-        document.getElementById(id).style.width = b[j] + "%";
-      });
-
-      /* wait for reflow then capture */
-      setTimeout(function () {
-        html2canvas(shell, {
-          scale: 2,
-          useCORS: true,
-          allowTaint: true,
-          backgroundColor: null,
-          width: shell.offsetWidth,
-          height: shell.offsetHeight,
-        })
-          .then(function (canvas) {
-            pages.push(canvas);
-            resolve();
-          })
-          .catch(function () {
-            resolve();
-          });
-      }, 300);
-    });
-  }
-
-  function captureSubSteps(idx, updateFn, steps) {
-    var subChain = Promise.resolve();
-    steps.forEach(function (step) {
-      subChain = subChain.then(function () {
-        return new Promise(function (resolve) {
-          updateFn(step);
-          setTimeout(function () {
-            html2canvas(shell, {
-              scale: 2,
-              useCORS: true,
-              allowTaint: true,
-              backgroundColor: null,
-              width: shell.offsetWidth,
-              height: shell.offsetHeight,
-            })
-              .then(function (canvas) {
-                pages.push(canvas);
-                resolve();
-              })
-              .catch(function () {
-                resolve();
-              });
-          }, 300);
-        });
-      });
-    });
-    return subChain;
-  }
-
-  /* capture all slides sequentially, expanding sub-steps */
-  var chain = Promise.resolve();
-  for (var i = 0; i < T; i++) {
-    (function (idx) {
-      chain = chain.then(function () {
-        btn.textContent = idx + 1 + "/" + T;
-        /* set up initial sub-step state before first capture */
-        if (idx === 5) updateLayerStack(1);
-        if (idx === 8) updateArenaCards(1);
-        return captureSlide(idx).then(function () {
-          /* s5: capture how-it-works sub-steps 2,3,4 (step 1 already captured) */
-          if (idx === 5) {
-            return captureSubSteps(idx, updateLayerStack, [2, 3, 4]);
-          }
-          /* s8 (arena): capture all 6 card states (step 1 already captured) */
-          if (idx === 8) {
-            return captureSubSteps(idx, updateArenaCards, [2, 3, 4, 5, 6]);
-          }
-        });
-      });
-    })(i);
-  }
-
-  chain.then(function () {
-    if (pages.length === 0) {
-      pdfBusy = false;
-      btn.textContent = "PDF";
-      btn.style.opacity = "";
-      controls.style.display = "";
-      if (navGel) navGel.style.display = "";
-      if (bhud) bhud.style.display = "";
-      return;
-    }
-
-    /* build PDF from captured canvases — landscape, matching shell aspect ratio */
-    var jsPDF = window.jspdf.jsPDF;
-    var firstCanvas = pages[0];
-    var pdfW = firstCanvas.width;
-    var pdfH = firstCanvas.height;
-    var doc = new jsPDF({
-      orientation: pdfW > pdfH ? "landscape" : "portrait",
-      unit: "px",
-      format: [pdfW / 2, pdfH / 2],
-    });
-
-    pages.forEach(function (canvas, idx) {
-      if (idx > 0)
-        doc.addPage(
-          [pdfW / 2, pdfH / 2],
-          pdfW > pdfH ? "landscape" : "portrait",
-        );
-      var imgData = canvas.toDataURL("image/png");
-      doc.addImage(imgData, "PNG", 0, 0, pdfW / 2, pdfH / 2);
-    });
-
-    doc.save("cyph-deck.pdf");
-
-    /* restore original slide */
-    controls.style.display = "";
-    if (navGel) navGel.style.display = "";
-    if (bhud) bhud.style.display = "";
-    goTo(savedSlide);
-    btn.textContent = "PDF";
-    btn.style.opacity = "";
-    pdfBusy = false;
-  });
-}

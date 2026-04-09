@@ -2170,17 +2170,7 @@ a.crisis-card:hover {
 
 /* ═══ CARD FLIP ═══ */
 
-/* ═══ MOBILE: full-bleed deck ═══ */
-@media (max-width: 1024px) {
-  #game-shell {
-    width: 100%;
-    min-height: 100%;
-    border-radius: 0;
-    box-shadow: none;
-  }
-}
-
-/* ═══ LOCK + PDF CONTROLS ═══ */
+/* ═══ LOCK CONTROLS ═══ */
 body.locked * {
   animation: none !important;
   transition: none !important;
