@@ -364,28 +364,11 @@ function vpHeight() {
 function computeFitScale() {
   return Math.min(vpWidth() / 1440, vpHeight() / 900);
 }
-function isMobile() {
-  return window.matchMedia("(max-width: 900px)").matches;
-}
 function applyFitScale() {
   var shell = document.getElementById("game-shell");
   if (!shell) return;
-  if (isMobile()) {
-    /* locked rotated view: rotate -90deg so the landscape canvas runs along
-       the phone's long edge. compute scale from the SHORT and LONG dims of
-       the viewport so the deck stays the same size whether the device is
-       physically held portrait or landscape — no shrinking on rotation. */
-    var w = vpWidth();
-    var h = vpHeight();
-    var shortDim = Math.min(w, h);
-    var longDim = Math.max(w, h);
-    var s = Math.min(shortDim / 900, longDim / 1440);
-    shell.style.transform =
-      "translate(-50%, -50%) rotate(-90deg) scale(" + s + ")";
-  } else {
-    shell.style.transform =
-      "translate(-50%, -50%) scale(" + computeFitScale() + ")";
-  }
+  shell.style.transform =
+    "translate(-50%, -50%) scale(" + computeFitScale() + ")";
 }
 window.addEventListener("resize", applyFitScale);
 window.addEventListener("orientationchange", applyFitScale);
@@ -396,21 +379,22 @@ if (window.visualViewport) {
 /* ── init ── */
 document.addEventListener("DOMContentLoaded", () => {
   var shell = document.getElementById("game-shell");
-  if (isMobile()) {
-    /* mobile: snap directly into the rotated transform — the bouncy CSS
-       entrance keyframe only handles the unrotated transform string. */
+  /* lock button is a dev-only affordance — hide it on the deployed site,
+     show only when running locally (localhost / 127.0.0.1 / file://). */
+  var host = location.hostname;
+  var isLocal = host === "localhost" || host === "127.0.0.1" || host === "";
+  if (!isLocal) {
+    var dc = document.getElementById("deck-controls");
+    if (dc) dc.style.display = "none";
+  }
+  /* trigger the CSS keyframe entrance via --fit-scale. anime.js can't
+     interpolate translate percentages so this is CSS-driven. */
+  shell.style.setProperty("--fit-scale", computeFitScale());
+  shell.classList.add("entered");
+  setTimeout(function () {
     applyFitScale();
     runA(0);
-  } else {
-    /* desktop: trigger the CSS keyframe entrance via --fit-scale. anime.js
-       can't interpolate translate percentages so this is CSS-driven. */
-    shell.style.setProperty("--fit-scale", computeFitScale());
-    shell.classList.add("entered");
-    setTimeout(function () {
-      applyFitScale();
-      runA(0);
-    }, 800);
-  }
+  }, 800);
 
   const s = document.getElementById("citySil");
   [
