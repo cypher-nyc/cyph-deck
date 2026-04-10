@@ -83,13 +83,19 @@ var LOG_URL =
     return t.split("/")[0]; // "01"
   }
 
+  /* per-slide cap: 3 minutes. if a viewer leaves a tab open on one slide
+     for hours, we don't want that to bloat the sheet — anything past 3min
+     of attention is treated the same as 3min for analytics purposes. */
+  var SLIDE_CAP_MS = 3 * 60 * 1000;
+
   function bankCurrentSlide() {
     if (currentSlideKey == null || currentSlideStart == null) return;
     var elapsed = Date.now() - currentSlideStart;
-    if (elapsed <= 0) return;
-    slideTimings[currentSlideKey] =
-      (slideTimings[currentSlideKey] || 0) + elapsed;
     currentSlideStart = Date.now();
+    if (elapsed <= 0) return;
+    var prior = slideTimings[currentSlideKey] || 0;
+    if (prior >= SLIDE_CAP_MS) return;
+    slideTimings[currentSlideKey] = Math.min(prior + elapsed, SLIDE_CAP_MS);
   }
 
   function onSlidePossiblyChanged() {
@@ -162,10 +168,10 @@ var LOG_URL =
   }
 
   document.addEventListener("DOMContentLoaded", function () {
-    /* localhost bypass — no prompt when running locally */
+    /* localhost bypass — no prompt when running locally, and skip
+       slide-time tracking too so dev sessions don't pollute the sheet */
     if (isLocal) {
       markAuthed("local dev");
-      startTracking();
       return;
     }
     /* already authed in this session — skip the gate */
