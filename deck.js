@@ -36,9 +36,9 @@ const layerInfo = [
   {
     ids: ["isoL1", "isoL2", "isoL3"],
     num: "∞",
-    title: "the loop",
+    title: "why every step matters.",
     sub: "",
-    desc: "underground deepens. cyph challenges.\u00A0irl\u00A0embodies.",
+    desc: "most platforms produce consumption zombies. our three experiences together produce inquisitive and compassionate thinkers.",
     color: "gradient",
   },
 ];
@@ -86,28 +86,225 @@ function updateLayerStack(step) {
   }, 400);
 }
 
-/* ── arena card stack (s9): steps 1-3 = live, 4-6 = conceptual ── */
+/* ── cyph slide (s8) flyer carousel: a single flyer card on the left
+   cycles through 6 flyers. steps 1-3 = live (live1-3.png), 4-6 = conceptual
+   (concept1-3.png). the right side shows underground artifacts + office
+   hours related to the active flyer (see updateCyphDetail). ── */
 function updateArenaCards(step) {
   busy = true;
-  var live = document.getElementById("arenaLive");
-  var concept = document.getElementById("arenaConcept");
-  var liveCards = ["lc1", "lc2", "lc3"];
-  var conceptCards = ["cc1", "cc2", "cc3"];
-
-  if (step <= 3) {
-    live.classList.remove("muted");
-    concept.classList.add("muted");
-    setStackPositions(liveCards, step - 1);
-    setStackPositions(conceptCards, 0);
-  } else {
-    concept.classList.remove("muted");
-    live.classList.add("muted");
-    setStackPositions(conceptCards, step - 4);
-    setStackPositions(liveCards, 2);
+  // toggle which flyer image is .cyph-flyer-active (crossfade in CSS)
+  for (var i = 1; i <= 6; i++) {
+    var card = document.getElementById("cf" + i);
+    if (card) card.classList.toggle("cyph-flyer-active", i === step);
   }
+  updateCyphDetail(step);
   setTimeout(function () {
     busy = false;
   }, 400);
+}
+
+/* ── cyph (s8) per-flyer fixtures: each step's underground artifacts +
+   office hours host. mirrors arena-fe's underground_resources +
+   office_hours_candidates payloads (momentCoreApi.ts).
+   the artifact image paths are placeholders pulled from assets/artifacts/
+   (the user will swap them for curated picks). ── */
+const cyphFixtures = [
+  // step 1 — knicks vs rockets (live)
+  {
+    section: "live",
+    sectionSub: "topics sourced from API's & real-time listening.",
+    artifacts: [
+      {
+        src: "assets/images/knicks_rockets/cassette.png",
+        caption: "archive · 1994 ECF tape",
+      },
+      {
+        src: "assets/images/knicks_rockets/ewing.jpeg",
+        caption: "longform · ewing & the center",
+      },
+      {
+        src: "assets/images/knicks_rockets/percentages.png",
+        caption: "data viz · MSG win % 1968-now",
+      },
+    ],
+    host: {
+      img: "assets/images/knicks_rockets/office_hours/chris_robinson.jpeg",
+      room: "understanding the salary cap.",
+      name: "chris robinson",
+      when: "happening right now",
+    },
+  },
+  // step 2 — the oscars (live)
+  {
+    section: "live",
+    sectionSub: "topics sourced from API's & real-time listening.",
+    artifacts: [
+      {
+        src: "assets/images/oscars/pauline.jpg",
+        caption: "criticism · pauline kael",
+      },
+      {
+        src: "assets/images/oscars/ari-aster.jpg",
+        caption: "interview · ari aster",
+      },
+      {
+        src: "assets/images/oscars/box_office.webp",
+        caption: "data viz · best pic vs box office",
+      },
+    ],
+    host: {
+      img: "assets/images/oscars/office_hours/jordan_rose.jpeg",
+      room: "what happens behind the scenes.",
+      name: "jordan rose",
+      when: "happening right now",
+    },
+  },
+  // step 3 — mamdani inauguration (live)
+  {
+    section: "live",
+    sectionSub: "topics sourced from API's & real-time listening.",
+    artifacts: [
+      {
+        src: "assets/images/mamdani/transcript.jpg",
+        caption: "transcript · inaugural address",
+      },
+      {
+        src: "assets/images/mamdani/housing.webp",
+        caption: "history · NYC mayors & housing",
+      },
+      {
+        src: "assets/images/mamdani/rent_freeze.jpeg",
+        caption: "report · what a rent freeze does",
+      },
+    ],
+    host: {
+      img: "assets/images/mamdani/office_hours/nia_gibson.jpeg",
+      room: "what mamdani inherits.",
+      name: "nia gibson",
+      when: "happening right now",
+    },
+  },
+  // step 4 — has culture become content? (conceptual)
+  {
+    section: "conceptual",
+    sectionSub: "ideas surfaced from pulses in deep research.",
+    artifacts: [
+      {
+        src: "assets/images/is_culture_content/commodity_fetishism.png",
+        caption: "essay · marx, commodity fetishism",
+      },
+      {
+        src: "assets/images/is_culture_content/mass_culture.png",
+        caption: "essay · adorno, the culture industry",
+      },
+      {
+        src: "assets/images/is_culture_content/the_century_of_the_self.png",
+        caption: "doc · curtis, century of the self",
+      },
+    ],
+    host: {
+      img: "assets/images/is_culture_content/office_hours/tom_freston_I_want_my_mtv_back.png",
+      room: "i want my mtv back: what we lost.",
+      name: "tom freston",
+      when: "happening right now",
+    },
+  },
+  // step 5 — is art a weapon? (conceptual)
+  {
+    section: "conceptual",
+    sectionSub: "ideas surfaced from pulses in deep research.",
+    artifacts: [
+      {
+        src: "assets/images/is_art_a_weapon/propaganda.png",
+        caption: "archive · propaganda",
+      },
+      {
+        src: "assets/images/is_art_a_weapon/society_spectacle.png",
+        caption: "monograph · debord, society of the spectacle",
+      },
+      {
+        src: "assets/images/is_art_a_weapon/graphic.png",
+        caption: "ephemera · protest graphics",
+      },
+    ],
+    host: {
+      img: "assets/images/is_art_a_weapon/office_hours/dred_scott.png",
+      room: "by any medium necessary.",
+      name: "dred scott",
+      when: "happening right now",
+    },
+  },
+  // step 6 — is the soul actually cartesian? (conceptual)
+  {
+    section: "conceptual",
+    sectionSub: "ideas surfaced from pulses in deep research.",
+    artifacts: [
+      {
+        src: "assets/images/soul_cartesian/meditations.png",
+        caption: "text · descartes, meditations",
+      },
+      {
+        src: "assets/images/soul_cartesian/concept_of_mind.png",
+        caption: "monograph · ryle, the concept of mind",
+      },
+      {
+        src: "assets/images/soul_cartesian/hylomorphism.png",
+        caption: "theory · aristotelian hylomorphism",
+      },
+    ],
+    host: {
+      img: "assets/images/soul_cartesian/office_hours/ian_mcgilchrist.png",
+      room: "the ghost was never in the machine.",
+      name: "iain mcgilchrist",
+      when: "happening right now",
+    },
+  },
+];
+
+function updateCyphDetail(step) {
+  var fx = cyphFixtures[(step || 1) - 1];
+  if (!fx) return;
+
+  // section label toggles live ↔ conceptual
+  var label = document.getElementById("cyphSectionLabel");
+  if (label) label.textContent = fx.section;
+  var sub = document.getElementById("cyphSectionSub");
+  if (sub) sub.textContent = fx.sectionSub;
+
+  // floating underground artifacts — swap img.src + caption text on the
+  // three fixed wrapper divs so their drift animations stay running.
+  for (var i = 0; i < 3; i++) {
+    var art = fx.artifacts && fx.artifacts[i];
+    var imgEl = document.getElementById("cyphArt" + (i + 1));
+    var capEl = document.getElementById("cyphArt" + (i + 1) + "Cap");
+    if (imgEl && art) imgEl.src = art.src;
+    if (capEl && art) capEl.textContent = art.caption;
+  }
+
+  // office hours host — circular avatar matching arena-fe Dashboard.tsx
+  // (108px circle + name + future date + orange rsvp pill).
+  var hostEl = document.getElementById("cyphHosts");
+  if (hostEl && fx.host) {
+    hostEl.innerHTML =
+      '<div class="cyph-host">' +
+      '<div class="cyph-host-circle">' +
+      '<img src="' +
+      fx.host.img +
+      '" alt="" />' +
+      "</div>" +
+      '<div class="cyph-host-meta">' +
+      '<div class="cyph-host-room">' +
+      fx.host.room +
+      "</div>" +
+      '<div class="cyph-host-name">hosted by ' +
+      fx.host.name +
+      "</div>" +
+      '<div class="cyph-host-when">' +
+      fx.host.when +
+      "</div>" +
+      "</div>" +
+      "</div>";
+  }
 }
 
 function setStackPositions(ids, activeIdx) {
@@ -356,10 +553,15 @@ function goTo(i) {
    it gives us the actually-visible area. innerWidth/Height fall back for
    browsers without visualViewport support. */
 function vpWidth() {
-  return (window.visualViewport && window.visualViewport.width) || window.innerWidth;
+  return (
+    (window.visualViewport && window.visualViewport.width) || window.innerWidth
+  );
 }
 function vpHeight() {
-  return (window.visualViewport && window.visualViewport.height) || window.innerHeight;
+  return (
+    (window.visualViewport && window.visualViewport.height) ||
+    window.innerHeight
+  );
 }
 function computeFitScale() {
   return Math.min(vpWidth() / 1440, vpHeight() / 900);
@@ -395,6 +597,10 @@ document.addEventListener("DOMContentLoaded", () => {
     applyFitScale();
     runA(0);
   }, 800);
+
+  /* seed the cyph (s8) detail panel so it renders content before the
+     user has clicked into the first arena step */
+  updateCyphDetail(1);
 
   const s = document.getElementById("citySil");
   [
@@ -669,44 +875,18 @@ function runA(i) {
         easing: B,
       });
       break;
-    case 8:
-      anime({
-        targets: "#s8 .game-panel",
-        opacity: [0, 1],
-        scale: [0.95, 1],
-        duration: 500,
-        easing: B,
-      });
-      anime({
-        targets: ".arena-col.live .arena-card",
-        translateX: [-20, 0],
-        opacity: [0, 1],
-        duration: 400,
-        delay: anime.stagger(80),
-        easing: B,
-      });
-      anime({
-        targets: ".arena-col.conceptual .arena-card",
-        translateX: [20, 0],
-        opacity: [0, 1],
-        duration: 400,
-        delay: anime.stagger(80),
-        easing: B,
-      });
-      break;
-    case 9: {
+    case 8: {
+      /* seed the cyph carousel to match the visible state. without this,
+         arenaStep stays at 0 and the first click "consumes" the increment
+         from 0→1 (which re-renders the same fixture 1 that's already on
+         screen), making it look like the first click did nothing. */
       var fromFutureA = _prevCur > 8;
       arenaStep = fromFutureA ? 6 : 1;
       updateArenaCards(arenaStep);
-      anime({
-        targets: ".card-stack",
-        opacity: [0, 1],
-        translateY: [20, 0],
-        duration: 500,
-        easing: B,
-      });
       break;
     }
+    case 9:
+      break;
     case 10:
       anime({
         targets: "#s10 .game-panel",
@@ -938,4 +1118,3 @@ function toggleLock() {
     btn.innerHTML = "&#x1f512;";
   }
 }
-

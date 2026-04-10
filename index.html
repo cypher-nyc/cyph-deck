@@ -98,8 +98,8 @@
                   <span class="badge-value">harvard</span>
                 </div>
                 <div class="badge-field">
-                  <span class="badge-label">origin</span>
-                  <span class="badge-value">uptown manhattan</span>
+                  <span class="badge-label">previous work</span>
+                  <span class="badge-value">ex-mckinsey</span>
                 </div>
               </div>
               <div class="badge-stats">
@@ -139,12 +139,12 @@
                     <div
                       class="badge-stat-fill"
                       data-fill="9"
-                      style="width: 0%; background: #888"
+                      style="width: 0%; background: #ec4e20"
                     ></div>
                   </div>
                 </div>
                 <div class="badge-stat">
-                  <span class="badge-stat-label">ballet dancer</span>
+                  <span class="badge-stat-label">classical ballet</span>
                   <div class="badge-stat-track">
                     <div
                       class="badge-stat-fill"
@@ -200,8 +200,8 @@
                   <span class="badge-value">syracuse</span>
                 </div>
                 <div class="badge-field">
-                  <span class="badge-label">origin</span>
-                  <span class="badge-value">jamaica queens</span>
+                  <span class="badge-label">previous work</span>
+                  <span class="badge-value">ex-wapo</span>
                 </div>
               </div>
               <div class="badge-stats">
@@ -241,7 +241,7 @@
                     <div
                       class="badge-stat-fill"
                       data-fill="9"
-                      style="width: 0%; background: #888"
+                      style="width: 0%; background: #ec4e20"
                     ></div>
                   </div>
                 </div>
@@ -475,6 +475,21 @@
               <span class="layer-dot" id="ldot4"></span>
             </div>
           </div>
+        </div>
+        <div
+          style="
+            position: absolute;
+            right: 24px;
+            bottom: 16px;
+            font-family:
+              &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
+            font-size: 11px;
+            font-style: italic;
+            color: var(--charcoal-muted);
+            letter-spacing: 0.02em;
+          "
+        >
+          demo available upon request.
         </div>
       </div>
 
@@ -1220,7 +1235,7 @@
                   color: #fff;
                   padding: 6px 14px;
                   border-radius: 20px;
-                  background: #fbaf00;
+                  background: #6d1a36;
                 "
                 >neuroscientists</span
               >
@@ -1230,7 +1245,7 @@
                   color: #fff;
                   padding: 6px 14px;
                   border-radius: 20px;
-                  background: #ec4e20;
+                  background: #fbaf00;
                 "
                 >psychologists</span
               >
@@ -1250,7 +1265,7 @@
                   color: #fff;
                   padding: 6px 14px;
                   border-radius: 20px;
-                  background: #6d1a36;
+                  background: #fbaf00;
                 "
                 >philosophers</span
               >
@@ -1260,7 +1275,7 @@
                   color: #fff;
                   padding: 6px 14px;
                   border-radius: 20px;
-                  background: #fbaf00;
+                  background: #ec4e20;
                 "
                 >librarians</span
               >
@@ -1270,7 +1285,7 @@
                   color: #fff;
                   padding: 6px 14px;
                   border-radius: 20px;
-                  background: #ec4e20;
+                  background: #608fe6;
                 "
                 >architects</span
               >
@@ -1280,7 +1295,7 @@
                   color: #fff;
                   padding: 6px 14px;
                   border-radius: 20px;
-                  background: #608fe6;
+                  background: #6d1a36;
                 "
                 >sociologists</span
               >
@@ -1290,7 +1305,7 @@
                   color: #fff;
                   padding: 6px 14px;
                   border-radius: 20px;
-                  background: #6d1a36;
+                  background: #ec4e20;
                 "
                 >physicists</span
               >
@@ -1300,7 +1315,7 @@
                   color: #fff;
                   padding: 6px 14px;
                   border-radius: 20px;
-                  background: #fbaf00;
+                  background: #608fe6;
                 "
                 >linguists</span
               >
@@ -1310,7 +1325,7 @@
                   color: #fff;
                   padding: 6px 14px;
                   border-radius: 20px;
-                  background: #ec4e20;
+                  background: #fbaf00;
                 "
                 >archivists</span
               >
@@ -1320,7 +1335,7 @@
                   color: #fff;
                   padding: 6px 14px;
                   border-radius: 20px;
-                  background: #608fe6;
+                  background: #ec4e20;
                 "
                 >designers</span
               >
@@ -1340,7 +1355,7 @@
                   color: #fff;
                   padding: 6px 14px;
                   border-radius: 20px;
-                  background: #fbaf00;
+                  background: #608fe6;
                 "
                 >journalists</span
               >
@@ -1362,7 +1377,7 @@
                 letter-spacing: 1px;
               "
             >
-              desired resource partners
+              target resource partners
             </div>
             <div
               style="
@@ -1585,28 +1600,44 @@
       <div class="slide" id="s8">
         <h2>cyph.</h2>
 
+        <!-- LEFT/RIGHT layout for cyph slide:
+             LEFT column = section label sitting directly above the flyer card
+             (toggles live ↔ conceptual per click-through).
+             RIGHT column = horizontal-split detail panel — floating
+             underground artifacts on one side, office hours polaroid on the
+             other. mirrors arena-fe's CardDetail click-into-detail pattern. -->
         <div
           style="
+            position: relative;
             display: flex;
-            gap: 60px;
-            width: 1100px;
-            align-items: start;
-            margin-top: 20px;
+            gap: 48px;
+            width: 1080px;
+            margin-top: 14px;
+            margin-bottom: 60px;
+            align-items: flex-start;
             justify-content: center;
           "
         >
-          <!-- LEFT: live -->
-          <div class="arena-section" id="arenaLive">
+          <!-- LEFT column: label-over-flyer -->
+          <div
+            style="
+              width: 280px;
+              flex-shrink: 0;
+              display: flex;
+              flex-direction: column;
+            "
+          >
             <div
               style="
                 display: flex;
-                align-items: baseline;
-                gap: 10px;
-                margin-bottom: 16px;
-                justify-content: center;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 2px;
+                margin-bottom: 10px;
               "
             >
               <span
+                id="cyphSectionLabel"
                 style="
                   font-family:
                     &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
@@ -1617,135 +1648,229 @@
                   letter-spacing: 1px;
                 "
                 >live</span
-              ><span
+              >
+              <span
+                id="cyphSectionSub"
                 style="
                   font-family:
                     &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
-                  font-size: 14px;
+                  font-size: 12px;
+                  font-style: italic;
                   color: var(--charcoal-muted);
+                  line-height: 1.45;
                 "
-                >topics sourced from API's & real-time cultural listening.</span
+                >topics sourced from API's &amp; real-time listening.</span
               >
             </div>
-            <div class="card-stack" id="stackLive">
+
+            <!-- floating flyer card. cyphDrift wrapper animation; child <img>s
+                 stack at the same position, JS toggles .cyph-flyer-active. -->
+            <div
+              class="cyph-flyer-drift"
+              style="position: relative; width: 280px; height: 400px"
+            >
               <img
-                class="stack-card pos-front"
-                id="lc1"
+                class="cyph-flyer cyph-flyer-active"
+                id="cf1"
                 src="assets/cards/live1.png"
               />
+              <img class="cyph-flyer" id="cf2" src="assets/cards/live2.png" />
+              <img class="cyph-flyer" id="cf3" src="assets/cards/live3.png" />
               <img
-                class="stack-card pos-mid"
-                id="lc2"
-                src="assets/cards/live2.png"
-              />
-              <img
-                class="stack-card pos-back"
-                id="lc3"
-                src="assets/cards/live3.png"
-              />
-            </div>
-          </div>
-
-          <!-- RIGHT: conceptual -->
-          <div class="arena-section" id="arenaConcept">
-            <div
-              style="
-                display: flex;
-                align-items: baseline;
-                gap: 10px;
-                margin-bottom: 16px;
-                justify-content: center;
-              "
-            >
-              <span
-                style="
-                  font-family:
-                    &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
-                  font-weight: 700;
-                  font-size: 14px;
-                  color: var(--charcoal);
-                  text-transform: uppercase;
-                  letter-spacing: 1px;
-                "
-                >conceptual</span
-              ><span
-                style="
-                  font-family:
-                    &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
-                  font-size: 14px;
-                  color: var(--charcoal-muted);
-                "
-                >ideas surfaced from pulses in deep research.</span
-              >
-            </div>
-            <div class="card-stack" id="stackConcept">
-              <img
-                class="stack-card pos-front"
-                id="cc1"
+                class="cyph-flyer"
+                id="cf4"
                 src="assets/cards/concept1.png"
               />
               <img
-                class="stack-card pos-mid"
-                id="cc2"
+                class="cyph-flyer"
+                id="cf5"
                 src="assets/cards/concept2.png"
               />
               <img
-                class="stack-card pos-back"
-                id="cc3"
+                class="cyph-flyer"
+                id="cf6"
                 src="assets/cards/concept3.png"
               />
             </div>
           </div>
-        </div>
 
-        <!-- sub-captions under card stacks -->
-        <div
-          style="
-            display: flex;
-            gap: 60px;
-            width: 1100px;
-            margin-top: 12px;
-            justify-content: center;
-          "
-        >
-          <p
+          <!-- RIGHT column: horizontal-split detail panel
+               (underground | office hours) -->
+          <div
             style="
               flex: 1;
-              font-family:
-                &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
-              font-size: 13px;
-              font-style: italic;
-              color: var(--charcoal-muted);
-              text-align: center;
-              margin: 0;
+              max-width: 720px;
+              min-width: 0;
+              display: flex;
+              gap: 28px;
+              align-self: stretch;
             "
           >
-            contest what's happening right now.
-          </p>
-          <p
+            <!-- from the underground (left side of split) -->
+            <div
+              style="
+                flex: 1.55;
+                display: flex;
+                flex-direction: column;
+                min-width: 0;
+              "
+            >
+              <div
+                style="
+                  margin-bottom: 12px;
+                  padding-bottom: 6px;
+                  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+                "
+              >
+                <span
+                  style="
+                    font-family:
+                      &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
+                    font-size: 14px;
+                    font-weight: 700;
+                    color: var(--charcoal);
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                  "
+                  >from the underground</span
+                >
+              </div>
+
+              <!-- floating artifacts: 3 drift-animated wrappers; JS swaps
+                   img.src + caption per click-through. drift1/3/5 keyframes
+                   keep them moving asynchronously like a moodboard. -->
+              <div
+                style="
+                  flex: 1;
+                  display: flex;
+                  gap: 18px;
+                  align-items: center;
+                  justify-content: center;
+                  padding: 16px 4px 8px;
+                "
+              >
+                <div class="cyph-artifact cyph-artifact-1">
+                  <div class="cyph-artifact-img-wrap">
+                    <img
+                      id="cyphArt1"
+                      src="assets/images/knicks_rockets/cassette.png"
+                      alt=""
+                    />
+                  </div>
+                </div>
+                <div class="cyph-artifact cyph-artifact-2">
+                  <div class="cyph-artifact-img-wrap">
+                    <img
+                      id="cyphArt2"
+                      src="assets/images/knicks_rockets/ewing.jpeg"
+                      alt=""
+                    />
+                  </div>
+                </div>
+                <div class="cyph-artifact cyph-artifact-3">
+                  <div class="cyph-artifact-img-wrap">
+                    <img
+                      id="cyphArt3"
+                      src="assets/images/knicks_rockets/percentages.png"
+                      alt=""
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- office hours (right side of split) -->
+            <div
+              style="
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                min-width: 0;
+                padding-left: 28px;
+              "
+            >
+              <div
+                style="
+                  margin-bottom: 12px;
+                  padding-bottom: 6px;
+                  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+                "
+              >
+                <span
+                  style="
+                    font-family:
+                      &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
+                    font-size: 14px;
+                    font-weight: 700;
+                    color: var(--charcoal);
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                  "
+                  >office hours</span
+                >
+              </div>
+              <div
+                id="cyphHosts"
+                style="
+                  flex: 1;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  padding: 14px 0 6px;
+                "
+              ></div>
+            </div>
+          </div>
+
+          <!-- TAGLINE ROW — pulled out of the columns and absolute-positioned
+               at top:100% of the grid (= flyer bottom, since LEFT column no
+               longer contains a tagline). this guarantees all three sit on
+               the same Y regardless of right-side content height. the inner
+               flex mirrors the grid's column widths so each tagline sits
+               directly under its respective column. -->
+          <div
             style="
-              flex: 1;
-              font-family:
-                &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
-              font-size: 13px;
-              font-style: italic;
-              color: var(--charcoal-muted);
-              text-align: center;
-              margin: 0;
+              position: absolute;
+              top: 100%;
+              left: 0;
+              right: 0;
+              margin-top: 16px;
+              display: flex;
+              gap: 48px;
+              justify-content: center;
             "
           >
-            dive deep into age old questions.
-          </p>
+            <div style="width: 280px; flex-shrink: 0">
+              <p class="cyph-tagline">
+                meet a sparring partner in the cyph to wrestle with pressing
+                ideas.
+              </p>
+            </div>
+            <div style="flex: 1; max-width: 720px; display: flex; gap: 28px">
+              <div style="flex: 1.55; min-width: 0">
+                <p class="cyph-tagline">
+                  dig into research from the underground related to the cyph
+                  topic.
+                </p>
+              </div>
+              <div style="flex: 1; min-width: 0; padding-left: 28px">
+                <p class="cyph-tagline">
+                  underground thinkers are invited to the cyph to host office
+                  hours.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <!-- room types + traction -->
+        <!-- room types + traction (restored from deployed version) -->
         <div
           style="
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 1100px;
-            margin-top: 16px;
+            width: 1080px;
+            margin-top: 18px;
             gap: 8px;
           "
         >
@@ -2683,6 +2808,21 @@
             </div>
           </div>
         </div>
+        <div
+          style="
+            position: absolute;
+            right: 24px;
+            bottom: 16px;
+            font-family:
+              &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
+            font-size: 11px;
+            font-style: italic;
+            color: var(--charcoal-muted);
+            letter-spacing: 0.02em;
+          "
+        >
+          breakdown available upon request.
+        </div>
       </div>
       <!-- LEVEL 13: GTM -->
       <div class="slide" id="s12">
@@ -3189,7 +3329,7 @@
           <div class="test-bubble" style="background: #ec4e20">
             <div class="test-quote" style="color: #fff">
               "the world needs an ed-tech app built by someone who knows how to
-              resonate with inner-city kids."
+              resonate with culture."
             </div>
           </div>
           <div class="test-bubble" style="background: #608fe6">

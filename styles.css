@@ -2131,60 +2131,195 @@ a.crisis-card:hover {
   background: rgba(0, 0, 0, 0.5);
 }
 
-/* ═══ ARENA CARD STACKS (s9) ═══ */
-.arena-section {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition:
-    filter 0.5s ease,
-    opacity 0.5s ease;
+/* ═══ CYPH SLIDE (s8) — flyer + arena-fe-style detail panel ═══
+   single floating flyer card on the left cycles through 6 flyers
+   (3 live → 3 conceptual). right side shows the underground artifacts +
+   office hours related to the active flyer, mirroring arena-fe's
+   CardDetail / MomentResources / MomentOfficeHours layout. */
+
+/* drift float animation matches arena-fe's framer-motion drift on selected
+   moment cards: y: [0, -3, 0, 2, 0], duration 8s, ease-in-out, infinite */
+@keyframes cyphDrift {
+  0% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(-3px);
+  }
+  50% {
+    transform: translateY(0);
+  }
+  75% {
+    transform: translateY(2px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
-.arena-section.muted {
-  filter: grayscale(1);
-  opacity: 0.25;
+.cyph-flyer-drift {
+  animation: cyphDrift 8s ease-in-out infinite;
 }
 
-.card-stack {
-  position: relative;
-  width: 320px;
-  height: 430px;
-  margin: 0 auto;
-}
-.stack-card {
+/* all 6 flyers stack on top of each other; only one has .cyph-flyer-active
+   at a time, JS toggles per arenaStep. crossfade transition for the swap. */
+.cyph-flyer {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 16px;
-  transition:
-    transform 0.5s ease,
-    opacity 0.5s ease,
-    z-index 0s;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  border-radius: 6px;
+  box-shadow: 0 4px 22px rgba(0, 0, 0, 0.18);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
 }
-/* back cards peek out behind */
-.stack-card.pos-back {
-  z-index: 1;
-  transform: translateX(24px) rotate(4deg);
-  opacity: 0.6;
-}
-.stack-card.pos-mid {
-  z-index: 2;
-  transform: translateX(12px) rotate(2deg);
-  opacity: 0.8;
-}
-.stack-card.pos-front {
-  z-index: 3;
-  transform: translateX(0) rotate(0deg);
+.cyph-flyer.cyph-flyer-active {
   opacity: 1;
+  pointer-events: auto;
+}
+
+/* floating underground artifacts — small image + caption underneath, each
+   wrapper drifts on its own keyframe pattern so the three move
+   asynchronously like a moodboard. translate + rotate move together so
+   the caption stays attached to its image. */
+.cyph-artifact {
+  width: 110px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  flex-shrink: 0;
+}
+.cyph-artifact-1 {
+  animation: drift1 9s ease-in-out infinite;
+}
+.cyph-artifact-2 {
+  animation: drift3 11s ease-in-out infinite;
+}
+.cyph-artifact-3 {
+  animation: drift5 10s ease-in-out infinite;
+}
+.cyph-artifact-img-wrap {
+  width: 110px;
+  height: 145px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cyph-artifact img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.2));
+}
+.cyph-artifact-caption {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.6px;
+  color: var(--charcoal-muted);
+  text-align: center;
+  line-height: 1.3;
+  max-width: 120px;
+}
+
+/* arena-fe Dashboard.tsx host treatment: 108px circle, 0.5px border, soft
+   shadow, image fills via object-cover, gentle drift float. name + title
+   stack below in serif/mono. */
+.cyph-host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.cyph-host-circle {
+  width: 108px;
+  height: 108px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 0.5px solid rgba(19, 41, 61, 0.2);
+  box-shadow: 0 6px 24px rgba(19, 41, 61, 0.14);
+  background: rgba(19, 41, 61, 0.08);
+  animation: drift4 13s ease-in-out infinite;
+}
+.cyph-host-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  /* B&W portraits — reads as archival/curated rather than press-photo */
+  filter: grayscale(100%) contrast(1.05);
+}
+.cyph-host-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.cyph-host-room {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--charcoal);
+  text-align: center;
+  line-height: 1.2;
+  max-width: 220px;
+  margin-bottom: 1px;
+}
+.cyph-host-name {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--charcoal-muted);
+  text-align: center;
+  line-height: 1.15;
+}
+.cyph-host-when {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.6px;
+  color: var(--charcoal-muted);
+  text-align: center;
+  line-height: 1.3;
+}
+/* matches arena-fe IrlDashboard rsvp link: serif lowercase with a thin
+   underline, no fill, no padding box. visual-only on the deck — pointer
+   events disabled so the deck never reacts to a click on it. */
+.cyph-host-rsvp {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 2px 0;
+  background: none;
+  color: var(--charcoal);
+  border: none;
+  border-bottom: 1px solid var(--charcoal);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0;
+  text-decoration: none;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* italic muted tagline that sits under each section to explain what the
+   section does — mirrors the deck's existing sub-caption voice. */
+.cyph-tagline {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 11.5px;
+  font-style: italic;
+  color: var(--charcoal-muted);
+  line-height: 1.5;
+  text-align: center;
 }
 
 /* ═══ CARD FLIP ═══ */
-
 
 /* ═══ LOCK CONTROLS ═══ */
 body.locked * {
