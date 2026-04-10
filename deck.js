@@ -351,62 +351,65 @@ function goTo(i) {
   runA(i);
 }
 
-/* ── fit-to-viewport scaling ── */
+/* ── fit-to-viewport scaling ──
+   visualViewport excludes the iOS Safari address bar / bottom toolbar, so
+   it gives us the actually-visible area. innerWidth/Height fall back for
+   browsers without visualViewport support. */
+function vpWidth() {
+  return (window.visualViewport && window.visualViewport.width) || window.innerWidth;
+}
+function vpHeight() {
+  return (window.visualViewport && window.visualViewport.height) || window.innerHeight;
+}
 function computeFitScale() {
-  return Math.min(window.innerWidth / 1440, window.innerHeight / 900);
+  return Math.min(vpWidth() / 1440, vpHeight() / 900);
 }
-function isPortraitMobile() {
-  /* matches the CSS media query that hides the deck and shows the rotate prompt */
-  return window.matchMedia("(orientation: portrait) and (max-width: 900px)")
-    .matches;
-}
-function isDeckHidden() {
-  return isPortraitMobile() && !document.body.classList.contains("force-portrait");
+function isMobile() {
+  return window.matchMedia("(max-width: 900px)").matches;
 }
 function applyFitScale() {
   var shell = document.getElementById("game-shell");
   if (!shell) return;
-  var portrait = isPortraitMobile();
-  var forced = document.body.classList.contains("force-portrait");
-  if (portrait && forced) {
-    /* rotated -90deg → visual dims are 900x1440; fit those into the viewport */
-    var s = Math.min(window.innerWidth / 900, window.innerHeight / 1440);
+  if (isMobile()) {
+    /* locked rotated view: rotate -90deg so the landscape canvas runs along
+       the phone's long edge. compute scale from the SHORT and LONG dims of
+       the viewport so the deck stays the same size whether the device is
+       physically held portrait or landscape — no shrinking on rotation. */
+    var w = vpWidth();
+    var h = vpHeight();
+    var shortDim = Math.min(w, h);
+    var longDim = Math.max(w, h);
+    var s = Math.min(shortDim / 900, longDim / 1440);
     shell.style.transform =
       "translate(-50%, -50%) rotate(-90deg) scale(" + s + ")";
   } else {
-    if (forced && !portrait) {
-      /* user physically rotated phone to landscape — exit forced mode so the
-         deck snaps back to its native orientation */
-      document.body.classList.remove("force-portrait");
-    }
-    shell.style.transform = "scale(" + computeFitScale() + ")";
+    shell.style.transform =
+      "translate(-50%, -50%) scale(" + computeFitScale() + ")";
   }
 }
 window.addEventListener("resize", applyFitScale);
 window.addEventListener("orientationchange", applyFitScale);
-
-/* ── user dismissed the rotate prompt — flip into rotated full-bleed view ── */
-function dismissRotatePrompt() {
-  document.body.classList.add("force-portrait");
-  applyFitScale();
+if (window.visualViewport) {
+  window.visualViewport.addEventListener("resize", applyFitScale);
 }
 
 /* ── init ── */
 document.addEventListener("DOMContentLoaded", () => {
-  if (isDeckHidden()) {
-    /* deck is hidden behind the rotate-device prompt — skip the bouncy
-       entrance so anime tweens don't fight applyFitScale on rotation */
+  var shell = document.getElementById("game-shell");
+  if (isMobile()) {
+    /* mobile: snap directly into the rotated transform — the bouncy CSS
+       entrance keyframe only handles the unrotated transform string. */
     applyFitScale();
     runA(0);
   } else {
-    var fitScale = computeFitScale();
-    anime({
-      targets: "#game-shell",
-      scale: [0, fitScale],
-      duration: 800,
-      easing: "easeOutBack",
-      complete: () => runA(0),
-    });
+    /* desktop: trigger the CSS keyframe entrance via --fit-scale. anime.js
+       can't interpolate translate percentages so this is CSS-driven. */
+    shell.style.setProperty("--fit-scale", computeFitScale());
+    shell.classList.add("entered");
+    setTimeout(function () {
+      applyFitScale();
+      runA(0);
+    }, 800);
   }
 
   const s = document.getElementById("citySil");

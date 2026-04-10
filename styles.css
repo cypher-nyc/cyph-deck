@@ -61,13 +61,28 @@ body {
 #game-shell {
   width: 1440px;
   height: 900px;
-  position: relative;
+  position: fixed;
+  top: 50%;
+  left: 50%;
   border: none;
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 0 60px rgba(0, 0, 0, 0.3);
-  transform: scale(0);
+  transform: translate(-50%, -50%) scale(0);
+  transform-origin: center center;
   background: var(--cream);
+  --fit-scale: 1;
+}
+#game-shell.entered {
+  animation: deckEntrance 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+@keyframes deckEntrance {
+  from {
+    transform: translate(-50%, -50%) scale(0);
+  }
+  to {
+    transform: translate(-50%, -50%) scale(var(--fit-scale));
+  }
 }
 
 .bg-layer {
@@ -2170,100 +2185,11 @@ a.crisis-card:hover {
 
 /* ═══ CARD FLIP ═══ */
 
-/* ═══ ROTATE-DEVICE PROMPT (portrait mobile) ═══ */
-#rotate-prompt {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 99999;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 22px;
-  padding: 32px;
-  background: var(--cream);
-  color: var(--charcoal);
-  text-align: center;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-#rotate-prompt .rotate-icon {
-  color: #ec4e20;
-  animation: rotateNudge 2.4s ease-in-out infinite;
-}
-#rotate-prompt .rotate-sub {
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 1.4;
-  max-width: 280px;
-  letter-spacing: -0.01em;
-  color: var(--charcoal);
-}
-#rotate-dismiss {
-  margin-top: 6px;
-  background: none;
-  border: none;
-  border-bottom: 1px solid rgba(19, 41, 61, 0.35);
-  padding: 4px 0;
-  font-family: inherit;
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  text-transform: lowercase;
-  color: #555;
-  cursor: pointer;
-}
-#rotate-dismiss:hover {
-  color: var(--charcoal);
-  border-bottom-color: var(--charcoal);
-}
-@keyframes rotateNudge {
-  0%,
-  60%,
-  100% {
-    transform: rotate(0deg);
-  }
-  20%,
-  40% {
-    transform: rotate(-90deg);
-  }
-}
-@media (orientation: portrait) and (max-width: 900px) {
-  #game-shell,
-  #deck-controls {
-    display: none !important;
-  }
-  #rotate-prompt {
-    display: flex;
-  }
-}
-/* user clicked "proceed with this view" — override the portrait gate.
-   the landscape shell gets rotated -90deg so it fills the portrait screen
-   instead of letterboxing into a tiny strip. positioned fixed + centered
-   with translate so the rotated bounding box doesn't overflow the viewport
-   horizontally (which used to "slip the camera"). */
-body.force-portrait #rotate-prompt {
-  display: none !important;
-}
-body.force-portrait #game-shell {
-  display: block !important;
-  position: fixed !important;
-  top: 50% !important;
-  left: 50% !important;
-  margin: 0 !important;
-  transform-origin: center center !important;
-  animation: forcePortraitFade 0.4s ease-out;
-}
-body.force-portrait #deck-controls {
-  display: flex !important;
-}
-@keyframes forcePortraitFade {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
+/* ═══ MOBILE: locked rotated view ═══
+   on mobile we always render the deck rotated -90deg so the landscape
+   canvas fills the long edge of the phone screen. JS sets the transform.
+   user keeps phone in portrait and tilts head, or holds the phone such
+   that the rotated content reads upright. */
 
 /* ═══ LOCK CONTROLS ═══ */
 body.locked * {
