@@ -2185,47 +2185,6 @@ a.crisis-card:hover {
 
 /* ═══ CARD FLIP ═══ */
 
-/* ═══ MOBILE: portrait hint ═══
-   on portrait mobile the deck fit-scales to width (so it ends up as a
-   short, wide strip centered vertically). this hint floats below it to
-   nudge the user to rotate for the full-size landscape view. pinch-zoom
-   handles readability if they'd rather stay in portrait. */
-#rotate-hint {
-  display: none;
-}
-@media (orientation: portrait) and (max-width: 900px) {
-  #rotate-hint {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    position: fixed;
-    bottom: 28px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 9998;
-    padding: 9px 16px;
-    background: rgba(19, 41, 61, 0.9);
-    color: var(--cream);
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: lowercase;
-    border-radius: 999px;
-    pointer-events: none;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
-    animation: rotateHintPulse 3s ease-in-out infinite;
-  }
-}
-@keyframes rotateHintPulse {
-  0%,
-  100% {
-    opacity: 0.78;
-  }
-  50% {
-    opacity: 1;
-  }
-}
 
 /* ═══ LOCK CONTROLS ═══ */
 body.locked * {
