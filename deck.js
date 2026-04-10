@@ -36,7 +36,7 @@ const layerInfo = [
   {
     ids: ["isoL1", "isoL2", "isoL3"],
     num: "∞",
-    title: "why every step matters.",
+    title: "why all of it matters.",
     sub: "",
     desc: "most platforms produce consumption zombies. our three experiences together produce inquisitive and compassionate thinkers.",
     color: "gradient",
@@ -119,19 +119,18 @@ const cyphFixtures = [
         caption: "archive · 1994 ECF tape",
       },
       {
-        src: "assets/images/knicks_rockets/ewing.jpeg",
-        caption: "longform · ewing & the center",
+        src: "assets/images/knicks_rockets/1980_flyer.png",
+        caption: "ephemera · 1980 game flyer",
       },
       {
-        src: "assets/images/knicks_rockets/percentages.png",
-        caption: "data viz · MSG win % 1968-now",
+        src: "assets/images/knicks_rockets/book.png",
+        caption: "monograph · the cap",
       },
     ],
     host: {
       img: "assets/images/knicks_rockets/office_hours/chris_robinson.jpeg",
-      room: "understanding the salary cap.",
+      room: "understanding the nba salary cap",
       name: "chris robinson",
-      when: "happening right now",
     },
   },
   // step 2 — the oscars (live)
@@ -154,9 +153,8 @@ const cyphFixtures = [
     ],
     host: {
       img: "assets/images/oscars/office_hours/jordan_rose.jpeg",
-      room: "what happens behind the scenes.",
+      room: "oscar's: behind the scenes",
       name: "jordan rose",
-      when: "happening right now",
     },
   },
   // step 3 — mamdani inauguration (live)
@@ -179,9 +177,8 @@ const cyphFixtures = [
     ],
     host: {
       img: "assets/images/mamdani/office_hours/nia_gibson.jpeg",
-      room: "what mamdani inherits.",
+      room: "what mamdani inherits",
       name: "nia gibson",
-      when: "happening right now",
     },
   },
   // step 4 — has culture become content? (conceptual)
@@ -204,9 +201,8 @@ const cyphFixtures = [
     ],
     host: {
       img: "assets/images/is_culture_content/office_hours/tom_freston_I_want_my_mtv_back.png",
-      room: "i want my mtv back: what we lost.",
+      room: "i want my mtv back: what we lost",
       name: "tom freston",
-      when: "happening right now",
     },
   },
   // step 5 — is art a weapon? (conceptual)
@@ -229,9 +225,8 @@ const cyphFixtures = [
     ],
     host: {
       img: "assets/images/is_art_a_weapon/office_hours/dred_scott.png",
-      room: "by any medium necessary.",
+      room: "by any medium necessary",
       name: "dred scott",
-      when: "happening right now",
     },
   },
   // step 6 — is the soul actually cartesian? (conceptual)
@@ -254,9 +249,8 @@ const cyphFixtures = [
     ],
     host: {
       img: "assets/images/soul_cartesian/office_hours/ian_mcgilchrist.png",
-      room: "the ghost was never in the machine.",
+      room: "the ghost was never in the machine",
       name: "iain mcgilchrist",
-      when: "happening right now",
     },
   },
 ];
@@ -298,9 +292,6 @@ function updateCyphDetail(step) {
       "</div>" +
       '<div class="cyph-host-name">hosted by ' +
       fx.host.name +
-      "</div>" +
-      '<div class="cyph-host-when">' +
-      fx.host.when +
       "</div>" +
       "</div>" +
       "</div>";
