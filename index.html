@@ -3256,6 +3256,39 @@
     <div id="deck-controls">
       <button id="lock-btn" onclick="toggleLock()">&#x1f512;</button>
     </div>
+
+    <div id="auth-gate" aria-label="access gate">
+      <div class="auth-panel">
+        <!-- reuses the same station-sign element shown on s4 — same dark
+             placard, same C/Y/P/H route bullets — so the gate reads as
+             slide zero of the deck rather than a separate auth screen -->
+        <div class="station-sign auth-sign">
+          <div class="station-name">we're the new underground.</div>
+          <div class="station-bullets">
+            <span class="station-bullet paprika">C</span
+            ><span class="station-bullet cornflower">Y</span
+            ><span class="station-bullet amber">P</span
+            ><span class="station-bullet amaranth">H</span>
+          </div>
+        </div>
+        <form id="auth-form" autocomplete="off">
+          <input
+            id="auth-input"
+            type="email"
+            inputmode="email"
+            autocomplete="off"
+            autocapitalize="off"
+            autocorrect="off"
+            spellcheck="false"
+            placeholder="you@firm.com"
+          />
+          <button type="submit">enter</button>
+        </form>
+        <div id="auth-err">&nbsp;</div>
+      </div>
+    </div>
+
+    <script src="auth.js"></script>
     <script src="deck.js"></script>
   </body>
 </html>

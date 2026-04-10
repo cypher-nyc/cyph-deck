@@ -2230,3 +2230,108 @@ body.locked .layer-anno-num {
 body.locked #deck-controls button {
   transition: opacity 0.2s !important;
 }
+
+/* ═══ ACCESS GATE ═══
+   Full-screen overlay shown until the user enters a valid VC password.
+   auth.js adds `body.authed` on success which hides this overlay. */
+#auth-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background: var(--cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: var(--charcoal);
+}
+body.authed #auth-gate {
+  display: none;
+}
+.auth-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  max-width: 460px;
+  width: 100%;
+  text-align: center;
+}
+/* override the s4 station-sign defaults: that copy is absolutely
+   positioned in the slide corner — here it's the centered hero, so
+   strip the positioning and scale it up. the dark placard, white
+   wordmark, and route bullets all come from .station-sign as-is. */
+.auth-sign {
+  position: static;
+  padding: 28px 38px 26px;
+  border-radius: 18px;
+}
+.auth-sign .station-name {
+  font-size: 44px;
+  letter-spacing: -0.5px;
+}
+.auth-sign .station-bullets {
+  margin-top: 14px;
+  gap: 9px;
+}
+.auth-sign .station-bullet {
+  width: 38px;
+  height: 38px;
+  font-size: 20px;
+}
+#auth-form {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  max-width: 380px;
+}
+#auth-input {
+  flex: 1;
+  min-width: 0;
+  padding: 12px 14px;
+  border: 1.5px solid rgba(19, 41, 61, 0.25);
+  border-radius: 8px;
+  background: transparent;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--charcoal);
+  letter-spacing: 0.02em;
+  outline: none;
+  transition:
+    border-color 0.18s ease,
+    background 0.18s ease;
+}
+#auth-input::placeholder {
+  color: rgba(19, 41, 61, 0.35);
+  font-weight: 400;
+}
+#auth-input:focus {
+  border-color: #ec4e20;
+  background: rgba(255, 255, 255, 0.5);
+}
+#auth-form button {
+  padding: 12px 18px;
+  border: none;
+  border-radius: 8px;
+  background: #ec4e20;
+  color: #fff;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: lowercase;
+  cursor: pointer;
+  transition: background 0.18s ease;
+}
+#auth-form button:hover {
+  background: #d83e10;
+}
+#auth-err {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: #6d1a36;
+  min-height: 16px;
+}
