@@ -14,7 +14,7 @@ Three pillars, one platform:
 
 The cycle: underground deepens / the cyph sharpens / touch grass grounds.
 
-See `/Users/cash/Documents/github/cyph/PLATFORM_ARCHITECTURE.md` for full technical architecture.
+See `PLATFORM_ARCHITECTURE.md` for full technical architecture.
 
 ## Color scheme
 
