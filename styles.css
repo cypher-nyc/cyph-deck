@@ -2282,10 +2282,10 @@ a.crisis-card:hover {
   filter: grayscale(100%) contrast(1.05);
 }
 .cyph-host-meta {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
+  display: grid;
+  grid-template-rows: 2.4em auto;
+  row-gap: 4px;
+  justify-items: center;
 }
 .cyph-host-room {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -2296,6 +2296,9 @@ a.crisis-card:hover {
   line-height: 1.2;
   max-width: 220px;
   margin-bottom: 1px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 }
 .cyph-host-name {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
