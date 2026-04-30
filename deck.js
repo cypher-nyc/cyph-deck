@@ -36,7 +36,7 @@ const layerInfo = [
   {
     ids: ["isoL1", "isoL2", "isoL3"],
     num: "∞",
-    title: "why all of it matters.",
+    title: "how it all comes together.",
     sub: "",
     desc: "most platforms produce consumption zombies. our three experiences together produce inquisitive and compassionate thinkers.",
     color: "gradient",
