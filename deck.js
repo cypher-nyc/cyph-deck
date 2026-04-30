@@ -45,6 +45,8 @@ const layerInfo = [
 
 function updateLayerStack(step) {
   busy = true;
+  var s5 = document.getElementById("s5");
+  if (s5) s5.classList.toggle("underground-active", step === 1);
   ["isoL1", "isoL2", "isoL3"].forEach(function (id) {
     document.getElementById(id).classList.remove("active");
   });
@@ -64,7 +66,10 @@ function updateLayerStack(step) {
     titleEl.textContent = d.title;
     subEl.textContent = d.sub;
     if (d.color === "gradient") {
-      var grad = "linear-gradient(90deg, #13293D, #FBAF00, #608FE6, #6D1A36)";
+      /* static tri-tone: cornflower → amber → amaranth. cool-warm-deep
+         flow across the ∞ glyph at 135deg, no animation. */
+      var grad =
+        "linear-gradient(135deg, #608FE6 0%, #FBAF00 50%, #6D1A36 100%)";
       numEl.style.background = grad;
       numEl.style.webkitBackgroundClip = "text";
       numEl.style.webkitTextFillColor = "transparent";
@@ -370,6 +375,15 @@ const bgMap = {
 function applySlide(i) {
   document.getElementById("s" + cur).classList.remove("active");
 
+  /* pre-toggle s5's underground-active class BEFORE the slide fades in,
+     so the dark bg transition completes during the 180ms doGo gap +
+     150ms slide opacity fade — no visible lag. cur is still the prev
+     slide here (matches case 5's fromFuture logic in runA). */
+  if (i === 5) {
+    var s5 = document.getElementById("s5");
+    if (s5) s5.classList.toggle("underground-active", cur <= 5);
+  }
+
   const nc = ch[i];
   const activeBg = bgMap[nc] || "shell";
 
@@ -497,6 +511,13 @@ function goTo(i) {
   for (var j = 0; j < T; j++) {
     var sl = document.getElementById("s" + j);
     if (sl) sl.classList.remove("active");
+  }
+
+  /* same pre-toggle as applySlide — direct nav also needs the dark bg
+     ready before the slide flips visible */
+  if (i === 5) {
+    var s5pre = document.getElementById("s5");
+    if (s5pre) s5pre.classList.toggle("underground-active", cur <= 5);
   }
 
   // Update backgrounds, HUD, bars

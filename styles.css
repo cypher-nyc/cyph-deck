@@ -861,6 +861,28 @@ body {
   z-index: 10;
   margin: 0;
 }
+
+/* s5 (how it works) — dark immersion when the underground layer is active.
+   Mirrors the underground pillar theme from cyph-design-system-fe
+   (pillarTokens.underground: bg #272b2e, text #fff). Other steps keep cream. */
+#s5 {
+  transition: background-color 0.4s ease;
+}
+#s5.underground-active {
+  background: #272b2e;
+}
+#s5.underground-active h2 {
+  color: #ffffff !important;
+}
+#s5.underground-active .layer-anno-desc {
+  color: rgba(255, 255, 255, 0.56);
+}
+#s5.underground-active .layer-dot {
+  background: rgba(255, 255, 255, 0.2);
+}
+#s5.underground-active .layer-dot.active {
+  background: rgba(255, 255, 255, 0.7);
+}
 /* ═══ STATION SIGN HEADER ═══ */
 .station-sign {
   position: absolute;
