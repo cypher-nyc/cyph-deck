@@ -637,12 +637,12 @@ function runA(i) {
         easing: B,
       });
       anime({
-        targets: "#s0 .sub",
-        translateY: [12, 0],
+        targets: "#s0 .cover-def",
+        translateY: [-20, 0],
         opacity: [0, 1],
-        duration: 500,
-        delay: 150,
-        easing: C,
+        duration: 600,
+        delay: anime.stagger(120, { start: 150 }),
+        easing: B,
       });
       anime({
         targets: "#s0 .cbadge",
