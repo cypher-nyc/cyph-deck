@@ -450,6 +450,29 @@ body {
   max-width: 620px;
   line-height: 1.55;
 }
+.cover-defs {
+  margin: 24px 0 0;
+  padding: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: var(--charcoal);
+  max-width: 760px;
+}
+.cover-def {
+  font-size: 22px;
+  line-height: 1.5;
+  font-weight: 400;
+  margin: 0 0 18px;
+}
+.cover-def:last-child {
+  margin-bottom: 0;
+}
+.cover-def-pos {
+  font-style: italic;
+  font-weight: 400;
+}
+.cover-def-final {
+  margin-top: 28px;
+}
 /* s9 (touch grass) overrides */
 #s9,
 #s9 p,
