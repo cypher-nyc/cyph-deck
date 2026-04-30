@@ -471,7 +471,12 @@ body {
   font-weight: 400;
 }
 .cover-def-final {
-  margin-top: 28px;
+  margin-top: 36px;
+  font-weight: 700;
+  color: #ec4e20;
+}
+.cover-def-final .cover-def-pos {
+  font-weight: 700;
 }
 /* s9 (touch grass) overrides */
 #s9,
