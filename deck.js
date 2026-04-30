@@ -129,7 +129,7 @@ const cyphFixtures = [
     ],
     host: {
       img: "assets/images/knicks_rockets/office_hours/chris_robinson.jpeg",
-      room: "understanding the nba salary cap",
+      room: '"shut up and dribble:" power in the nba',
       name: "chris robinson",
     },
   },
@@ -153,7 +153,7 @@ const cyphFixtures = [
     ],
     host: {
       img: "assets/images/oscars/office_hours/jordan_rose.jpeg",
-      room: "oscar's: behind the scenes",
+      room: "the oscars: behind the screen",
       name: "jordan rose",
     },
   },
@@ -201,7 +201,7 @@ const cyphFixtures = [
     ],
     host: {
       img: "assets/images/is_culture_content/office_hours/tom_freston_I_want_my_mtv_back.png",
-      room: "i want my mtv back: what we lost",
+      room: "missing mtv: what we lost",
       name: "tom freston",
     },
   },
