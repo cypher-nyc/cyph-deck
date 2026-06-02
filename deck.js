@@ -610,6 +610,28 @@ document.addEventListener("DOMContentLoaded", () => {
     runA(0);
   }, 800);
 
+  /* cover-slide background video: the element has `autoplay`, so the
+     browser starts playback on load. For prefers-reduced-motion, pause
+     and rewind to the first frame so it acts as a still poster. */
+  var coverVideo = document.querySelector("#s0 .cover-bg-video");
+  if (coverVideo) {
+    var reduce = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    if (reduce) {
+      var pauseToFirstFrame = function () {
+        coverVideo.pause();
+        try {
+          coverVideo.currentTime = 0;
+        } catch (e) {}
+      };
+      pauseToFirstFrame();
+      coverVideo.addEventListener("loadedmetadata", pauseToFirstFrame, {
+        once: true,
+      });
+    }
+  }
+
   /* seed the cyph (s8) detail panel so it renders content before the
      user has clicked into the first arena step */
   updateCyphDetail(1);
