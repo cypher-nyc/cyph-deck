@@ -2403,155 +2403,375 @@
       <div class="slide" id="s10">
         <h2>how we make money.</h2>
 
-        <div style="width: 1100px; margin-top: 16px">
-          <!-- main columns: newspaper layout -->
-          <div style="display: flex; gap: 0; align-items: start">
-            <div>
-              <p
+        <div
+          style="
+            width: 1100px;
+            height: 540px;
+            margin-top: 16px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 18px;
+            align-items: stretch;
+          "
+        >
+          <!-- bottom-left: belong -->
+          <div
+            class="biz-stream biz-stream--belong"
+            style="
+              grid-row: 2;
+              grid-column: 1;
+              display: flex;
+              flex-direction: column;
+              border-left: 4px solid #6c1a36;
+              padding: 10px 16px 12px 14px;
+              min-width: 0;
+              min-height: 0;
+            "
+          >
+            <div
+              style="
+                font-family:
+                  &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
+                font-size: 13px;
+                font-weight: 700;
+                letter-spacing: 0.04em;
+                color: #a8456a;
+                margin-bottom: 8px;
+              "
+            >
+              belong
+            </div>
+            <p
+              style="
+                font-family:
+                  &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
+                font-size: 15px;
+                color: var(--charcoal);
+                line-height: 1.45;
+                margin: 0;
+              "
+            >
+              our most curious cyphers earn an invite to the
+              <strong>advanced cyphcard</strong> — real-world perks for a
+              small monthly fee.
+            </p>
+            <div
+              style="
+                margin-top: auto;
+                display: flex;
+                justify-content: center;
+                align-items: flex-end;
+                padding-top: 12px;
+              "
+            >
+              <img
+                src="assets/reference/ip/cyphcard.png"
+                alt="cyphcard"
+                class="cyphcard-sway"
+                draggable="false"
                 style="
-                  font-family:
-                    &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
-                  font-weight: 700;
-                  font-size: 28px;
-                  color: var(--charcoal);
-                  line-height: 1.2;
-                  margin-bottom: 12px;
+                  width: auto;
+                  height: 110px;
+                  object-fit: contain;
+                  filter: drop-shadow(4px 6px 12px rgba(0, 0, 0, 0.45));
                 "
-              >
-                collaborators will pay us to feature their treasures in the
-                underground.
-              </p>
-              <p
-                style="
-                  font-family:
-                    &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
-                  font-size: 14px;
-                  color: var(--charcoal-muted);
-                  line-height: 1.6;
-                  margin-bottom: 16px;
-                "
-              >
-                the right content surfaces to the right people. all resource
-                pools are
-                <strong style="color: var(--charcoal)"
-                  >human-produced. never ai.</strong
-                >
-              </p>
-
-              <div
-                style="
-                  display: flex;
-                  flex-wrap: wrap;
-                  gap: 6px;
-                  margin-top: 10px;
-                "
-              >
-                <span
-                  style="
-                    font-size: 13px;
-                    color: #fff;
-                    padding: 5px 12px;
-                    border-radius: 20px;
-                    background: #608fe6;
-                  "
-                  >film footage</span
-                >
-                <span
-                  style="
-                    font-size: 13px;
-                    color: #fff;
-                    padding: 5px 12px;
-                    border-radius: 20px;
-                    background: #ec4e20;
-                  "
-                  >fashion archives</span
-                >
-                <span
-                  style="
-                    font-size: 13px;
-                    color: #fff;
-                    padding: 5px 12px;
-                    border-radius: 20px;
-                    background: #fbaf00;
-                  "
-                  >rare book stores</span
-                >
-                <span
-                  style="
-                    font-size: 13px;
-                    color: #fff;
-                    padding: 5px 12px;
-                    border-radius: 20px;
-                    background: #6d1a36;
-                  "
-                  >music estates</span
-                >
-                <span
-                  style="
-                    font-size: 13px;
-                    color: #fff;
-                    padding: 5px 12px;
-                    border-radius: 20px;
-                    background: #608fe6;
-                  "
-                  >sports inventory</span
-                >
-                <span
-                  style="
-                    font-size: 13px;
-                    color: #fff;
-                    padding: 5px 12px;
-                    border-radius: 20px;
-                    background: #ec4e20;
-                  "
-                  >museums</span
-                >
-                <span
-                  style="
-                    font-size: 13px;
-                    color: #fff;
-                    padding: 5px 12px;
-                    border-radius: 20px;
-                    background: #fbaf00;
-                  "
-                  >vintage stores</span
-                >
-                <span
-                  style="
-                    font-size: 13px;
-                    color: #fff;
-                    padding: 5px 12px;
-                    border-radius: 20px;
-                    background: #6d1a36;
-                  "
-                  >publications</span
-                >
-              </div>
+              />
             </div>
           </div>
 
-          <!-- bottom rule -->
+          <!-- top-right: reach -->
           <div
-            style="border-top: 1px solid rgba(0, 0, 0, 0.1); margin-top: 20px"
-          ></div>
-
-          <!-- floating artifacts: 3 rows of 7, last row centered (6 items) -->
-          <div
+            class="biz-stream biz-stream--reach"
             style="
-              width: 1100px;
-              margin-top: 16px;
+              grid-row: 1;
+              grid-column: 2;
               display: flex;
               flex-direction: column;
-              gap: 10px;
+              border-left: 4px solid #608ee5;
+              padding: 10px 16px 12px 14px;
+              min-width: 0;
+              min-height: 0;
             "
           >
-            <!-- row 1: 7 -->
-            <div style="display: flex; gap: 10px; justify-content: center">
+            <div
+              style="
+                font-family:
+                  &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
+                font-size: 13px;
+                font-weight: 700;
+                letter-spacing: 0.04em;
+                color: #608ee5;
+                margin-bottom: 8px;
+              "
+            >
+              reach
+            </div>
+            <p
+              style="
+                font-family:
+                  &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
+                font-size: 15px;
+                color: var(--charcoal);
+                line-height: 1.45;
+                margin: 0;
+              "
+            >
+              aligned brands pay to be featured in
+              <strong>cyph city</strong>, earning the credibility of an
+              underground ally.
+            </p>
+            <div
+              style="
+                margin-top: auto;
+                display: flex;
+                justify-content: center;
+                align-items: flex-end;
+                padding-top: 12px;
+              "
+            >
+              <img
+                src="assets/reference/ip/cyph-nav-icon.png"
+                alt="cyph nav icon"
+                class="ds-tile-sway"
+                draggable="false"
+                style="
+                  width: auto;
+                  height: 150px;
+                  object-fit: contain;
+                  filter: drop-shadow(4px 6px 12px rgba(0, 0, 0, 0.45));
+                "
+              />
+            </div>
+          </div>
+
+          <!-- bottom-right: build -->
+          <div
+            class="biz-stream biz-stream--build"
+            style="
+              grid-row: 2;
+              grid-column: 2;
+              display: flex;
+              flex-direction: column;
+              border-left: 4px solid #ed4e20;
+              padding: 10px 16px 12px 14px;
+              min-width: 0;
+              min-height: 0;
+            "
+          >
+            <div
+              style="
+                font-family:
+                  &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
+                font-size: 13px;
+                font-weight: 700;
+                letter-spacing: 0.04em;
+                color: #ed4e20;
+                margin-bottom: 8px;
+              "
+            >
+              build
+            </div>
+            <p
+              style="
+                font-family:
+                  &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
+                font-size: 15px;
+                color: var(--charcoal);
+                line-height: 1.45;
+                margin: 0;
+              "
+            >
+              companies, schools, and institutions pay us to design and run
+              <strong>private cyphs and programs</strong>.
+            </p>
+            <div
+              style="
+                margin-top: auto;
+                display: flex;
+                justify-content: center;
+                align-items: flex-end;
+                padding-top: 12px;
+              "
+            >
+              <img
+                src="assets/reference/ip/route-syllabus-toggle.png"
+                alt="route syllabus toggle"
+                class="ds-paper-sway"
+                draggable="false"
+                style="
+                  width: auto;
+                  height: 110px;
+                  object-fit: contain;
+                  filter: drop-shadow(4px 6px 12px rgba(0, 0, 0, 0.45));
+                "
+              />
+            </div>
+          </div>
+
+          <!-- top-left: inventory -->
+          <div
+            class="biz-stream biz-stream--inventory"
+            style="
+              grid-row: 1;
+              grid-column: 1;
+              display: flex;
+              flex-direction: column;
+              border-left: 4px solid #fbaf03;
+              padding: 10px 16px 12px 14px;
+              min-width: 0;
+              min-height: 0;
+              overflow: hidden;
+            "
+          >
+            <div
+              style="
+                font-family:
+                  &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
+                font-size: 13px;
+                font-weight: 700;
+                letter-spacing: 0.04em;
+                color: #fbaf03;
+                margin-bottom: 8px;
+              "
+            >
+              inventory
+            </div>
+            <p
+              style="
+                font-family:
+                  &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
+                font-size: 14px;
+                color: var(--charcoal);
+                line-height: 1.4;
+                margin: 0 0 4px 0;
+              "
+            >
+              collaborators pay to surface their <strong>rare treasures</strong>
+              in the underground.
+            </p>
+            <p
+              style="
+                font-family:
+                  &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
+                font-size: 11px;
+                color: var(--charcoal-muted);
+                line-height: 1.4;
+                margin: 0 0 8px 0;
+              "
+            >
+              all resource pools are
+              <strong style="color: var(--charcoal)"
+                >human-produced. never ai.</strong
+              >
+            </p>
+
+            <!-- pills, scaled to fit the quadrant; wraps within column -->
+            <div
+              style="
+                display: flex;
+                flex-wrap: wrap;
+                gap: 4px;
+              "
+            >
+              <span
+                style="
+                  font-size: 10px;
+                  color: #fff;
+                  padding: 2px 7px;
+                  border-radius: 20px;
+                  background: #608fe6;
+                "
+                >film footage</span
+              >
+              <span
+                style="
+                  font-size: 10px;
+                  color: #fff;
+                  padding: 2px 7px;
+                  border-radius: 20px;
+                  background: #ec4e20;
+                "
+                >fashion archives</span
+              >
+              <span
+                style="
+                  font-size: 10px;
+                  color: #fff;
+                  padding: 2px 7px;
+                  border-radius: 20px;
+                  background: #fbaf00;
+                "
+                >rare book stores</span
+              >
+              <span
+                style="
+                  font-size: 10px;
+                  color: #fff;
+                  padding: 2px 7px;
+                  border-radius: 20px;
+                  background: #6d1a36;
+                "
+                >music estates</span
+              >
+              <span
+                style="
+                  font-size: 10px;
+                  color: #fff;
+                  padding: 2px 7px;
+                  border-radius: 20px;
+                  background: #608fe6;
+                "
+                >sports inventory</span
+              >
+              <span
+                style="
+                  font-size: 10px;
+                  color: #fff;
+                  padding: 2px 7px;
+                  border-radius: 20px;
+                  background: #ec4e20;
+                "
+                >museums</span
+              >
+              <span
+                style="
+                  font-size: 10px;
+                  color: #fff;
+                  padding: 2px 7px;
+                  border-radius: 20px;
+                  background: #fbaf00;
+                "
+                >vintage stores</span
+              >
+              <span
+                style="
+                  font-size: 10px;
+                  color: #fff;
+                  padding: 2px 7px;
+                  border-radius: 20px;
+                  background: #6d1a36;
+                "
+                >publications</span
+              >
+            </div>
+
+            <!-- collage: dense wrap-pack anchored at quadrant base -->
+            <div
+              class="biz-collage"
+              style="
+                margin-top: auto;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 4px;
+                padding-top: 10px;
+              "
+            >
               <img
                 src="assets/artifacts/renaissance.jpg"
                 style="
                   width: auto;
-                  height: 105px;
+                  height: 38px;
                   object-fit: contain;
                   border-radius: 3px;
                   box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.12);
@@ -2562,7 +2782,7 @@
                 src="assets/artifacts/goya.jpg"
                 style="
                   width: auto;
-                  height: 105px;
+                  height: 38px;
                   object-fit: contain;
                   border-radius: 3px;
                   box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.12);
@@ -2573,7 +2793,7 @@
                 src="assets/artifacts/babylon_timbuktu.jpg"
                 style="
                   width: auto;
-                  height: 105px;
+                  height: 38px;
                   object-fit: contain;
                   border-radius: 3px;
                   box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.12);
@@ -2584,7 +2804,7 @@
                 src="assets/artifacts/vanity_fair.jpg"
                 style="
                   width: auto;
-                  height: 105px;
+                  height: 38px;
                   object-fit: contain;
                   border-radius: 3px;
                   box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.12);
@@ -2595,7 +2815,7 @@
                 src="assets/artifacts/films_joan_crawford.jpg"
                 style="
                   width: auto;
-                  height: 105px;
+                  height: 38px;
                   object-fit: contain;
                   border-radius: 3px;
                   box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.12);
@@ -2606,7 +2826,7 @@
                 src="assets/artifacts/birth-of-mahavira.png"
                 style="
                   width: auto;
-                  height: 105px;
+                  height: 38px;
                   object-fit: contain;
                   border-radius: 3px;
                   box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.12);
@@ -2617,21 +2837,18 @@
                 src="assets/artifacts/indian_art.png"
                 style="
                   width: auto;
-                  height: 105px;
+                  height: 38px;
                   object-fit: contain;
                   border-radius: 3px;
                   box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.12);
                   animation: drift1 10.5s ease-in-out infinite;
                 "
               />
-            </div>
-            <!-- row 2: 7 -->
-            <div style="display: flex; gap: 10px; justify-content: center">
               <img
                 src="assets/artifacts/crisis_black_white.jpg"
                 style="
                   width: auto;
-                  height: 105px;
+                  height: 38px;
                   object-fit: contain;
                   border-radius: 3px;
                   box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.12);
@@ -2642,7 +2859,7 @@
                 src="assets/artifacts/history_of_bible.jpg"
                 style="
                   width: auto;
-                  height: 105px;
+                  height: 38px;
                   object-fit: contain;
                   border-radius: 3px;
                   box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.12);
@@ -2653,7 +2870,7 @@
                 src="assets/artifacts/movie_monsters.jpg"
                 style="
                   width: auto;
-                  height: 105px;
+                  height: 38px;
                   object-fit: contain;
                   border-radius: 3px;
                   box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.12);
@@ -2664,7 +2881,7 @@
                 src="assets/artifacts/sud_afrika.jpg"
                 style="
                   width: auto;
-                  height: 105px;
+                  height: 38px;
                   object-fit: contain;
                   border-radius: 3px;
                   box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.12);
@@ -2675,7 +2892,7 @@
                 src="assets/artifacts/three_friends.jpg"
                 style="
                   width: auto;
-                  height: 105px;
+                  height: 38px;
                   object-fit: contain;
                   border-radius: 3px;
                   box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.12);
@@ -2686,7 +2903,7 @@
                 src="assets/artifacts/new_age_yearbook.png"
                 style="
                   width: auto;
-                  height: 105px;
+                  height: 38px;
                   object-fit: contain;
                   border-radius: 3px;
                   box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.12);
@@ -2697,21 +2914,18 @@
                 src="assets/artifacts/cool_collage_2.png"
                 style="
                   width: auto;
-                  height: 105px;
+                  height: 38px;
                   object-fit: contain;
                   border-radius: 3px;
                   box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.12);
                   animation: drift4 8s ease-in-out infinite;
                 "
               />
-            </div>
-            <!-- row 3: 6 centered -->
-            <div style="display: flex; gap: 10px; justify-content: center">
               <img
                 src="assets/artifacts/kid_collage.png"
                 style="
                   width: auto;
-                  height: 105px;
+                  height: 38px;
                   object-fit: contain;
                   border-radius: 3px;
                   box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.12);
@@ -2722,7 +2936,7 @@
                 src="assets/artifacts/5.png"
                 style="
                   width: auto;
-                  height: 105px;
+                  height: 38px;
                   object-fit: contain;
                   border-radius: 3px;
                   box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.12);
@@ -2733,7 +2947,7 @@
                 src="assets/artifacts/7.jpg"
                 style="
                   width: auto;
-                  height: 105px;
+                  height: 38px;
                   object-fit: contain;
                   border-radius: 3px;
                   box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.12);
@@ -2744,7 +2958,7 @@
                 src="assets/artifacts/10.png"
                 style="
                   width: auto;
-                  height: 105px;
+                  height: 38px;
                   object-fit: contain;
                   border-radius: 3px;
                   box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.12);
@@ -2755,7 +2969,7 @@
                 src="assets/artifacts/14.jpeg"
                 style="
                   width: auto;
-                  height: 105px;
+                  height: 38px;
                   object-fit: contain;
                   border-radius: 3px;
                   box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.12);
@@ -2766,7 +2980,7 @@
                 src="assets/artifacts/29.jpg"
                 style="
                   width: auto;
-                  height: 105px;
+                  height: 38px;
                   object-fit: contain;
                   border-radius: 3px;
                   box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.12);

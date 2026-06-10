@@ -921,31 +921,29 @@ function runA(i) {
     }
     case 9:
       break;
-    case 10:
-      anime({
-        targets: "#s10 .game-panel",
-        opacity: [0, 1],
-        scale: [0.95, 1],
-        duration: 500,
-        easing: B,
-      });
-      anime({
-        targets: "#s10 .biz-main",
-        scale: [0.9, 1],
-        opacity: [0, 1],
-        duration: 550,
-        delay: 200,
-        easing: B,
-      });
-      anime({
-        targets: "#s10 .biz-card",
-        translateX: [20, 0],
-        opacity: [0, 1],
-        duration: 450,
-        delay: anime.stagger(140, { start: 350 }),
-        easing: B,
-      });
+    case 10: {
+      var s10Reduce = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+      if (s10Reduce) {
+        document
+          .querySelectorAll("#s10 .biz-stream")
+          .forEach(function (el) {
+            el.style.opacity = "1";
+            el.style.transform = "none";
+          });
+      } else {
+        anime({
+          targets: "#s10 .biz-stream",
+          translateY: [10, 0],
+          opacity: [0, 1],
+          duration: 420,
+          delay: anime.stagger(90),
+          easing: B,
+        });
+      }
       break;
+    }
     case 11:
       anime({
         targets: "#s11 .user-row",
@@ -1093,7 +1091,7 @@ function toggleLock() {
       el.style.transform = "none";
     });
     document
-      .querySelectorAll("#s10 .game-panel, #s10 .biz-main, #s10 .biz-card")
+      .querySelectorAll("#s10 .biz-stream")
       .forEach(function (el) {
         el.style.opacity = "1";
         el.style.transform = "none";
