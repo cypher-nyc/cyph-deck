@@ -1099,6 +1099,75 @@ body {
   }
 }
 
+/* "me" cyphcard pendulum — mirrors MeNavIcon3D's continuous sway
+   (CyphCard3D sway={true}) using a flat CSS approximation. */
+@keyframes cyphcardSway {
+  0%,
+  100% {
+    transform: perspective(420px) rotateY(-7deg) rotateX(2deg) rotateZ(-2deg);
+  }
+  50% {
+    transform: perspective(420px) rotateY(7deg) rotateX(2deg) rotateZ(2deg);
+  }
+}
+.cyphcard-sway {
+  transform-origin: 50% 100%;
+  animation: cyphcardSway 4.2s ease-in-out infinite;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cyphcard-sway {
+    animation: none;
+    transform: perspective(420px) rotateY(0) rotateX(2deg);
+  }
+}
+
+/* Captured stills of the real DS components (cyph nav icon,
+   RouteSyllabusToggle paper) live in assets/reference/ip/ and are
+   rendered as <img>. These classes evoke the originals' continuous
+   motion (CyphDoorsIcon3D 6s door cycle, SwayingPaper3D pendulum)
+   with a subtle horizontal/rotation sway, gated by reduced motion. */
+@keyframes dsTileSway {
+  0%,
+  100% {
+    transform: translateX(-2px);
+  }
+  50% {
+    transform: translateX(2px);
+  }
+}
+.ds-tile-sway {
+  animation: dsTileSway 5.4s ease-in-out infinite;
+  will-change: transform;
+}
+@keyframes dsPaperSway {
+  0%,
+  100% {
+    transform: rotate(-1.6deg);
+  }
+  50% {
+    transform: rotate(1.6deg);
+  }
+}
+.ds-paper-sway {
+  transform-origin: 50% 100%;
+  animation: dsPaperSway 4.6s ease-in-out infinite;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ds-tile-sway,
+  .ds-paper-sway {
+    animation: none;
+    transform: none;
+  }
+  /* Gate slide-11 inventory collage drift behind reduced-motion
+     (the inline `animation: driftN ...` styles aren't gated on their
+     own; scoped to #s10 so other slides' drift usage is untouched). */
+  #s10 .biz-collage img {
+    animation: none !important;
+  }
+}
+
 /* counter-culture — images aligned above their cards */
 .cc-canvas {
   height: 350px;
