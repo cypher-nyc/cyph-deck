@@ -1803,10 +1803,30 @@ img[src*="3rdspace"] {
 .user-info {
   width: 260px;
 }
+.user-logos {
+  width: 44px;
+  margin-right: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.user-logos img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  display: block;
+}
+.user-row-inner {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
 .user-info h4 {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 28px;
   color: var(--charcoal);
 }
 .user-info p {
@@ -1832,6 +1852,9 @@ img[src*="3rdspace"] {
   padding: 12px 10px;
   border-top: 2px solid var(--charcoal);
 }
+.user-total .user-info {
+  width: 334px;
+}
 .user-total .user-info h4 {
   color: var(--charcoal);
 }
@@ -1852,7 +1875,7 @@ img[src*="3rdspace"] {
   color: var(--charcoal);
 }
 .col-hdr .spacer {
-  width: 260px;
+  width: 334px;
   flex: none;
 }
 
