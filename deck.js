@@ -125,6 +125,9 @@ const cyphFixtures = [
   {
     section: "live",
     sectionSub: "topics sourced from API's & real-time listening.",
+    flyerTitle: "Knicks Championship",
+    flyerCount: "+1.3K more",
+    flyerFaces: ["assets/portraits/cypher-01.jpg", "assets/portraits/cypher-04.jpg"],
     artifacts: [
       {
         src: "assets/images/knicks_rockets/cassette.png",
@@ -149,6 +152,9 @@ const cyphFixtures = [
   {
     section: "conceptual",
     sectionSub: "ideas surfaced from pulses in deep research.",
+    flyerTitle: "is the soul actually cartesian?",
+    flyerCount: "+312 more",
+    flyerFaces: ["assets/portraits/cypher-02.jpg", "assets/portraits/cypher-07.jpg"],
     artifacts: [
       {
         src: "assets/images/soul_cartesian/meditations.png",
@@ -180,6 +186,18 @@ function updateCyphDetail(step) {
   if (label) label.textContent = fx.section;
   var sub = document.getElementById("cyphSectionSub");
   if (sub) sub.textContent = fx.sectionSub;
+
+  // flyer hover treatment — title + headcount + lead faces for the cyph
+  var flyerTitle = document.getElementById("cyphFlyerTitle");
+  if (flyerTitle && fx.flyerTitle) flyerTitle.textContent = fx.flyerTitle;
+  var flyerCount = document.getElementById("cyphFlyerCount");
+  if (flyerCount && fx.flyerCount) flyerCount.textContent = fx.flyerCount;
+  if (fx.flyerFaces) {
+    var f1 = document.getElementById("cfhFace1");
+    var f2 = document.getElementById("cfhFace2");
+    if (f1 && fx.flyerFaces[0]) f1.src = fx.flyerFaces[0];
+    if (f2 && fx.flyerFaces[1]) f2.src = fx.flyerFaces[1];
+  }
 
   // floating underground artifacts — swap img.src + caption text on the
   // three fixed wrapper divs so their drift animations stay running.
