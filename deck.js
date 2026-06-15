@@ -31,7 +31,7 @@ const layerInfo = [
     title: "irl",
     sub: "touch grass.",
     desc: "everything found underground and tested in the cyph finds its fullest expression here — the tangible world, the human face, the experience that changes you.",
-    color: "#6D1A36",
+    color: "#FBAF00",
   },
   {
     ids: ["isoL1", "isoL2", "isoL3"],
@@ -86,19 +86,26 @@ function updateLayerStack(step) {
     document.getElementById("layerDesc").textContent = d.desc;
     document.getElementById("layerAnno").style.opacity = "1";
   }
+  /* cyph doors (isoL2) loop open/close only while their layer is the
+     selected step; otherwise they hold closed (see iso3d.js). */
+  if (typeof window.setCyphDoorsActive === "function") {
+    window.setCyphDoorsActive(
+      document.getElementById("isoL2").classList.contains("active"),
+    );
+  }
   setTimeout(function () {
     busy = false;
   }, 400);
 }
 
 /* ── cyph slide (s8) flyer carousel: a single flyer card on the left
-   cycles through 6 flyers. steps 1-3 = live (live1-3.png), 4-6 = conceptual
-   (concept1-3.png). the right side shows underground artifacts + office
+   cycles through 2 flyers. step 1 = live (live1.png), step 2 = conceptual
+   (concept3.png). the right side shows underground artifacts + office
    hours related to the active flyer (see updateCyphDetail). ── */
 function updateArenaCards(step) {
   busy = true;
   // toggle which flyer image is .cyph-flyer-active (crossfade in CSS)
-  for (var i = 1; i <= 6; i++) {
+  for (var i = 1; i <= 2; i++) {
     var card = document.getElementById("cf" + i);
     if (card) card.classList.toggle("cyph-flyer-active", i === step);
   }
@@ -114,7 +121,7 @@ function updateArenaCards(step) {
    the artifact image paths are placeholders pulled from assets/artifacts/
    (the user will swap them for curated picks). ── */
 const cyphFixtures = [
-  // step 1 — knicks vs rockets (live)
+  // step 1 — knicks vs spurs (live)
   {
     section: "live",
     sectionSub: "topics sourced from API's & real-time listening.",
@@ -138,103 +145,7 @@ const cyphFixtures = [
       name: "chris robinson",
     },
   },
-  // step 2 — the oscars (live)
-  {
-    section: "live",
-    sectionSub: "topics sourced from API's & real-time listening.",
-    artifacts: [
-      {
-        src: "assets/images/oscars/pauline.jpg",
-        caption: "criticism · pauline kael",
-      },
-      {
-        src: "assets/images/oscars/ari-aster.jpg",
-        caption: "interview · ari aster",
-      },
-      {
-        src: "assets/images/oscars/box_office.webp",
-        caption: "data viz · best pic vs box office",
-      },
-    ],
-    host: {
-      img: "assets/images/oscars/office_hours/jordan_rose.jpeg",
-      room: "the oscars: behind the screen",
-      name: "jordan rose",
-    },
-  },
-  // step 3 — mamdani inauguration (live)
-  {
-    section: "live",
-    sectionSub: "topics sourced from API's & real-time listening.",
-    artifacts: [
-      {
-        src: "assets/images/mamdani/transcript.jpg",
-        caption: "transcript · inaugural address",
-      },
-      {
-        src: "assets/images/mamdani/housing.webp",
-        caption: "history · NYC mayors & housing",
-      },
-      {
-        src: "assets/images/mamdani/rent_freeze.jpeg",
-        caption: "report · what a rent freeze does",
-      },
-    ],
-    host: {
-      img: "assets/images/mamdani/office_hours/nia_gibson.jpeg",
-      room: "what mamdani inherits",
-      name: "nia gibson",
-    },
-  },
-  // step 4 — has culture become content? (conceptual)
-  {
-    section: "conceptual",
-    sectionSub: "ideas surfaced from pulses in deep research.",
-    artifacts: [
-      {
-        src: "assets/images/is_culture_content/commodity_fetishism.png",
-        caption: "essay · marx, commodity fetishism",
-      },
-      {
-        src: "assets/images/is_culture_content/mass_culture.png",
-        caption: "essay · adorno, the culture industry",
-      },
-      {
-        src: "assets/images/is_culture_content/the_century_of_the_self.png",
-        caption: "doc · curtis, century of the self",
-      },
-    ],
-    host: {
-      img: "assets/images/is_culture_content/office_hours/tom_freston_I_want_my_mtv_back.png",
-      room: "missing mtv: what we lost",
-      name: "tom freston",
-    },
-  },
-  // step 5 — is art a weapon? (conceptual)
-  {
-    section: "conceptual",
-    sectionSub: "ideas surfaced from pulses in deep research.",
-    artifacts: [
-      {
-        src: "assets/images/is_art_a_weapon/propaganda.png",
-        caption: "archive · propaganda",
-      },
-      {
-        src: "assets/images/is_art_a_weapon/society_spectacle.png",
-        caption: "monograph · debord, society of the spectacle",
-      },
-      {
-        src: "assets/images/is_art_a_weapon/graphic.png",
-        caption: "ephemera · protest graphics",
-      },
-    ],
-    host: {
-      img: "assets/images/is_art_a_weapon/office_hours/dred_scott.png",
-      room: "by any medium necessary",
-      name: "dred scott",
-    },
-  },
-  // step 6 — is the soul actually cartesian? (conceptual)
+  // step 2 — is the soul actually cartesian? (conceptual)
   {
     section: "conceptual",
     sectionSub: "ideas surfaced from pulses in deep research.",
@@ -464,7 +375,7 @@ function go(i) {
   }
   /* sub-step: arena cards on slide 8 */
   if (cur === 8) {
-    if (i > cur && arenaStep < 6) {
+    if (i > cur && arenaStep < 2) {
       arenaStep++;
       updateArenaCards(arenaStep);
       return;
@@ -915,7 +826,7 @@ function runA(i) {
          from 0→1 (which re-renders the same fixture 1 that's already on
          screen), making it look like the first click did nothing. */
       var fromFutureA = _prevCur > 8;
-      arenaStep = fromFutureA ? 6 : 1;
+      arenaStep = fromFutureA ? 2 : 1;
       updateArenaCards(arenaStep);
       break;
     }

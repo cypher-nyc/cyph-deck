@@ -41,6 +41,14 @@
       rel="stylesheet"
     />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.182.0/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@0.182.0/examples/jsm/"
+        }
+      }
+    </script>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -150,7 +158,7 @@
           </div>
           <div class="cover-def">
             <span class="cover-def-word">cypher</span>
-            <em class="cover-def-pos">(n., black music)</em>
+            <em class="cover-def-pos">(n., music)</em>
             <span class="cover-def-sep"> &mdash; </span>
             <span class="cover-def-body">a circle of voices in sequence.</span>
           </div>
@@ -181,9 +189,9 @@
               /></a>
               <div class="badge-title">jalen daniels</div>
               <div class="badge-subtitle">
-                <span class="badge-pill">philosopher</span>
-                <span class="badge-pill">technologist</span>
-                <span class="badge-pill">strategist</span>
+                <span class="badge-pill" style="background: #608fe6">philosopher</span>
+                <span class="badge-pill" style="background: #ec4e20">technologist</span>
+                <span class="badge-pill" style="background: #fbaf00">strategist</span>
               </div>
             </div>
             <div class="badge-body">
@@ -244,7 +252,7 @@
                     <div
                       class="badge-stat-fill"
                       data-fill="9"
-                      style="width: 0%; background: #ec4e20"
+                      style="width: 0%; background: #cfcfcf"
                     ></div>
                   </div>
                 </div>
@@ -254,7 +262,7 @@
                     <div
                       class="badge-stat-fill"
                       data-fill="99"
-                      style="width: 0%; background: #13293d"
+                      style="width: 0%; background: #ec4e20"
                     ></div>
                   </div>
                 </div>
@@ -283,9 +291,9 @@
               /></a>
               <div class="badge-title">bryan cash</div>
               <div class="badge-subtitle">
-                <span class="badge-pill">computer scientist</span>
-                <span class="badge-pill">sports savant</span>
-                <span class="badge-pill">optimizer</span>
+                <span class="badge-pill" style="background: #608fe6">computer scientist</span>
+                <span class="badge-pill" style="background: #ec4e20">sports savant</span>
+                <span class="badge-pill" style="background: #fbaf00">optimizer</span>
               </div>
             </div>
             <div class="badge-body">
@@ -347,7 +355,7 @@
                     <div
                       class="badge-stat-fill"
                       data-fill="9"
-                      style="width: 0%; background: #ec4e20"
+                      style="width: 0%; background: #cfcfcf"
                     ></div>
                   </div>
                 </div>
@@ -357,7 +365,7 @@
                     <div
                       class="badge-stat-fill"
                       data-fill="99"
-                      style="width: 0%; background: #13293d"
+                      style="width: 0%; background: #ec4e20"
                     ></div>
                   </div>
                 </div>
@@ -565,19 +573,18 @@
             padding: 40px 0;
           "
         >
-          <!-- Stacked isometric layers -->
+          <!-- Stacked app nav-icon visuals: irl (top) / cyph / underground.
+               Underground + cyph are the live 3D icons (see iso3d.js);
+               irl is the polaroid asset with a CSS pendulum sway. -->
           <div class="layer-stack">
             <div class="iso-layer" id="isoL3">
-              <img class="lyr-color" src="assets/layers/l3-color.png" />
-              <img class="lyr-bw" src="assets/layers/l3-bw.png" />
+              <img class="iso-polaroid" src="assets/irl/polaroid.jpg" alt="" draggable="false" />
             </div>
             <div class="iso-layer" id="isoL2">
-              <img class="lyr-color" src="assets/layers/l2-color.png" />
-              <img class="lyr-bw" src="assets/layers/l2-bw.png" />
+              <canvas class="iso-canvas" id="doorsCanvas"></canvas>
             </div>
             <div class="iso-layer" id="isoL1">
-              <img class="lyr-color" src="assets/layers/l1-color.png" />
-              <img class="lyr-bw" src="assets/layers/l1-bw.png" />
+              <canvas class="iso-canvas" id="ugCanvas"></canvas>
             </div>
           </div>
 
@@ -1075,16 +1082,11 @@
           <div
             style="width: 340px; display: flex; flex-direction: column; gap: 0"
           >
-            <img
-              src="assets/reference/ip/cyphcard.png"
-              style="
-                width: 75%;
-                border-radius: 8px;
-                margin-bottom: 6px;
-                align-self: center;
-                animation: drift2 10s ease-in-out infinite;
-              "
-            />
+            <canvas
+              id="cyphcardCanvas"
+              class="cyphcard-3d"
+              aria-label="cyphcard membership plate"
+            ></canvas>
             <p
               style="
                 font-family:
@@ -1809,21 +1811,9 @@
                 id="cf1"
                 src="assets/cards/live1.png"
               />
-              <img class="cyph-flyer" id="cf2" src="assets/cards/live2.png" />
-              <img class="cyph-flyer" id="cf3" src="assets/cards/live3.png" />
               <img
                 class="cyph-flyer"
-                id="cf4"
-                src="assets/cards/concept1.png"
-              />
-              <img
-                class="cyph-flyer"
-                id="cf5"
-                src="assets/cards/concept2.png"
-              />
-              <img
-                class="cyph-flyer"
-                id="cf6"
+                id="cf2"
                 src="assets/cards/concept3.png"
               />
             </div>
@@ -1984,7 +1974,7 @@
               </div>
               <div style="flex: 1; min-width: 0; padding-left: 28px">
                 <p class="cyph-todo">
-                  learn from office hours hosted by underground thinkers
+                  learn from underground thinkers
                 </p>
               </div>
             </div>
@@ -2244,23 +2234,10 @@
                   font-size: 28px;
                   color: var(--charcoal);
                   line-height: 1.2;
-                  margin-bottom: 4px;
+                  margin-bottom: 20px;
                 "
               >
-                unschooled.
-              </p>
-              <p
-                style="
-                  font-family:
-                    &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
-                  font-size: 13px;
-                  color: var(--charcoal-muted);
-                  line-height: 1.5;
-                  margin-bottom: 14px;
-                "
-              >
-                our irl sister org trains the next gen of scholars outside the
-                academy.
+                our board.
               </p>
 
               <div
@@ -2452,9 +2429,8 @@
                 margin: 0;
               "
             >
-              our most curious cyphers earn an invite to the
-              <strong>advanced cyphcard</strong> — real-world perks for a
-              small monthly fee.
+              curious users earn rewards through our
+              <strong>cyphcard+</strong>.
             </p>
             <div
               style="
@@ -2465,18 +2441,11 @@
                 padding-top: 12px;
               "
             >
-              <img
-                src="assets/reference/ip/cyphcard.png"
-                alt="cyphcard"
-                class="cyphcard-sway"
-                draggable="false"
-                style="
-                  width: auto;
-                  height: 110px;
-                  object-fit: contain;
-                  filter: drop-shadow(4px 6px 12px rgba(0, 0, 0, 0.45));
-                "
-              />
+              <canvas
+                id="belongCardCanvas"
+                class="biz-card-3d"
+                aria-label="advanced cyphcard"
+              ></canvas>
             </div>
           </div>
 
@@ -2517,9 +2486,8 @@
                 margin: 0;
               "
             >
-              aligned brands pay to be featured in
-              <strong>cyph city</strong>, earning the credibility of an
-              underground ally.
+              aligned brands pay to be featured in and stamped by
+              <strong>cyph city.</strong>
             </p>
             <div
               style="
@@ -2530,17 +2498,12 @@
                 padding-top: 12px;
               "
             >
+              <!-- TEMP: cyph city still in place of the live doors -->
               <img
-                src="assets/reference/ip/cyph-nav-icon.png"
-                alt="cyph nav icon"
-                class="ds-tile-sway"
+                src="assets/reference/ip/cyph_city.png"
+                alt="cyph city"
+                class="biz-reach-img"
                 draggable="false"
-                style="
-                  width: auto;
-                  height: 150px;
-                  object-fit: contain;
-                  filter: drop-shadow(4px 6px 12px rgba(0, 0, 0, 0.45));
-                "
               />
             </div>
           </div>
@@ -2582,8 +2545,8 @@
                 margin: 0;
               "
             >
-              companies, schools, and institutions pay us to design and run
-              <strong>private cyphs and programs</strong>.
+              companies and institutions pay for
+              <strong>collaborative products and programs</strong>.
             </p>
             <div
               style="
@@ -2594,18 +2557,11 @@
                 padding-top: 12px;
               "
             >
-              <img
-                src="assets/reference/ip/route-syllabus-toggle.png"
-                alt="route syllabus toggle"
-                class="ds-paper-sway"
-                draggable="false"
-                style="
-                  width: auto;
-                  height: 110px;
-                  object-fit: contain;
-                  filter: drop-shadow(4px 6px 12px rgba(0, 0, 0, 0.45));
-                "
-              />
+              <canvas
+                id="syllabusPaperCanvas"
+                class="biz-paper-3d"
+                aria-label="route syllabus toggle"
+              ></canvas>
             </div>
           </div>
 
@@ -2647,23 +2603,8 @@
                 margin: 0 0 4px 0;
               "
             >
-              collaborators pay to surface their <strong>rare treasures</strong>
+              collaborators pay to surface their <strong>treasures</strong>
               in the underground.
-            </p>
-            <p
-              style="
-                font-family:
-                  &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
-                font-size: 11px;
-                color: var(--charcoal-muted);
-                line-height: 1.4;
-                margin: 0 0 8px 0;
-              "
-            >
-              all resource pools are
-              <strong style="color: var(--charcoal)"
-                >human-produced. never ai.</strong
-              >
             </p>
 
             <!-- pills, scaled to fit the quadrant; wraps within column -->
@@ -3535,18 +3476,6 @@
                 "
                 >u.</span
               >
-              <span
-                style="
-                  font-family:
-                    &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
-                  font-size: 11px;
-                  font-style: italic;
-                  color: #ec4e20;
-                  white-space: nowrap;
-                  line-height: 1.2;
-                "
-                >our irl sister salon</span
-              >
             </div>
           </div>
         </div>
@@ -3626,9 +3555,7 @@
               "
             >
               upcoming podcasts, publications, video series, press, public
-              service (Jalen - UPenn speech, NYT article, Oxford debate,
-              Brooklyn Public Library Criticism Fellowship; Bryan - Panel on
-              architectural thinking in world of AI)
+              service.
             </p>
           </div>
           <div style="flex: 2.08; text-align: center">
@@ -3721,33 +3648,30 @@
         <div class="test-grid">
           <div class="test-bubble" style="background: #ec4e20">
             <div class="test-quote" style="color: #fff">
-              "people are yearning to break the shackles and speak their truth.
-              everybody feels so censored on social media and afraid to get
-              canceled or fired."
+              "people are yearning to break the shackles and speak their truth."
             </div>
           </div>
           <div class="test-bubble" style="background: #608fe6">
             <div class="test-quote" style="color: #fff">
-              "it encourages individuality because of the subject matter and the
-              limited size of rooms so there's no need for an echo chamber."
+              "it encourages individuality...there's no need for an echo chamber."
             </div>
           </div>
           <div class="test-bubble" style="background: #fbaf00">
             <div class="test-quote" style="color: #13293d">
-              "i like that it's more global than local. it's centered around
+              "i like that it's centered around
               topics and things that matter rather than a sea of content."
             </div>
           </div>
           <div class="test-bubble" style="background: #6d1a36">
             <div class="test-quote" style="color: #fff">
-              "i stray away from actual discussions because i can never find
+              "i love cyph because I can find
               actual scholars whom i would want to talk with."
             </div>
           </div>
           <div class="test-bubble" style="background: #13293d">
             <div class="test-quote" style="color: #fff">
               "i've been craving a place to actually talk to people after an
-              episode of raising kanan."
+              episode of [my favorite show]."
             </div>
           </div>
           <div class="test-bubble" style="background: #fbaf00">
@@ -3757,7 +3681,7 @@
           </div>
           <div class="test-bubble" style="background: #6d1a36">
             <div class="test-quote" style="color: #fff">
-              "humanity needs a popular app that tells them to go outside."
+              "humanity needs a platform that tells them to go outside."
             </div>
           </div>
           <div class="test-bubble" style="background: #13293d">
@@ -3768,7 +3692,7 @@
           </div>
           <div class="test-bubble" style="background: #ec4e20">
             <div class="test-quote" style="color: #fff">
-              "the world needs an ed-tech app built by someone who knows how to
+              "the world needs an ed-tech platform built by someone who knows how to
               resonate with culture."
             </div>
           </div>
@@ -3874,5 +3798,6 @@
 
     <script src="auth.js"></script>
     <script src="deck.js"></script>
+    <script type="module" src="iso3d.js"></script>
   </body>
 </html>
