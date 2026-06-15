@@ -2419,6 +2419,98 @@ img[src*="3rdspace"] {
   pointer-events: auto;
 }
 
+/* ── flyer hover treatment: cyph title + headcount pill ──
+   Mirrors the app's CyphFlyerHoverPill (underground/dark variant) — same
+   translucent chrome, 999 radius, soft shadow, overlapping face circles +
+   "+N more" tally — with the cyph title above it. Fades + lifts in on
+   hover of the active flyer. */
+.cyph-flyer-hover {
+  position: absolute;
+  left: 50%;
+  bottom: 16px;
+  transform: translate(-50%, 8px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+  z-index: 5;
+}
+.cyph-flyer-drift:hover .cyph-flyer-hover {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+.cyph-flyer-hover-title {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.65);
+}
+.cyph-flyer-hover-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 12px;
+  background: rgba(15, 22, 28, 0.78);
+  border-radius: 999px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: rgba(255, 255, 255, 0.92);
+  white-space: nowrap;
+}
+.cfh-faces {
+  display: flex;
+}
+.cfh-face {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1.5px solid #0f161c;
+  background: #cdc6b4;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.cfh-face img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.cfh-face + .cfh-face {
+  margin-left: -5px;
+}
+
+/* darkening scrim over the flyer on hover — stronger toward the bottom
+   where the title + pill sit, so the white title reads cleanly. */
+.cyph-flyer-scrim {
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.32) 0%,
+    rgba(0, 0, 0, 0.42) 45%,
+    rgba(0, 0, 0, 0.82) 100%
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  z-index: 2;
+}
+.cyph-flyer-drift:hover .cyph-flyer-scrim {
+  opacity: 1;
+}
+
 /* floating underground artifacts — small image + caption underneath, each
    wrapper drifts on its own keyframe pattern so the three move
    asynchronously like a moodboard. translate + rotate move together so
