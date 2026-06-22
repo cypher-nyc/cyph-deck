@@ -1,4 +1,4 @@
-const T = 15;
+const T = 16;
 let cur = 0;
 let busy = false;
 let goTimer = null;
@@ -267,7 +267,8 @@ const ch = {
   11: "business",
   12: "business",
   13: "business",
-  14: "close",
+  14: "business",
+  15: "close",
 };
 
 const bars = [
@@ -285,6 +286,7 @@ const bars = [
   [90, 75, 72, 68],
   [92, 80, 75, 72],
   [95, 88, 82, 80],
+  [97, 92, 88, 85],
   [100, 100, 100, 100],
 ];
 
@@ -331,11 +333,11 @@ function applySlide(i) {
     .getElementById("citySil")
     .classList[nc === "arena" ? "add" : "remove"]("show");
   document.getElementById("hudCtr").textContent =
-    String(i + 1).padStart(2, "0") + "/15";
+    String(i + 1).padStart(2, "0") + "/16";
   document.getElementById("bhudCtr").textContent =
-    String(i + 1).padStart(2, "0") + "/15";
+    String(i + 1).padStart(2, "0") + "/16";
 
-  const p = Math.round((i / 14) * 100);
+  const p = Math.round((i / 15) * 100);
   const f = document.getElementById("xpFill");
   f.style.width = p + "%";
   if (nc === "underground") f.style.background = "#EC4E20";
@@ -466,10 +468,10 @@ function goTo(i) {
     .getElementById("citySil")
     .classList[nc === "arena" ? "add" : "remove"]("show");
   document.getElementById("hudCtr").textContent =
-    String(i + 1).padStart(2, "0") + "/15";
+    String(i + 1).padStart(2, "0") + "/16";
   document.getElementById("bhudCtr").textContent =
-    String(i + 1).padStart(2, "0") + "/15";
-  var p = Math.round((i / 14) * 100);
+    String(i + 1).padStart(2, "0") + "/16";
+  var p = Math.round((i / 15) * 100);
   var f = document.getElementById("xpFill");
   f.style.width = p + "%";
   if (nc === "underground") f.style.background = "#EC4E20";
@@ -918,14 +920,71 @@ function runA(i) {
       break;
     case 14:
       anime({
-        targets: "#s14 h1",
+        targets: "#s14 .raise-term",
+        translateY: [14, 0],
+        opacity: [0, 1],
+        duration: 500,
+        delay: anime.stagger(90, { start: 100 }),
+        easing: C,
+      });
+      /* pie grows in */
+      anime({
+        targets: "#s14 .raise-pie",
+        scale: [0.55, 1],
+        opacity: [0, 1],
+        duration: 700,
+        delay: 320,
+        easing: B,
+      });
+      anime({
+        targets: "#s14 .raise-legend li",
+        translateX: [10, 0],
+        opacity: [0, 1],
+        duration: 420,
+        delay: anime.stagger(55, { start: 420 }),
+        easing: C,
+      });
+      /* gantt rows fade in, then each bar draws left→right */
+      anime({
+        targets: "#s14 .gantt-row",
+        opacity: [0, 1],
+        duration: 320,
+        delay: anime.stagger(55, { start: 460 }),
+        easing: C,
+      });
+      anime({
+        targets: "#s14 .gantt-bar",
+        scaleX: [0, 1],
+        duration: 620,
+        delay: anime.stagger(70, { start: 540 }),
+        easing: C,
+      });
+      anime({
+        targets: "#s14 .gantt-milestone",
+        scale: [0, 1],
+        opacity: [0, 1],
+        duration: 450,
+        delay: 540 + 70 * 6,
+        easing: B,
+      });
+      anime({
+        targets: "#s14 .gantt-axis span, #s14 .gantt-axis-title",
+        opacity: [0, 1],
+        duration: 400,
+        delay: anime.stagger(18, { start: 900 }),
+        easing: C,
+      });
+      break;
+    case 15:
+      anime({
+        targets: "#s15 h1",
         translateY: [12, 0],
         opacity: [0, 1],
         duration: 600,
         easing: C,
       });
       anime({
-        targets: "#s14 .sub",
+        targets: "#s15 .sub",
         opacity: [0, 1],
         duration: 500,
         delay: 300,
@@ -1037,10 +1096,14 @@ function toggleLock() {
       el.style.opacity = "1";
       el.style.transform = "none";
     });
-    document.querySelectorAll("#s14 h1, #s14 .sub").forEach(function (el) {
-      el.style.opacity = "1";
-      el.style.transform = "none";
-    });
+    document
+      .querySelectorAll(
+        "#s14 .raise-term, #s14 .raise-pie, #s14 .raise-legend li, #s14 .gantt-row, #s14 .gantt-bar, #s15 h1, #s15 .sub",
+      )
+      .forEach(function (el) {
+        el.style.opacity = "1";
+        el.style.transform = "none";
+      });
 
     /* swap inverted images to pre-inverted versions (html2canvas can't do filter:invert) */
     var invertMap = {
