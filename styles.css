@@ -1107,26 +1107,20 @@ body {
     0 0 11px 2px rgba(236, 78, 32, 0.6);
 }
 
-/* ── s15: demo montage grid ── */
+/* ── s15: demo close — full-bleed VHS backdrop ── */
 #s15 {
   padding: 0;
 }
-.demo-grid {
+.demo-bg {
   position: absolute;
   inset: 0;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-  gap: 0;
-  z-index: 0;
-}
-.demo-clip {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   display: block;
   border: none;
   background: #000;
+  z-index: 0;
 }
 .demo-scrim {
   position: absolute;
@@ -1153,10 +1147,10 @@ body {
 .demo-overlay .sub a {
   pointer-events: auto;
 }
-/* mobile / touch: skip the 9-video grid (autoplay is unreliable + heavy on
+/* mobile / touch: skip the background video (autoplay is unreliable + heavy on
    phones, esp. iOS Low Power Mode) — show just the text on the black slide */
 @media (max-width: 820px), (hover: none) and (pointer: coarse) {
-  #s15 .demo-grid,
+  #s15 .demo-bg,
   #s15 .demo-scrim {
     display: none;
   }
