@@ -419,6 +419,11 @@ body {
   pointer-events: none;
   transition: opacity 0.15s;
   overflow-y: auto;
+  /* Reserve the scrollbar gutter on both edges so a vertical scrollbar
+     (classic/always-on, e.g. Windows) never narrows the centering box and
+     shifts justify-content:center content sideways. Overlay-scrollbar OSes
+     (macOS) are unaffected. */
+  scrollbar-gutter: stable both-edges;
 }
 .slide.active {
   opacity: 1;
