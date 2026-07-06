@@ -649,6 +649,84 @@ body {
   margin-top: 10px;
   align-items: stretch;
 }
+
+/* ── founder bio sub-steps (s15): dedicated full-slide bios that fade in
+   after "ready for a demo?" — step 1 jalen, step 2 bryan (see go() in
+   deck.js). the demo video/scrim/overlay fade out underneath so the bios
+   sit straight on black. newspaper register: no boxes, text on black. ── */
+#s15 .demo-bg,
+#s15 .demo-scrim,
+#s15 .demo-overlay {
+  transition: opacity 0.5s ease;
+}
+#s15.bio-active .demo-bg,
+#s15.bio-active .demo-scrim,
+#s15.bio-active .demo-overlay {
+  opacity: 0;
+  pointer-events: none;
+}
+.founder-bio {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3; /* above .demo-overlay (2) */
+  padding: 84px 88px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+.founder-bio.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.founder-bio-col {
+  width: 250px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.founder-bio-photo {
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.founder-bio-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.founder-bio-name {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 42px;
+  line-height: 1.05;
+  text-transform: lowercase;
+  color: var(--charcoal);
+  margin: 6px 0 16px;
+}
+.founder-bio-text {
+  max-width: 780px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--charcoal);
+}
+.founder-bio-text p {
+  margin: 0 0 14px;
+}
+.founder-bio-text p:last-child {
+  margin-bottom: 0;
+}
 .badge-card {
   width: 360px;
   perspective: 1200px;
