@@ -4,6 +4,7 @@ let busy = false;
 let goTimer = null;
 let layerStep = 0;
 let arenaStep = 0;
+let founderStep = 0;
 let _prevCur = 0;
 
 /* ── isometric layer stack data (s5) ── */
@@ -232,6 +233,23 @@ function updateCyphDetail(step) {
   }
 }
 
+/* ── founder bio sub-steps (s15, after "ready for a demo?"): 0 = demo
+   view, 1 = jalen's dedicated full-slide bio, 2 = bryan's. each advance
+   crossfades the previous view out and the next in (CSS opacity
+   transitions on .founder-bio / #s15.bio-active). ── */
+function updateFounderBio(step) {
+  busy = true;
+  var s15 = document.getElementById("s15");
+  if (s15) s15.classList.toggle("bio-active", step > 0);
+  var bioA = document.getElementById("bioA");
+  var bioB = document.getElementById("bioB");
+  if (bioA) bioA.classList.toggle("active", step === 1);
+  if (bioB) bioB.classList.toggle("active", step === 2);
+  setTimeout(function () {
+    busy = false;
+  }, 400);
+}
+
 function setStackPositions(ids, activeIdx) {
   var positions = ["pos-front", "pos-mid", "pos-back"];
   ids.forEach(function (id, i) {
@@ -379,7 +397,23 @@ function updateNav(chapter) {
 /* ── sequential navigation (arrows / bottom buttons) ── */
 const SKIP = []; // hidden slides
 function go(i) {
-  if (busy || i < 0 || i >= T || i === cur) return;
+  if (busy || i === cur) return;
+  /* sub-step: founder bios on slide 15. checked BEFORE the bounds guard —
+     advancing on the last slide calls go(16), which must step through the
+     bios instead of returning early. */
+  if (cur === 15) {
+    if (i > cur && founderStep < 2) {
+      founderStep++;
+      updateFounderBio(founderStep);
+      return;
+    }
+    if (i < cur && founderStep > 0) {
+      founderStep--;
+      updateFounderBio(founderStep);
+      return;
+    }
+  }
+  if (i < 0 || i >= T) return;
   /* sub-step: layer stack on slide 5 */
   if (cur === 5) {
     if (i > cur && layerStep < 4) {
@@ -976,6 +1010,10 @@ function runA(i) {
       });
       break;
     case 15:
+      /* arriving always lands on the demo view; the bios only appear by
+         advancing (s15 is the last slide, so there is no from-future entry) */
+      founderStep = 0;
+      updateFounderBio(founderStep);
       anime({
         targets: "#s15 h1",
         translateY: [12, 0],
