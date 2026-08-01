@@ -1,0 +1,13 @@
+{
+  "name": "cyph-deck",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CYPH investor pitch deck — static HTML/CSS/JS. The only build step is the PDF export.",
+  "type": "module",
+  "scripts": {
+    "pdf": "node tools/export-pdf.mjs"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.61.1"
+  }
+}
