@@ -50,11 +50,38 @@ Slides are `div.slide` with IDs `s0`–`s15` (16 total; plus a hidden `s8-hidden
 - **Floating images**: use `drift1`–`drift6` keyframe animations (8–12s, ease-in-out infinite) for organic movement.
 - **Typography**: Helvetica Neue throughout. Bold 700 for headers, 400 for body. `var(--charcoal)` (#ede8de, light) for primary text, `var(--charcoal-muted)` (#a8a8a8) for secondary.
 
+## PDF export
+
+`npm run pdf` (→ `tools/export-pdf.mjs`) regenerates `cyph-deck.pdf` from the
+live deck. It serves the directory on `127.0.0.1` (so auth.js takes its
+localhost bypass), drives Chrome with `navNext.click()` exactly the way a
+viewer advances, waits for every animation on each state to land, and packs
+the frames into a 22-page 1440×900pt PDF.
+
+- **Sub-steps get their own page.** The walk is state-driven, not slide-driven:
+  s5's layer stack (01/02/03/∞), s8's two cyph flyers, and s15's two founder
+  bios each export separately, so 16 slides → 22 pages. The loop stops when
+  advancing no longer changes state, so adding a slide needs no change here.
+- **System Chrome, not bundled Chromium** (`channel: "chrome"`). The cover and
+  close slides play H.264 video; Playwright's Chromium ships without
+  proprietary codecs and those pages would export black.
+- **Settle gate** = `anime.running` drained + `document.getAnimations()`
+  finished + deck.js's `busy` latch clear, held stable for 3 frames. The 26
+  infinite drift/float keyframes are skipped — they never finish by design, so
+  drifting elements land wherever their phase puts them and pages will differ
+  slightly run to run.
+- **s8 is hovered on purpose.** The flyer's cyph title + headcount pill live in
+  a `:hover` reveal (`.cyph-flyer-drift:hover .cyph-flyer-hover`); without the
+  pointer parked on it the page exports captionless.
+- Requests to `script.google.com` are aborted so an export doesn't land in the
+  auth.js access log.
+
 ## Key files
 
 - `index.html` — all slide content
 - `styles.css` — all styles
 - `deck.js` — navigation, animations, chapter mapping
+- `tools/export-pdf.mjs` — the PDF export (see above)
 - `assets/brands/` — resource partner logos
 - `assets/moments/` — arena flyer images (l1-l8 for live, c1-c10 for conceptual)
 - `assets/people/` — headshots (jalen, bryan, bakari, caitlin, sade)
