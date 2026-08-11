@@ -2,7 +2,7 @@
 
 ## What this is
 
-The investor pitch deck for Cyph (smack.live) — the underground arena to wrestle with ideas. Built as a single-page HTML/CSS/JS presentation.
+The investor pitch deck for Cyph (smack.live) — the underground arena for ideas. Built as a single-page HTML/CSS/JS presentation.
 
 ## Platform overview
 
