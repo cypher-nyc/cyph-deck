@@ -1019,8 +1019,10 @@ body {
   max-width: 100%;
   object-fit: contain;
 }
-/* the reach still — static, no drift */
+/* the reach still — static, no drift. deliberately breaks the shared cap:
+   it is a wide screenshot, so at 62px the city detail is unreadable. */
 .money-reach-img {
+  max-height: 90px;
   border-radius: 5px;
   filter: drop-shadow(4px 6px 12px rgba(0, 0, 0, 0.45));
 }
