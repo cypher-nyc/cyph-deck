@@ -254,14 +254,30 @@ const frames = [];
 let prevSig = null;
 
 for (let i = 0; i < MAX_STATES; i++) {
-  const sig = await page.evaluate(() => {
+  /* `slide` is read off the active element, not the HUD counter string, so
+     the checks below survive slides being added or removed. */
+  const { sig, slide, doorsOpen } = await page.evaluate(() => {
     const ctr = document.getElementById("hudCtr");
-    return [
-      ctr ? ctr.textContent.trim() : "?",
-      typeof layerStep !== "undefined" ? layerStep : 0,
-      typeof arenaStep !== "undefined" ? arenaStep : 0,
-      typeof founderStep !== "undefined" ? founderStep : 0,
-    ].join("|");
+    const active = document.querySelector(".slide.active");
+    const isoL2 = document.getElementById("isoL2");
+    return {
+      sig: [
+        ctr ? ctr.textContent.trim() : "?",
+        typeof layerStep !== "undefined" ? layerStep : 0,
+        typeof arenaStep !== "undefined" ? arenaStep : 0,
+        typeof founderStep !== "undefined" ? founderStep : 0,
+      ].join("|"),
+      slide: active ? active.id : "?",
+      /* the cyph layer is the doorway; it is showing on step 02 and again
+         in the ∞ composite. the .active class outlives s5, so gate on the
+         slide too — otherwise every later page reports doors. */
+      doorsOpen: !!(
+        active &&
+        active.id === "s5" &&
+        isoL2 &&
+        isoL2.classList.contains("active")
+      ),
+    };
   });
 
   if (sig === prevSig) {
@@ -270,12 +286,23 @@ for (let i = 0; i < MAX_STATES; i++) {
   }
   prevSig = sig;
 
+  /* The doors cycle on their own rAF loop inside iso3d.js, so the settle
+     gate can't see them and the capture would land wherever the 6s cycle
+     happens to be — usually shut. Park them wide open for the frame; the
+     next layer change releases the hold. */
+  if (doorsOpen) {
+    await page.evaluate(() => window.holdCyphDoorsOpen && window.holdCyphDoorsOpen());
+    await page.evaluate(
+      () => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))),
+    );
+  }
+
   /* s8's flyer carries its cyph title + headcount pill in a :hover reveal
      (.cyph-flyer-drift:hover .cyph-flyer-hover). Without the pointer parked
      on it the exported page shows a captionless image, so hover it, hold for
      the scrim/pill fade, and release afterwards. Everywhere else the mouse
      stays at 0,0, which touches nothing. */
-  const onFlyer = sig.startsWith("09/16");
+  const onFlyer = slide === "s8";
   if (onFlyer) {
     /* mouse.move over the box centre rather than locator.hover(): the flyer
        runs an infinite drift keyframe, so Playwright's actionability check
@@ -286,7 +313,10 @@ for (let i = 0; i < MAX_STATES; i++) {
   }
 
   frames.push(await page.screenshot({ type: "jpeg", quality: JPEG_QUALITY }));
-  console.log(`captured page ${frames.length}  (${sig})`);
+  console.log(
+    `captured page ${frames.length}  (${slide} ${sig}` +
+      `${doorsOpen ? " doors:open" : ""}${onFlyer ? " hover:flyer" : ""})`,
+  );
 
   if (onFlyer) await page.mouse.move(0, 0);
 

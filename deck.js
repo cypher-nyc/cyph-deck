@@ -300,7 +300,7 @@ const bars = [
   [80, 35, 15, 20],
   [82, 55, 18, 25],
   [88, 70, 22, 60],
-  [90, 72, 70, 65],
+  [90, 74, 71, 66],
   [90, 75, 72, 68],
   [92, 80, 75, 72],
   [95, 88, 82, 80],
@@ -891,19 +891,17 @@ function runA(i) {
         "(prefers-reduced-motion: reduce)"
       ).matches;
       if (s10Reduce) {
-        document
-          .querySelectorAll("#s10 .biz-stream")
-          .forEach(function (el) {
-            el.style.opacity = "1";
-            el.style.transform = "none";
-          });
+        document.querySelectorAll("#s10 .money-row, #s10 .money-takeaway").forEach(function (el) {
+          el.style.opacity = "1";
+          el.style.transform = "none";
+        });
       } else {
         anime({
-          targets: "#s10 .biz-stream",
-          translateY: [10, 0],
+          targets: "#s10 .money-row, #s10 .money-takeaway",
+          translateX: [-12, 0],
           opacity: [0, 1],
           duration: 420,
-          delay: anime.stagger(90),
+          delay: anime.stagger(80),
           easing: B,
         });
       }
@@ -1116,12 +1114,10 @@ function toggleLock() {
       el.style.opacity = "1";
       el.style.transform = "none";
     });
-    document
-      .querySelectorAll("#s10 .biz-stream")
-      .forEach(function (el) {
-        el.style.opacity = "1";
-        el.style.transform = "none";
-      });
+    document.querySelectorAll("#s10 .money-row, #s10 .money-takeaway").forEach(function (el) {
+      el.style.opacity = "1";
+      el.style.transform = "none";
+    });
     document.querySelectorAll("#s11 .user-row").forEach(function (el) {
       el.style.opacity = "1";
       el.style.transform = "none";
