@@ -395,7 +395,9 @@ function buildCyphDoors(canvas) {
   // from the closed-hold and opens cleanly.
   let elapsed = 0;
   let active = false;
+  let held = false;
   const tick = (dt) => {
+    if (held) return; // parked wide open; ignore the cycle
     if (active) elapsed += dt;
     const factor = active ? computeOpenFactor(elapsed, DOORS_CYCLE_SEC) : 0;
     leftGroup.position.x = -DOOR_OPEN_DISTANCE * factor;
@@ -403,12 +405,23 @@ function buildCyphDoors(canvas) {
   };
 
   const setActive = (next) => {
+    held = false; // any layer change releases a hold
     if (next === active) return;
     active = next;
     if (active) elapsed = 0; // restart from closed → open
   };
 
-  return { renderer, scene, camera, tick, setActive };
+  /* Park the doors fully open and stop cycling. The loop is rAF-driven, so
+     it is invisible to the PDF export's settle gate — without this the
+     exported frame catches the doors at an arbitrary point in the 6s cycle
+     (usually the closed hold). Released again by the next setActive. */
+  const holdOpen = () => {
+    held = true;
+    leftGroup.position.x = -DOOR_OPEN_DISTANCE;
+    rightGroup.position.x = DOOR_OPEN_DISTANCE;
+  };
+
+  return { renderer, scene, camera, tick, setActive, holdOpen };
 }
 
 // ═════════════════════════════════════════════════════════════════════
@@ -662,24 +675,25 @@ function init() {
   // cyph layer is selected, otherwise they hold closed.
   window.setCyphDoorsActive = (on) => doors.setActive(!!on);
 
+  // Used by tools/export-pdf.mjs to freeze the doorway open for a capture.
+  window.holdCyphDoorsOpen = () => doors.holdOpen();
+
   // Swaying membership plate on the underground slide (s6), if present.
   const cyphcardCanvas = document.getElementById("cyphcardCanvas");
   if (cyphcardCanvas) scenes.push(buildCyphcard(cyphcardCanvas));
 
-  // "how we make money" (s10) showcase tiles: reach → doors looping
-  // open/close continuously; belong → the swaying advanced cyphcard.
+  // "how we make money" (s10) row objects: the swaying advanced cyphcard
+  // (cyphcard+) and the syllabus paper (commissions), at row scale.
   const reachDoorsCanvas = document.getElementById("reachDoorsCanvas");
   if (reachDoorsCanvas) {
     const reachDoors = buildCyphDoors(reachDoorsCanvas);
     reachDoors.setActive(true); // loop continuously (no layer gating here)
     scenes.push(reachDoors);
   }
-  const belongCardCanvas = document.getElementById("belongCardCanvas");
-  if (belongCardCanvas) scenes.push(buildCyphcard(belongCardCanvas));
-
-  // build → swaying syllabus paper (route↔syllabus toggle affordance).
-  const syllabusPaperCanvas = document.getElementById("syllabusPaperCanvas");
-  if (syllabusPaperCanvas) scenes.push(buildSyllabusPaper(syllabusPaperCanvas));
+  const moneyCardCanvas = document.getElementById("moneyCardCanvas");
+  if (moneyCardCanvas) scenes.push(buildCyphcard(moneyCardCanvas));
+  const moneyPaperCanvas = document.getElementById("moneyPaperCanvas");
+  if (moneyPaperCanvas) scenes.push(buildSyllabusPaper(moneyPaperCanvas));
 
   const ro = new ResizeObserver(() => {
     for (const s of scenes) fitRenderer(s.renderer, s.camera, s.renderer.domElement);

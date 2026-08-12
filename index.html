@@ -100,7 +100,7 @@
           <span class="hud-nav-sep">/</span>
           <button class="hud-nav-btn" onclick="goTo(10)">business</button>
           <span class="hud-nav-sep">/</span>
-          <button class="hud-nav-btn" onclick="goTo(14)">close</button>
+          <button class="hud-nav-btn" onclick="goTo(15)">close</button>
         </nav>
         <div class="hud-counter" id="hudCtr">01/16</div>
       </div>
@@ -1337,12 +1337,12 @@
             display: flex;
             gap: 40px;
             width: 920px;
-            align-items: start;
+            align-items: stretch;
             margin-top: 20px;
           "
         >
           <!-- LEFT: collaborators -->
-          <div style="flex: 0 0 380px">
+          <div style="flex: 0 0 380px; display: flex; flex-direction: column">
             <div
               style="
                 font-family:
@@ -1357,18 +1357,12 @@
             </div>
             <div
               style="
-                font-family:
-                  &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
-                font-weight: 700;
-                font-size: 72px;
-                color: #ec4e20;
-                line-height: 1;
-                margin-bottom: 14px;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 6px;
+                margin-top: auto;
               "
             >
-              100+
-            </div>
-            <div style="display: flex; flex-wrap: wrap; gap: 6px">
               <span
                 style="
                   font-size: 14px;
@@ -1982,7 +1976,7 @@
           >
             <div style="width: 280px; flex-shrink: 0">
               <p class="cyph-todo">
-                wrestle with sparring partners in the cyph
+                match with cyphers around the world.
               </p>
             </div>
             <div style="flex: 1; max-width: 720px; display: flex; gap: 28px">
@@ -2022,10 +2016,10 @@
           >
           <div
             style="
-              display: flex;
-              justify-content: center;
+              display: grid;
+              grid-template-columns: repeat(2, 150px);
               gap: 10px;
-              align-items: center;
+              justify-content: center;
             "
           >
             <span
@@ -2035,6 +2029,7 @@
                 padding: 6px 14px;
                 border-radius: 20px;
                 background: #fbaf00;
+                text-align: center;
               "
               >open mics</span
             >
@@ -2045,6 +2040,7 @@
                 padding: 6px 14px;
                 border-radius: 20px;
                 background: #608fe6;
+                text-align: center;
               "
               >supper clubs</span
             >
@@ -2055,27 +2051,22 @@
                 padding: 6px 14px;
                 border-radius: 20px;
                 background: #6d1a36;
+                text-align: center;
               "
               >debates</span
             >
-          </div>
-          <span
-            style="
-              font-size: 14px;
-              color: #fff;
-              padding: 8px 18px;
-              border-radius: 24px;
-              background: #ec4e20;
-              display: inline-flex;
-              align-items: center;
-              gap: 8px;
-            "
-            >office hours
-            <span style="font-weight: 700; font-size: 48px; line-height: 1"
-              >90+</span
+            <span
+              style="
+                font-size: 14px;
+                color: #fff;
+                padding: 6px 14px;
+                border-radius: 20px;
+                background: #ec4e20;
+                text-align: center;
+              "
+              >office hours</span
             >
-            LOIs in progress</span
-          >
+          </div>
         </div>
       </div>
 
@@ -2272,7 +2263,7 @@
                   margin-bottom: 20px;
                 "
               >
-                our board.
+                advisory board.
               </p>
 
               <div
@@ -2415,648 +2406,174 @@
       <div class="slide" id="s10">
         <h2>how we make money.</h2>
 
-        <div
-          style="
-            width: 1100px;
-            height: 540px;
-            margin-top: 16px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr 1fr;
-            gap: 18px;
-            align-items: stretch;
-          "
-        >
-          <!-- bottom-left: belong -->
-          <div
-            class="biz-stream biz-stream--belong"
-            style="
-              grid-row: 2;
-              grid-column: 1;
-              display: flex;
-              flex-direction: column;
-              border-left: 4px solid #6c1a36;
-              padding: 10px 16px 12px 14px;
-              min-width: 0;
-              min-height: 0;
-            "
-          >
-            <div
-              style="
-                font-family:
-                  &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
-                font-size: 13px;
-                font-weight: 700;
-                letter-spacing: 0.04em;
-                color: #a8456a;
-                margin-bottom: 8px;
-              "
-            >
-              belong
-            </div>
-            <p
-              style="
-                font-family:
-                  &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
-                font-size: 15px;
-                color: var(--charcoal);
-                line-height: 1.45;
-                margin: 0;
-              "
-            >
-              curious users earn rewards through our
-              <strong>cyphcard+</strong>.
+        <div class="money-table">
+          <div class="money-row" style="--money-accent: #2fbf71">
+            <div class="money-label">institutional seats</div>
+            <p class="money-body">
+              institutions buy seat licenses that make cyph a verified
+              extension of their own campus.
             </p>
-            <div
-              style="
-                margin-top: auto;
-                display: flex;
-                justify-content: center;
-                align-items: flex-end;
-                padding-top: 12px;
-              "
-            >
-              <canvas
-                id="belongCardCanvas"
-                class="biz-card-3d"
-                aria-label="advanced cyphcard"
-              ></canvas>
-            </div>
-          </div>
-
-          <!-- top-right: reach -->
-          <div
-            class="biz-stream biz-stream--reach"
-            style="
-              grid-row: 1;
-              grid-column: 2;
-              display: flex;
-              flex-direction: column;
-              border-left: 4px solid #608ee5;
-              padding: 10px 16px 12px 14px;
-              min-width: 0;
-              min-height: 0;
-            "
-          >
-            <div
-              style="
-                font-family:
-                  &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
-                font-size: 13px;
-                font-weight: 700;
-                letter-spacing: 0.04em;
-                color: #608ee5;
-                margin-bottom: 8px;
-              "
-            >
-              reach
-            </div>
-            <p
-              style="
-                font-family:
-                  &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
-                font-size: 15px;
-                color: var(--charcoal);
-                line-height: 1.45;
-                margin: 0;
-              "
-            >
-              aligned brands pay to be featured in and stamped by
-              <strong>cyph city.</strong>
-            </p>
-            <div
-              style="
-                margin-top: auto;
-                display: flex;
-                justify-content: center;
-                align-items: flex-end;
-                padding-top: 12px;
-              "
-            >
-              <!-- TEMP: cyph city still in place of the live doors -->
+            <div class="money-graphic">
               <img
-                src="assets/reference/ip/cyph_city.png"
-                alt="cyph city"
-                class="biz-reach-img"
-                draggable="false"
+                src="assets/brands/irl/harvard.png"
+                alt="harvard"
+                style="animation: drift2 10s ease-in-out infinite"
+              />
+              <img
+                src="assets/brands/irl/syracuse.png"
+                alt="syracuse"
+                style="animation: drift5 11.5s ease-in-out infinite"
               />
             </div>
           </div>
 
-          <!-- bottom-right: build -->
-          <div
-            class="biz-stream biz-stream--build"
-            style="
-              grid-row: 2;
-              grid-column: 2;
-              display: flex;
-              flex-direction: column;
-              border-left: 4px solid #ed4e20;
-              padding: 10px 16px 12px 14px;
-              min-width: 0;
-              min-height: 0;
-            "
-          >
-            <div
-              style="
-                font-family:
-                  &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
-                font-size: 13px;
-                font-weight: 700;
-                letter-spacing: 0.04em;
-                color: #ed4e20;
-                margin-bottom: 8px;
-              "
-            >
-              commission
-            </div>
-            <ul
-              style="
-                font-family:
-                  &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
-                font-size: 15px;
-                color: var(--charcoal);
-                line-height: 1.45;
-                margin: 0;
-                padding-left: 18px;
-              "
-            >
-              <li>
-                companies and institutions pay for collaborative products
-                and programs
-              </li>
-              <li>users pay for intimate courses</li>
-            </ul>
-            <div
-              style="
-                margin-top: auto;
-                display: flex;
-                justify-content: center;
-                align-items: flex-end;
-                padding-top: 12px;
-              "
-            >
+          <div class="money-row" style="--money-accent: #ec4e20">
+            <div class="money-label">commissions</div>
+            <p class="money-body">
+              brands and institutions pay us to produce a commissioned cyph,
+              built from our archive, taught by our conductors, distributed
+              via our platform.
+            </p>
+            <div class="money-graphic">
               <canvas
-                id="syllabusPaperCanvas"
-                class="biz-paper-3d"
+                id="moneyPaperCanvas"
+                class="money-paper-3d"
                 aria-label="route syllabus toggle"
               ></canvas>
             </div>
           </div>
 
-          <!-- top-left: inventory -->
-          <div
-            class="biz-stream biz-stream--inventory"
-            style="
-              grid-row: 1;
-              grid-column: 1;
-              display: flex;
-              flex-direction: column;
-              border-left: 4px solid #fbaf03;
-              padding: 10px 16px 12px 14px;
-              min-width: 0;
-              min-height: 0;
-              overflow: hidden;
-            "
-          >
-            <div
-              style="
-                font-family:
-                  &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
-                font-size: 13px;
-                font-weight: 700;
-                letter-spacing: 0.04em;
-                color: #fbaf03;
-                margin-bottom: 8px;
-              "
-            >
-              inventory
-            </div>
-            <p
-              style="
-                font-family:
-                  &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
-                font-size: 14px;
-                color: var(--charcoal);
-                line-height: 1.4;
-                margin: 0 0 4px 0;
-              "
-            >
-              collaborators pay to surface their <strong>treasures</strong>
-              in the underground.
+          <div class="money-row" style="--money-accent: #fbaf00">
+            <div class="money-label">inventory</div>
+            <p class="money-body">
+              inventory partners pay a recurring fee to circulate their
+              collections in the underground, where our users discover, cite,
+              and buy them.
             </p>
-
-            <!-- pills, scaled to fit the quadrant; wraps within column -->
-            <div
-              style="
-                display: flex;
-                flex-wrap: wrap;
-                gap: 4px;
-              "
-            >
-              <span
-                style="
-                  font-size: 10px;
-                  color: #fff;
-                  padding: 2px 7px;
-                  border-radius: 20px;
-                  background: #608fe6;
-                "
-                >film footage</span
-              >
-              <span
-                style="
-                  font-size: 10px;
-                  color: #fff;
-                  padding: 2px 7px;
-                  border-radius: 20px;
-                  background: #ec4e20;
-                "
-                >fashion archives</span
-              >
-              <span
-                style="
-                  font-size: 10px;
-                  color: #fff;
-                  padding: 2px 7px;
-                  border-radius: 20px;
-                  background: #fbaf00;
-                "
-                >rare book stores</span
-              >
-              <span
-                style="
-                  font-size: 10px;
-                  color: #fff;
-                  padding: 2px 7px;
-                  border-radius: 20px;
-                  background: #6d1a36;
-                "
-                >music estates</span
-              >
-              <span
-                style="
-                  font-size: 10px;
-                  color: #fff;
-                  padding: 2px 7px;
-                  border-radius: 20px;
-                  background: #608fe6;
-                "
-                >sports inventory</span
-              >
-              <span
-                style="
-                  font-size: 10px;
-                  color: #fff;
-                  padding: 2px 7px;
-                  border-radius: 20px;
-                  background: #ec4e20;
-                "
-                >museums</span
-              >
-              <span
-                style="
-                  font-size: 10px;
-                  color: #fff;
-                  padding: 2px 7px;
-                  border-radius: 20px;
-                  background: #fbaf00;
-                "
-                >vintage stores</span
-              >
-              <span
-                style="
-                  font-size: 10px;
-                  color: #fff;
-                  padding: 2px 7px;
-                  border-radius: 20px;
-                  background: #6d1a36;
-                "
-                >publications</span
-              >
-            </div>
-
-            <!-- collage: dense wrap-pack anchored at quadrant base -->
-            <div
-              class="biz-collage"
-              style="
-                margin-top: auto;
-                display: flex;
-                flex-wrap: wrap;
-                gap: 4px;
-                padding-top: 10px;
-              "
-            >
+            <!-- same collage set as s10's inventory quadrant, at row scale -->
+            <div class="money-graphic money-graphic--collage">
               <img
                 src="assets/artifacts/renaissance.jpg"
-                style="
-                  width: auto;
-                  height: 38px;
-                  object-fit: contain;
-                  border-radius: 3px;
-                  box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.12);
-                  animation: drift1 9s ease-in-out infinite;
-                "
+                alt=""
+                style="animation: drift1 9s ease-in-out infinite"
               />
               <img
                 src="assets/artifacts/goya.jpg"
-                style="
-                  width: auto;
-                  height: 38px;
-                  object-fit: contain;
-                  border-radius: 3px;
-                  box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.12);
-                  animation: drift4 11s ease-in-out infinite;
-                "
+                alt=""
+                style="animation: drift4 11s ease-in-out infinite"
               />
               <img
                 src="assets/artifacts/babylon_timbuktu.jpg"
-                style="
-                  width: auto;
-                  height: 38px;
-                  object-fit: contain;
-                  border-radius: 3px;
-                  box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.12);
-                  animation: drift2 10s ease-in-out infinite;
-                "
+                alt=""
+                style="animation: drift2 10s ease-in-out infinite"
               />
               <img
                 src="assets/artifacts/vanity_fair.jpg"
-                style="
-                  width: auto;
-                  height: 38px;
-                  object-fit: contain;
-                  border-radius: 3px;
-                  box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.12);
-                  animation: drift5 8.5s ease-in-out infinite;
-                "
+                alt=""
+                style="animation: drift5 8.5s ease-in-out infinite"
               />
               <img
                 src="assets/artifacts/films_joan_crawford.jpg"
-                style="
-                  width: auto;
-                  height: 38px;
-                  object-fit: contain;
-                  border-radius: 3px;
-                  box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.12);
-                  animation: drift3 12s ease-in-out infinite;
-                "
+                alt=""
+                style="animation: drift3 10.5s ease-in-out infinite"
               />
               <img
                 src="assets/artifacts/birth-of-mahavira.png"
-                style="
-                  width: auto;
-                  height: 38px;
-                  object-fit: contain;
-                  border-radius: 3px;
-                  box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.12);
-                  animation: drift6 9.5s ease-in-out infinite;
-                "
+                alt=""
+                style="animation: drift6 9.5s ease-in-out infinite"
               />
               <img
                 src="assets/artifacts/indian_art.png"
-                style="
-                  width: auto;
-                  height: 38px;
-                  object-fit: contain;
-                  border-radius: 3px;
-                  box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.12);
-                  animation: drift1 10.5s ease-in-out infinite;
-                "
+                alt=""
+                style="animation: drift2 11.5s ease-in-out infinite"
               />
               <img
                 src="assets/artifacts/crisis_black_white.jpg"
-                style="
-                  width: auto;
-                  height: 38px;
-                  object-fit: contain;
-                  border-radius: 3px;
-                  box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.12);
-                  animation: drift4 9s ease-in-out infinite;
-                "
+                alt=""
+                style="animation: drift1 10s ease-in-out infinite"
               />
               <img
                 src="assets/artifacts/history_of_bible.jpg"
-                style="
-                  width: auto;
-                  height: 38px;
-                  object-fit: contain;
-                  border-radius: 3px;
-                  box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.12);
-                  animation: drift2 11s ease-in-out infinite;
-                "
+                alt=""
+                style="animation: drift4 9s ease-in-out infinite"
               />
               <img
                 src="assets/artifacts/movie_monsters.jpg"
-                style="
-                  width: auto;
-                  height: 38px;
-                  object-fit: contain;
-                  border-radius: 3px;
-                  box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.12);
-                  animation: drift5 10s ease-in-out infinite;
-                "
+                alt=""
+                style="animation: drift5 11s ease-in-out infinite"
               />
               <img
                 src="assets/artifacts/sud_afrika.jpg"
-                style="
-                  width: auto;
-                  height: 38px;
-                  object-fit: contain;
-                  border-radius: 3px;
-                  box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.12);
-                  animation: drift3 10.5s ease-in-out infinite;
-                "
+                alt=""
+                style="animation: drift3 8.5s ease-in-out infinite"
               />
               <img
                 src="assets/artifacts/three_friends.jpg"
-                style="
-                  width: auto;
-                  height: 38px;
-                  object-fit: contain;
-                  border-radius: 3px;
-                  box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.12);
-                  animation: drift6 9s ease-in-out infinite;
-                "
+                alt=""
+                style="animation: drift6 10s ease-in-out infinite"
               />
               <img
                 src="assets/artifacts/new_age_yearbook.png"
-                style="
-                  width: auto;
-                  height: 38px;
-                  object-fit: contain;
-                  border-radius: 3px;
-                  box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.12);
-                  animation: drift1 11.5s ease-in-out infinite;
-                "
+                alt=""
+                style="animation: drift2 9.5s ease-in-out infinite"
               />
               <img
                 src="assets/artifacts/cool_collage_2.png"
-                style="
-                  width: auto;
-                  height: 38px;
-                  object-fit: contain;
-                  border-radius: 3px;
-                  box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.12);
-                  animation: drift4 8s ease-in-out infinite;
-                "
+                alt=""
+                style="animation: drift1 11.5s ease-in-out infinite"
               />
               <img
                 src="assets/artifacts/kid_collage.png"
-                style="
-                  width: auto;
-                  height: 38px;
-                  object-fit: contain;
-                  border-radius: 3px;
-                  box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.12);
-                  animation: drift2 12s ease-in-out infinite;
-                "
-              />
-              <img
-                src="assets/artifacts/5.png"
-                style="
-                  width: auto;
-                  height: 38px;
-                  object-fit: contain;
-                  border-radius: 3px;
-                  box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.12);
-                  animation: drift5 9.5s ease-in-out infinite;
-                "
-              />
-              <img
-                src="assets/artifacts/7.jpg"
-                style="
-                  width: auto;
-                  height: 38px;
-                  object-fit: contain;
-                  border-radius: 3px;
-                  box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.12);
-                  animation: drift3 10s ease-in-out infinite;
-                "
-              />
-              <img
-                src="assets/artifacts/10.png"
-                style="
-                  width: auto;
-                  height: 38px;
-                  object-fit: contain;
-                  border-radius: 3px;
-                  box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.12);
-                  animation: drift6 11s ease-in-out infinite;
-                "
-              />
-              <img
-                src="assets/artifacts/14.jpeg"
-                style="
-                  width: auto;
-                  height: 38px;
-                  object-fit: contain;
-                  border-radius: 3px;
-                  box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.12);
-                  animation: drift1 8.5s ease-in-out infinite;
-                "
-              />
-              <img
-                src="assets/artifacts/29.jpg"
-                style="
-                  width: auto;
-                  height: 38px;
-                  object-fit: contain;
-                  border-radius: 3px;
-                  box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.12);
-                  animation: drift4 10.5s ease-in-out infinite;
-                "
+                alt=""
+                style="animation: drift4 10.5s ease-in-out infinite"
               />
             </div>
+          </div>
+
+          <div class="money-row" style="--money-accent: #608fe6">
+            <div class="money-label">reach</div>
+            <p class="money-body">
+              brands pay for landmark placements across cyph city and
+              contextual ads tailored to the user.
+            </p>
+            <!-- same static cyph city still as s10's reach quadrant — it
+                 doesn't drift there, so it doesn't drift here either -->
+            <div class="money-graphic">
+              <img
+                src="assets/reference/ip/cyph_city.png"
+                alt="cyph city"
+                class="money-reach-img"
+                draggable="false"
+              />
+            </div>
+          </div>
+
+          <div class="money-row" style="--money-accent: #a8456a">
+            <div class="money-label">cyphcard+</div>
+            <p class="money-body">
+              cyphcard+ membership is earned by invitation and paid annually,
+              unlocking exclusive rewards, experiences and IRL opportunities.
+            </p>
+            <div class="money-graphic">
+              <canvas
+                id="moneyCardCanvas"
+                class="money-card-3d"
+                aria-label="advanced cyphcard"
+              ></canvas>
+            </div>
+          </div>
+
+          <div class="money-takeaway">
+            <p class="money-takeaway-body">
+              cyph scales to
+              <strong style="color: #2fbf71">~$112M revenue by 2030</strong>
+              at
+              <strong style="color: #fbaf00">~76% gross margins</strong
+              >...while keeping wisdom free for every user.
+            </p>
           </div>
         </div>
 
-        <!-- remove old panel -->
-        <div style="display: none">
-          <div
-            class="game-panel"
-            style="width: 880px; max-width: 100%; margin-top: 8px"
-          >
-            <div class="game-panel-header green-header">business model</div>
-            <div class="game-panel-body" style="padding: 16px 20px">
-              <div class="biz-layout">
-                <div class="biz-main">
-                  <div style="text-align: center; margin-bottom: 10px">
-                    <span class="sicon lg"
-                      ><img
-                        src="data:image/png;base64,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"
-                        alt=""
-                    /></span>
-                  </div>
-                  <h3
-                    style="
-                      font-family:
-                        &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
-                      font-weight: 700;
-                      font-size: 16px;
-                      text-align: center;
-                      color: #fff;
-                      margin-bottom: 4px;
-                    "
-                  >
-                    research
-                  </h3>
-                  <p
-                    style="
-                      font-size: 15px;
-                      color: rgba(255, 255, 255, 0.5);
-                      text-align: center;
-                      line-height: 1.5;
-                      margin-bottom: 10px;
-                    "
-                  >
-                    collaborators will pay us to feature their treasures in the
-                    underground. the right content surfaces to the right people.
-                  </p>
-                  <p
-                    style="
-                      font-size: 14px;
-                      color: #fff;
-                      text-align: center;
-                      font-weight: 600;
-                    "
-                  >
-                    all resource pools are human-produced. never ai.
-                  </p>
-                  <div class="biz-cats">
-                    <span class="biz-cat">film footage</span
-                    ><span class="biz-cat">fashion archives</span
-                    ><span class="biz-cat">universities</span
-                    ><span class="biz-cat">rare book stores</span
-                    ><span class="biz-cat">music estates</span
-                    ><span class="biz-cat">sports inventory</span
-                    ><span class="biz-cat">museums</span
-                    ><span class="biz-cat">art collections</span
-                    ><span class="biz-cat">vintage stores</span
-                    ><span class="biz-cat">serial collectors</span
-                    ><span class="biz-cat">publications</span>
-                  </div>
-                </div>
-                <div class="biz-side">
-                  <div class="biz-card">
-                    <h4>conversations free</h4>
-                    <p>
-                      no ads. institutions and authors pay for the research
-                      layer. that layer is its own product.
-                    </p>
-                  </div>
-                  <div class="biz-card">
-                    <h4>data layer</h4>
-                    <p>
-                      meta charges $8-$15 cpm for clicks. we offer how people
-                      think. that's the real currency.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
         <div
           style="
             position: absolute;
@@ -3070,7 +2587,7 @@
             letter-spacing: 0.02em;
           "
         >
-          ...and our future revenue possibilities are vast.
+          projections available upon request.
         </div>
       </div>
 

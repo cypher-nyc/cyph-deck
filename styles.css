@@ -968,6 +968,102 @@ body {
   margin: 0;
 }
 
+/* ── s10: how we make money ── */
+.money-table {
+  width: 1120px;
+  max-width: 100%;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.money-row {
+  display: grid;
+  grid-template-columns: 180px 1fr 215px;
+  gap: 22px;
+  align-items: start;
+  border-left: 7px solid var(--money-accent);
+  padding: 6px 0 6px 18px;
+}
+.money-label {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--money-accent);
+  line-height: 1.35;
+}
+.money-body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.45;
+  color: var(--charcoal);
+  margin: 0;
+}
+/* graphic column — floating-artifact language for each revenue row
+   (drift keyframes are set inline per image). */
+.money-graphic {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  /* floor matches the tallest graphic so every row keeps one rhythm */
+  min-height: 64px;
+}
+/* every graphic is capped the same way so no row outgrows the others —
+   wide screenshots and tall cards both land inside the same 72px band. */
+.money-graphic img {
+  height: auto;
+  width: auto;
+  max-height: 62px;
+  max-width: 100%;
+  object-fit: contain;
+}
+/* the reach still — static, no drift */
+.money-reach-img {
+  border-radius: 5px;
+  filter: drop-shadow(4px 6px 12px rgba(0, 0, 0, 0.45));
+}
+/* the full artifact set, packed small enough to wrap inside one row */
+.money-graphic--collage {
+  flex-wrap: wrap;
+  align-content: center;
+  gap: 3px;
+}
+.money-graphic--collage img {
+  max-height: 22px;
+  border-radius: 2px;
+  box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.35);
+}
+/* live 3d objects at row scale — same builders, smaller footprint */
+.money-card-3d {
+  display: block;
+  width: 100px;
+  height: 64px;
+}
+.money-paper-3d {
+  display: block;
+  height: 64px;
+  aspect-ratio: 1 / 1.3;
+}
+/* closing takeaway — ruled off from the streams it summarises */
+.money-takeaway {
+  margin-top: 4px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
+.money-takeaway-body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 19px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--charcoal);
+  margin: 0;
+}
+.money-takeaway-body strong {
+  font-weight: 700;
+}
+
 /* ── s14: the raise ── */
 .raise-canvas {
   display: flex;
@@ -1516,10 +1612,10 @@ body {
     animation: none;
     transform: none;
   }
-  /* Gate slide-11 inventory collage drift behind reduced-motion
-     (the inline `animation: driftN ...` styles aren't gated on their
-     own; scoped to #s10 so other slides' drift usage is untouched). */
-  #s10 .biz-collage img {
+  /* Gate the money-slide artifact drift behind reduced-motion (the
+     inline `animation: driftN ...` styles aren't gated on their own;
+     scoped to #s10 so other slides' drift usage is untouched). */
+  #s10 .money-graphic img {
     animation: none !important;
   }
 }
@@ -2083,67 +2179,6 @@ img[src*="3rdspace"] {
   color: rgba(255, 255, 255, 0.5);
 }
 
-/* ═══ BIZ MODEL ═══ */
-.biz-layout {
-  display: flex;
-  gap: 24px;
-  width: 100%;
-  margin-top: 0;
-  align-items: start;
-}
-.biz-main {
-  flex: 1;
-  padding: 24px;
-  border-radius: 14px;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-}
-.biz-side {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.biz-card {
-  padding: 16px;
-  border-radius: 14px;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-.biz-card h4 {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 700;
-  font-size: 13px;
-  margin-bottom: 3px;
-  color: #fff;
-}
-.biz-card p {
-  font-size: 15px;
-  color: rgba(255, 255, 255, 0.5);
-  line-height: 1.5;
-}
-.biz-cats {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  margin-top: 10px;
-}
-.biz-cat {
-  font-size: 10px;
-  padding: 4px 10px;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.08);
-  color: rgba(255, 255, 255, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: none;
-}
-
 /* ═══ USER SIZE ═══ */
 .user-table {
   width: 100%;
@@ -2585,36 +2620,6 @@ img[src*="3rdspace"] {
   aspect-ratio: 480 / 303;
   align-self: center;
   margin-bottom: 6px;
-}
-
-/* "how we make money" showcase tiles — live versions of the doors
-   (reach) and the swaying cyphcard (belong), replacing the static
-   pngs. Fixed footprints sized to the grid cell's image region. */
-.biz-doors-3d {
-  display: block;
-  width: 210px;
-  height: 158px;
-}
-/* TEMP: cyph city still standing in for the live reach doors. */
-.biz-reach-img {
-  display: block;
-  width: auto;
-  height: 158px;
-  max-width: 100%;
-  object-fit: contain;
-  border-radius: 8px;
-  filter: drop-shadow(4px 6px 12px rgba(0, 0, 0, 0.45));
-}
-.biz-card-3d {
-  display: block;
-  width: 248px;
-  height: 158px;
-}
-/* build → swaying syllabus paper (portrait sheet). */
-.biz-paper-3d {
-  display: block;
-  height: 158px;
-  aspect-ratio: 1 / 1.3;
 }
 
 .layer-stack {
