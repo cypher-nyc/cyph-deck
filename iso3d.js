@@ -250,6 +250,9 @@ const DOOR_HORIZONTAL_LIFT = CAMERA_X * PARALLAX_FACTOR;
 const DOOR_VERTICAL_LIFT = CAMERA_Y * PARALLAX_FACTOR;
 
 const DOORS_CYCLE_SEC = 6;
+/* how far open `holdOpen()` parks the doors for a still capture — open
+   enough to read as an open doorway, short of the panels clipping away */
+const DOORS_HOLD_FACTOR = 0.6;
 
 function smoothstep(t) {
   const x = Math.max(0, Math.min(1, t));
@@ -411,14 +414,17 @@ function buildCyphDoors(canvas) {
     if (active) elapsed = 0; // restart from closed → open
   };
 
-  /* Park the doors fully open and stop cycling. The loop is rAF-driven, so
+  /* Park the doors part-open and stop cycling. The loop is rAF-driven, so
      it is invisible to the PDF export's settle gate — without this the
      exported frame catches the doors at an arbitrary point in the 6s cycle
-     (usually the closed hold). Released again by the next setActive. */
+     (usually the closed hold). Held at DOORS_HOLD_FACTOR rather than fully
+     open: at 1 the panels slide clear of the doorway clipping planes and
+     vanish, leaving an empty frame that doesn't read as doors at all.
+     Released again by the next setActive. */
   const holdOpen = () => {
     held = true;
-    leftGroup.position.x = -DOOR_OPEN_DISTANCE;
-    rightGroup.position.x = DOOR_OPEN_DISTANCE;
+    leftGroup.position.x = -DOOR_OPEN_DISTANCE * DOORS_HOLD_FACTOR;
+    rightGroup.position.x = DOOR_OPEN_DISTANCE * DOORS_HOLD_FACTOR;
   };
 
   return { renderer, scene, camera, tick, setActive, holdOpen };
