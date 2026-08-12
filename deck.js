@@ -891,13 +891,13 @@ function runA(i) {
         "(prefers-reduced-motion: reduce)"
       ).matches;
       if (s10Reduce) {
-        document.querySelectorAll("#s10 .money-row, #s10 .money-takeaway").forEach(function (el) {
+        document.querySelectorAll("#s10 .money-row, #s10 .deck-takeaway").forEach(function (el) {
           el.style.opacity = "1";
           el.style.transform = "none";
         });
       } else {
         anime({
-          targets: "#s10 .money-row, #s10 .money-takeaway",
+          targets: "#s10 .money-row, #s10 .deck-takeaway",
           translateX: [-12, 0],
           opacity: [0, 1],
           duration: 420,
@@ -909,7 +909,7 @@ function runA(i) {
     }
     case 11:
       anime({
-        targets: "#s11 .user-row",
+        targets: "#s11 .user-row, #s11 .deck-takeaway",
         translateX: [-15, 0],
         opacity: [0, 1],
         duration: 400,
@@ -1114,11 +1114,11 @@ function toggleLock() {
       el.style.opacity = "1";
       el.style.transform = "none";
     });
-    document.querySelectorAll("#s10 .money-row, #s10 .money-takeaway").forEach(function (el) {
+    document.querySelectorAll("#s10 .money-row, #s10 .deck-takeaway").forEach(function (el) {
       el.style.opacity = "1";
       el.style.transform = "none";
     });
-    document.querySelectorAll("#s11 .user-row").forEach(function (el) {
+    document.querySelectorAll("#s11 .user-row, #s11 .deck-takeaway").forEach(function (el) {
       el.style.opacity = "1";
       el.style.transform = "none";
     });
