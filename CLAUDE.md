@@ -85,7 +85,7 @@ the frames into a 22-page 1440×900pt PDF.
 - `tools/export-pdf.mjs` — the PDF export (see above)
 - `assets/brands/` — resource partner logos
 - `assets/moments/` — arena flyer images (l1-l8 for live, c1-c10 for conceptual)
-- `assets/people/` — headshots (jalen, bryan, bakari, caitlin, sade)
+- `assets/people/` — headshots (jalen, bryan, bakari, caitlin, calvary)
 - `assets/reference/crisis/` — crisis slide floating images
 - `assets/images/` — counter-culture images (agora, salon, harlem_renaissance)
 - `assets/videos/` — `s15` demo-montage clips, web `.mp4` only (H.264, **no audio**). Source `.mov` masters are **not** kept in-repo: transcode with `ffmpeg -i in.mov -an -vf "scale=960:-2" -c:v libx264 -pix_fmt yuv420p -crf 28 -preset fast -movflags +faststart out.mp4`, wire the `.mp4` into the grid, then delete the master. (VHS/grain-heavy clips compress poorly — bump `-crf` if a file is disproportionately large.)
