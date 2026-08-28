@@ -1028,16 +1028,15 @@ body {
   align-items: center;
   text-align: center;
 }
-/* eyebrow over the press hit — the app's `label` type role (11px, 700,
-   0.08em tracking), which is what that tracking is actually specified for */
+/* eyebrow over the press hit — same voice as the deck's other labels
+   (Helvetica bold, natural tracking) */
 .room-eyebrow {
   /* stretched so it hangs off the image's left edge, not the column's centre */
   align-self: stretch;
   text-align: left;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 700;
-  font-size: 11px;
-  letter-spacing: 0.08em;
+  font-size: 13px;
   color: #fff;
   margin-bottom: 10px;
 }
@@ -1073,13 +1072,6 @@ body {
   width: auto;
   opacity: 0.9;
 }
-.room-vc {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 13px;
-  font-style: italic;
-  color: var(--charcoal-muted);
-}
-
 /* ── s10: how we make money ── */
 .money-table {
   width: 1120px;
