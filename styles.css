@@ -1040,9 +1040,23 @@ body {
   color: #fff;
   margin-bottom: 10px;
 }
+.room-press {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  align-items: stretch;
+}
+/* aspect shares: conductors 3:4 (0.75), article 856×836 (1.024);
+   0.75 / 1.774 and 1.024 / 1.774 of the row, so equal heights fall out */
+.room-conductors {
+  display: block;
+  width: calc(42.28% - 6px);
+  height: auto;
+  border: 1px solid rgba(237, 232, 222, 0.25);
+}
 .room-article {
   display: block;
-  width: 100%;
+  width: calc(57.72% - 6px);
 }
 .room-article img {
   display: block;
