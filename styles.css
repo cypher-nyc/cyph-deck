@@ -968,6 +968,118 @@ body {
   margin: 0;
 }
 
+/* ── s1: advisory board — a second section beneath the founder cards.
+   Stretched so the row centres on the slide axis, i.e. the same axis the
+   badge cards centre on; the label captions it underneath in the gtm
+   slide's contextual-writeup voice (11px italic grey). ── */
+#s1 .advisory {
+  align-self: stretch;
+  margin-top: 44px;
+}
+.advisory-label {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 11px;
+  font-style: italic;
+  line-height: 1.4;
+  color: #888;
+  text-align: center;
+  margin-top: 14px;
+}
+.advisory-row {
+  display: flex;
+  justify-content: center;
+  gap: 56px;
+}
+.advisor {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.advisor img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.advisor-name {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.3;
+  color: var(--charcoal);
+}
+.advisor-role {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  line-height: 1.3;
+  color: var(--charcoal-muted);
+}
+
+/* ── s9: the press hit + "in the room" (right column). The article is a real
+   link — Chrome carries the href into the PDF export as a clickable
+   annotation. Logo heights are the optically-balanced values from the cyph
+   002 recap deck (deck.json, "in the room"), scaled 1.15× for this slide; the
+   marks are already white/clay artwork, so no invert filter is needed on the
+   dark register. ── */
+.room-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+/* eyebrow over the press hit — the app's `label` type role (11px, 700,
+   0.08em tracking), which is what that tracking is actually specified for */
+.room-eyebrow {
+  /* stretched so it hangs off the image's left edge, not the column's centre */
+  align-self: stretch;
+  text-align: left;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: #fff;
+  margin-bottom: 10px;
+}
+.room-article {
+  display: block;
+  width: 100%;
+}
+.room-article img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid rgba(237, 232, 222, 0.25);
+}
+.room-article:hover img {
+  border-color: #ec4e20;
+}
+.room-label {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--charcoal);
+  margin: 18px 0 12px;
+}
+.room-logos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  column-gap: 18px;
+  row-gap: 14px;
+}
+.room-logos img {
+  width: auto;
+  opacity: 0.9;
+}
+.room-vc {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-style: italic;
+  color: var(--charcoal-muted);
+}
+
 /* ── s10: how we make money ── */
 .money-table {
   width: 1120px;
