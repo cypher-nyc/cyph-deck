@@ -249,6 +249,20 @@ const PARALLAX_FACTOR = 1 - PARALLAX_T;
 const DOOR_HORIZONTAL_LIFT = CAMERA_X * PARALLAX_FACTOR;
 const DOOR_VERTICAL_LIFT = CAMERA_Y * PARALLAX_FACTOR;
 
+/* The cyph flyer living behind the doors — so the doors read as opening
+   ONTO something, not just opening. Parked on the camera→origin ray at the
+   parallax reference depth (PARALLAX_TARGET_Z is the depth the doorway is
+   already visually centred on), so it lands dead centre in the aperture.
+   Sized against the doorway height projected to that depth: the aperture is
+   DOORWAY_HEIGHT / PARALLAX_T tall back there, and the flyer takes 86% of it
+   so the frame still reads around all four edges. Shut, it shows as two
+   vertical slices through the door windows (true holes — see buildDoorPanel)
+   at CYPH_FLYER_DIM; as the doors part it brightens to full. */
+const CYPH_FLYER_ART = "assets/cards/archive_memory_ai.jpg";
+const CYPH_FLYER_SIZE = (DOORWAY_HEIGHT / PARALLAX_T) * 0.86;
+const CYPH_FLYER_DIM = 0.5;
+const CYPH_FLYER_LIT = 1.0;
+
 const DOORS_CYCLE_SEC = 6;
 /* how far open `holdOpen()` parks the doors for a still capture — open
    enough to read as an open doorway, short of the panels clipping away */
@@ -364,6 +378,27 @@ function buildCyphDoors(canvas) {
     });
   });
 
+  // The cyph behind the doorway. Unlit + untone-mapped so its brightness is
+  // driven purely by the open factor (see tick), and unclipped — it sits well
+  // inside the doorway planes, so nothing of it spills past the frame.
+  const flyerMat = new THREE.MeshBasicMaterial({
+    color: new THREE.Color().setScalar(CYPH_FLYER_DIM),
+    toneMapped: false,
+  });
+  const flyer = new THREE.Mesh(
+    new THREE.PlaneGeometry(CYPH_FLYER_SIZE, CYPH_FLYER_SIZE),
+    flyerMat,
+  );
+  flyer.position.set(0, 0, PARALLAX_TARGET_Z);
+  scene.add(flyer);
+  texLoader.load(CYPH_FLYER_ART, (tex) => {
+    tex.colorSpace = THREE.SRGBColorSpace;
+    tex.anisotropy = maxAniso;
+    tex.needsUpdate = true;
+    flyerMat.map = tex;
+    flyerMat.needsUpdate = true;
+  });
+
   // Bottom sill — the only car-wall chrome that stays visible.
   const halfDoorwayH = DOORWAY_HEIGHT / 2;
   const sillHeight = (WALL_HEIGHT - DOORWAY_HEIGHT) / 2;
@@ -399,12 +434,18 @@ function buildCyphDoors(canvas) {
   let elapsed = 0;
   let active = false;
   let held = false;
+  const setFlyerBrightness = (factor) => {
+    flyerMat.color.setScalar(
+      CYPH_FLYER_DIM + (CYPH_FLYER_LIT - CYPH_FLYER_DIM) * factor,
+    );
+  };
   const tick = (dt) => {
     if (held) return; // parked wide open; ignore the cycle
     if (active) elapsed += dt;
     const factor = active ? computeOpenFactor(elapsed, DOORS_CYCLE_SEC) : 0;
     leftGroup.position.x = -DOOR_OPEN_DISTANCE * factor;
     rightGroup.position.x = DOOR_OPEN_DISTANCE * factor;
+    setFlyerBrightness(factor);
   };
 
   const setActive = (next) => {
@@ -425,6 +466,7 @@ function buildCyphDoors(canvas) {
     held = true;
     leftGroup.position.x = -DOOR_OPEN_DISTANCE * DOORS_HOLD_FACTOR;
     rightGroup.position.x = DOOR_OPEN_DISTANCE * DOORS_HOLD_FACTOR;
+    setFlyerBrightness(DOORS_HOLD_FACTOR);
   };
 
   return { renderer, scene, camera, tick, setActive, holdOpen };

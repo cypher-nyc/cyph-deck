@@ -677,6 +677,14 @@ function runA(i) {
         delay: 120,
         easing: B,
       });
+      anime({
+        targets: "#advisory",
+        translateY: [16, 0],
+        opacity: [0, 1],
+        duration: 600,
+        delay: 260,
+        easing: B,
+      });
       // Animate stat bars on the front
       setTimeout(() => {
         document.querySelectorAll("#s1 .badge-stat-fill").forEach((bar, j) => {
