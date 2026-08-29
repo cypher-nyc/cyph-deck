@@ -77,9 +77,16 @@ orientation-proof — a phone held sideways is 852x393, which a width-only media
 query reads as a laptop. iPads (768 across the short edge) keep the
 interactive deck, where the fit-scale is a legible 0.53.
 
-**Escape hatches:** `?desktop=1` forces the interactive deck (also the target
-of the page view's own "open the interactive deck" button), `?mobile=1` forces
-the page view — useful for checking it from a laptop.
+**The phone view carries no actions at all** — no links, no buttons, just the
+bar and the pages. It never routes into the interactive deck (any route from a
+phone into the 1440x900 stage leads somewhere unreadable) and offers no PDF
+download either; the pages on screen already are the deck. `npm run check`
+asserts `#mobile-deck` contains zero anchors and zero buttons, so neither can
+creep back in.
+
+**Escape hatches** (URL-only, never surfaced to a viewer): `?desktop=1` forces
+the interactive deck, `?mobile=1` forces the page view — useful for checking
+the page view from a laptop.
 
 **Stylesheet split.** `base.css` (reset, `:root` tokens, station-sign placard,
 access gate) loads on **both** paths; `styles.css` and `mobile.css` load on top
