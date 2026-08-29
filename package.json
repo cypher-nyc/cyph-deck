@@ -5,7 +5,8 @@
   "description": "CYPH investor pitch deck — static HTML/CSS/JS. The only build step is the PDF export.",
   "type": "module",
   "scripts": {
-    "pdf": "node tools/export-pdf.mjs"
+    "pdf": "node tools/export-pdf.mjs",
+    "check": "node tools/check-paths.mjs"
   },
   "devDependencies": {
     "playwright-core": "^1.61.1"

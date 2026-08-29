@@ -1,0 +1,131 @@
+/* ═══ CYPH deck — the page view (phones) ═══
+   Loaded instead of styles.css when the router in index.html's <head>
+   decides this is a phone. The interactive deck is a fixed 1440×900 stage
+   that deck.js scales to fit; on a 393pt phone that resolves to ~0.27, which
+   renders the nav buttons at ~4px and the body copy at ~4.6px. Rather than
+   reflow sixteen absolutely-positioned slides — which would have to be
+   redone on every slide edit — the phone gets the exported pages, which are
+   generated from this same deck by tools/export-pdf.mjs and therefore cannot
+   drift from it.
+
+   base.css (reset, tokens, access gate) is already in the cascade. */
+
+/* The desktop stage never mounts here, but the markup is still in the
+   document — keep it out of the layout and out of the accessibility tree. */
+html.phone #game-shell,
+html.phone .city-sil {
+  display: none !important;
+}
+
+html.phone body {
+  display: block;
+  background: #000;
+}
+
+#mobile-deck {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: #000;
+}
+
+/* ── top bar ──
+   Black, not the HUD's paprika: every exported page carries the deck's own
+   orange HUD baked into the image, and a paprika bar sitting directly on top
+   of one reads as a rendering fault rather than as chrome. Black chrome,
+   orange content — and it keeps the deck's dark register. */
+.mdeck-hud {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  background: #000;
+  border-bottom: 1px solid rgba(237, 232, 222, 0.14);
+  padding-top: env(safe-area-inset-top);
+  height: calc(44px + env(safe-area-inset-top));
+}
+.mdeck-hud .station-bullets {
+  margin: 0;
+  gap: 4px;
+}
+.mdeck-hud .station-bullet {
+  width: 22px;
+  height: 22px;
+  font-size: 12px;
+}
+.mdeck-counter {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #ede8de;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── the pages ──
+   Sections are image-height, not viewport-height: a 16:10 page on a portrait
+   phone is only ~62% as tall as it is wide, so full-height sections would put
+   two-thirds of the screen in black. Stacking them close reads as a document.
+   In landscape max-height takes over and each page fits the screen. */
+.mdeck-pages {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-snap-type: y proximity;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+}
+.mpage {
+  scroll-snap-align: center;
+  padding: 9px 0;
+  display: flex;
+  justify-content: center;
+}
+.mpage img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  /* leave the bars' worth of room so a landscape page is never clipped:
+     44 top + 64 foot + this section's own 18 of padding */
+  max-height: calc(100dvh - 130px);
+  background: #0b0b0b;
+  /* an un-loaded page holds its slot instead of collapsing the scroll */
+  aspect-ratio: 1440 / 900;
+}
+
+/* ── bottom bar ── */
+.mdeck-foot {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 8px;
+  padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+  background: #000;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+.mdeck-foot a {
+  flex: 1 1 0;
+  /* 44px is the iOS minimum touch target — the thing the scaled-down deck
+     could not give us */
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  border-radius: 10px;
+  padding: 0 12px;
+}
+.mdeck-foot .mdeck-pdf {
+  background: #ec4e20;
+  color: #fff;
+}
+.mdeck-foot .mdeck-full {
+  background: transparent;
+  color: #ede8de;
+  border: 1px solid rgba(237, 232, 222, 0.28);
+}
