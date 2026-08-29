@@ -49,7 +49,43 @@
         }
       }
     </script>
-    <link rel="stylesheet" href="styles.css" />
+    <!-- base.css is the reset + tokens + access gate: every device needs it,
+         so it stays a plain link and the preload scanner can start it early. -->
+    <link rel="stylesheet" href="base.css" />
+
+    <!-- ═══ viewing-path router ═══
+         The interactive deck is a fixed 1440x900 stage that deck.js scales to
+         fit the viewport. On a phone that scale resolves to ~0.27, which puts
+         the nav buttons at ~4px (under the 44px touch minimum) and the body
+         copy at ~4.6px, and none of the eleven :hover reveals can ever fire.
+         So phones get the exported page images instead - same deck, generated
+         from it by tools/export-pdf.mjs, so the two cannot drift apart.
+
+         Phone test is `coarse pointer AND smallest screen dimension <= 500`.
+         The min() is what makes it orientation-proof: a phone held sideways is
+         852x393, which a width-only media query would read as a laptop. iPads
+         (768 across the short edge) keep the interactive deck, where the
+         fit-scale is a legible 0.53.
+
+         ?desktop=1 forces the interactive deck, ?mobile=1 forces the page
+         view - the escape hatch in both directions. -->
+    <script>
+      (function () {
+        var q = new URLSearchParams(location.search);
+        var forced =
+          q.get("desktop") === "1" ? false : q.get("mobile") === "1" ? true : null;
+        var coarse = window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+        var minDim = Math.min(screen.width || 9999, screen.height || 9999);
+        var phone = forced === null ? coarse && minDim <= 500 : forced;
+        document.documentElement.classList.add(phone ? "phone" : "desktop");
+        /* injected during head parsing, so it is still render-blocking and
+           there is no flash of unstyled deck */
+        var l = document.createElement("link");
+        l.rel = "stylesheet";
+        l.href = phone ? "mobile.css" : "styles.css";
+        document.head.appendChild(l);
+      })();
+    </script>
   </head>
   <body>
     <div id="game-shell">
@@ -1929,7 +1965,7 @@
                   <div class="cyph-artifact-img-wrap">
                     <img
                       id="cyphArt2"
-                      src="assets/images/knicks_rockets/ewing.jpeg"
+                      src="assets/images/knicks_rockets/1980_flyer.png"
                       alt=""
                     />
                   </div>
@@ -1938,7 +1974,7 @@
                   <div class="cyph-artifact-img-wrap">
                     <img
                       id="cyphArt3"
-                      src="assets/images/knicks_rockets/percentages.png"
+                      src="assets/images/knicks_rockets/book.png"
                       alt=""
                     />
                   </div>
@@ -3582,8 +3618,27 @@
       </div>
     </div>
 
+    <!-- auth.js gates and logs on both paths - a phone viewer is still a
+         viewer, and still belongs in the access sheet. -->
     <script src="auth.js"></script>
-    <script src="deck.js"></script>
-    <script type="module" src="iso3d.js"></script>
+    <script>
+      /* Load only the path this device actually uses. On a phone that means
+         deck.js, iso3d.js and three.js are never fetched at all - the whole
+         WebGL/animation stack is skipped rather than merely hidden. */
+      (function () {
+        var phone = document.documentElement.classList.contains("phone");
+        var s = document.createElement("script");
+        s.src = phone ? "mobile.js" : "deck.js";
+        s.async = false;
+        document.body.appendChild(s);
+      })();
+    </script>
+    <script type="module">
+      /* Static `import * as THREE` would pull three.js down even behind a
+         runtime guard, so the guard has to sit outside the module. */
+      if (!document.documentElement.classList.contains("phone")) {
+        import("./iso3d.js");
+      }
+    </script>
   </body>
 </html>

@@ -25,6 +25,12 @@ import { chromium } from "playwright-core";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const OUT = path.join(ROOT, "cyph-deck.pdf");
+/* the phone view's pages — same frames as the PDF, downscaled and re-encoded
+   as WebP. Written in this run so the page view can never drift from the deck
+   it was exported from. See mobile.js. */
+const PAGES_DIR = path.join(ROOT, "assets", "deck-pages");
+const PAGE_W = 1440; // 1:1 with the deck's design width; ~3.3x a 430pt phone
+const WEBP_QUALITY = 0.82;
 
 /* deck design size — #game-shell is exactly this, and computeFitScale()
    resolves to 1 at this viewport, so no scaling is involved. */
@@ -325,9 +331,52 @@ for (let i = 0; i < MAX_STATES; i++) {
   await page.evaluate(SETTLE);
 }
 
+/* ── phone pages ──
+   Downscale + re-encode in a blank tab: Chrome already has a WebP encoder, so
+   this needs no image dependency and the script stays dependency-free. */
+const conv = await browser.newPage();
+await conv.goto("about:blank");
+const webps = [];
+for (const f of frames) {
+  const dataUrl = await conv.evaluate(
+    async ({ b64, w, q }) => {
+      const img = new Image();
+      img.src = "data:image/jpeg;base64," + b64;
+      await img.decode();
+      const c = document.createElement("canvas");
+      c.width = w;
+      c.height = Math.round((img.naturalHeight * w) / img.naturalWidth);
+      const ctx = c.getContext("2d");
+      ctx.imageSmoothingQuality = "high";
+      ctx.drawImage(img, 0, 0, c.width, c.height);
+      return c.toDataURL("image/webp", q);
+    },
+    { b64: f.toString("base64"), w: PAGE_W, q: WEBP_QUALITY },
+  );
+  webps.push(Buffer.from(dataUrl.slice(dataUrl.indexOf(",") + 1), "base64"));
+}
+
 await browser.close();
 server.close();
 
 const pdf = buildPdf(frames, "cyph-deck");
 fs.writeFileSync(OUT, pdf);
 console.log(`\nwrote ${path.relative(process.cwd(), OUT)} — ${frames.length} pages, ${(pdf.length / 1e6).toFixed(1)} MB`);
+
+/* rewrite the directory rather than overwrite in place, so a deck that loses
+   a slide doesn't leave an orphaned page behind for mobile.js to request */
+fs.rmSync(PAGES_DIR, { recursive: true, force: true });
+fs.mkdirSync(PAGES_DIR, { recursive: true });
+let pagesBytes = 0;
+webps.forEach((buf, i) => {
+  fs.writeFileSync(path.join(PAGES_DIR, `${String(i + 1).padStart(2, "0")}.webp`), buf);
+  pagesBytes += buf.length;
+});
+fs.writeFileSync(
+  path.join(PAGES_DIR, "manifest.json"),
+  JSON.stringify({ pages: webps.length, width: PAGE_W, generated: new Date().toISOString() }, null, 2) + "\n",
+);
+console.log(
+  `wrote ${path.relative(process.cwd(), PAGES_DIR)}/ — ${webps.length} webp pages, ` +
+    `${(pagesBytes / 1e6).toFixed(1)} MB total (${Math.round(pagesBytes / webps.length / 1024)} KB avg)`,
+);

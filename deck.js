@@ -555,8 +555,18 @@ if (window.visualViewport) {
   window.visualViewport.addEventListener("resize", applyFitScale);
 }
 
-/* ── init ── */
-document.addEventListener("DOMContentLoaded", () => {
+/* ── init ──
+   deck.js is injected by the viewing-path router in index.html rather than
+   parsed from a static tag, so DOMContentLoaded may already have fired by the
+   time this runs. Dynamically inserted scripts do not hold that event open. */
+function onReady(fn) {
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", fn);
+  } else {
+    fn();
+  }
+}
+onReady(() => {
   var shell = document.getElementById("game-shell");
   /* lock button is a dev-only affordance — hide it on the deployed site,
      show only when running locally (localhost / 127.0.0.1 / file://). */
