@@ -87,6 +87,10 @@ async function visit(label, contextOpts, query = "") {
     cls: document.documentElement.className,
     mobileDeck: !!document.getElementById("mobile-deck"),
     pages: document.querySelectorAll(".mpage").length,
+    /* the page view carries no actions at all — no route into the
+       interactive deck, and no PDF download either */
+    deckLinks: document.querySelectorAll("#mobile-deck a, #mobile-deck button")
+      .length,
     /* the gate must render legibly on both paths even though only one of them
        loads the big desktop sheet */
     gateStyled:
@@ -117,6 +121,7 @@ console.log("\niPhone 14 Pro (393x852, coarse pointer)");
   check("every exported page rendered", state.pages, manifest.pages);
   check("access gate is styled", state.gateStyled, true);
   check("gate bullets are styled", state.bulletStyled, true);
+  check("page view offers no links or buttons", state.deckLinks, 0);
   check("mobile.css fetched", got("/mobile.css"), true);
   check("mobile.js fetched", got("/mobile.js"), true);
   check("styles.css NOT fetched", got("/styles.css"), false);

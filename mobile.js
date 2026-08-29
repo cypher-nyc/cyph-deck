@@ -62,15 +62,12 @@
       pages.appendChild(sec);
     }
 
-    var foot = document.createElement("div");
-    foot.className = "mdeck-foot";
-    foot.innerHTML =
-      '<a class="mdeck-pdf" href="cyph-deck.pdf" download>download the pdf</a>' +
-      '<a class="mdeck-full" href="?desktop=1">open the interactive deck</a>';
-
+    /* No footer: the page view carries no actions at all. The interactive
+       deck is never offered (a 1440x900 stage scales to ~0.27 on a phone, so
+       any route to it from here leads somewhere unreadable), and neither is a
+       PDF download — the pages on screen already are the deck. */
     root.appendChild(hud);
     root.appendChild(pages);
-    root.appendChild(foot);
     document.body.appendChild(root);
 
     track(pages, total);

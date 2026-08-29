@@ -75,6 +75,8 @@ html.phone body {
   scroll-snap-type: y proximity;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: contain;
+  /* the last page clears the home indicator */
+  padding-bottom: env(safe-area-inset-bottom);
 }
 .mpage {
   scroll-snap-align: center;
@@ -87,45 +89,12 @@ html.phone body {
   width: auto;
   height: auto;
   max-width: 100%;
-  /* leave the bars' worth of room so a landscape page is never clipped:
-     44 top + 64 foot + this section's own 18 of padding */
-  max-height: calc(100dvh - 130px);
+  /* leave the top bar's worth of room so a landscape page is never clipped:
+     44 bar + this section's own 18 of padding, plus the notch */
+  max-height: calc(
+    100dvh - 62px - env(safe-area-inset-top) - env(safe-area-inset-bottom)
+  );
   background: #0b0b0b;
   /* an un-loaded page holds its slot instead of collapsing the scroll */
   aspect-ratio: 1440 / 900;
-}
-
-/* ── bottom bar ── */
-.mdeck-foot {
-  flex: 0 0 auto;
-  display: flex;
-  gap: 8px;
-  padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
-  background: #000;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
-}
-.mdeck-foot a {
-  flex: 1 1 0;
-  /* 44px is the iOS minimum touch target — the thing the scaled-down deck
-     could not give us */
-  min-height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  text-decoration: none;
-  border-radius: 10px;
-  padding: 0 12px;
-}
-.mdeck-foot .mdeck-pdf {
-  background: #ec4e20;
-  color: #fff;
-}
-.mdeck-foot .mdeck-full {
-  background: transparent;
-  color: #ede8de;
-  border: 1px solid rgba(237, 232, 222, 0.28);
 }
