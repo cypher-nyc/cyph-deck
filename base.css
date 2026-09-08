@@ -117,8 +117,9 @@ body {
 }
 
 /* ═══ ACCESS GATE ═══
-   Full-screen overlay shown until the user enters a valid VC password.
-   auth.js adds `body.authed` on success which hides this overlay. */
+   Full-screen overlay shown until the viewer enters an email.
+   auth.js adds `body.authed` on success which hides this overlay, or
+   `body.retired` when a versioned deck has been retired. */
 #auth-gate {
   position: fixed;
   inset: 0;
@@ -133,6 +134,21 @@ body {
 }
 body.authed #auth-gate {
   display: none;
+}
+
+/* retired version: same placard, no form */
+body.retired #auth-form,
+body.retired #auth-err {
+  display: none;
+}
+body.retired #auth-retired {
+  display: block;
+  margin-top: 18px;
+  max-width: 340px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.45;
+  color: #a8a8a8;
 }
 .auth-panel {
   display: flex;

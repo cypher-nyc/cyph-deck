@@ -1,0 +1,50 @@
+name: Publish investors.cyph.city
+
+# GitHub Pages keeps publishing main:/ on its own. This workflow only
+# touches the S3 site behind investors.cyph.city:
+#   - a push that changes site/** republishes the site files (never a deck)
+#   - a deck version is an explicit act: run it by hand with the version id
+
+on:
+  push:
+    branches: [main]
+    paths: ["site/**", "auth.js", "base.css", "favicon.png"]
+  workflow_dispatch:
+    inputs:
+      target:
+        description: "what to publish"
+        type: choice
+        options: [site, deck]
+        default: site
+      version:
+        description: "deck version id from site/deck/versions.json (deck only)"
+        required: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      AWS_REGION: us-east-1
+      INVESTORS_DISTRIBUTION_ID: ${{ secrets.INVESTORS_DISTRIBUTION_ID }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Publish site
+        if: github.event_name == 'push' || inputs.target == 'site'
+        run: node tools/publish-investors.mjs site
+
+      - name: Publish deck version
+        if: github.event_name == 'workflow_dispatch' && inputs.target == 'deck'
+        run: |
+          test -n "${{ inputs.version }}" || { echo "version is required for a deck publish"; exit 1; }
+          node tools/publish-investors.mjs deck --version "${{ inputs.version }}"
