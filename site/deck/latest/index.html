@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>cyph - pitch deck</title>
+    <link rel="icon" type="image/png" href="/common/favicon.png" />
+    <!-- the link we hand out. It resolves to whichever version is current
+         in /deck/versions.json, so the sheet still records the exact
+         version each viewer saw. The preview tags are here so a pasted
+         link unfurls as the deck, not as a redirect page. -->
+    <meta property="og:title" content="cyph. the new underground." />
+    <meta property="og:description" content="swag meets scholarship. the investor deck." />
+    <meta property="og:image" content="https://cyph.city/logo/og-image.png" />
+    <meta property="og:url" content="https://investors.cyph.city/deck/latest/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        background: #000;
+      }
+    </style>
+    <script>
+      fetch("/deck/versions.json", { cache: "no-cache" })
+        .then(function (r) {
+          return r.json();
+        })
+        .then(function (v) {
+          location.replace("/deck/" + v.current + "/" + location.search);
+        })
+        .catch(function () {
+          location.replace("/404.html");
+        });
+    </script>
+  </head>
+  <body></body>
+</html>
