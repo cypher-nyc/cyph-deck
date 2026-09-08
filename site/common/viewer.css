@@ -1,0 +1,109 @@
+/* ═══ CYPH — page viewer ═══
+   The deck's phone page view (mobile.css), generalized for any page
+   column on any screen. base.css (reset, tokens, station sign, access
+   gate) is already in the cascade. Dark register throughout. */
+
+html,
+body {
+  background: #000;
+}
+body {
+  margin: 0;
+}
+
+#viewer {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: #000;
+}
+
+/* ── top bar ── black chrome, the content carries the color */
+.viewer-hud {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  background: #000;
+  border-bottom: 1px solid rgba(237, 232, 222, 0.14);
+  padding-top: env(safe-area-inset-top);
+  height: calc(44px + env(safe-area-inset-top));
+}
+.viewer-hud .station-bullets {
+  margin: 0;
+  gap: 4px;
+}
+.viewer-hud .station-bullet {
+  width: 22px;
+  height: 22px;
+  font-size: 12px;
+}
+.viewer-counter {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #ede8de;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── the pages ── image-height sections stacked close, read as a document */
+.viewer-pages {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-snap-type: y proximity;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.viewer-pages.single {
+  scroll-snap-type: none;
+}
+.vpage {
+  scroll-snap-align: center;
+  padding: 9px 0;
+  display: flex;
+  justify-content: center;
+}
+.vpage img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: min(100%, 1280px);
+  /* the bar's worth of room so a landscape page is never clipped:
+     44 bar + this section's 18 of padding, plus the notch */
+  max-height: calc(
+    100dvh - 62px - env(safe-area-inset-top) - env(safe-area-inset-bottom)
+  );
+  background: #0b0b0b;
+}
+
+/* ── footer ── the download and any calls to action, after the gate */
+.viewer-foot {
+  flex: 0 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 16px;
+  padding-bottom: calc(12px + env(safe-area-inset-bottom));
+  background: #000;
+  border-top: 1px solid rgba(237, 232, 222, 0.14);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+}
+.viewer-foot a {
+  color: #ede8de;
+  text-decoration: none;
+  border-bottom: 1px solid #ec4e20;
+  padding-bottom: 1px;
+}
+.viewer-foot a:hover {
+  color: #fff;
+}
+.viewer-foot a:focus {
+  outline: none;
+}

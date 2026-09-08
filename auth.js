@@ -1,15 +1,26 @@
 /* ═══ CYPH — access gate ═══
    Soft email gate. Not protection — anyone with an email can get in.
    This is a chain-of-custody marker: every viewer self-identifies and
-   their entry gets logged (if LOG_URL is set), so you can see who has
-   opened the deck and when.
+   their entry gets logged, so you can see who has opened what and when.
 
    Validation: input must contain an "@" sign. That's it.
 
-   To enable access logging: create a Google Apps Script web app that
-   appends rows to a Sheet, then paste its /exec URL into LOG_URL below.
-   If LOG_URL is empty the logger is a silent no-op. Instructions at the
-   bottom of this file. */
+   The same file is served on every surface — the GitHub Pages deck, each
+   versioned deck at investors.cyph.city/deck/<version>/, the one-pager,
+   and every partner deck and invite at events.cyph.city. The page tells
+   it which surface it is through the script tag's data-* attributes
+   (window.CYPH_GATE works too):
+
+     data-mode      "gate" (default) | "open"
+                    open = no prompt at all, the view is still logged
+     data-viewed    surface id for the sheet's `viewed` column
+                    (defaults: deck/<version> from the path, or deck/gh-pages)
+     data-meta      JSON string logged as-is, e.g. {"guest":"7f2k90ab"}
+     data-versions  URL of versions.json; a deck version marked live:false
+                    shows the retired screen instead of the gate
+
+   The logger is a Google Apps Script web app; its source is
+   apps-script/Code.gs. If LOG_URL is empty the logger is a silent no-op. */
 
 var LOG_URL =
   "https://script.google.com/macros/s/AKfycbzYkyBPNMGYTx2DpLb-vyFENWOGS0DrG12JW8Iud2r9FLG-wHtonujO7rvZqNjLJepi/exec";
@@ -18,6 +29,47 @@ var LOG_URL =
   var host = location.hostname;
   var isLocal = host === "localhost" || host === "127.0.0.1" || host === "";
 
+  /* ─── which surface is this ─── */
+  var script = document.currentScript;
+  var ds = (script && script.dataset) || {};
+  var win = window.CYPH_GATE || {};
+  function cfg(key) {
+    if (ds[key] != null && ds[key] !== "") return ds[key];
+    if (win[key] != null && win[key] !== "") return win[key];
+    return null;
+  }
+  var MODE = cfg("mode") === "open" ? "open" : "gate";
+  var VERSIONS_URL = cfg("versions");
+
+  /* /deck/<version>/ anywhere → the version is the surface */
+  var versionMatch = location.pathname.match(/^\/deck\/([^/]+)\//);
+  var VERSION = versionMatch ? versionMatch[1] : null;
+
+  function deriveViewed() {
+    if (VERSION) return "deck/" + VERSION;
+    var explicit = cfg("viewed");
+    if (explicit) return explicit;
+    if (/\.github\.io$/.test(host)) return "deck/gh-pages";
+    var p = location.pathname
+      .replace(/\/index\.html$/, "")
+      .replace(/^\/+|\/+$/g, "");
+    return p || "deck";
+  }
+  var VIEWED = deriveViewed();
+
+  function parseMeta(raw) {
+    if (!raw) return null;
+    if (typeof raw === "object") return raw;
+    try {
+      var v = JSON.parse(raw);
+      return v && typeof v === "object" ? v : null;
+    } catch (e) {
+      return null;
+    }
+  }
+  var META = parseMeta(cfg("meta"));
+
+  /* ─── auth state ─── */
   function markAuthed(email) {
     sessionStorage.setItem("cyph-authed", "1");
     sessionStorage.setItem("cyph-email", email || "");
@@ -28,8 +80,11 @@ var LOG_URL =
     return sessionStorage.getItem("cyph-authed") === "1";
   }
 
+  /* ─── logger ─── */
   function postLog(payload) {
     if (!LOG_URL) return;
+    payload.viewed = VIEWED;
+    payload.meta = META;
     var body = JSON.stringify(payload);
     /* sendBeacon survives unload/pagehide where fetch() can be cancelled.
        It only allows simple content types — text/plain matches what the
@@ -60,6 +115,16 @@ var LOG_URL =
       referrer: document.referrer,
       href: location.href,
     });
+  }
+
+  /* One access row per surface per tab session. sessionStorage is per
+     origin, so an email entered on /deck/sept26/ also opens /onepager/ in
+     the same tab — this is what still puts a row in the sheet for it. */
+  function logAccessOnce(email) {
+    var key = "cyph-logged:" + VIEWED;
+    if (sessionStorage.getItem(key) === "1") return;
+    sessionStorage.setItem(key, "1");
+    logAccess(email);
   }
 
   /* ─── per-slide time tracking ───
@@ -152,6 +217,30 @@ var LOG_URL =
     });
   }
 
+  /* ─── retirement ───
+     Only a versioned deck can be retired, and only when the page names a
+     versions.json. Anything that goes wrong on the way falls through to
+     the normal gate: a live deck must never be bricked by this check. */
+  function checkRetired(cb) {
+    if (!VERSION || !VERSIONS_URL) return cb(false);
+    fetch(VERSIONS_URL, { cache: "no-cache" })
+      .then(function (r) {
+        return r.ok ? r.json() : null;
+      })
+      .catch(function () {
+        return null;
+      })
+      .then(function (v) {
+        var list = (v && v.versions) || [];
+        var hit = null;
+        for (var i = 0; i < list.length; i++) {
+          if (list[i] && list[i].id === VERSION) hit = list[i];
+        }
+        cb(!!hit && hit.live === false);
+      });
+  }
+
+  /* ─── the gate ─── */
   function handleSubmit(e) {
     e.preventDefault();
     var input = document.getElementById("auth-input");
@@ -163,8 +252,15 @@ var LOG_URL =
       return;
     }
     markAuthed(email);
-    logAccess(email);
+    logAccessOnce(email);
     startTracking();
+  }
+
+  function wireForm() {
+    var form = document.getElementById("auth-form");
+    if (form) form.addEventListener("submit", handleSubmit);
+    var input = document.getElementById("auth-input");
+    if (input) input.focus();
   }
 
   document.addEventListener("DOMContentLoaded", function () {
@@ -174,57 +270,28 @@ var LOG_URL =
       markAuthed("local dev");
       return;
     }
-    /* already authed in this session — skip the gate */
-    if (isAuthed()) {
+    /* open surfaces (a personal invite) — nothing to type, the view is
+       logged, and nothing is written to sessionStorage so an open page
+       never unlocks a gated one on the same origin */
+    if (MODE === "open") {
       document.body.classList.add("authed");
+      logAccessOnce("");
       startTracking();
       return;
     }
-    var form = document.getElementById("auth-form");
-    if (form) form.addEventListener("submit", handleSubmit);
-    var input = document.getElementById("auth-input");
-    if (input) input.focus();
+    checkRetired(function (retired) {
+      if (retired) {
+        document.body.classList.add("retired");
+        return;
+      }
+      /* already authed in this session — skip the gate */
+      if (isAuthed()) {
+        document.body.classList.add("authed");
+        logAccessOnce(sessionStorage.getItem("cyph-email") || "");
+        startTracking();
+        return;
+      }
+      wireForm();
+    });
   });
 })();
-
-/* ─── Google Apps Script setup (optional, for access + slide-time logging) ───
-
-1. Create a new Google Sheet with two tabs:
-      "access"  — headers: timestamp | email | userAgent | referrer | href
-      "timings" — headers: timestamp | email | reason | totalSec | timings | href
-2. Extensions → Apps Script. Replace the file contents with:
-
-      function doPost(e) {
-        var ss = SpreadsheetApp.getActiveSpreadsheet();
-        var d = JSON.parse(e.postData.contents);
-        if (d.type === "timings") {
-          var sheet = ss.getSheetByName("timings") || ss.insertSheet("timings");
-          var totalMs = 0;
-          Object.keys(d.timings).forEach(function (k) {
-            totalMs += d.timings[k];
-          });
-          sheet.appendRow([
-            d.timestamp, d.email, d.reason,
-            Math.round(totalMs / 1000),
-            JSON.stringify(d.timings),
-            d.href
-          ]);
-        } else {
-          var sheet = ss.getSheetByName("access") || ss.getActiveSheet();
-          sheet.appendRow([
-            d.timestamp, d.email,
-            d.userAgent, d.referrer, d.href
-          ]);
-        }
-        return ContentService.createTextOutput("ok");
-      }
-
-3. Deploy → New deployment → Web app → Execute as: Me, Access: Anyone.
-4. Copy the /exec URL and paste it into LOG_URL at the top of this file.
-5. Commit and push. Every email submission appends an "access" row;
-   every 30s (and on tab hide / unload) appends a "timings" row containing
-   accumulated milliseconds-per-slide for the current viewing session.
-
-If you already have an older deployment that only handles access logging,
-update the script as above and re-deploy: Deploy → Manage deployments →
-pencil → New version → Deploy. The /exec URL stays the same. */

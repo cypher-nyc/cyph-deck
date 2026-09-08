@@ -3615,12 +3615,17 @@
           <button type="submit">enter</button>
         </form>
         <div id="auth-err">&nbsp;</div>
+        <div id="auth-retired" hidden>
+          this version of the deck has been retired. ask us for the current link.
+        </div>
       </div>
     </div>
 
     <!-- auth.js gates and logs on both paths - a phone viewer is still a
          viewer, and still belongs in the access sheet. -->
-    <script src="auth.js"></script>
+    <!-- data-versions only matters at investors.cyph.city/deck/<version>/;
+         on GitHub Pages the path never matches and nothing is fetched. -->
+    <script src="auth.js" data-versions="/deck/versions.json"></script>
     <script>
       /* Load only the path this device actually uses. On a phone that means
          deck.js, iso3d.js and three.js are never fetched at all - the whole

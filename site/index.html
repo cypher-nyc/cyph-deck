@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>cyph.</title>
+    <link rel="icon" type="image/png" href="/common/favicon.png" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        background: #000;
+      }
+    </style>
+    <script>
+      /* the root sends you to the current deck version; the link we send
+         out is always the versioned one, this is only for a typed URL */
+      fetch("/deck/versions.json", { cache: "no-cache" })
+        .then(function (r) {
+          return r.json();
+        })
+        .then(function (v) {
+          location.replace("/deck/" + v.current + "/");
+        })
+        .catch(function () {
+          location.replace("/404.html");
+        });
+    </script>
+  </head>
+  <body></body>
+</html>

@@ -1,0 +1,6 @@
+{
+  "_note": "investors.cyph.city hosting, from cyph-terraform (investors.tf) outputs. Not secrets. Fill distributionId after the first terraform apply.",
+  "host": "investors.cyph.city",
+  "bucket": "cyph-investors-prod",
+  "distributionId": "E3O6S0G9JGGG7L"
+}
