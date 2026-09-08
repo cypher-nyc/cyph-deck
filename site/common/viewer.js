@@ -25,6 +25,20 @@
   var ALT = ds.alt || "page";
   var FALLBACK = { pages: 1, width: 1440, height: 900 };
 
+  /* Page images and the PDF live at stable filenames and get a day of
+     browser cache, which is right for repeat views and wrong the
+     moment a deck is rebuilt - the same bytes-changed-under-a-stable-
+     name trap that pins a stale social card. The manifest is fetched
+     no-cache and carries `generated`, so hanging it off every asset
+     URL as a version makes a rebuild bust every browser at once while
+     keeping the cache for everything that did not change. */
+  var STAMP = "";
+
+  function versioned(url) {
+    if (!STAMP) return url;
+    return url + (url.indexOf("?") === -1 ? "?" : "&") + "v=" + STAMP;
+  }
+
   function pad(n) {
     return String(n).padStart(2, "0");
   }
@@ -72,7 +86,7 @@
       var sec = document.createElement("div");
       sec.className = "vpage";
       var img = document.createElement("img");
-      img.src = DIR + pad(i) + ".webp";
+      img.src = versioned(DIR + pad(i) + ".webp");
       img.alt = ALT + " — page " + i + " of " + total;
       img.loading = i <= 2 ? "eager" : "lazy";
       img.decoding = "async";
@@ -96,7 +110,8 @@
   /* PDF + CTA row. Built only after the gate has opened. */
   function foot(root) {
     var links = [];
-    if (PDF) links.push({ label: PDF_LABEL, href: PDF, download: true });
+    if (PDF)
+      links.push({ label: PDF_LABEL, href: versioned(PDF), download: true });
     readCta().forEach(function (c) {
       if (c && c.href && c.label) links.push(c);
     });
@@ -172,7 +187,11 @@
         return null;
       })
       .then(function (m) {
-        build(m && m.pages ? m : FALLBACK);
+        var manifest = m && m.pages ? m : FALLBACK;
+        if (manifest.generated) {
+          STAMP = encodeURIComponent(manifest.generated);
+        }
+        build(manifest);
       });
   }
 
