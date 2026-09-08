@@ -102,6 +102,7 @@ async function publishDeck() {
   const v = flag("version");
   if (!v) throw new Error("deck needs --version <id>");
   if (!/^[a-z0-9][a-z0-9-]*$/.test(v)) throw new Error(`version "${v}" must be lowercase letters, digits, dashes`);
+  if (v === "latest") throw new Error('"latest" is the alias that points at versions.json current, not a version');
   const entry = (await versions()).versions.find((x) => x.id === v);
   if (!entry) throw new Error(`version "${v}" is not in site/deck/versions.json — add it first`);
   if (entry.live === false) throw new Error(`version "${v}" is retired; flip live:true to publish it`);
@@ -149,7 +150,7 @@ async function publishSite() {
     /* no --delete, ever: the site publish shares the bucket with /deck/* */
     sync(stage, dest, { cacheControl: DAY, except: ["*.html", "*.json", "*.js", "*.css"] });
     sync(stage, dest, { cacheControl: NO_CACHE, only: ["*.html", "*.json", "*.js", "*.css"] });
-    invalidate(["/", "/index.html", "/404.html", "/deck/versions.json", "/onepager/*", "/common/*"]);
+    invalidate(["/", "/index.html", "/404.html", "/deck/versions.json", "/deck/latest/*", "/onepager/*", "/common/*"]);
     console.log(`\n  https://${HOST}/onepager/`);
   } finally {
     await fsp.rm(stage, { recursive: true, force: true });

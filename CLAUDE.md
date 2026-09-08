@@ -161,8 +161,9 @@ to the one-pager at `/onepager/`. Everything under `site/` is that host:
 
 - `site/deck/versions.json`: the version list. A version must be listed and
   `live` to publish; flipping `live:false` and republishing `site` retires it
-  (auth.js shows the retired placard instead of the gate). The root redirects
-  to `current`.
+  (auth.js shows the retired placard instead of the gate). `/deck/latest/` is
+  the link we hand out: it resolves to `current`, so the sheet still records
+  the exact version each viewer saw. The root does the same.
 - `site/onepager/`: `cyph-onepager.pdf` (a copied export of the InDesign
   one-pager, compressed with Ghostscript) + `pages/` from
   `node tools/onepager-pages.mjs [new.pdf]`. Committed like `assets/deck-pages`.
