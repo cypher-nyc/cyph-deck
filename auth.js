@@ -27,7 +27,10 @@ var LOG_URL =
 
 (function () {
   var host = location.hostname;
-  var isLocal = host === "localhost" || host === "127.0.0.1" || host === "";
+  /* *.localhost is `make dev-lite` (scripts/cyph-sites.mjs): investors.localhost
+     is this host, events.localhost is event-decks. Same bypass as localhost so
+     a dev session never reaches the access sheet. */
+  var isLocal = host === "localhost" || host === "127.0.0.1" || host === "" || /\.localhost$/.test(host);
 
   /* ─── which surface is this ─── */
   var script = document.currentScript;
