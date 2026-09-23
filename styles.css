@@ -1095,10 +1095,18 @@
   max-width: 100%;
   object-fit: contain;
 }
-/* the reach still — static, no drift. deliberately breaks the shared cap:
-   it is a wide screenshot, so at 94px the city detail is unreadable. */
-.money-graphic .money-reach-img {
-  max-height: 110px;
+/* the ads row carries three stills side by side, so its graphic column
+   sizes to them instead of the shared 215px. */
+.money-row--trio {
+  grid-template-columns: 180px 1fr auto;
+}
+/* one shared 16:10 frame per still, cover-cropped so mixed aspect ratios
+   land the same size; static, no drift. */
+.money-graphic .money-ads-img {
+  width: 150px;
+  height: 94px;
+  max-height: none;
+  object-fit: cover;
   border-radius: 5px;
   filter: drop-shadow(4px 6px 12px rgba(0, 0, 0, 0.45));
 }
