@@ -111,6 +111,26 @@ page into `#hudCtr`, which is the element auth.js already observes for
 per-slide dwell time, so phone sessions log to the same `timings` tab as
 desktop ones with no change to auth.js.
 
+## Partner deck (partners.cyph.city)
+
+The non-VC deck: 8 slides, built from this one so the two never drift.
+`tools/build-partners.mjs` writes `partners.html` (generated, never
+hand-edited): `s0`–`s4`, `s13` and `s15` are lifted verbatim from
+`index.html` **and keep their ids**, so every `#sN` rule in `styles.css`
+applies unchanged. Slide 6 (`#hiw`, how it works) is `partners/hiw.html`: the
+`s5` layer stack beside the `s6`/`s8`/`s9` content, one step per layer
+(01 underground / 02 cyph / 03 irl); its transit map and press/logo column are
+`@include`d from `index.html`. Slide 8 is `partners/close.html` (`s15` with
+Cash's partner copy, no founder bios). `partners/partners.js` is its deck.js
+(slides addressed by id, same `go`/`goTo`/`busy`/`layerStep` contract, so
+export-pdf drives it unchanged); `partners/partners.css` loads on top of
+`styles.css`, desktop only. No revenue HUD bar. The gate logs it as
+`viewed = partners`.
+
+`npm run partners` = build + `export-pdf.mjs --deck partners` →
+`cyph-partners.pdf` + `assets/partner-pages/` (mobile.js reads the directory
+from `<html data-pages>`). Re-run it after touching any reused slide.
+
 ## PDF export
 
 `npm run pdf` (→ `tools/export-pdf.mjs`) regenerates **both** `cyph-deck.pdf`

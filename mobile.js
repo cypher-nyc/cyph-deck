@@ -11,7 +11,8 @@
    or removing a slide needs no change to this file. */
 
 (function () {
-  var DIR = "assets/deck-pages/";
+  /* partners.html points this at assets/partner-pages/ via <html data-pages> */
+  var DIR = document.documentElement.dataset.pages || "assets/deck-pages/";
   var FALLBACK_PAGES = 22; /* only if the manifest is unreachable */
 
   function pad(n) {

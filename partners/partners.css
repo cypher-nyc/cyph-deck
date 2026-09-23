@@ -1,0 +1,273 @@
+/* ═══ CYPH partner deck — how it works (#hiw) ═══
+   Loads on top of styles.css, desktop path only. Only the consolidated slide
+   needs anything new: every other partner slide is an investor slide under
+   its own id. The number / title / subtitle / description reuse s5's
+   .layer-anno-* type; the stack reuses s5's .layer-stack / .iso-layer. */
+
+#hiw h2 {
+  color: var(--charcoal);
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  text-align: left;
+  z-index: 10;
+  margin: 0;
+}
+
+.hiw-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 64px;
+  width: 100%;
+  height: 100%;
+  padding-top: 40px;
+}
+#hiw .iso-layer {
+  cursor: pointer;
+}
+
+/* one step visible at a time; all three share the panel */
+.hiw-anno {
+  position: relative;
+  width: 800px;
+  height: 620px;
+}
+.hiw-step {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.45s ease,
+    visibility 0s linear 0.45s;
+}
+.hiw-step.on {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.45s ease;
+}
+.hiw-step--ug {
+  --hiw-accent: var(--orange);
+}
+.hiw-step--cy {
+  --hiw-accent: var(--blue);
+}
+.hiw-step--irl {
+  --hiw-accent: var(--yellow);
+}
+.hiw-step .layer-anno-num,
+.hiw-step .layer-anno-title,
+.hiw-step .layer-anno-sub {
+  color: var(--hiw-accent);
+}
+.hiw-step .layer-anno-desc {
+  color: var(--charcoal);
+  max-width: 620px;
+}
+
+.hiw-detail {
+  display: flex;
+  margin-top: 26px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(237, 232, 222, 0.18);
+}
+.hiw-head {
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--charcoal);
+  margin-bottom: 8px;
+}
+.hiw-line {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--charcoal-muted);
+}
+.hiw-line em,
+.hiw-line strong {
+  color: var(--charcoal);
+}
+
+/* 01 underground: s6's route map + the s6 cyphcard column */
+.hiw-ug {
+  gap: 28px;
+  align-items: stretch;
+}
+.hiw-map {
+  width: 400px;
+  height: 360px;
+  flex-shrink: 0;
+  background: rgba(20, 18, 15, 0.9);
+  border-radius: 14px;
+  border: 2px solid rgba(242, 140, 40, 0.15);
+  padding: 10px;
+  overflow: hidden;
+}
+.hiw-map svg {
+  width: 100%;
+  height: 100%;
+}
+.hiw-ug-side {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.hiw-card-cap {
+  font-size: 11px;
+  font-style: italic;
+  text-align: center;
+  line-height: 1.5;
+  color: var(--charcoal);
+  margin: 0 0 14px;
+}
+.hiw-stamp {
+  margin-top: 14px;
+}
+
+/* 02 cyph: s8's two flyers + the room types */
+/* no rules on this step: no rule under the description, none between
+   the flyers and the rooms, none between rooms */
+.hiw-cy {
+  gap: 22px;
+  align-items: flex-start;
+  border-top: none;
+}
+.hiw-flyer {
+  width: 168px;
+  flex-shrink: 0;
+  margin: 0;
+}
+.hiw-kind {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--blue);
+}
+.hiw-kind-sub {
+  font-size: 11px;
+  line-height: 1.35;
+  color: var(--charcoal-muted);
+  min-height: 30px;
+  margin: 3px 0 8px;
+}
+.hiw-flyer img {
+  display: block;
+  width: 100%;
+  border-radius: 6px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+}
+.hiw-flyer figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 9px;
+  font-size: 12px;
+  line-height: 1.3;
+  color: var(--charcoal);
+}
+.hiw-cy-side {
+  flex: 1;
+  padding-left: 22px;
+}
+.hiw-room {
+  padding: 12px 0;
+}
+.hiw-room h4 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--charcoal);
+  margin-bottom: 4px;
+}
+.hiw-room p {
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--charcoal-muted);
+}
+
+/* 03 irl: s9's two columns, press + logos capped to fit the panel */
+.hiw-irl {
+  gap: 32px;
+  align-items: flex-start;
+}
+.hiw-irl-side {
+  width: 250px;
+  flex-shrink: 0;
+}
+.hiw-irl-head {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.2;
+  color: var(--charcoal);
+  margin-bottom: 10px;
+}
+.hiw-irl-sub {
+  font-size: 14px;
+  font-style: italic;
+  line-height: 1.45;
+  color: var(--charcoal-muted);
+}
+.hiw-stat {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-top: 22px;
+}
+.hiw-stat b {
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--orange);
+}
+/* the + sits on the same baseline as "residencies and venues." */
+.hiw-stat b span {
+  font-size: 30px;
+}
+.hiw-stat > span {
+  font-size: 13px;
+  color: var(--charcoal-muted);
+}
+#hiw .room-col {
+  align-items: flex-start;
+  text-align: left;
+  padding-left: 32px;
+  border-left: 1px solid rgba(237, 232, 222, 0.18);
+}
+#hiw .room-press {
+  height: 180px;
+  width: auto;
+}
+#hiw .room-conductors,
+#hiw .room-article,
+#hiw .room-article img {
+  width: auto;
+  height: 100%;
+}
+#hiw .room-logos {
+  justify-content: flex-start;
+  zoom: 0.85;
+}
+
+/* step dots: s5's, lit for the dark register */
+.hiw-dots {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  margin: 0;
+}
+#hiw .layer-dot {
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.2);
+}
+#hiw .layer-dot.active {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+/* s5's footer line */
+.hiw-foot {
+  position: absolute;
+  right: 24px;
+  bottom: 16px;
+  font-size: 11px;
+  font-style: italic;
+  letter-spacing: 0.02em;
+  color: var(--orange);
+}

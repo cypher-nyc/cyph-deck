@@ -1,0 +1,6 @@
+{
+  "_note": "partners.cyph.city hosting, from cyph-terraform (partners.tf) outputs. Not secrets.",
+  "host": "partners.cyph.city",
+  "bucket": "cyph-partners-prod",
+  "distributionId": "E1O0K61K8Z6NA8"
+}
