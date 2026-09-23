@@ -7,7 +7,8 @@
    two cyph flyers on s8, and the two founder bios after "ready for a demo?" —
    because that is what the viewer actually sees.
 
-   Run:  npm run pdf
+   Run:  npm run pdf                                   (investor deck)
+         node tools/export-pdf.mjs --deck partners     (partner deck; npm run partners)
    Notes:
    - Uses the system Google Chrome (`channel: "chrome"`), NOT Playwright's
      bundled Chromium: the cover + close slides play H.264 video and the
@@ -24,11 +25,21 @@ import { fileURLToPath } from "node:url";
 import { chromium } from "playwright-core";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const OUT = path.join(ROOT, "cyph-deck.pdf");
+/* which deck: the investor deck (index.html) or the partner deck
+   (partners.html, built by tools/build-partners.mjs). Each has its own PDF
+   and its own phone pages. */
+const DECKS = {
+  investors: { page: "index.html", out: "cyph-deck.pdf", pages: "deck-pages", title: "cyph-deck" },
+  partners: { page: "partners.html", out: "cyph-partners.pdf", pages: "partner-pages", title: "cyph-partners" },
+};
+const deckArg = process.argv.indexOf("--deck");
+const DECK = DECKS[deckArg > 0 ? process.argv[deckArg + 1] : "investors"];
+if (!DECK) throw new Error(`--deck must be one of: ${Object.keys(DECKS).join(", ")}`);
+const OUT = path.join(ROOT, DECK.out);
 /* the phone view's pages — same frames as the PDF, downscaled and re-encoded
    as WebP. Written in this run so the page view can never drift from the deck
    it was exported from. See mobile.js. */
-const PAGES_DIR = path.join(ROOT, "assets", "deck-pages");
+const PAGES_DIR = path.join(ROOT, "assets", DECK.pages);
 const PAGE_W = 1440; // 1:1 with the deck's design width; ~3.3x a 430pt phone
 const WEBP_QUALITY = 0.82;
 
@@ -229,7 +240,7 @@ console.log(`serving ${ROOT} on 127.0.0.1:${port}`);
 /* "load", not "networkidle": the two <video> elements stream on a loop, so
    the network never actually goes idle. The explicit asset wait below is the
    real readiness gate. */
-await page.goto(`http://127.0.0.1:${port}/index.html`, { waitUntil: "load" });
+await page.goto(`http://127.0.0.1:${port}/${DECK.page}`, { waitUntil: "load" });
 
 /* every asset decoded and both videos showing a real frame before we start —
    otherwise the cover exports as a black rectangle */
@@ -275,12 +286,13 @@ for (let i = 0; i < MAX_STATES; i++) {
       ].join("|"),
       slide: active ? active.id : "?",
       /* the cyph layer is the doorway; it is showing on step 02 and again
-         in the ∞ composite. the .active class outlives s5, so gate on the
-         slide too — otherwise every later page reports doors. */
+         in the ∞ composite. the .active class outlives the slide, so gate
+         on the stack being on the active slide (s5 here, #hiw on the
+         partner deck) — otherwise every later page reports doors. */
       doorsOpen: !!(
         active &&
-        active.id === "s5" &&
         isoL2 &&
+        active.contains(isoL2) &&
         isoL2.classList.contains("active")
       ),
     };
@@ -359,7 +371,7 @@ for (const f of frames) {
 await browser.close();
 server.close();
 
-const pdf = buildPdf(frames, "cyph-deck");
+const pdf = buildPdf(frames, DECK.title);
 fs.writeFileSync(OUT, pdf);
 console.log(`\nwrote ${path.relative(process.cwd(), OUT)} — ${frames.length} pages, ${(pdf.length / 1e6).toFixed(1)} MB`);
 

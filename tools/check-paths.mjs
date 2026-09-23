@@ -57,7 +57,7 @@ function check(label, actual, expected) {
 
 const browser = await chromium.launch({ channel: "chrome" });
 
-async function visit(label, contextOpts, query = "") {
+async function visit(label, contextOpts, query = "", entry = "index.html") {
   const ctx = await browser.newContext(contextOpts);
   const page = await ctx.newPage();
   const reqs = [];
@@ -73,7 +73,7 @@ async function visit(label, contextOpts, query = "") {
       errs.push(m.text());
   });
   await page.route("https://script.google.com/**", (r) => r.abort());
-  await page.goto(`http://127.0.0.1:${port}/index.html${query}`, {
+  await page.goto(`http://127.0.0.1:${port}/${entry}${query}`, {
     waitUntil: "load",
   });
   await page.waitForTimeout(2500);
@@ -165,6 +165,47 @@ console.log("\nDesktop (1440x900)");
   check("iso3d.js fetched", got("/iso3d.js"), true);
   check("mobile.js NOT fetched", got("/mobile.js"), false);
   check("mobile.css NOT fetched", got("/mobile.css"), false);
+  check("no page errors", errs.length, 0);
+  if (errs.length) console.log("   ", errs);
+}
+
+/* ── partner deck (partners.html): same router, its own pages + script ── */
+console.log("\nPartner deck — iPhone 14 Pro");
+{
+  const { state, got, errs } = await visit(
+    "partners-phone",
+    { ...devices["iPhone 14 Pro"] },
+    "",
+    "partners.html",
+  );
+  const manifest = JSON.parse(
+    fs.readFileSync(path.join(ROOT, "assets/partner-pages/manifest.json")),
+  );
+  check("routed to the page view", state.cls.includes("phone"), true);
+  check("every partner page rendered", state.pages, manifest.pages);
+  check("reads the partner pages", got("/assets/partner-pages/01.webp"), true);
+  check("investor pages NOT fetched", got("/assets/deck-pages/01.webp"), false);
+  check("page view offers no links or buttons", state.deckLinks, 0);
+  check("styles.css NOT fetched", got("/styles.css"), false);
+  check("partners.js NOT fetched", got("/partners/partners.js"), false);
+  check("three.js NOT fetched", got("three.module.js"), false);
+  check("no page errors", errs.length, 0);
+  if (errs.length) console.log("   ", errs);
+}
+console.log("\nPartner deck — desktop");
+{
+  const { state, got, errs } = await visit(
+    "partners-desktop",
+    { viewport: { width: 1440, height: 900 } },
+    "",
+    "partners.html",
+  );
+  check("routed to the interactive deck", state.cls.includes("desktop"), true);
+  check("access gate is styled", state.gateStyled, true);
+  check("partners.js fetched", got("/partners/partners.js"), true);
+  check("partners.css fetched", got("/partners/partners.css"), true);
+  check("deck.js NOT fetched", got("/deck.js"), false);
+  check("mobile.js NOT fetched", got("/mobile.js"), false);
   check("no page errors", errs.length, 0);
   if (errs.length) console.log("   ", errs);
 }
