@@ -19,12 +19,20 @@
     return String(n).padStart(2, "0");
   }
 
+  /* the manifest's per-page labels are the deck's own counter ("06/08"), so
+     sub-steps of one slide share its number and the total is slides, not
+     pages. An older manifest without them falls back to page numbers. */
+  var labels = null;
+  function label(n, total) {
+    return (labels && labels[n - 1]) || pad(n) + "/" + pad(total);
+  }
+
   /* auth.js tracks per-slide dwell time by observing #hudCtr's text. Writing
      the current page into it means phone sessions land in the same sheet as
      desktop ones, with no change to auth.js. */
   function reportPage(n, total) {
     var hud = document.getElementById("hudCtr");
-    if (hud) hud.textContent = pad(n) + "/" + pad(total);
+    if (hud) hud.textContent = label(n, total);
   }
 
   function build(total) {
@@ -41,7 +49,7 @@
       '<span class="station-bullet amaranth">H</span>' +
       "</span>" +
       '<span class="mdeck-counter" id="mdeckCounter">01/' +
-      pad(total) +
+      label(1, total).split("/")[1] +
       "</span>";
 
     var pages = document.createElement("div");
@@ -83,7 +91,7 @@
     function set(n) {
       if (n === current) return;
       current = n;
-      if (counter) counter.textContent = pad(n) + "/" + pad(total);
+      if (counter) counter.textContent = label(n, total);
       reportPage(n, total);
     }
 
@@ -119,6 +127,8 @@
         return null;
       })
       .then(function (m) {
+        if (m && Array.isArray(m.labels) && m.labels.length === m.pages)
+          labels = m.labels;
         build(m && m.pages ? m.pages : FALLBACK_PAGES);
       });
   }

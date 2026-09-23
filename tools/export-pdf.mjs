@@ -268,6 +268,9 @@ await page.waitForTimeout(2000);
 await page.evaluate(SETTLE);
 
 const frames = [];
+/* the deck's own counter per page ("06/08"), so the phone view numbers slides
+   the way the deck does: sub-steps share their slide's number */
+const labels = [];
 let prevSig = null;
 
 for (let i = 0; i < MAX_STATES; i++) {
@@ -331,6 +334,7 @@ for (let i = 0; i < MAX_STATES; i++) {
   }
 
   frames.push(await page.screenshot({ type: "jpeg", quality: JPEG_QUALITY }));
+  labels.push(sig.split("|")[0]);
   console.log(
     `captured page ${frames.length}  (${slide} ${sig}` +
       `${doorsOpen ? " doors:open" : ""}${onFlyer ? " hover:flyer" : ""})`,
@@ -386,7 +390,7 @@ webps.forEach((buf, i) => {
 });
 fs.writeFileSync(
   path.join(PAGES_DIR, "manifest.json"),
-  JSON.stringify({ pages: webps.length, width: PAGE_W, generated: new Date().toISOString() }, null, 2) + "\n",
+  JSON.stringify({ pages: webps.length, labels, width: PAGE_W, generated: new Date().toISOString() }, null, 2) + "\n",
 );
 console.log(
   `wrote ${path.relative(process.cwd(), PAGES_DIR)}/ — ${webps.length} webp pages, ` +
