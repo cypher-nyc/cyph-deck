@@ -70,7 +70,6 @@
   display: flex;
   margin-top: 26px;
   padding-top: 22px;
-  border-top: 1px solid rgba(237, 232, 222, 0.18);
 }
 .hiw-head {
   font-weight: 700;
@@ -125,12 +124,9 @@
 }
 
 /* 02 cyph: s8's two flyers + the room types */
-/* no rules on this step: no rule under the description, none between
-   the flyers and the rooms, none between rooms */
 .hiw-cy {
   gap: 22px;
   align-items: flex-start;
-  border-top: none;
 }
 .hiw-flyer {
   width: 168px;
@@ -199,37 +195,28 @@
   color: var(--charcoal);
   margin-bottom: 10px;
 }
-.hiw-irl-sub {
-  font-size: 14px;
-  font-style: italic;
-  line-height: 1.45;
-  color: var(--charcoal-muted);
-}
 .hiw-stat {
   display: flex;
-  align-items: baseline;
+  flex-direction: column;
   gap: 10px;
-  margin-top: 22px;
 }
 .hiw-stat b {
-  font-size: 64px;
+  font-size: 112px;
   font-weight: 700;
   line-height: 1;
   color: var(--orange);
 }
-/* the + sits on the same baseline as "residencies and venues." */
 .hiw-stat b span {
-  font-size: 30px;
+  font-size: 52px;
 }
 .hiw-stat > span {
   font-size: 13px;
-  color: var(--charcoal-muted);
+  color: var(--charcoal);
 }
 #hiw .room-col {
   align-items: flex-start;
   text-align: left;
   padding-left: 32px;
-  border-left: 1px solid rgba(237, 232, 222, 0.18);
 }
 #hiw .room-press {
   height: 180px;
@@ -244,21 +231,6 @@
 #hiw .room-logos {
   justify-content: flex-start;
   zoom: 0.85;
-}
-
-/* step dots: s5's, lit for the dark register */
-.hiw-dots {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  margin: 0;
-}
-#hiw .layer-dot {
-  cursor: pointer;
-  background: rgba(255, 255, 255, 0.2);
-}
-#hiw .layer-dot.active {
-  background: rgba(255, 255, 255, 0.7);
 }
 
 /* s5's footer line */
