@@ -1,0 +1,64 @@
+name: Publish partners.cyph.city
+
+# The partner deck publishes on every push to main that touches anything
+# tools/publish-partners.mjs stages, or anything partners.html is built from.
+#
+# partners.html is generated and committed. CI rebuilds it and refuses to
+# publish if the rebuild differs from the commit: that means index.html or
+# partners/ changed without `npm run partners`, and the phone pages
+# (assets/partner-pages/, which need Chrome to export) are stale too.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "partners.html"
+      - "partners/**"
+      - "index.html"
+      - "assets/**"
+      - "auth.js"
+      - "base.css"
+      - "styles.css"
+      - "mobile.css"
+      - "mobile.js"
+      - "iso3d.js"
+      - "favicon.png"
+      - "site/404.html"
+      - "tools/build-partners.mjs"
+      - "tools/publish-partners.mjs"
+      - "tools/partners.json"
+      - ".github/workflows/deploy-partners.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: publish-partners
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      AWS_REGION: us-east-1
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: partners.html matches its sources
+        run: |
+          node tools/build-partners.mjs
+          git diff --exit-code -- partners.html || {
+            echo "::error::partners.html is stale - run 'npm run partners' locally and commit the result"
+            exit 1
+          }
+
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Publish
+        run: node tools/publish-partners.mjs

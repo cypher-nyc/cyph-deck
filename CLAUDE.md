@@ -131,6 +131,13 @@ export-pdf drives it unchanged); `partners/partners.css` loads on top of
 `cyph-partners.pdf` + `assets/partner-pages/` (mobile.js reads the directory
 from `<html data-pages>`). Re-run it after touching any reused slide.
 
+**Deploy is on push.** `.github/workflows/deploy-partners.yml` publishes
+partners.cyph.city (S3 `cyph-partners-prod` + CloudFront) whenever a push to
+`main` touches the partner deck or anything it is built from. It rebuilds
+`partners.html` first and fails if that differs from the commit (a reused slide
+changed without `npm run partners`), because a stale build also means stale
+phone pages. A push to GitHub Pages alone never updates this host.
+
 ## PDF export
 
 `npm run pdf` (→ `tools/export-pdf.mjs`) regenerates **both** `cyph-deck.pdf`
