@@ -14,6 +14,7 @@ on:
     paths:
       - "partners.html"
       - "partners/**"
+      - "!partners/one-off/**"
       - "index.html"
       - "assets/**"
       - "auth.js"

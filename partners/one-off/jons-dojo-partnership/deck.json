@@ -1,0 +1,116 @@
+{
+  "title": "Cyph — Jon’s Dojo Partnership",
+  "filename": "Cyph_JonsDojo_Partnership",
+  "accent": "architecture",
+  "_source": "Copy is verbatim from 'Jon’s Dojo Partnership x Cyph' (Google Doc, 3pp letter). Nothing here is written for the deck: the only editorial act is pagination and the split of each source heading (SPACE OVERVIEW) into the page header (space) and its first section label (overview), so all three sections read overview / proposal / return in the same rhythm. The source's italic run-in terms become the bullet list's Medium lead-in, which is what the one-pager language already does with a run-in. Everything renders lowercase because .page does — that is the platform rule, not a rewrite.",
+  "pages": [
+    {
+      "type": "cover",
+      "eyebrow": "cyph",
+      "title": "jon’s dojo\npartnership",
+      "tagline": "space. digitization. residential library."
+    },
+    {
+      "type": "brief",
+      "heading": "space",
+      "blocks": [
+        {
+          "label": "overview",
+          "body": "In the legacy of the Harlem Renaissance, we host cyphs with the world's most underground thinkers, dissenters, and innovators. Rather than the prototypical panel or fireside chat (which are more passive ways of learning), our cyphs prioritize high-energy dynamism where the entire room contributes. Cyphs can take the form of interactive lectures, debates, office hours, supper clubs, exhibitions, performances, screenings, and more.\n\nEvery guest is hand-selected for their perspective and vetted through diligent peer recommendation. We are interested in the composition of how someone thinks rather than what's on their résumé. Each cyph is carefully cast so that the room's intellectual DNA is matched with intention, producing discourse that is generative, organic, and consequential.\n\nEvery cyph also produces a scholastic artifact. An official writeup runs in our printed anthology, which collects the year's cyphs alongside the class of participants and the partners who made them possible: affiliated spaces, brands, resources, and institutions. We work with our press connections to place related coverage in the media, and we film each cyph on VHS so the conversation is archived in physical form at our partner libraries.\n\nWe hold these cyphs in underground locations carrying a profound and hidden legacy that only the most curious would go looking for: Jon's Dojo is exactly that space."
+        }
+      ]
+    },
+    {
+      "type": "brief",
+      "heading": "space",
+      "blocks": [
+        {
+          "label": "proposal",
+          "bullets": [
+            "**Monthly residency.** A standing monthly cyph in the parlor, likely “office hours” which is low lift and very high impact.",
+            "**Syllabus series filming.** We use the parlor as the film venue for our syllabus series, which showcases the personal, intellectual journey of select thinkers."
+          ]
+        },
+        {
+          "label": "return",
+          "body": "As a space partner, Jon's Dojo becomes a home for the new wisdom Renaissance: a counterweight to an era that has confused intelligence with speed. Partnership includes:",
+          "bullets": [
+            "**Client pipeline.** As Cyphers and our partners use Jon's Dojo, they convert into workspace members, event patrons, and repeat guests who bring their own rooms with them.",
+            "**Reputation and legacy.** Every cyph produces press. We place coverage with our media connections and cite Jon's Dojo as an official space partner in both the printed anthology and its digital edition. We are also building a map of New York's underground rooms for scholars in spirit and practice, and the Dojo would be among the first entries. That map does not exist yet, which means the spaces that join early are the ones that define what it means to be on it.",
+            "**Revenue.** Each cyph sesh is underwritten by a resonant patron: a publication, brand, or institution whose values align with the topic (The Root, for instance). A portion of that sponsorship flows to Jon's Dojo as compensation for the space."
+          ]
+        }
+      ]
+    },
+    {
+      "type": "brief",
+      "heading": "digitization",
+      "blocks": [
+        {
+          "label": "overview",
+          "body": "The archive is changing hands. It was once kept by grandmothers and griots. Now it lives on platforms that can forge a past as easily as preserve one. Our history sits on servers we do not own. What happens when the cloud goes down? What gets deleted, and who decides?\n\nAt Cyph, we believe the archive is the greatest weapon against attacks on truth. We seek out the physical collections that families have kept for generations, and we digitize them. The results are preserved on vaulted servers, in bespoke libraries, and with niche historical museums. We are in relation with venerable partners, including the Schomburg Center for Research in Black Culture, JSTOR, and the Internet Archive, so that these collections can be studied and enjoyed rather than left in a box in an attic."
+        }
+      ]
+    },
+    {
+      "type": "brief",
+      "heading": "digitization",
+      "blocks": [
+        {
+          "label": "proposal",
+          "bullets": [
+            "**Digitization.** Cyph will assist in digitizing the Jon's Dojo family archive for circulation in our vault and, where appropriate, in our partner archives. We handle discoverability, making the material findable by the public and by the scholars who would consider it invaluable."
+          ]
+        },
+        {
+          "label": "return",
+          "body": "As a digitization partner, Jon's Dojo becomes a pioneer in preserving Black family archives at a moment when history itself is under attack. Partnership includes:",
+          "bullets": [
+            "**Legacy.** Your archive is preserved on Cyph and with our partners, protected against loss and discoverable for generations. Jon's Dojo would be the first of many Black families to take this on, and the first case is the one that gets named.",
+            "**Citation and awareness.** As scholars engage the collection, they publish. Cited scholarship compounds, because one discovery draws the next researcher, who draws the next. An archive"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "brief",
+      "heading": "residential library",
+      "blocks": [
+        {
+          "label": "overview",
+          "body": "Cyph is the first to have an exclusive membership club where members have access to underground, residential libraries across New York City. Members pay a yearly fee to gain access to these treasured resources, where they can scholastically engage, check out books, use residential parlors as scholastic leisure places, and participate in exclusive cyphs that are reserved for advanced cyphers and are rigorous and demanding. Members are often part of scholastic cohorts, and some are assigned a residential archive to make scholarship out of."
+        }
+      ]
+    },
+    {
+      "type": "brief",
+      "heading": "residential library",
+      "blocks": [
+        {
+          "label": "proposal",
+          "bullets": [
+            "**Inaugural Residency Cohort.** Jon's Dojo joins the inaugural cohort of residential library partners for Cyph membership. The lineup draws from rooms in the lineage of Harlem's parlors, the East Village artist lofts, and the legendary Williamsburg warehouses responsible for the city's intellectual spark."
+          ]
+        },
+        {
+          "label": "return",
+          "bullets": [
+            "**Revenue.** As part of the inaugural cohort, Jon's Dojo receives a healthy portion of annual membership revenue. This is net new revenue to your book of business, additive to the income you already generate through event bookings.",
+            "**Reputation.** Promoted as a residential library on our map of underground spaces, Jon's Dojo enters a lineup of legacy residencies and takes its place among the pioneers of the era.",
+            "**Marketing and awareness.** As members borrow books, resources, and artifacts from your residential library, they will say where those resources came from. Exclusive access to Jon's Dojo becomes something worth mentioning, and that mention feeds awareness and conversions for your client pipeline."
+          ]
+        }
+      ]
+    },
+    {
+      "type": "brief",
+      "heading": "a note",
+      "lockup": true,
+      "blocks": [
+        {
+          "body": "Whatever form this partnership takes, Cyph's capabilities are available to Jon's Dojo. Our team brings a background in strategy at McKinsey and Company and in engineering, and we are glad to put both to work wherever they are useful: web development and maintenance, client pipeline design, and revenue modeling, among others. We offer our gifts to build with people we trust."
+        }
+      ]
+    }
+  ]
+}

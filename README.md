@@ -34,6 +34,8 @@ iso3d.js            three.js canvases on the money slide (desktop only)
 partners.html       GENERATED partner (non-VC) deck; built by tools/build-partners.mjs, never hand-edited
 partners/           the partner deck's own sources: hiw.html (how it works), close.html,
                     partners.js (its deck.js), partners.css (on top of styles.css)
+partners/one-off/   single-partner documents, one folder each (deck.json + its PDF); rendered by
+                    event-decks, never staged or published (see partners/one-off/README.md)
 auth.js             email gate + access/dwell logging; runs on both paths; shared with event-decks
 apps-script/        Code.gs, the Google Apps Script logger source (one sheet)
 tools/              export-pdf.mjs (PDF + phone pages), check-paths.mjs, publish-investors.mjs,
