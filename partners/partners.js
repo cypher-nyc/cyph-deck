@@ -228,9 +228,9 @@ onReady(function () {
     });
   }
 
-  /* layers and dots on how it works jump straight to their step */
+  /* layers on how it works jump straight to their step */
   document
-    .querySelectorAll("#hiw .iso-layer, #hiw .layer-dot")
+    .querySelectorAll("#hiw .iso-layer")
     .forEach(function (node) {
       node.addEventListener("click", function () {
         if (cur !== HIW) return;
