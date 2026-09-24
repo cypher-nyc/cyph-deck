@@ -5,7 +5,7 @@
    that gets downloaded, so the two cannot drift.
 
    The PDF is a copied export of the InDesign one-pager
-   (../Cyph_OnePagers_Package). When a new one ships, drop it in and re-run:
+   (../event-decks/design-source/one-pagers). When a new one ships, drop it in and re-run:
 
      node tools/onepager-pages.mjs [path/to/new.pdf]
 
