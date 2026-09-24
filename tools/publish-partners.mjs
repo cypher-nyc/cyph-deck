@@ -13,7 +13,8 @@
    The bucket belongs to this deck alone, so the sync deletes whatever the
    stage no longer carries.
 
-   Credentials: whatever the aws CLI resolves (AWS_PROFILE=cyph locally).
+   Credentials: --profile cyph, unless keys come in through the environment
+   (CI: deploy-partners.yml sets AWS_ACCESS_KEY_ID and has no profiles).
    Bucket + distribution come from tools/partners.json;
    PARTNERS_DISTRIBUTION_ID overrides. */
 
@@ -43,6 +44,7 @@ const NO_CACHE = "no-cache, no-store, must-revalidate";
 const DAY = "public, max-age=86400";
 
 const DRY = process.argv.includes("--dry-run");
+const PROFILE = process.env.AWS_ACCESS_KEY_ID ? [] : ["--profile", "cyph"];
 
 function run(cmd, args) {
   console.log(`  $ ${cmd} ${args.join(" ")}`);
@@ -101,11 +103,11 @@ async function publish() {
 
     const dest = `s3://${BUCKET}/`;
     const text = ["*.html", "*.json", "*.js", "*.css"];
-    run("aws", ["s3", "sync", dir, dest, "--delete", "--cache-control", DAY, ...text.flatMap((p) => ["--exclude", p])]);
-    run("aws", ["s3", "sync", dir, dest, "--delete", "--cache-control", NO_CACHE, "--exclude", "*", ...text.flatMap((p) => ["--include", p])]);
+    run("aws", [...PROFILE, "s3", "sync", dir, dest, "--delete", "--cache-control", DAY, ...text.flatMap((p) => ["--exclude", p])]);
+    run("aws", [...PROFILE, "s3", "sync", dir, dest, "--delete", "--cache-control", NO_CACHE, "--exclude", "*", ...text.flatMap((p) => ["--include", p])]);
     if (!DIST_ID && DRY) console.log("  $ aws cloudfront create-invalidation --distribution-id <unset> --paths /*");
     else if (!DIST_ID) throw new Error("no distribution id: set tools/partners.json distributionId or PARTNERS_DISTRIBUTION_ID");
-    else run("aws", ["cloudfront", "create-invalidation", "--distribution-id", DIST_ID, "--paths", "/*"]);
+    else run("aws", [...PROFILE, "cloudfront", "create-invalidation", "--distribution-id", DIST_ID, "--paths", "/*"]);
     console.log(`\n  https://${HOST}/`);
   } finally {
     await fsp.rm(dir, { recursive: true, force: true });
