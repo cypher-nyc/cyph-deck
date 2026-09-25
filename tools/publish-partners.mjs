@@ -90,7 +90,7 @@ async function stage() {
   const leaked = files.filter((f) => /(^|\/)deck\.js$|cyph-deck\.pdf$|^assets\/deck-pages\//.test(f));
   if (leaked.length) throw new Error(`investor files in the partner stage: ${leaked.join(", ")}`);
   const html = await fsp.readFile(path.join(dir, "index.html"), "utf8");
-  if (!html.includes('id="hiw"')) throw new Error("staged index.html is not the partner deck");
+  if (!html.includes('data-viewed="partners"')) throw new Error("staged index.html is not the partner deck");
   return { dir, files };
 }
 
