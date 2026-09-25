@@ -71,6 +71,13 @@
   margin-top: 26px;
   padding-top: 22px;
 }
+/* 02's quiet aside under the description */
+.hiw-archive-note {
+  margin-top: 8px;
+  font-size: 12px;
+  font-style: italic;
+  color: var(--charcoal-muted);
+}
 .hiw-head {
   font-weight: 700;
   font-size: 16px;
@@ -122,15 +129,39 @@
 .hiw-stamp {
   margin-top: 14px;
 }
+/* s10's old inventory collage, filling the column under the caption
+   (drift keyframes are set inline per image) */
+.hiw-inventory {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  gap: 6px;
+}
+.hiw-inventory img {
+  height: 34px;
+  width: auto;
+  border-radius: 2px;
+  box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.35);
+}
 
-/* 02 cyph: s8's two flyers + the room types */
+/* 02 cyph: s8's two flyers (the star: as tall as the panel allows, at the
+   poster's own 3:4),
+   each over its office-hours lead, then s8's cyph-type pills in one row */
 .hiw-cy {
-  gap: 22px;
-  align-items: flex-start;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 0;
+}
+.hiw-flyers {
+  display: flex;
+  gap: 40px;
 }
 .hiw-flyer {
-  width: 168px;
-  flex-shrink: 0;
+  flex: 1;
+  min-width: 0;
   margin: 0;
 }
 .hiw-kind {
@@ -142,51 +173,72 @@
   font-size: 11px;
   line-height: 1.35;
   color: var(--charcoal-muted);
-  min-height: 30px;
   margin: 3px 0 8px;
 }
-.hiw-flyer img {
+.hiw-flyer > img {
   display: block;
-  width: 100%;
+  height: 262px;
+  aspect-ratio: 3 / 4;
   border-radius: 6px;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
 }
 .hiw-flyer figcaption {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-top: 9px;
-  font-size: 12px;
-  line-height: 1.3;
-  color: var(--charcoal);
-}
-.hiw-cy-side {
-  flex: 1;
-  padding-left: 22px;
-}
-.hiw-room {
-  padding: 12px 0;
-}
-.hiw-room h4 {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--charcoal);
-  margin-bottom: 4px;
-}
-.hiw-room p {
+  margin-top: 8px;
   font-size: 13px;
-  line-height: 1.45;
+  line-height: 1.3;
+  white-space: nowrap;
+  color: var(--charcoal);
+}
+/* s8's office-hours lead (.cyph-host), compacted to sit under a flyer */
+.hiw-host {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+.hiw-host img {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  object-fit: cover;
+  filter: grayscale(100%) contrast(1.05);
+}
+.hiw-host-room {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--charcoal);
+}
+.hiw-host-name {
+  margin-top: 2px;
+  font-size: 11px;
   color: var(--charcoal-muted);
 }
-
-/* 03 irl: s9's two columns, press + logos capped to fit the panel */
-.hiw-irl {
-  gap: 32px;
-  align-items: flex-start;
+/* s8's cyph-type pills, one row under the leads */
+.hiw-types-label {
+  font-size: 10px;
+  color: var(--charcoal-muted);
+  margin-bottom: 4px;
 }
-.hiw-irl-side {
-  width: 250px;
-  flex-shrink: 0;
+.hiw-pills {
+  display: grid;
+  grid-template-columns: repeat(4, 120px);
+  gap: 8px;
+}
+.hiw-pills span {
+  font-size: 12px;
+  color: #fff;
+  padding: 3px 10px;
+  border-radius: 20px;
+  text-align: center;
+}
+
+/* 03 irl: one container — s9's press hit with "in the room" beside it —
+   and the 40+ stat underneath as a footnote */
+.hiw-irl {
+  flex-direction: column;
+  gap: 18px;
 }
 .hiw-irl-head {
   font-weight: 700;
@@ -197,29 +249,39 @@
 }
 .hiw-stat {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  align-items: baseline;
+  gap: 12px;
 }
 .hiw-stat b {
-  font-size: 112px;
+  font-size: 44px;
   font-weight: 700;
   line-height: 1;
   color: var(--orange);
 }
 .hiw-stat b span {
-  font-size: 52px;
+  font-size: 24px;
 }
 .hiw-stat > span {
   font-size: 13px;
   color: var(--charcoal);
 }
+/* eyebrow + images in the left column, label + logos in the right */
 #hiw .room-col {
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 28px;
+  align-items: start;
   text-align: left;
-  padding-left: 32px;
+  padding-left: 0 !important; /* beats index.html's inline padding-left */
+}
+#hiw .room-eyebrow {
+  grid-column: 1;
+  grid-row: 1;
 }
 #hiw .room-press {
-  height: 180px;
+  grid-column: 1;
+  grid-row: 2;
+  height: 300px;
   width: auto;
 }
 #hiw .room-conductors,
@@ -228,18 +290,132 @@
   width: auto;
   height: 100%;
 }
+#hiw .room-label {
+  grid-column: 2;
+  grid-row: 1;
+  margin: 0 0 10px;
+  font-size: 13px;
+}
 #hiw .room-logos {
+  grid-column: 2;
+  grid-row: 2;
   justify-content: flex-start;
+  margin-top: 16px;
   zoom: 0.85;
 }
+/* the same drift cycle as 01's inventory collage (set inline there; the logos
+   come from index.html, so it is set here), but float only: hiw-float1-6 are
+   drift1-6's translate paths without the rotate */
+#hiw .room-logos img:nth-child(12n + 1) {
+  animation: hiw-float1 9s ease-in-out infinite;
+}
+#hiw .room-logos img:nth-child(12n + 2) {
+  animation: hiw-float4 11s ease-in-out infinite;
+}
+#hiw .room-logos img:nth-child(12n + 3) {
+  animation: hiw-float2 10s ease-in-out infinite;
+}
+#hiw .room-logos img:nth-child(12n + 4) {
+  animation: hiw-float5 8.5s ease-in-out infinite;
+}
+#hiw .room-logos img:nth-child(12n + 5) {
+  animation: hiw-float3 10.5s ease-in-out infinite;
+}
+#hiw .room-logos img:nth-child(12n + 6) {
+  animation: hiw-float6 9.5s ease-in-out infinite;
+}
+#hiw .room-logos img:nth-child(12n + 7) {
+  animation: hiw-float2 11.5s ease-in-out infinite;
+}
+#hiw .room-logos img:nth-child(12n + 8) {
+  animation: hiw-float1 10s ease-in-out infinite;
+}
+#hiw .room-logos img:nth-child(12n + 9) {
+  animation: hiw-float4 9s ease-in-out infinite;
+}
+#hiw .room-logos img:nth-child(12n + 10) {
+  animation: hiw-float5 11s ease-in-out infinite;
+}
+#hiw .room-logos img:nth-child(12n + 11) {
+  animation: hiw-float3 8.5s ease-in-out infinite;
+}
+#hiw .room-logos img:nth-child(12n + 12) {
+  animation: hiw-float6 10s ease-in-out infinite;
+}
+@keyframes hiw-float1 {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  33% {
+    transform: translate(8px, -10px);
+  }
+  66% {
+    transform: translate(-6px, 8px);
+  }
+}
+@keyframes hiw-float2 {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  33% {
+    transform: translate(-10px, 7px);
+  }
+  66% {
+    transform: translate(7px, -9px);
+  }
+}
+@keyframes hiw-float3 {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  33% {
+    transform: translate(9px, 8px);
+  }
+  66% {
+    transform: translate(-8px, -7px);
+  }
+}
+@keyframes hiw-float4 {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  33% {
+    transform: translate(-7px, -8px);
+  }
+  66% {
+    transform: translate(6px, 10px);
+  }
+}
+@keyframes hiw-float5 {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  33% {
+    transform: translate(10px, 6px);
+  }
+  66% {
+    transform: translate(-5px, -9px);
+  }
+}
+@keyframes hiw-float6 {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  33% {
+    transform: translate(-9px, 7px);
+  }
+  66% {
+    transform: translate(8px, -6px);
+  }
+}
 
-/* s5's footer line */
-.hiw-foot {
-  position: absolute;
-  right: 24px;
-  bottom: 16px;
-  font-size: 11px;
-  font-style: italic;
-  letter-spacing: 0.02em;
-  color: var(--orange);
+/* s13: eight testimonials (two dropped at build), four per row */
+#s13 .test-grid {
+  grid-template-columns: repeat(4, 1fr);
 }

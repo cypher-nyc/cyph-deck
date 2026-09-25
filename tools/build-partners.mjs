@@ -63,9 +63,22 @@ function include(partial) {
   );
 }
 
-const slides = ORDER.map((s) => (s.includes("/") ? include(read(s)) : "      " + byId(s))).join(
-  "\n\n",
-);
+/* testimonials the partner deck leaves out of s13 (the other eight sit 4 x 2) */
+const DROP_QUOTES = ["i've been craving a place to actually talk", "this is like a digital tailgate!"];
+function dropQuotes(html) {
+  for (const q of DROP_QUOTES) {
+    const at = html.indexOf(q);
+    if (at < 0) throw new Error(`index.html: s13 quote "${q}" moved`);
+    const start = html.lastIndexOf('<div class="test-bubble"', at);
+    const lineStart = html.lastIndexOf("\n", start);
+    html = html.slice(0, lineStart) + html.slice(start + extract(html, start, "test bubble").length);
+  }
+  return html;
+}
+
+const slides = ORDER.map((s) =>
+  s.includes("/") ? include(read(s)) : "      " + (s === "s13" ? dropQuotes(byId(s)) : byId(s)),
+).join("\n\n");
 
 /* ── the shell ── */
 let out = src;

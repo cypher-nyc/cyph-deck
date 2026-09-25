@@ -633,7 +633,9 @@
               <img class="iso-polaroid" src="assets/irl/polaroid.jpg" alt="" draggable="false" />
             </div>
             <div class="iso-layer" id="isoL2" data-step="2">
-              <canvas class="iso-canvas" id="doorsCanvas"></canvas>
+              <!-- behind the doors: the design system's full live cyph car (cyph
+                   theme, left side) around the memory flyer -->
+              <canvas class="iso-canvas" id="doorsCanvas" data-flyer="assets/cards/live_cyph_car.jpg"></canvas>
             </div>
             <div class="iso-layer" id="isoL1" data-step="1">
               <canvas class="iso-canvas" id="ugCanvas"></canvas>
@@ -647,9 +649,7 @@
               <h3 class="layer-anno-title">underground</h3>
               <p class="layer-anno-sub">where you become dangerous.</p>
               <p class="layer-anno-desc">
-                a living world of buried artifacts, suppressed ideas, and
-                unexplored intellectual territory — that maps your thinking over
-                time.
+                swipe in. pick a route. uncover a living world of buried artifacts, and suppressed ideas. your cyphcard maps how you think over time.
               </p>
               <div class="hiw-detail hiw-ug">
                 <div class="hiw-map">
@@ -1095,20 +1095,26 @@
                     aria-label="cyphcard membership plate"
                   ></canvas>
                   <p class="hiw-card-cap">
-                    swipe your cyphcard in our underground,<br />
-                    or irl from your apple wallet.
+                    tap irl books, ideas & artifacts with cyphcard in apple wallet.
                   </p>
-                  <p class="hiw-head">explore underground ideas.</p>
-                  <p class="hiw-line">
-                    swipe in. pick a route. uncover rare, human-authored treasures
-                    your algorithm would’ve never surfaced. your journey becomes a
-                    personalized map of <em>how</em> you think.
-                  </p>
-                  <p class="hiw-line hiw-stamp">
-                    all resources are
-                    <strong>human-produced.</strong>
-                    never ai slop.
-                  </p>
+                  <!-- the investor deck's old s10 inventory collage, at column scale -->
+                  <div class="hiw-inventory">
+                    <img src="assets/artifacts/renaissance.jpg" alt="" style="animation: drift1 9s ease-in-out infinite" />
+                    <img src="assets/artifacts/goya.jpg" alt="" style="animation: drift4 11s ease-in-out infinite" />
+                    <img src="assets/artifacts/babylon_timbuktu.jpg" alt="" style="animation: drift2 10s ease-in-out infinite" />
+                    <img src="assets/artifacts/vanity_fair.jpg" alt="" style="animation: drift5 8.5s ease-in-out infinite" />
+                    <img src="assets/artifacts/films_joan_crawford.jpg" alt="" style="animation: drift3 10.5s ease-in-out infinite" />
+                    <img src="assets/artifacts/birth-of-mahavira.png" alt="" style="animation: drift6 9.5s ease-in-out infinite" />
+                    <img src="assets/artifacts/indian_art.png" alt="" style="animation: drift2 11.5s ease-in-out infinite" />
+                    <img src="assets/artifacts/crisis_black_white.jpg" alt="" style="animation: drift1 10s ease-in-out infinite" />
+                    <img src="assets/artifacts/history_of_bible.jpg" alt="" style="animation: drift4 9s ease-in-out infinite" />
+                    <img src="assets/artifacts/movie_monsters.jpg" alt="" style="animation: drift5 11s ease-in-out infinite" />
+                    <img src="assets/artifacts/sud_afrika.jpg" alt="" style="animation: drift3 8.5s ease-in-out infinite" />
+                    <img src="assets/artifacts/three_friends.jpg" alt="" style="animation: drift6 10s ease-in-out infinite" />
+                    <img src="assets/artifacts/new_age_yearbook.png" alt="" style="animation: drift2 9.5s ease-in-out infinite" />
+                    <img src="assets/artifacts/cool_collage_2.png" alt="" style="animation: drift1 11.5s ease-in-out infinite" />
+                    <img src="assets/artifacts/kid_collage.png" alt="" style="animation: drift4 10.5s ease-in-out infinite" />
+                  </div>
                 </div>
               </div>
             </section>
@@ -1119,18 +1125,29 @@
               <h3 class="layer-anno-title">cyph</h3>
               <p class="layer-anno-sub">where ideas get tested in real time.</p>
               <p class="layer-anno-desc">
-                a live intellectual ‘cyph’ that resists the echo chamber and
-                places you into productive tension with minds you'd never
-                otherwise meet.
+                contest ideas in real-time cyphs with thinkers around the world.
+                go deeper in office hours with the underground's sharpest
+                scholars.
               </p>
+              <p class="hiw-archive-note">the research from the room is archived in our partner libraries.</p>
               <div class="hiw-detail hiw-cy">
+                <!-- s8's two flyers, each with its office-hours lead (deck.js
+                     cyphFixtures host), then s8's cyph-type pills -->
+                <div class="hiw-flyers">
                 <figure class="hiw-flyer">
                   <p class="hiw-kind">live</p>
                   <p class="hiw-kind-sub">topics sourced from API's &amp; real-time listening.</p>
                   <img src="assets/cards/live1.png" alt="" />
                   <figcaption>
-                    <b>Knicks Championship</b>
+                    <b>knicks championship</b>
                   </figcaption>
+                  <div class="hiw-host">
+                    <img src="assets/images/knicks_rockets/office_hours/chris_robinson.jpeg" alt="" />
+                    <div>
+                      <p class="hiw-host-room">"shut up and dribble:" power in the nba</p>
+                      <p class="hiw-host-name">hosted by chris robinson</p>
+                    </div>
+                  </div>
                 </figure>
                 <figure class="hiw-flyer">
                   <p class="hiw-kind">conceptual</p>
@@ -1139,26 +1156,22 @@
                   <figcaption>
                     <b>is the soul actually cartesian?</b>
                   </figcaption>
+                  <div class="hiw-host">
+                    <img src="assets/images/soul_cartesian/office_hours/ian_mcgilchrist.png" alt="" />
+                    <div>
+                      <p class="hiw-host-room">the ghost was never in the machine</p>
+                      <p class="hiw-host-name">hosted by iain mcgilchrist</p>
+                    </div>
+                  </div>
                 </figure>
-                <div class="hiw-cy-side">
-                  <p class="hiw-head">match with cyphers around the world.</p>
-                  <div class="hiw-rooms">
-                    <div class="hiw-room">
-                      <h4>open mic</h4>
-                      <p>say what you mean. raw, unfiltered, first-person.</p>
-                    </div>
-                    <div class="hiw-room">
-                      <h4>office hours</h4>
-                      <p>1-on-1. you ask, they answer. no panel, no moderator.</p>
-                    </div>
-                    <div class="hiw-room">
-                      <h4>supper club</h4>
-                      <p>small room. good food. hard questions.</p>
-                    </div>
-                    <div class="hiw-room">
-                      <h4>debate</h4>
-                      <p>structured. timed. two sides. one question.</p>
-                    </div>
+                </div>
+                <div class="hiw-types">
+                  <p class="hiw-types-label">cyph types</p>
+                  <div class="hiw-pills">
+                    <span style="background: var(--yellow)">open mics</span>
+                    <span style="background: var(--blue)">supper clubs</span>
+                    <span style="background: var(--maroon)">debates</span>
+                    <span style="background: var(--orange)">office hours</span>
                   </div>
                 </div>
               </div>
@@ -1173,12 +1186,6 @@
                 of IRL lectures, office hours, supper clubs, &amp; debates.
               </p>
               <div class="hiw-detail hiw-irl">
-                <div class="hiw-irl-side">
-                  <div class="hiw-stat">
-                    <b>40<span>+</span></b>
-                    <span>residencies and venues across nyc</span>
-                  </div>
-                </div>
                 <div style="flex: 1; padding-left: 28px" class="room-col">
               <p class="room-eyebrow">our last cyph...</p>
               <!-- split screen: conductors | article. Widths are each
@@ -1224,11 +1231,16 @@
                 <img src="assets/brands/room/theroot.png" alt="the root" style="height: 20px" />
               </div>
             </div>
+                <div class="hiw-irl-side">
+                  <div class="hiw-stat">
+                    <b>40<span>+</span></b>
+                    <span>residencies and venues across nyc.</span>
+                  </div>
+                </div>
               </div>
             </section>
           </div>
         </div>
-        <p class="hiw-foot">demo available upon request.</p>
       </div>
 
 
@@ -1255,17 +1267,6 @@
             <div class="test-quote" style="color: #fff">
               "i love cyph because I can find
               actual scholars whom i would want to talk with."
-            </div>
-          </div>
-          <div class="test-bubble" style="background: #13293d">
-            <div class="test-quote" style="color: #fff">
-              "i've been craving a place to actually talk to people after an
-              episode of [my favorite show]."
-            </div>
-          </div>
-          <div class="test-bubble" style="background: #fbaf00">
-            <div class="test-quote" style="color: #13293d">
-              "this is like a digital tailgate!"
             </div>
           </div>
           <div class="test-bubble" style="background: #6d1a36">
