@@ -2306,7 +2306,7 @@ img[src*="3rdspace"] {
 /* ═══ TESTIMONIALS (Sims speech bubbles) ═══ */
 .test-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 12px;
   width: 1100px;
   margin-top: 8px;

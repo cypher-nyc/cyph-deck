@@ -3,9 +3,8 @@
 
    Nothing in it is authored twice. Seven of its eight slides are lifted out
    of index.html verbatim, by id, and keep that id — so every `#sN` rule in
-   styles.css applies to them unchanged (s10, the testimonials, loses two
-   quotes on the way). The eighth is partners/close.html (s12 with the
-   partner copy). A partial can pull pieces of index.html in through
+   styles.css applies to them unchanged. The eighth is partners/close.html
+   (s12 with the partner copy). A partial can pull pieces of index.html in through
    `<!-- @include index.html <selector> -->` lines.
 
    The shell (head, router, HUD, gate, loaders) is index.html's own, edited in
@@ -62,21 +61,8 @@ function include(partial) {
   );
 }
 
-/* testimonials the partner deck leaves out of s10 (the other eight sit 4 x 2) */
-const DROP_QUOTES = ["i've been craving a place to actually talk", "this is like a digital tailgate!"];
-function dropQuotes(html) {
-  for (const q of DROP_QUOTES) {
-    const at = html.indexOf(q);
-    if (at < 0) throw new Error(`index.html: s10 quote "${q}" moved`);
-    const start = html.lastIndexOf('<div class="test-bubble"', at);
-    const lineStart = html.lastIndexOf("\n", start);
-    html = html.slice(0, lineStart) + html.slice(start + extract(html, start, "test bubble").length);
-  }
-  return html;
-}
-
 const slides = ORDER.map((s) =>
-  s.includes("/") ? include(read(s)) : "      " + (s === "s10" ? dropQuotes(byId(s)) : byId(s)),
+  s.includes("/") ? include(read(s)) : "      " + byId(s),
 ).join("\n\n");
 
 /* ── the shell ── */
