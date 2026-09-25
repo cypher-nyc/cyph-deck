@@ -3,9 +3,9 @@
    waits for every animation on each state to land, screenshots it, and packs
    the frames into cyph-deck.pdf.
 
-   Sub-steps count as their own page — the layer stack on s5 (01/02/03/∞), the
-   two cyph flyers on s8, and the two founder bios after "ready for a demo?" —
-   because that is what the viewer actually sees.
+   Sub-steps count as their own page — the how-it-works layers on s5
+   (01/02/03) and the two founder bios after "ready for a demo?" — because
+   that is what the viewer actually sees.
 
    Run:  npm run pdf                                   (investor deck)
          node tools/export-pdf.mjs --deck partners     (partner deck; npm run partners)
@@ -49,7 +49,7 @@ const W = 1440;
 const H = 900;
 const DPR = 2; // 2880×1800 JPEGs, same as the previous export
 const JPEG_QUALITY = 85;
-const MAX_STATES = 60; // runaway guard; the deck is ~22
+const MAX_STATES = 60; // runaway guard; the deck is ~17
 
 /* ── static server ── */
 const MIME = {
@@ -284,14 +284,13 @@ for (let i = 0; i < MAX_STATES; i++) {
       sig: [
         ctr ? ctr.textContent.trim() : "?",
         typeof layerStep !== "undefined" ? layerStep : 0,
-        typeof arenaStep !== "undefined" ? arenaStep : 0,
         typeof founderStep !== "undefined" ? founderStep : 0,
       ].join("|"),
       slide: active ? active.id : "?",
-      /* the cyph layer is the doorway; it is showing on step 02 and again
-         in the ∞ composite. the .active class outlives the slide, so gate
-         on the stack being on the active slide (s5 here, #hiw on the
-         partner deck) — otherwise every later page reports doors. */
+      /* the cyph layer is the doorway; it is showing on step 02. the
+         .active class outlives the slide, so gate on the stack being on
+         the active slide (s5, on both decks) — otherwise every later page
+         reports doors. */
       doorsOpen: !!(
         active &&
         isoL2 &&
@@ -318,29 +317,12 @@ for (let i = 0; i < MAX_STATES; i++) {
     );
   }
 
-  /* s8's flyer carries its cyph title + headcount pill in a :hover reveal
-     (.cyph-flyer-drift:hover .cyph-flyer-hover). Without the pointer parked
-     on it the exported page shows a captionless image, so hover it, hold for
-     the scrim/pill fade, and release afterwards. Everywhere else the mouse
-     stays at 0,0, which touches nothing. */
-  const onFlyer = slide === "s8";
-  if (onFlyer) {
-    /* mouse.move over the box centre rather than locator.hover(): the flyer
-       runs an infinite drift keyframe, so Playwright's actionability check
-       never sees it "stable" and would time out. */
-    const box = await page.locator("#s8 .cyph-flyer-drift").boundingBox();
-    if (box) await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
-    await page.waitForTimeout(500);
-  }
-
   frames.push(await page.screenshot({ type: "jpeg", quality: JPEG_QUALITY }));
   labels.push(sig.split("|")[0]);
   console.log(
     `captured page ${frames.length}  (${slide} ${sig}` +
-      `${doorsOpen ? " doors:open" : ""}${onFlyer ? " hover:flyer" : ""})`,
+      `${doorsOpen ? " doors:open" : ""})`,
   );
-
-  if (onFlyer) await page.mouse.move(0, 0);
 
   await page.evaluate(() => document.getElementById("navNext").click());
   await page.waitForTimeout(300); // let doGo's 180ms handoff start

@@ -130,15 +130,11 @@
           <span class="hud-nav-sep">/</span>
           <button class="hud-nav-btn" onclick="goTo(6)">underground</button>
           <span class="hud-nav-sep">/</span>
-          <button class="hud-nav-btn" onclick="goTo(8)">the cyph</button>
+          <button class="hud-nav-btn" onclick="goTo(7)">business</button>
           <span class="hud-nav-sep">/</span>
-          <button class="hud-nav-btn" onclick="goTo(9)">irl</button>
-          <span class="hud-nav-sep">/</span>
-          <button class="hud-nav-btn" onclick="goTo(10)">business</button>
-          <span class="hud-nav-sep">/</span>
-          <button class="hud-nav-btn" onclick="goTo(15)">close</button>
+          <button class="hud-nav-btn" onclick="goTo(12)">close</button>
         </nav>
-        <div class="hud-counter" id="hudCtr">01/16</div>
+        <div class="hud-counter" id="hudCtr">01/13</div>
       </div>
       <div class="xp-bar"><div class="xp-fill" id="xpFill"></div></div>
 
@@ -625,90 +621,40 @@
         </div>
       </div>
 
-      <!-- LEVEL 5: HOW WE DO IT — ISOMETRIC LAYER STACK -->
+      <!-- LEVEL 5: HOW IT WORKS — the isometric layer stack beside one panel
+           per layer: 01 underground (route map + cyphcard) / 02 cyph (the
+           two flyers + office-hours leads) / 03 irl (our last cyph + in the
+           room, 40+ underneath). The partner deck lifts this slide as-is. -->
       <div class="slide" id="s5">
         <h2>how it works</h2>
-        <div
-          style="
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 56px;
-            width: 100%;
-            height: 100%;
-            padding: 40px 0;
-          "
-        >
-          <!-- Stacked app nav-icon visuals: irl (top) / cyph / underground.
-               Underground + cyph are the live 3D icons (see iso3d.js);
-               irl is the polaroid asset with a CSS pendulum sway. -->
+        <div class="hiw-wrap">
+          <!-- same stack as s5: irl (top) / cyph / underground -->
           <div class="layer-stack">
-            <div class="iso-layer" id="isoL3">
+            <div class="iso-layer" id="isoL3" data-step="3">
               <img class="iso-polaroid" src="assets/irl/polaroid.jpg" alt="" draggable="false" />
             </div>
-            <div class="iso-layer" id="isoL2">
-              <canvas class="iso-canvas" id="doorsCanvas"></canvas>
+            <div class="iso-layer" id="isoL2" data-step="2">
+              <!-- behind the doors: the design system's full live cyph car (cyph
+                   theme, left side) around the memory flyer -->
+              <canvas class="iso-canvas" id="doorsCanvas" data-flyer="assets/cards/live_cyph_car.jpg"></canvas>
             </div>
-            <div class="iso-layer" id="isoL1">
+            <div class="iso-layer" id="isoL1" data-step="1">
               <canvas class="iso-canvas" id="ugCanvas"></canvas>
             </div>
           </div>
 
-          <!-- Annotation panel -->
-          <div class="layer-anno" id="layerAnno" style="opacity: 0">
-            <span class="layer-anno-num" id="layerNum">01</span>
-            <h3 class="layer-anno-title" id="layerTitle">underground</h3>
-            <p class="layer-anno-sub" id="layerSub">
-              where you become dangerous.
-            </p>
-            <p class="layer-anno-desc" id="layerDesc">
-              a living world of buried artifacts, suppressed ideas, and
-              unexplored intellectual territory — that maps your thinking over
-              time.
-            </p>
-            <div class="layer-dots">
-              <span class="layer-dot active" id="ldot1"></span>
-              <span class="layer-dot" id="ldot2"></span>
-              <span class="layer-dot" id="ldot3"></span>
-              <span class="layer-dot" id="ldot4"></span>
-            </div>
-          </div>
-        </div>
-        <div
-          style="
-            position: absolute;
-            right: 24px;
-            bottom: 16px;
-            font-family:
-              &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
-            font-size: 11px;
-            font-style: italic;
-            color: #ec4e20;
-            letter-spacing: 0.02em;
-          "
-        >
-          demo available upon request.
-        </div>
-      </div>
-
-      <!-- LEVEL 6: UNDERGROUND TRANSIT MAP -->
-      <div class="slide" id="s6">
-        <h2>underground.</h2>
-
-        <div style="display: flex; gap: 20px; width: 1020px; align-items: end">
-          <!-- LEFT: ROUTE MAP (SVG) -->
-          <div
-            style="
-              flex: 1;
-              background: rgba(20, 18, 15, 0.9);
-              border-radius: 14px;
-              border: 2px solid rgba(242, 140, 40, 0.15);
-              padding: 10px;
-              position: relative;
-              overflow: hidden;
-            "
-          >
-            <svg
+          <div class="hiw-anno">
+            <!-- 01 underground -->
+            <section class="hiw-step hiw-step--ug" data-step="1">
+              <span class="layer-anno-num">01</span>
+              <h3 class="layer-anno-title">underground</h3>
+              <p class="layer-anno-sub">where you become dangerous.</p>
+              <p class="layer-anno-desc">
+                swipe in. pick a route. uncover a living world of buried artifacts, and suppressed ideas. your cyphcard maps how you think over time.
+              </p>
+              <div class="hiw-detail hiw-ug">
+                <div class="hiw-map">
+                  <svg
               id="transitSvg"
               viewBox="0 0 380 360"
               fill="none"
@@ -1142,261 +1088,164 @@
                 gang
               </text>
             </svg>
-          </div>
-
-          <!-- RIGHT: ROUTE INFO CARD -->
-          <div
-            style="width: 340px; display: flex; flex-direction: column; gap: 0"
-          >
-            <canvas
-              id="cyphcardCanvas"
-              class="cyphcard-3d"
-              aria-label="cyphcard membership plate"
-            ></canvas>
-            <p
-              style="
-                font-family:
-                  &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
-                font-size: 11px;
-                font-style: italic;
-                color: var(--charcoal);
-                text-align: center;
-                margin: 0 0 12px;
-                letter-spacing: 0.02em;
-                line-height: 1.5;
-              "
-            >
-              swipe your cyphcard in our underground,<br />
-              or irl from your apple wallet.
-            </p>
-            <div
-              style="
-                background: rgba(20, 18, 15, 0.92);
-                border-radius: 12px;
-                padding: 16px 18px;
-              "
-            >
-              <p
-                style="
-                  font-family:
-                    ’Helvetica Neue’,
-                    Helvetica,
-                    Arial,
-                    sans-serif;
-                  font-weight: 700;
-                  font-size: 16px;
-                  color: #fff;
-                  margin-bottom: 10px;
-                "
-              >
-                explore underground ideas.
-              </p>
-              <p
-                style="
-                  font-size: 14px;
-                  color: rgba(255, 255, 255, 0.6);
-                  line-height: 1.5;
-                  margin-bottom: 16px;
-                "
-              >
-                swipe in. pick a route. uncover rare, human-authored treasures
-                your algorithm would’ve never surfaced. your journey becomes a
-                personalized map of <em>how</em> you think.
-              </p>
-
-              <!-- Route legend - each highlights when its line animates -->
-              <div
-                id="routeLegend"
-                style="display: flex; flex-direction: column; gap: 8px"
-              >
-                <div
-                  class="route-label"
-                  id="rl-philosophy"
-                  style="
-                    display: flex;
-                    align-items: center;
-                    gap: 10px;
-                    padding: 8px 0;
-                    transition: all 0.4s;
-                  "
-                >
-                  <div
-                    style="
-                      width: 24px;
-                      height: 6px;
-                      border-radius: 3px;
-                      background: #fbaf00;
-                    "
-                  ></div>
-                  <div>
-                    <div
-                      style="
-                        font-family:
-                          ’Helvetica Neue’,
-                          Helvetica,
-                          Arial,
-                          sans-serif;
-                        font-weight: 700;
-                        font-size: 14px;
-                        color: rgba(255, 255, 255, 0.65);
-                        transition: color 0.4s;
-                      "
-                    >
-                      philosophy
-                    </div>
-                    <div
-                      style="font-size: 11px; color: rgba(255, 255, 255, 0.25)"
-                    >
-                      plato, kant, baldwin, wynter
-                    </div>
-                  </div>
                 </div>
-                <div
-                  class="route-label"
-                  id="rl-sports"
-                  style="
-                    display: flex;
-                    align-items: center;
-                    gap: 10px;
-                    padding: 8px 0;
-                    transition: all 0.4s;
-                  "
-                >
-                  <div
-                    style="
-                      width: 24px;
-                      height: 6px;
-                      border-radius: 3px;
-                      background: #ec4e20;
-                    "
-                  ></div>
-                  <div>
-                    <div
-                      style="
-                        font-family:
-                          ’Helvetica Neue’,
-                          Helvetica,
-                          Arial,
-                          sans-serif;
-                        font-weight: 700;
-                        font-size: 14px;
-                        color: rgba(255, 255, 255, 0.65);
-                        transition: color 0.4s;
-                      "
-                    >
-                      sports culture
-                    </div>
-                    <div
-                      style="font-size: 11px; color: rgba(255, 255, 255, 0.25)"
-                    >
-                      ali, iverson, osaka, kaepernick
-                    </div>
-                  </div>
-                </div>
-                <div
-                  class="route-label"
-                  id="rl-theology"
-                  style="
-                    display: flex;
-                    align-items: center;
-                    gap: 10px;
-                    padding: 8px 0;
-                    transition: all 0.4s;
-                  "
-                >
-                  <div
-                    style="
-                      width: 24px;
-                      height: 6px;
-                      border-radius: 3px;
-                      background: #6d1a36;
-                    "
-                  ></div>
-                  <div>
-                    <div
-                      style="
-                        font-family:
-                          ’Helvetica Neue’,
-                          Helvetica,
-                          Arial,
-                          sans-serif;
-                        font-weight: 700;
-                        font-size: 14px;
-                        color: rgba(255, 255, 255, 0.65);
-                        transition: color 0.4s;
-                      "
-                    >
-                      theology
-                    </div>
-                    <div
-                      style="font-size: 11px; color: rgba(255, 255, 255, 0.25)"
-                    >
-                      aquinas, cone, heschel
-                    </div>
-                  </div>
-                </div>
-                <div
-                  class="route-label"
-                  id="rl-architecture"
-                  style="
-                    display: flex;
-                    align-items: center;
-                    gap: 10px;
-                    padding: 8px 0;
-                    transition: all 0.4s;
-                  "
-                >
-                  <div
-                    style="
-                      width: 24px;
-                      height: 6px;
-                      border-radius: 3px;
-                      background: #608fe6;
-                    "
-                  ></div>
-                  <div>
-                    <div
-                      style="
-                        font-family:
-                          ’Helvetica Neue’,
-                          Helvetica,
-                          Arial,
-                          sans-serif;
-                        font-weight: 700;
-                        font-size: 14px;
-                        color: rgba(255, 255, 255, 0.65);
-                        transition: color 0.4s;
-                      "
-                    >
-                      architecture
-                    </div>
-                    <div
-                      style="font-size: 11px; color: rgba(255, 255, 255, 0.25)"
-                    >
-                      olmsted, adjaye, lin, gang
-                    </div>
+                <div class="hiw-ug-side">
+                  <canvas
+                    id="cyphcardCanvas"
+                    class="cyphcard-3d"
+                    aria-label="cyphcard membership plate"
+                  ></canvas>
+                  <p class="hiw-card-cap">
+                    tap irl books, ideas & artifacts with cyphcard in apple wallet.
+                  </p>
+                  <!-- the investor deck's old s10 inventory collage, at column scale -->
+                  <div class="hiw-inventory">
+                    <img src="assets/artifacts/renaissance.jpg" alt="" style="animation: drift1 9s ease-in-out infinite" />
+                    <img src="assets/artifacts/goya.jpg" alt="" style="animation: drift4 11s ease-in-out infinite" />
+                    <img src="assets/artifacts/babylon_timbuktu.jpg" alt="" style="animation: drift2 10s ease-in-out infinite" />
+                    <img src="assets/artifacts/vanity_fair.jpg" alt="" style="animation: drift5 8.5s ease-in-out infinite" />
+                    <img src="assets/artifacts/films_joan_crawford.jpg" alt="" style="animation: drift3 10.5s ease-in-out infinite" />
+                    <img src="assets/artifacts/birth-of-mahavira.png" alt="" style="animation: drift6 9.5s ease-in-out infinite" />
+                    <img src="assets/artifacts/indian_art.png" alt="" style="animation: drift2 11.5s ease-in-out infinite" />
+                    <img src="assets/artifacts/crisis_black_white.jpg" alt="" style="animation: drift1 10s ease-in-out infinite" />
+                    <img src="assets/artifacts/history_of_bible.jpg" alt="" style="animation: drift4 9s ease-in-out infinite" />
+                    <img src="assets/artifacts/movie_monsters.jpg" alt="" style="animation: drift5 11s ease-in-out infinite" />
+                    <img src="assets/artifacts/sud_afrika.jpg" alt="" style="animation: drift3 8.5s ease-in-out infinite" />
+                    <img src="assets/artifacts/three_friends.jpg" alt="" style="animation: drift6 10s ease-in-out infinite" />
+                    <img src="assets/artifacts/new_age_yearbook.png" alt="" style="animation: drift2 9.5s ease-in-out infinite" />
+                    <img src="assets/artifacts/cool_collage_2.png" alt="" style="animation: drift1 11.5s ease-in-out infinite" />
+                    <img src="assets/artifacts/kid_collage.png" alt="" style="animation: drift4 10.5s ease-in-out infinite" />
                   </div>
                 </div>
               </div>
-              <p
-                style="
-                  font-size: 14px;
-                  color: rgba(255, 255, 255, 0.6);
-                  line-height: 1.5;
-                  margin-top: 14px;
-                  margin-bottom: 0;
-                "
-              >
-                blend maps with anyone on cyph. explore collisions and complex
-                patterns. go crazy.
+            </section>
+
+            <!-- 02 cyph -->
+            <section class="hiw-step hiw-step--cy" data-step="2">
+              <span class="layer-anno-num">02</span>
+              <h3 class="layer-anno-title">cyph</h3>
+              <p class="layer-anno-sub">where ideas get tested in real time.</p>
+              <p class="layer-anno-desc">
+                contest ideas in real-time cyphs with thinkers around the world.
+                go deeper in office hours with the underground's sharpest
+                scholars.
               </p>
+              <div class="hiw-detail hiw-cy">
+                <!-- s8's two flyers, each with its office-hours lead (deck.js
+                     cyphFixtures host), then s8's cyph-type pills -->
+                <div class="hiw-flyers">
+                <figure class="hiw-flyer">
+                  <p class="hiw-kind">live</p>
+                  <p class="hiw-kind-sub">topics sourced from API's &amp; real-time listening.</p>
+                  <img src="assets/cards/live1.png" alt="" />
+                  <figcaption>
+                    <b>knicks championship</b>
+                  </figcaption>
+                  <div class="hiw-host">
+                    <img src="assets/images/knicks_rockets/office_hours/chris_robinson.jpeg" alt="" />
+                    <div>
+                      <p class="hiw-host-room">"shut up and dribble:" power in the nba</p>
+                      <p class="hiw-host-name">hosted by chris robinson</p>
+                    </div>
+                  </div>
+                </figure>
+                <figure class="hiw-flyer">
+                  <p class="hiw-kind">conceptual</p>
+                  <p class="hiw-kind-sub">ideas surfaced from pulses in deep research.</p>
+                  <img src="assets/cards/soul_cartesian.png" alt="" />
+                  <figcaption>
+                    <b>is the soul actually cartesian?</b>
+                  </figcaption>
+                  <div class="hiw-host">
+                    <img src="assets/images/soul_cartesian/office_hours/ian_mcgilchrist.png" alt="" />
+                    <div>
+                      <p class="hiw-host-room">the ghost was never in the machine</p>
+                      <p class="hiw-host-name">hosted by iain mcgilchrist</p>
+                    </div>
+                  </div>
+                </figure>
+                </div>
+                <div class="hiw-types">
+                  <p class="hiw-types-label">cyph types</p>
+                  <div class="hiw-pills">
+                    <span style="background: var(--yellow)">open mics</span>
+                    <span style="background: var(--blue)">supper clubs</span>
+                    <span style="background: var(--maroon)">debates</span>
+                    <span style="background: var(--orange)">office hours</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- 03 irl -->
+            <section class="hiw-step hiw-step--irl" data-step="3">
+              <span class="layer-anno-num">03</span>
+              <h3 class="layer-anno-title">irl</h3>
+              <p class="layer-anno-desc">
+                no more screen addiction. close the laptop and enter our world
+                of IRL lectures, office hours, supper clubs, &amp; debates.
+              </p>
+              <p class="hiw-archive-note">the research from the room is archived in our partner libraries.</p>
+              <div class="hiw-detail hiw-irl">
+                <div style="flex: 1; padding-left: 28px" class="room-col">
+              <p class="room-eyebrow">our last cyph...</p>
+              <!-- split screen: conductors | article. Widths are each
+                   image's aspect share of the row (0.75 : 1.024, the same
+                   height-matched proportioning as the cyph 002 recap page),
+                   so both land on the same top and bottom edge. -->
+              <div class="room-press">
+                <img
+                  class="room-conductors"
+                  src="assets/press/conductors.jpg"
+                  alt="the conductors — ruby thelot, dario calmese, will lohier"
+                />
+                <a
+                  class="room-article"
+                  href="https://whitehotmagazine.com/articles/truth-in-age-of-ai/7896"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <img
+                    src="assets/press/whitehot_article.jpg"
+                    alt="whitehot magazine — cyph 001: the archive, memory &amp; truth in the age of ai"
+                  />
+                </a>
+              </div>
+              <p class="room-label">in the room</p>
+              <div class="room-logos">
+                <img src="assets/brands/room/guggenheim.png" alt="guggenheim" style="height: 12px" />
+                <img src="assets/brands/room/anthropic.png" alt="anthropic" style="height: 37px" />
+                <img src="assets/brands/room/openai.png" alt="openai" style="height: 20px" />
+                <img src="assets/brands/room/gq.png" alt="gq" style="height: 27px" />
+                <img src="assets/brands/room/essence.svg" alt="essence" style="height: 16px" />
+                <img src="assets/brands/room/schomburg.png" alt="schomburg center" style="height: 37px" />
+                <img src="assets/brands/room/google.png" alt="google" style="height: 21px" />
+                <img src="assets/brands/room/studio_museum.png" alt="the studio museum in harlem" style="height: 25px" />
+                <img src="assets/brands/room/hbo.svg" alt="hbo" style="height: 16px" />
+                <img src="assets/brands/room/squarespace.svg" alt="squarespace" style="height: 18px" />
+                <img src="assets/brands/room/dept.svg" alt="dept" style="height: 34px" />
+                <img src="assets/brands/room/codeandtheory.png" alt="code and theory" style="height: 13px" />
+                <img src="assets/brands/room/iseda.png" alt="ise-da" style="height: 26px" />
+                <img src="assets/brands/room/resonner.png" alt="résonner media" style="height: 15px" />
+                <img src="assets/brands/room/nycps.png" alt="nyc public schools" style="height: 26px" />
+                <img src="assets/brands/room/superposition.png" alt="superposition gallery" style="height: 13px" />
+                <img src="assets/brands/room/theroot.png" alt="the root" style="height: 20px" />
+              </div>
             </div>
+                <div class="hiw-irl-side">
+                  <div class="hiw-stat">
+                    <b>40<span>+</span></b>
+                    <span>residencies and venues across nyc.</span>
+                  </div>
+                </div>
+              </div>
+            </section>
           </div>
         </div>
       </div>
 
-      <!-- LEVEL 7: EXPLORE UNDERGROUND (Sims inventory/collection screen) -->
-      <div class="slide" id="s7">
+      <!-- LEVEL 6: EXPLORE UNDERGROUND (Sims inventory/collection screen) -->
+      <div class="slide" id="s6">
         <h2>underground thinkers want to work with us.</h2>
 
         <div
@@ -1408,159 +1257,30 @@
             margin-top: 20px;
           "
         >
-          <!-- LEFT: collaborators -->
-          <div style="flex: 0 0 380px; display: flex; flex-direction: column">
-            <div
+          <!-- LEFT: the artifact archive -->
+          <div
+            style="
+              flex: 0 0 380px;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+            "
+          >
+            <p
               style="
                 font-family:
                   &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
                 font-weight: 700;
-                font-size: 14px;
+                font-size: 28px;
+                line-height: 1.2;
                 color: var(--charcoal);
-                margin-bottom: 6px;
+                margin: 0;
               "
             >
-              collabs in progress
-            </div>
-            <div
-              style="
-                display: flex;
-                flex-wrap: wrap;
-                gap: 6px;
-                margin-top: auto;
-              "
-            >
-              <span
-                style="
-                  font-size: 14px;
-                  color: #fff;
-                  padding: 6px 14px;
-                  border-radius: 20px;
-                  background: #6d1a36;
-                "
-                >neuroscientists</span
-              >
-              <span
-                style="
-                  font-size: 14px;
-                  color: #fff;
-                  padding: 6px 14px;
-                  border-radius: 20px;
-                  background: #fbaf00;
-                "
-                >psychologists</span
-              >
-              <span
-                style="
-                  font-size: 14px;
-                  color: #fff;
-                  padding: 6px 14px;
-                  border-radius: 20px;
-                  background: #608fe6;
-                "
-                >computer scientists</span
-              >
-              <span
-                style="
-                  font-size: 14px;
-                  color: #fff;
-                  padding: 6px 14px;
-                  border-radius: 20px;
-                  background: #fbaf00;
-                "
-                >philosophers</span
-              >
-              <span
-                style="
-                  font-size: 14px;
-                  color: #fff;
-                  padding: 6px 14px;
-                  border-radius: 20px;
-                  background: #ec4e20;
-                "
-                >librarians</span
-              >
-              <span
-                style="
-                  font-size: 14px;
-                  color: #fff;
-                  padding: 6px 14px;
-                  border-radius: 20px;
-                  background: #608fe6;
-                "
-                >architects</span
-              >
-              <span
-                style="
-                  font-size: 14px;
-                  color: #fff;
-                  padding: 6px 14px;
-                  border-radius: 20px;
-                  background: #6d1a36;
-                "
-                >sociologists</span
-              >
-              <span
-                style="
-                  font-size: 14px;
-                  color: #fff;
-                  padding: 6px 14px;
-                  border-radius: 20px;
-                  background: #ec4e20;
-                "
-                >physicists</span
-              >
-              <span
-                style="
-                  font-size: 14px;
-                  color: #fff;
-                  padding: 6px 14px;
-                  border-radius: 20px;
-                  background: #608fe6;
-                "
-                >linguists</span
-              >
-              <span
-                style="
-                  font-size: 14px;
-                  color: #fff;
-                  padding: 6px 14px;
-                  border-radius: 20px;
-                  background: #fbaf00;
-                "
-                >archivists</span
-              >
-              <span
-                style="
-                  font-size: 14px;
-                  color: #fff;
-                  padding: 6px 14px;
-                  border-radius: 20px;
-                  background: #ec4e20;
-                "
-                >designers</span
-              >
-              <span
-                style="
-                  font-size: 14px;
-                  color: #fff;
-                  padding: 6px 14px;
-                  border-radius: 20px;
-                  background: #6d1a36;
-                "
-                >art directors</span
-              >
-              <span
-                style="
-                  font-size: 14px;
-                  color: #fff;
-                  padding: 6px 14px;
-                  border-radius: 20px;
-                  background: #608fe6;
-                "
-                >journalists</span
-              >
-            </div>
+              we've acquired over
+              <span style="color: var(--orange)">11K</span> personal artifacts
+              from historic legends.
+            </p>
           </div>
 
           <!-- RIGHT: resource partners -->
@@ -1576,7 +1296,7 @@
                 color: var(--charcoal);
               "
             >
-              target resource partners
+              seeded with rich culture &amp; academia
             </div>
             <div
               style="
@@ -1765,19 +1485,8 @@
         </div>
 
         <div style="display: flex; gap: 40px; width: 920px; margin-top: 36px">
-          <p
-            style="
-              flex: 0 0 380px;
-              font-family:
-                &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
-              font-size: 14px;
-              color: var(--charcoal-muted);
-              margin: 0;
-            "
-          >
-            ideation with harvard, howard, school teachers, grandmothers, nyc
-            street legends and more on the intricacies of learning journeys.
-          </p>
+          <!-- empty left column keeps the line under the partner logos -->
+          <div style="flex: 0 0 380px"></div>
           <p
             style="
               flex: 1;
@@ -1795,588 +1504,8 @@
         </div>
       </div>
 
-      <!-- LEVEL 8: ARENA -->
-      <div class="slide" id="s8">
-        <h2>the cyph</h2>
-
-        <!-- LEFT/RIGHT layout for cyph slide:
-             LEFT column = section label sitting directly above the flyer card
-             (toggles live ↔ conceptual per click-through).
-             RIGHT column = horizontal-split detail panel — floating
-             underground artifacts on one side, office hours polaroid on the
-             other. mirrors arena-fe's CardDetail click-into-detail pattern. -->
-        <div
-          style="
-            position: relative;
-            display: flex;
-            gap: 48px;
-            width: 1080px;
-            margin-top: 14px;
-            margin-bottom: 60px;
-            align-items: flex-start;
-            justify-content: center;
-          "
-        >
-          <!-- LEFT column: label-over-flyer -->
-          <div
-            style="
-              width: 280px;
-              flex-shrink: 0;
-              display: flex;
-              flex-direction: column;
-            "
-          >
-            <div
-              style="
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 2px;
-                margin-bottom: 10px;
-              "
-            >
-              <span
-                id="cyphSectionLabel"
-                style="
-                  font-family:
-                    &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
-                  font-weight: 700;
-                  font-size: 14px;
-                  color: var(--charcoal);
-                "
-                >live</span
-              >
-              <span
-                id="cyphSectionSub"
-                style="
-                  font-family:
-                    &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
-                  font-size: 12px;
-                  font-style: italic;
-                  color: var(--charcoal-muted);
-                  line-height: 1.45;
-                "
-                >topics sourced from API's &amp; real-time listening.</span
-              >
-            </div>
-
-            <!-- floating flyer card. cyphDrift wrapper animation; child <img>s
-                 stack at the same position, JS toggles .cyph-flyer-active. -->
-            <div
-              class="cyph-flyer-drift"
-              style="position: relative; width: 280px; height: 400px"
-            >
-              <img
-                class="cyph-flyer cyph-flyer-active"
-                id="cf1"
-                src="assets/cards/live1.png"
-              />
-              <img
-                class="cyph-flyer"
-                id="cf2"
-                src="assets/cards/soul_cartesian.png"
-              />
-              <!-- darkening scrim, revealed on hover so the title reads -->
-              <div class="cyph-flyer-scrim"></div>
-              <!-- hover treatment: cyph title + headcount pill (mirrors the
-                   app's CyphFlyerHoverPill, underground/dark variant) -->
-              <div class="cyph-flyer-hover" id="cyphFlyerHover">
-                <div class="cyph-flyer-hover-title" id="cyphFlyerTitle">
-                  Knicks Championship
-                </div>
-                <div class="cyph-flyer-hover-pill">
-                  <span class="cfh-faces">
-                    <span class="cfh-face"
-                      ><img id="cfhFace1" alt="" src="assets/portraits/cypher-01.jpg"
-                    /></span>
-                    <span class="cfh-face"
-                      ><img id="cfhFace2" alt="" src="assets/portraits/cypher-04.jpg"
-                    /></span>
-                  </span>
-                  <span id="cyphFlyerCount">+1.3K more</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- RIGHT column: horizontal-split detail panel
-               (underground | office hours) -->
-          <div
-            style="
-              flex: 1;
-              max-width: 720px;
-              min-width: 0;
-              display: flex;
-              gap: 28px;
-              align-self: stretch;
-            "
-          >
-            <!-- from the underground (left side of split) -->
-            <div
-              style="
-                flex: 1.55;
-                display: flex;
-                flex-direction: column;
-                min-width: 0;
-              "
-            >
-              <div
-                style="
-                  margin-bottom: 12px;
-                  padding-bottom: 6px;
-                  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-                "
-              >
-                <span
-                  style="
-                    font-family:
-                      &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
-                    font-size: 14px;
-                    font-weight: 700;
-                    color: var(--charcoal);
-                  "
-                  >underground resources</span
-                >
-              </div>
-
-              <!-- floating artifacts: 3 drift-animated wrappers; JS swaps
-                   img.src + caption per click-through. drift1/3/5 keyframes
-                   keep them moving asynchronously like a moodboard. -->
-              <div
-                style="
-                  flex: 1;
-                  display: flex;
-                  gap: 18px;
-                  align-items: center;
-                  justify-content: center;
-                  padding: 16px 4px 8px;
-                "
-              >
-                <div class="cyph-artifact cyph-artifact-1">
-                  <div class="cyph-artifact-img-wrap">
-                    <img
-                      id="cyphArt1"
-                      src="assets/images/knicks_rockets/cassette.png"
-                      alt=""
-                    />
-                  </div>
-                </div>
-                <div class="cyph-artifact cyph-artifact-2">
-                  <div class="cyph-artifact-img-wrap">
-                    <img
-                      id="cyphArt2"
-                      src="assets/images/knicks_rockets/1980_flyer.png"
-                      alt=""
-                    />
-                  </div>
-                </div>
-                <div class="cyph-artifact cyph-artifact-3">
-                  <div class="cyph-artifact-img-wrap">
-                    <img
-                      id="cyphArt3"
-                      src="assets/images/knicks_rockets/book.png"
-                      alt=""
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- office hours (right side of split) -->
-            <div
-              style="
-                flex: 1;
-                display: flex;
-                flex-direction: column;
-                min-width: 0;
-                padding-left: 28px;
-              "
-            >
-              <div
-                style="
-                  margin-bottom: 12px;
-                  padding-bottom: 6px;
-                  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-                "
-              >
-                <span
-                  style="
-                    font-family:
-                      &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
-                    font-size: 14px;
-                    font-weight: 700;
-                    color: var(--charcoal);
-                  "
-                  >office hours</span
-                >
-              </div>
-              <div
-                id="cyphHosts"
-                style="
-                  flex: 1;
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  padding: 14px 0 6px;
-                "
-              ></div>
-            </div>
-          </div>
-
-          <!-- TAGLINE ROW — pulled out of the columns and absolute-positioned
-               at top:100% of the grid (= flyer bottom, since LEFT column no
-               longer contains a tagline). this guarantees all three sit on
-               the same Y regardless of right-side content height. the inner
-               flex mirrors the grid's column widths so each tagline sits
-               directly under its respective column. -->
-          <div
-            style="
-              position: absolute;
-              top: 100%;
-              left: 0;
-              right: 0;
-              margin-top: 16px;
-              display: flex;
-              gap: 48px;
-              justify-content: center;
-            "
-          >
-            <div style="width: 280px; flex-shrink: 0">
-              <p class="cyph-todo">
-                match with cyphers around the world.
-              </p>
-            </div>
-            <div style="flex: 1; max-width: 720px; display: flex; gap: 28px">
-              <div style="flex: 1.55; min-width: 0">
-                <p class="cyph-todo">
-                  dig into rare, underground research to nourish your mind.
-                </p>
-              </div>
-              <div style="flex: 1; min-width: 0; padding-left: 28px">
-                <p class="cyph-todo">
-                  learn from underground thinkers
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- room types + traction (restored from deployed version) -->
-        <div
-          style="
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 1080px;
-            margin-top: 18px;
-            gap: 8px;
-          "
-        >
-          <span
-            style="
-              font-family:
-                &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
-              font-size: 10px;
-              color: var(--charcoal-muted);
-            "
-            >cyph types</span
-          >
-          <div
-            style="
-              display: grid;
-              grid-template-columns: repeat(2, 150px);
-              gap: 10px;
-              justify-content: center;
-            "
-          >
-            <span
-              style="
-                font-size: 14px;
-                color: #fff;
-                padding: 6px 14px;
-                border-radius: 20px;
-                background: #fbaf00;
-                text-align: center;
-              "
-              >open mics</span
-            >
-            <span
-              style="
-                font-size: 14px;
-                color: #fff;
-                padding: 6px 14px;
-                border-radius: 20px;
-                background: #608fe6;
-                text-align: center;
-              "
-              >supper clubs</span
-            >
-            <span
-              style="
-                font-size: 14px;
-                color: #fff;
-                padding: 6px 14px;
-                border-radius: 20px;
-                background: #6d1a36;
-                text-align: center;
-              "
-              >debates</span
-            >
-            <span
-              style="
-                font-size: 14px;
-                color: #fff;
-                padding: 6px 14px;
-                border-radius: 20px;
-                background: #ec4e20;
-                text-align: center;
-              "
-              >office hours</span
-            >
-          </div>
-        </div>
-      </div>
-
-      <!-- LEVEL 9: ROOM TYPES -->
-      <div class="slide" id="s8-hidden" style="display: none">
-        <div class="game-panel" style="width: 780px; max-width: 100%">
-          <div
-            class="game-panel-header blue-header"
-            style="display: flex; align-items: center; gap: 8px"
-          >
-            <span
-              style="
-                width: 10px;
-                height: 10px;
-                border-radius: 50%;
-                background: rgba(255, 255, 255, 0.6);
-                box-shadow: 0 0 8px rgba(0, 101, 179, 0.5);
-                display: inline-block;
-              "
-            ></span>
-            room types
-          </div>
-          <div class="game-panel-body" style="padding: 16px 20px">
-            <div class="room-cards" style="justify-content: center">
-              <div class="room-card">
-                <div class="room-card-top">
-                  <img
-                    src="data:image/png;base64,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"
-                    alt=""
-                  />
-                </div>
-                <div class="room-card-body">
-                  <h4>open mic</h4>
-                  <p>say what you mean. raw, unfiltered, first-person.</p>
-                </div>
-              </div>
-              <div class="room-card">
-                <div class="room-card-top">
-                  <img
-                    src="data:image/png;base64,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"
-                    alt=""
-                  />
-                </div>
-                <div class="room-card-body">
-                  <h4>office hours</h4>
-                  <p>1-on-1. you ask, they answer. no panel, no moderator.</p>
-                </div>
-              </div>
-              <div class="room-card">
-                <div class="room-card-top">
-                  <img
-                    src="data:image/png;base64,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"
-                    alt=""
-                  />
-                </div>
-                <div class="room-card-body">
-                  <h4>supper club</h4>
-                  <p>small room. good food. hard questions.</p>
-                </div>
-              </div>
-              <div class="room-card">
-                <div class="room-card-top">
-                  <img
-                    src="data:image/png;base64,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"
-                    alt=""
-                  />
-                </div>
-                <div class="room-card-body">
-                  <h4>debate</h4>
-                  <p>structured. timed. two sides. one question.</p>
-                </div>
-              </div>
-            </div>
-            <div style="margin-top: 16px; text-align: center">
-              <div
-                style="
-                  font-family:
-                    &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
-                  font-weight: 700;
-                  font-size: 44px;
-                  color: #fff;
-                "
-              >
-                90+
-              </div>
-              <p style="font-size: 14px; color: rgba(255, 255, 255, 0.5)">
-                letters of intent in progress from office hour candidates. video
-                and audio rooms. matchmaking by curiosity.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- LEVEL 10: IRL -->
-      <div
-        class="slide"
-        id="s9"
-        style="
-          background:
-            linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-            url(&quot;assets/backgrounds/central.png&quot;) center/cover
-              no-repeat;
-        "
-      >
-        <h2 style="color: #fff">touch grass.</h2>
-
-        <div style="width: 1100px; margin-top: 16px">
-          <!-- top rule -->
-          <!-- main columns: newspaper layout -->
-          <div style="display: flex; gap: 0; align-items: stretch">
-            <!-- COL 1: the concept + venues -->
-            <div
-              style="
-                flex: 1.2;
-                padding-right: 28px;
-                border-right: 1px solid rgba(237, 232, 222, 0.18);
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-              "
-            >
-              <p
-                style="
-                  font-family:
-                    &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
-                  font-weight: 700;
-                  font-size: 28px;
-                  color: var(--charcoal);
-                  line-height: 1.2;
-                  margin-bottom: 16px;
-                  white-space: nowrap;
-                "
-              >
-                we drop IRL cyphs. 
-              </p>
-              <p
-                style="
-                  font-family:
-                    &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
-                  font-weight: 400;
-                  font-size: 15px;
-                  font-style: italic;
-                  color: var(--charcoal-muted);
-                  line-height: 1.4;
-                  margin-top: -8px;
-                  margin-bottom: 16px;
-                "
-              >
-                no more screen addiction. close the laptop and enter our
-                world of IRL lectures,<br />office hours, supper clubs, &amp; debates.
-              </p>
-              <div style="display: flex; align-items: baseline; gap: 12px">
-                <span
-                  style="
-                    font-family:
-                      &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
-                    font-weight: 700;
-                    font-size: 72px;
-                    color: #ec4e20;
-                    line-height: 1;
-                  "
-                  >40<span
-                    style="
-                      font-size: 36px;
-                      vertical-align: middle;
-                      color: #ec4e20;
-                    "
-                    >+</span
-                  ></span
-                >
-                <span
-                  style="
-                    font-family:
-                      &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
-                    font-size: 14px;
-                    color: var(--charcoal-muted);
-                    white-space: nowrap;
-                    position: relative;
-                    top: -12px;
-                  "
-                  >residencies and venues.</span
-                >
-              </div>
-            </div>
-
-            <!-- COL 2: the press hit + who was in the room -->
-            <div style="flex: 1; padding-left: 28px" class="room-col">
-              <p class="room-eyebrow">our last cyph...</p>
-              <!-- split screen: conductors | article. Widths are each
-                   image's aspect share of the row (0.75 : 1.024, the same
-                   height-matched proportioning as the cyph 002 recap page),
-                   so both land on the same top and bottom edge. -->
-              <div class="room-press">
-                <img
-                  class="room-conductors"
-                  src="assets/press/conductors.jpg"
-                  alt="the conductors — ruby thelot, dario calmese, will lohier"
-                />
-                <a
-                  class="room-article"
-                  href="https://whitehotmagazine.com/articles/truth-in-age-of-ai/7896"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  <img
-                    src="assets/press/whitehot_article.jpg"
-                    alt="whitehot magazine — cyph 001: the archive, memory &amp; truth in the age of ai"
-                  />
-                </a>
-              </div>
-              <p class="room-label">in the room</p>
-              <div class="room-logos">
-                <img src="assets/brands/room/guggenheim.png" alt="guggenheim" style="height: 12px" />
-                <img src="assets/brands/room/anthropic.png" alt="anthropic" style="height: 37px" />
-                <img src="assets/brands/room/openai.png" alt="openai" style="height: 20px" />
-                <img src="assets/brands/room/gq.png" alt="gq" style="height: 27px" />
-                <img src="assets/brands/room/essence.svg" alt="essence" style="height: 16px" />
-                <img src="assets/brands/room/schomburg.png" alt="schomburg center" style="height: 37px" />
-                <img src="assets/brands/room/google.png" alt="google" style="height: 21px" />
-                <img src="assets/brands/room/studio_museum.png" alt="the studio museum in harlem" style="height: 25px" />
-                <img src="assets/brands/room/hbo.svg" alt="hbo" style="height: 16px" />
-                <img src="assets/brands/room/squarespace.svg" alt="squarespace" style="height: 18px" />
-                <img src="assets/brands/room/dept.svg" alt="dept" style="height: 34px" />
-                <img src="assets/brands/room/codeandtheory.png" alt="code and theory" style="height: 13px" />
-                <img src="assets/brands/room/iseda.png" alt="ise-da" style="height: 26px" />
-                <img src="assets/brands/room/resonner.png" alt="résonner media" style="height: 15px" />
-                <img src="assets/brands/room/nycps.png" alt="nyc public schools" style="height: 26px" />
-                <img src="assets/brands/room/superposition.png" alt="superposition gallery" style="height: 13px" />
-                <img src="assets/brands/room/theroot.png" alt="the root" style="height: 20px" />
-              </div>
-            </div>
-          </div>
-
-          <!-- bottom rule -->
-          <div
-            style="border-top: 1px solid rgba(0, 0, 0, 0.1); margin-top: 20px"
-          ></div>
-        </div>
-      </div>
-
-      <!-- LEVEL 11: HOW WE MAKE MONEY -->
-      <div class="slide" id="s10">
+      <!-- LEVEL 7: HOW WE MAKE MONEY -->
+      <div class="slide" id="s7">
         <h2>how we make money.</h2>
 
         <div class="money-table">
@@ -2471,8 +1600,8 @@
         </div>
       </div>
 
-      <!-- LEVEL 12: USER BEHAVIOR SIZE -->
-      <div class="slide" id="s11">
+      <!-- LEVEL 8: USER BEHAVIOR SIZE -->
+      <div class="slide" id="s8">
         <h2>user behavior size.</h2>
         <div
           class="user-table"
@@ -2626,8 +1755,8 @@
           request.
         </div>
       </div>
-      <!-- LEVEL 13: GTM -->
-      <div class="slide" id="s12">
+      <!-- LEVEL 9: GTM -->
+      <div class="slide" id="s9">
         <h2>gtm.</h2>
         <div class="crisis-canvas">
           <div class="gtm-float-group">
@@ -3091,8 +2220,8 @@
         </div>
       </div>
 
-      <!-- LEVEL 14: TESTIMONIALS -->
-      <div class="slide" id="s13">
+      <!-- LEVEL 10: TESTIMONIALS -->
+      <div class="slide" id="s10">
         <h2>what real peeps have said.</h2>
         <div class="test-grid">
           <div class="test-bubble" style="background: #ec4e20">
@@ -3154,8 +2283,8 @@
         </div>
       </div>
 
-      <!-- LEVEL 15: THE RAISE -->
-      <div class="slide" id="s14">
+      <!-- LEVEL 11: THE RAISE -->
+      <div class="slide" id="s11">
         <h2>the raise.</h2>
         <div class="raise-canvas">
           <div class="raise-terms">
@@ -3331,8 +2460,8 @@
         </div>
       </div>
 
-      <!-- LEVEL 16: CLOSE -->
-      <div class="slide" id="s15">
+      <!-- LEVEL 12: CLOSE -->
+      <div class="slide" id="s12">
         <video
           class="demo-bg"
           autoplay
@@ -3493,7 +2622,7 @@
           <button id="navPrev">&#8592;</button
           ><button id="navNext">&#8594;</button>
         </div>
-        <div class="bhud-counter" id="bhudCtr">01/16</div>
+        <div class="bhud-counter" id="bhudCtr">01/13</div>
       </div>
     </div>
     <!-- end game-shell -->

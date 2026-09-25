@@ -44,11 +44,13 @@ Five brand colors used throughout:
 
 ## Slide structure
 
-Slides are `div.slide` with IDs `s0`–`s15` (16 total; plus a hidden `s8-hidden` variant). IDs **must stay contiguous** — navigation indexes them via `getElementById("s" + i)`. Navigation is in `deck.js` with chapter mapping. Slide counter shows `XX/16`.
+Slides are `div.slide` with IDs `s0`–`s12` (13 total). IDs **must stay contiguous** — navigation indexes them via `getElementById("s" + i)`. Navigation is in `deck.js` with chapter mapping. Slide counter shows `XX/13`.
 
-- **`s10` — how we make money** (`business` chapter): the only revenue slide. Three `.money-row`s in a `.money-table` (cyphcard+ · cyph.edu · ads), each a 3-column grid (label · body · `.money-graphic`), vertically centered, with a 7px accent rule set per row via the `--money-accent` custom property — one distinct hue per row. Graphics use the floating-artifact language (drift keyframes inline) and are capped to the same 94px band so no row outgrows the others (`.money-reach-img`, the ads row's cyph city still, is the one exception at 124px — it is a wide screenshot and unreadable at 94); the cyphcard+ row carries a live `iso3d.js` canvas (`moneyCardCanvas`). Closes on a shared `.deck-takeaway` line (also used by `s11`). Styles under `/* s10: how we make money */` in `styles.css`.
-- **`s14` — the raise** (`business` chapter): headline terms ($1M raising · $9M pre-money cap · 14 mo runway), a CSS `conic-gradient` use-of-funds pie + legend, and a milestone `timeline` column. Styles under `/* s14: the raise */` in `styles.css`.
-- **`s15` — the demo montage / close** (`close` chapter): a 3×3 grid (`.demo-grid`) of looping, muted, autoplay product videos under a single consistent dark gloss (`.demo-scrim`), with the "ready for a demo?" headline + emails overlaid (`.demo-overlay`). Videos use `object-fit: contain` (full frame, letterboxed). On phones/touch (`@media (max-width: 820px), (hover: none) and (pointer: coarse)`) the grid + scrim are hidden — text-on-black only (multi-video autoplay is unreliable/heavy on mobile, esp. iOS Low Power Mode).
+- **`s5` — how it works** (`solution` chapter): the isometric layer stack (`#isoL1`–`#isoL3`, live `iso3d.js` canvases) beside `.hiw-anno`, one `.hiw-step` panel per layer — 01 underground (route map `#transitSvg` + swaying `cyphcardCanvas` + inventory collage) / 02 cyph (the live + conceptual flyers with their office-hours leads, cyph-type pills) / 03 irl ("our last cyph" press + "in the room" logos, 40+ underneath). A layer and its panel share `data-step`; `updateHiw` in `deck.js` sets `.active` / `.on`. Behind the doors (`#doorsCanvas[data-flyer]`) is the design system's full live cyph car around the memory flyer (`assets/cards/live_cyph_car.jpg`). Styles under `/* ═══ HOW IT WORKS (s5) ═══ */` in `styles.css`. The partner deck lifts it unchanged.
+
+- **`s7` — how we make money** (`business` chapter): the only revenue slide. Three `.money-row`s in a `.money-table` (cyphcard+ · cyph.edu · ads), each a 3-column grid (label · body · `.money-graphic`), vertically centered, with a 7px accent rule set per row via the `--money-accent` custom property — one distinct hue per row. Graphics use the floating-artifact language (drift keyframes inline) and are capped to the same 94px band so no row outgrows the others (`.money-reach-img`, the ads row's cyph city still, is the one exception at 124px — it is a wide screenshot and unreadable at 94); the cyphcard+ row carries a live `iso3d.js` canvas (`moneyCardCanvas`). Closes on a shared `.deck-takeaway` line (also used by `s8`). Styles under `/* s7: how we make money */` in `styles.css`.
+- **`s11` — the raise** (`business` chapter): headline terms ($1M raising · $9M pre-money cap · 14 mo runway), a CSS `conic-gradient` use-of-funds pie + legend, and a milestone `timeline` column. Styles under `/* s11: the raise */` in `styles.css`.
+- **`s12` — the demo montage / close** (`close` chapter): a 3×3 grid (`.demo-grid`) of looping, muted, autoplay product videos under a single consistent dark gloss (`.demo-scrim`), with the "ready for a demo?" headline + emails overlaid (`.demo-overlay`). Videos use `object-fit: contain` (full frame, letterboxed). On phones/touch (`@media (max-width: 820px), (hover: none) and (pointer: coarse)`) the grid + scrim are hidden — text-on-black only (multi-video autoplay is unreliable/heavy on mobile, esp. iOS Low Power Mode).
 
 **Adding/removing a slide** must be done in lockstep across: the `id` numbering in `index.html`; the initial `XX/NN` counter hardcoded in **both** HUD counters (`#hudCtr`, `#bhudCtr`); and in `deck.js` — `T` (total), the `ch` chapter map, the `bars` HUD-bar array, the progress denominator (`i / (T-1)`), the `runA` per-index animation `case`s, and the lock-mode reveal selectors.
 
@@ -115,13 +117,11 @@ desktop ones with no change to auth.js.
 
 The non-VC deck: 8 slides, built from this one so the two never drift.
 `tools/build-partners.mjs` writes `partners.html` (generated, never
-hand-edited): `s0`–`s4`, `s13` and `s15` are lifted verbatim from
-`index.html` **and keep their ids**, so every `#sN` rule in `styles.css`
-applies unchanged. Slide 6 (`#hiw`, how it works) is `partners/hiw.html`: the
-`s5` layer stack beside the `s6`/`s8`/`s9` content, one step per layer
-(01 underground / 02 cyph / 03 irl); its transit map and press/logo column are
-`@include`d from `index.html`. Slide 8 is `partners/close.html` (`s15` with
-Cash's partner copy, no founder bios). `partners/partners.js` is its deck.js
+hand-edited): `s0`–`s5` and `s10` are lifted verbatim from `index.html`
+**and keep their ids**, so every `#sN` rule in `styles.css` applies
+unchanged (`s10`, the testimonials, drops two quotes at build and runs four
+per row). Slide 8 is `partners/close.html` (`s12` with Cash's partner copy,
+no founder bios). `partners/partners.js` is its deck.js
 (slides addressed by id, same `go`/`goTo`/`busy`/`layerStep` contract, so
 export-pdf drives it unchanged); `partners/partners.css` loads on top of
 `styles.css`, desktop only. No revenue HUD bar. The gate logs it as
@@ -144,11 +144,11 @@ phone pages. A push to GitHub Pages alone never updates this host.
 and the phone view's pages in `assets/deck-pages/` from the live deck. It serves the directory on `127.0.0.1` (so auth.js takes its
 localhost bypass), drives Chrome with `navNext.click()` exactly the way a
 viewer advances, waits for every animation on each state to land, and packs
-the frames into a 22-page 1440×900pt PDF.
+the frames into a 17-page 1440×900pt PDF.
 
 - **Sub-steps get their own page.** The walk is state-driven, not slide-driven:
-  s5's layer stack (01/02/03/∞), s8's two cyph flyers, and s15's two founder
-  bios each export separately, so 16 slides → 22 pages. The loop stops when
+  s5's how-it-works layers (01/02/03) and s12's two founder bios each export
+  separately, so 13 slides → 17 pages. The loop stops when
   advancing no longer changes state, so adding a slide needs no change here.
 - **System Chrome, not bundled Chromium** (`channel: "chrome"`). The cover and
   close slides play H.264 video; Playwright's Chromium ships without
@@ -158,9 +158,6 @@ the frames into a 22-page 1440×900pt PDF.
   infinite drift/float keyframes are skipped — they never finish by design, so
   drifting elements land wherever their phase puts them and pages will differ
   slightly run to run.
-- **s8 is hovered on purpose.** The flyer's cyph title + headcount pill live in
-  a `:hover` reveal (`.cyph-flyer-drift:hover .cyph-flyer-hover`); without the
-  pointer parked on it the page exports captionless.
 - Requests to `script.google.com` are aborted so an export doesn't land in the
   auth.js access log.
 - **It also writes `assets/deck-pages/`** — the same frames downscaled to
@@ -177,7 +174,7 @@ The file map lives in `README.md` (Layout). Rules that go with it:
 
 - `assets/deck-pages/` — generated; the phone view's WebP pages + manifest.
   Never hand-edit, never hand-add — `npm run pdf` owns this directory.
-- `assets/videos/` — `s15` demo-montage clips, web `.mp4` only (H.264, **no audio**). Source `.mov` masters are **not** kept in-repo: transcode with `ffmpeg -i in.mov -an -vf "scale=960:-2" -c:v libx264 -pix_fmt yuv420p -crf 28 -preset fast -movflags +faststart out.mp4`, wire the `.mp4` into the grid, then delete the master. (VHS/grain-heavy clips compress poorly — bump `-crf` if a file is disproportionately large.)
+- `assets/videos/` — `s12` demo-montage clips, web `.mp4` only (H.264, **no audio**). Source `.mov` masters are **not** kept in-repo: transcode with `ffmpeg -i in.mov -an -vf "scale=960:-2" -c:v libx264 -pix_fmt yuv420p -crf 28 -preset fast -movflags +faststart out.mp4`, wire the `.mp4` into the grid, then delete the master. (VHS/grain-heavy clips compress poorly — bump `-crf` if a file is disproportionately large.)
 
 ## investors.cyph.city (S3 + CloudFront), beside GitHub Pages
 

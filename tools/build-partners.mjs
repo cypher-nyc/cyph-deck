@@ -1,12 +1,11 @@
 /* ═══ CYPH partner deck — build ═══
    Writes partners.html: the non-VC deck served at partners.cyph.city.
 
-   Nothing in it is authored twice. Six of its eight slides are lifted out of
-   index.html verbatim, by id, and keep that id — so every `#sN` rule in
-   styles.css applies to them unchanged. The other two are partials in
-   partners/: hiw.html (how it works: the s5 stack with the s6/s8/s9 content
-   laid out beside it) and close.html (s15 with the partner copy). hiw.html
-   pulls its transit map and press/logo column out of index.html too, through
+   Nothing in it is authored twice. Seven of its eight slides are lifted out
+   of index.html verbatim, by id, and keep that id — so every `#sN` rule in
+   styles.css applies to them unchanged (s10, the testimonials, loses two
+   quotes on the way). The eighth is partners/close.html (s12 with the
+   partner copy). A partial can pull pieces of index.html in through
    `<!-- @include index.html <selector> -->` lines.
 
    The shell (head, router, HUD, gate, loaders) is index.html's own, edited in
@@ -25,7 +24,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const read = (p) => fs.readFileSync(path.join(ROOT, p), "utf8");
 
 /* the partner running order: investor slide ids, or a partial in partners/ */
-const ORDER = ["s0", "s1", "s2", "s3", "s4", "partners/hiw.html", "s13", "partners/close.html"];
+const ORDER = ["s0", "s1", "s2", "s3", "s4", "s5", "s10", "partners/close.html"];
 
 const src = read("index.html");
 
@@ -63,12 +62,12 @@ function include(partial) {
   );
 }
 
-/* testimonials the partner deck leaves out of s13 (the other eight sit 4 x 2) */
+/* testimonials the partner deck leaves out of s10 (the other eight sit 4 x 2) */
 const DROP_QUOTES = ["i've been craving a place to actually talk", "this is like a digital tailgate!"];
 function dropQuotes(html) {
   for (const q of DROP_QUOTES) {
     const at = html.indexOf(q);
-    if (at < 0) throw new Error(`index.html: s13 quote "${q}" moved`);
+    if (at < 0) throw new Error(`index.html: s10 quote "${q}" moved`);
     const start = html.lastIndexOf('<div class="test-bubble"', at);
     const lineStart = html.lastIndexOf("\n", start);
     html = html.slice(0, lineStart) + html.slice(start + extract(html, start, "test bubble").length);
@@ -77,7 +76,7 @@ function dropQuotes(html) {
 }
 
 const slides = ORDER.map((s) =>
-  s.includes("/") ? include(read(s)) : "      " + (s === "s13" ? dropQuotes(byId(s)) : byId(s)),
+  s.includes("/") ? include(read(s)) : "      " + (s === "s10" ? dropQuotes(byId(s)) : byId(s)),
 ).join("\n\n");
 
 /* ── the shell ── */
@@ -129,8 +128,8 @@ out =
   `<nav class="hud-nav">\n${nav.replace('class="hud-nav-btn"', 'class="hud-nav-btn active"')}\n        </nav>` +
   out.slice(navEnd);
 
-swap('<div class="hud-counter" id="hudCtr">01/16</div>', '<div class="hud-counter" id="hudCtr">01/08</div>', "hud counter");
-swap('<div class="bhud-counter" id="bhudCtr">01/16</div>', '<div class="bhud-counter" id="bhudCtr">01/08</div>', "bhud counter");
+swap('<div class="hud-counter" id="hudCtr">01/13</div>', '<div class="hud-counter" id="hudCtr">01/08</div>', "hud counter");
+swap('<div class="bhud-counter" id="bhudCtr">01/13</div>', '<div class="bhud-counter" id="bhudCtr">01/08</div>', "bhud counter");
 
 /* no revenue bar on the partner deck */
 const revLabel = out.indexOf('<div class="hud-bar-label">revenue</div>');
