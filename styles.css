@@ -3105,9 +3105,10 @@ body.locked #deck-controls button {
 /* 03's quiet aside under the description */
 .hiw-archive-note {
   margin-top: 8px;
-  font-size: 12px;
-  font-style: italic;
-  color: var(--charcoal-muted);
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--charcoal);
+  max-width: 620px;
 }
 .hiw-head {
   font-weight: 700;
