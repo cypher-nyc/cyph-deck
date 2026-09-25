@@ -119,8 +119,7 @@ The non-VC deck: 8 slides, built from this one so the two never drift.
 `tools/build-partners.mjs` writes `partners.html` (generated, never
 hand-edited): `s0`–`s5` and `s10` are lifted verbatim from `index.html`
 **and keep their ids**, so every `#sN` rule in `styles.css` applies
-unchanged (`s10`, the testimonials, drops two quotes at build and runs four
-per row). Slide 8 is `partners/close.html` (`s12` with Cash's partner copy,
+unchanged. Slide 8 is `partners/close.html` (`s12` with Cash's partner copy,
 no founder bios). `partners/partners.js` is its deck.js
 (slides addressed by id, same `go`/`goTo`/`busy`/`layerStep` contract, so
 export-pdf drives it unchanged); `partners/partners.css` loads on top of

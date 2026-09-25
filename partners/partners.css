@@ -2,8 +2,3 @@
    Loads on top of styles.css, desktop path only. Every partner slide is an
    investor slide under its own id (how it works included, as s5), so only
    partner-specific overrides live here. */
-
-/* s10: eight testimonials (two dropped at build), four per row */
-#s10 .test-grid {
-  grid-template-columns: repeat(4, 1fr);
-}
