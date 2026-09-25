@@ -729,11 +729,11 @@ function init() {
   // Used by tools/export-pdf.mjs to freeze the doorway open for a capture.
   window.holdCyphDoorsOpen = () => doors.holdOpen();
 
-  // Swaying membership plate on the underground slide (s6), if present.
+  // Swaying membership plate on how it works (s5, 01 underground), if present.
   const cyphcardCanvas = document.getElementById("cyphcardCanvas");
   if (cyphcardCanvas) scenes.push(buildCyphcard(cyphcardCanvas));
 
-  // "how we make money" (s10) row objects: the swaying advanced cyphcard
+  // "how we make money" (s7) row objects: the swaying advanced cyphcard
   // (cyphcard+) and the syllabus paper (commissions), at row scale.
   const reachDoorsCanvas = document.getElementById("reachDoorsCanvas");
   if (reachDoorsCanvas) {

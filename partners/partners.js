@@ -4,12 +4,12 @@
    drive it exactly the way they drive the investor deck.
 
    Slides are addressed by id, not by `s` + index: the reused investor slides
-   keep their own ids (s0..s4, s13, s15) so styles.css applies unchanged.
+   keep their own ids (s0..s5, s10, s12) so styles.css applies unchanged.
    The entrance animations for those slides are deck.js's, copied as-is. */
 
-const SLIDES = ["s0", "s1", "s2", "s3", "s4", "hiw", "s13", "s15"];
+const SLIDES = ["s0", "s1", "s2", "s3", "s4", "s5", "s10", "s12"];
 const T = SLIDES.length;
-const HIW = SLIDES.indexOf("hiw");
+const HIW = SLIDES.indexOf("s5");
 let cur = 0;
 let busy = false;
 let goTimer = null;
@@ -58,7 +58,7 @@ function pad(n) {
 /* ── how it works: 01 underground / 02 cyph / 03 irl ── */
 function updateHiw(step) {
   busy = true;
-  document.querySelectorAll("#hiw [data-step]").forEach(function (node) {
+  document.querySelectorAll("#s5 [data-step]").forEach(function (node) {
     var on = +node.dataset.step === step;
     node.classList.toggle(
       node.classList.contains("hiw-step") ? "on" : "active",
@@ -75,10 +75,10 @@ function updateHiw(step) {
   }, 400);
 }
 
-/* s6's route draw, all four lines at once so it lands inside the settle gate */
+/* 01's route draw, all four lines at once so it lands inside the settle gate */
 function drawRoutes() {
-  var lines = document.querySelectorAll("#hiw #transitSvg polyline");
-  var stops = document.querySelectorAll("#hiw .stop, #hiw .stop-text");
+  var lines = document.querySelectorAll("#s5 #transitSvg polyline");
+  var stops = document.querySelectorAll("#s5 .stop, #s5 .stop-text");
   anime.remove(lines);
   anime.remove(stops);
   anime({
@@ -230,7 +230,7 @@ onReady(function () {
 
   /* layers on how it works jump straight to their step */
   document
-    .querySelectorAll("#hiw .iso-layer")
+    .querySelectorAll("#s5 .iso-layer")
     .forEach(function (node) {
       node.addEventListener("click", function () {
         if (cur !== HIW) return;
@@ -373,10 +373,10 @@ function runA(i) {
         easing: C,
       });
       break;
-    case "hiw":
+    case "s5":
       layerStep = _prevCur > HIW ? 3 : 1;
       anime({
-        targets: "#hiw .iso-layer",
+        targets: "#s5 .iso-layer",
         translateY: [40, 0],
         opacity: [0, 1],
         duration: 500,
@@ -384,7 +384,7 @@ function runA(i) {
         easing: B,
       });
       anime({
-        targets: "#hiw .hiw-anno",
+        targets: "#s5 .hiw-anno",
         opacity: [0, 1],
         translateX: [20, 0],
         duration: 500,
@@ -395,9 +395,9 @@ function runA(i) {
         updateHiw(layerStep);
       }, 100);
       break;
-    case "s13":
+    case "s10":
       anime({
-        targets: "#s13 .test-bubble",
+        targets: "#s10 .test-bubble",
         scale: [0.85, 1],
         opacity: [0, 1],
         duration: 350,
@@ -405,16 +405,16 @@ function runA(i) {
         easing: B,
       });
       break;
-    case "s15":
+    case "s12":
       anime({
-        targets: "#s15 h1",
+        targets: "#s12 h1",
         translateY: [12, 0],
         opacity: [0, 1],
         duration: 600,
         easing: C,
       });
       anime({
-        targets: "#s15 .sub",
+        targets: "#s12 .sub",
         opacity: [0, 1],
         duration: 500,
         delay: 300,
