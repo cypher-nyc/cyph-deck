@@ -259,6 +259,9 @@ const DOOR_VERTICAL_LIFT = CAMERA_Y * PARALLAX_FACTOR;
    vertical slices through the door windows (true holes — see buildDoorPanel)
    at CYPH_FLYER_DIM; as the doors part it brightens to full. */
 const CYPH_FLYER_ART = "assets/cards/archive_memory_ai.jpg";
+/* a deck can put different art back there with `data-flyer` on the canvas
+   (the partner deck shows the live cyph car around the same flyer); it must
+   be square like the default */
 const CYPH_FLYER_SIZE = (DOORWAY_HEIGHT / PARALLAX_T) * 0.86;
 const CYPH_FLYER_DIM = 0.5;
 const CYPH_FLYER_LIT = 1.0;
@@ -391,7 +394,7 @@ function buildCyphDoors(canvas) {
   );
   flyer.position.set(0, 0, PARALLAX_TARGET_Z);
   scene.add(flyer);
-  texLoader.load(CYPH_FLYER_ART, (tex) => {
+  texLoader.load(canvas.dataset.flyer || CYPH_FLYER_ART, (tex) => {
     tex.colorSpace = THREE.SRGBColorSpace;
     tex.anisotropy = maxAniso;
     tex.needsUpdate = true;
