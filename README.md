@@ -37,7 +37,7 @@ partners/           the partner deck's own sources: close.html,
 partners/one-off/   single-partner documents, one folder each (deck.json + its PDF); rendered by
                     event-decks, never staged or published (see partners/one-off/README.md)
 trailer.html        trailer.cyph.city: the trailer video behind the same gate (<video data-cyph-track>)
-trailer/            trailer.mp4, the web encode served there (H.264, faststart, no master kept)
+trailer/            trailer.mp4, the web encode served there; trailer/README.md = how to swap in a new cut
 auth.js             email gate + access/dwell logging; runs on both paths; shared with event-decks
 apps-script/        Code.gs, the Google Apps Script logger source (one sheet)
 tools/              export-pdf.mjs (PDF + phone pages), check-paths.mjs, publish-investors.mjs,
@@ -88,4 +88,4 @@ There is no lint step. To view locally, run `make sites` from the monorepo root 
 - `/deck/latest/` resolves to `current` in `versions.json`; that is the link handed out.
 - GitHub Pages keeps serving `main:/` untouched by the workflow.
 - partners.cyph.city: `.github/workflows/deploy-partners.yml` runs `node tools/publish-partners.mjs` on every push to main that touches the partner deck or its sources (also by hand: workflow_dispatch, or the script from the Mac with `AWS_PROFILE=cyph`). CI rebuilds partners.html and fails if it differs from the commit, so run `npm run partners` before pushing an edit to a reused slide. S3 bucket `cyph-partners-prod` + CloudFront from cyph-terraform `partners.tf`; ids in `tools/partners.json`. The stage is an allow-list and refuses to publish if any investor-only file (index.html as the investor deck, deck.js, cyph-deck.pdf, assets/deck-pages/) is in it.
-- trailer.cyph.city: `.github/workflows/deploy-trailer.yml` runs `node tools/publish-trailer.mjs` on every push to main that touches `trailer.html`, `trailer/**`, the gate files or the script (also by hand: workflow_dispatch, or the script from the Mac with `AWS_PROFILE=cyph`). S3 bucket `cyph-trailer-prod` + CloudFront from cyph-terraform `trailer.tf`; ids in `tools/trailer.json`. The stage is an allow-list: the page, the gate files, `trailer/trailer.mp4`, `404.html` and `/common/`.
+- trailer.cyph.city: `.github/workflows/deploy-trailer.yml` runs `node tools/publish-trailer.mjs` on every push to main that touches `trailer.html`, `trailer/**`, the gate files or the script (also by hand: workflow_dispatch, or the script from the Mac with `AWS_PROFILE=cyph`). S3 bucket `cyph-trailer-prod` + CloudFront from cyph-terraform `trailer.tf`; ids in `tools/trailer.json`. The stage is an allow-list: the page, the gate files, `trailer/trailer.mp4`, `404.html` and `/common/`. **New trailer cut: follow [trailer/README.md](trailer/README.md).**
