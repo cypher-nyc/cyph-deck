@@ -1,0 +1,117 @@
+<!doctype html>
+<!-- trailer.cyph.city: one video behind the same email gate as the decks.
+     Published by tools/publish-trailer.mjs as index.html. auth.js logs the
+     access row and, through <video data-cyph-track>, the watch time. -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover"
+    />
+    <title>cyph - trailer</title>
+    <link rel="icon" type="image/png" href="favicon.png" />
+
+    <!-- same unfurl as the partner deck -->
+    <meta property="og:image" content="https://cyph.city/logo/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:title" content="cyph" />
+    <meta
+      property="og:description"
+      content="The underground arena for ideas."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://trailer.cyph.city/" />
+    <meta property="og:site_name" content="cyph" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="cyph" />
+    <meta
+      name="twitter:description"
+      content="The underground arena for ideas."
+    />
+    <meta name="twitter:image" content="https://cyph.city/logo/og-image.png" />
+
+    <link rel="stylesheet" href="base.css" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: #000;
+      }
+      #trailer {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- preload="metadata": nothing big is fetched until the viewer is past
+         the gate and presses play -->
+    <video
+      id="trailer"
+      data-cyph-track
+      src="trailer/trailer.mp4"
+      controls
+      playsinline
+      preload="metadata"
+    ></video>
+
+    <div id="auth-gate" aria-label="access gate">
+      <div class="auth-panel">
+        <div class="station-sign auth-sign">
+          <div class="station-name">we're the new underground.</div>
+          <div class="station-bullets">
+            <span class="station-bullet paprika">C</span
+            ><span class="station-bullet cornflower">Y</span
+            ><span class="station-bullet amber">P</span
+            ><span class="station-bullet amaranth">H</span>
+          </div>
+        </div>
+        <form id="auth-form" autocomplete="off">
+          <input
+            id="auth-input"
+            type="email"
+            inputmode="email"
+            autocomplete="off"
+            autocapitalize="off"
+            autocorrect="off"
+            spellcheck="false"
+            placeholder="enter your email..."
+          />
+          <button type="submit">enter</button>
+        </form>
+        <div id="auth-err">&nbsp;</div>
+      </div>
+    </div>
+
+    <script src="auth.js" data-viewed="trailer"></script>
+    <script>
+      /* Play as soon as the gate opens. auth.js adds body.authed inside the
+         submit handler, so play() still runs in the viewer's gesture and
+         starts with sound. A viewer already authed this session has no
+         gesture; the browser refuses sound there, so it starts muted. */
+      (function () {
+        var video = document.getElementById("trailer");
+        var started = false;
+        function start() {
+          if (started || !document.body.classList.contains("authed")) return;
+          started = true;
+          video.play().catch(function () {
+            video.muted = true;
+            video.play().catch(function () {});
+          });
+        }
+        new MutationObserver(start).observe(document.body, {
+          attributes: true,
+          attributeFilter: ["class"],
+        });
+        start();
+      })();
+    </script>
+  </body>
+</html>

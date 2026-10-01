@@ -137,6 +137,21 @@ partners.cyph.city (S3 `cyph-partners-prod` + CloudFront) whenever a push to
 changed without `npm run partners`), because a stale build also means stale
 phone pages. A push to GitHub Pages alone never updates this host.
 
+## Trailer (trailer.cyph.city)
+
+`trailer.html` is one `<video data-cyph-track>` behind the partner deck's gate
+(same placard and wording), logged as `viewed = trailer`. auth.js sees the
+`data-cyph-track` video and logs watch time instead of slide time on the same
+`timings` rows: keys are 5s segments of the video (`"0:00"`, `"0:05"` ...)
+holding ms actually played forward, so `totalSec` is time watched and the
+last key is how far they got. Seeks, pauses and loop restarts bank nothing;
+a paused tab sends no interval rows. The deck path through auth.js is
+unchanged. No Apps Script redeploy was needed.
+
+`trailer/trailer.mp4` is a web encode (H.264 yuv420p, `-movflags +faststart`,
+alpha flattened onto black); never commit the master. Replacing the trailer =
+swap that file and push; `deploy-trailer.yml` publishes it.
+
 ## PDF export
 
 `npm run pdf` (→ `tools/export-pdf.mjs`) regenerates **both** `cyph-deck.pdf`

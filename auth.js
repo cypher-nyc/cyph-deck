@@ -7,7 +7,9 @@
 
    The same file is served on every surface — the GitHub Pages deck, each
    versioned deck at investors.cyph.city/deck/<version>/, the one-pager,
-   and every partner deck and invite at events.cyph.city. The page tells
+   partners.cyph.city, trailer.cyph.city (video watch time instead of
+   slide time, see trackVideo) and every partner deck and invite at
+   events.cyph.city. The page tells
    it which surface it is through the script tag's data-* attributes
    (window.CYPH_GATE works too):
 
@@ -189,24 +191,75 @@ var LOG_URL =
     });
   }
 
+  /* ─── video watch tracking ───
+     A page with <video data-cyph-track> (trailer.cyph.city) logs watch time
+     instead of slide time, on the same `timings` rows: each key is a 5s
+     segment of the video ("0:00", "0:05" …) holding the ms of it actually
+     played, so totalSec is time watched and the last key is how far they
+     got. Only forward playback counts; a seek, pause or loop restart
+     banks nothing. Same 3-minute cap per key as a slide. */
+  var VIDEO_SEGMENT_SEC = 5;
+  var videoDirty = false;
+
+  function videoKey(sec) {
+    var s = Math.floor(sec / VIDEO_SEGMENT_SEC) * VIDEO_SEGMENT_SEC;
+    var r = s % 60;
+    return Math.floor(s / 60) + ":" + (r < 10 ? "0" : "") + r;
+  }
+
+  function trackVideo(video) {
+    var last = null;
+    function reset() {
+      last = null;
+    }
+    video.addEventListener("timeupdate", function () {
+      var now = video.currentTime;
+      if (last != null && !video.paused && !video.seeking) {
+        var delta = now - last;
+        /* timeupdate fires every ~250ms; anything bigger is a jump */
+        if (delta > 0 && delta < 2) {
+          var key = videoKey(last);
+          var prior = slideTimings[key] || 0;
+          if (prior < SLIDE_CAP_MS) {
+            slideTimings[key] = Math.min(prior + delta * 1000, SLIDE_CAP_MS);
+            videoDirty = true;
+          }
+        }
+      }
+      last = now;
+    });
+    video.addEventListener("seeking", reset);
+    video.addEventListener("pause", reset);
+    video.addEventListener("ended", reset);
+  }
+
   function startTracking() {
     if (trackingStarted) return;
+    var video = document.querySelector("video[data-cyph-track]");
     var hudCtr = document.getElementById("hudCtr");
-    if (!hudCtr) return;
+    if (!video && !hudCtr) return;
     trackingStarted = true;
     sessionStart = new Date().toISOString();
-    currentSlideKey = readSlideKey();
-    currentSlideStart = Date.now();
-    try {
-      new MutationObserver(onSlidePossiblyChanged).observe(hudCtr, {
-        childList: true,
-        characterData: true,
-        subtree: true,
-      });
-    } catch (e) {}
+    if (video) {
+      trackVideo(video);
+    } else {
+      currentSlideKey = readSlideKey();
+      currentSlideStart = Date.now();
+      try {
+        new MutationObserver(onSlidePossiblyChanged).observe(hudCtr, {
+          childList: true,
+          characterData: true,
+          subtree: true,
+        });
+      } catch (e) {}
+    }
     /* periodic safety-net flush in case neither pagehide nor visibilitychange
-       fires (rare on desktop, more common on mobile when the OS kills tabs) */
+       fires (rare on desktop, more common on mobile when the OS kills tabs).
+       A video that has not played since the last flush sends nothing, so a
+       paused tab does not write a row every 30s. */
     setInterval(function () {
+      if (video && !videoDirty) return;
+      videoDirty = false;
       flushTimings("interval");
     }, 30000);
     document.addEventListener("visibilitychange", function () {

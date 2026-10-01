@@ -1,0 +1,44 @@
+name: Publish trailer.cyph.city
+
+# The trailer page publishes on every push to main that touches anything
+# tools/publish-trailer.mjs stages.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "trailer.html"
+      - "trailer/**"
+      - "auth.js"
+      - "base.css"
+      - "favicon.png"
+      - "site/404.html"
+      - "tools/publish-trailer.mjs"
+      - "tools/trailer.json"
+      - ".github/workflows/deploy-trailer.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: publish-trailer
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      AWS_REGION: us-east-1
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Publish
+        run: node tools/publish-trailer.mjs
