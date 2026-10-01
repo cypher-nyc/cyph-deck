@@ -8,7 +8,9 @@
      viewed   one column, every surface id ever seen; feeds the dropdown
 
    `viewed` is the surface id auth.js sends (deck/sept26, onepager,
-   knicks002/partner, knicks002/invite ...). `meta` is whatever JSON the page
+   partners, trailer, knicks002/partner, knicks002/invite ...). On the
+   trailer, `timings` keys are 5s video segments ("0:00", "0:05" ...)
+   instead of slide numbers. `meta` is whatever JSON the page
    attached (a guest id on an invite).
 
    Install / upgrade (the /exec URL does not change):

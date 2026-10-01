@@ -8,10 +8,10 @@ Standalone: yes. No platform service is called. The only shared things are `auth
 
 | Service | Direction | Protocol | For what |
 |---|---|---|---|
-| Google Apps Script web app (`apps-script/Code.gs`) | out | HTTPS POST (`fetch` / `sendBeacon`) from `auth.js` | email gate, one access row per surface per tab session, per-slide dwell timings |
+| Google Apps Script web app (`apps-script/Code.gs`) | out | HTTPS POST (`fetch` / `sendBeacon`) from `auth.js` | email gate, one access row per surface per tab session, per-slide dwell timings (per-5s-segment watch time on the trailer) |
 | `site/deck/versions.json` (same host) | out | HTTPS GET from `auth.js` | retired-version check before showing the gate |
 | event-decks | in | copies `auth.js`, `base.css`, `favicon.png`, `site/common/viewer.*` | events.cyph.city builds its `/common/` bundle from these files |
-| cyph-terraform (`investors.tf`) | in | outputs | bucket + distribution id in `tools/investors.json` |
+| cyph-terraform (`investors.tf`, `partners.tf`, `trailer.tf`) | in | outputs | bucket + distribution id in `tools/investors.json`, `tools/partners.json`, `tools/trailer.json` |
 | cdnjs (anime.js), unpkg (three.js), Google Fonts | out | script/style tags | desktop deck animation and `iso3d.js` canvases |
 
 Events published/subscribed: none.
@@ -36,6 +36,8 @@ partners/           the partner deck's own sources: close.html,
                     partners.js (its deck.js), partners.css (on top of styles.css)
 partners/one-off/   single-partner documents, one folder each (deck.json + its PDF); rendered by
                     event-decks, never staged or published (see partners/one-off/README.md)
+trailer.html        trailer.cyph.city: the trailer video behind the same gate (<video data-cyph-track>)
+trailer/            trailer.mp4, the web encode served there (H.264, faststart, no master kept)
 auth.js             email gate + access/dwell logging; runs on both paths; shared with event-decks
 apps-script/        Code.gs, the Google Apps Script logger source (one sheet)
 tools/              export-pdf.mjs (PDF + phone pages), check-paths.mjs, publish-investors.mjs,
@@ -58,6 +60,7 @@ npm run check    # tools/check-paths.mjs: asserts each device fetches only its o
 node tools/publish-investors.mjs site --dry-run
 node tools/publish-investors.mjs deck --version <id> --dry-run
 node tools/publish-partners.mjs --dry-run
+node tools/publish-trailer.mjs --dry-run
 ```
 
 There is no lint step. To view locally, run `make sites` from the monorepo root and open `http://investors.localhost:4700/`; `auth.js` bypasses the gate on `localhost`, `127.0.0.1` and `*.localhost`.
@@ -85,3 +88,4 @@ There is no lint step. To view locally, run `make sites` from the monorepo root 
 - `/deck/latest/` resolves to `current` in `versions.json`; that is the link handed out.
 - GitHub Pages keeps serving `main:/` untouched by the workflow.
 - partners.cyph.city: `.github/workflows/deploy-partners.yml` runs `node tools/publish-partners.mjs` on every push to main that touches the partner deck or its sources (also by hand: workflow_dispatch, or the script from the Mac with `AWS_PROFILE=cyph`). CI rebuilds partners.html and fails if it differs from the commit, so run `npm run partners` before pushing an edit to a reused slide. S3 bucket `cyph-partners-prod` + CloudFront from cyph-terraform `partners.tf`; ids in `tools/partners.json`. The stage is an allow-list and refuses to publish if any investor-only file (index.html as the investor deck, deck.js, cyph-deck.pdf, assets/deck-pages/) is in it.
+- trailer.cyph.city: `.github/workflows/deploy-trailer.yml` runs `node tools/publish-trailer.mjs` on every push to main that touches `trailer.html`, `trailer/**`, the gate files or the script (also by hand: workflow_dispatch, or the script from the Mac with `AWS_PROFILE=cyph`). S3 bucket `cyph-trailer-prod` + CloudFront from cyph-terraform `trailer.tf`; ids in `tools/trailer.json`. The stage is an allow-list: the page, the gate files, `trailer/trailer.mp4`, `404.html` and `/common/`.

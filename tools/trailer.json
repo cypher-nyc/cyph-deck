@@ -1,0 +1,6 @@
+{
+  "_note": "trailer.cyph.city hosting, from cyph-terraform (trailer.tf) outputs. Not secrets.",
+  "host": "trailer.cyph.city",
+  "bucket": "cyph-trailer-prod",
+  "distributionId": "E28C2KQPKOBSQE"
+}
