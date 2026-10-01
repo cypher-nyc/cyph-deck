@@ -150,7 +150,9 @@ unchanged. No Apps Script redeploy was needed.
 
 `trailer/trailer.mp4` is a web encode (H.264 yuv420p, `-movflags +faststart`,
 alpha flattened onto black); never commit the master. Replacing the trailer =
-swap that file and push; `deploy-trailer.yml` publishes it.
+follow `trailer/README.md` step by step (encode, size check < 100 MB, push to
+main); `deploy-trailer.yml` publishes it. Keep that README the one source for
+the procedure.
 
 ## PDF export
 
