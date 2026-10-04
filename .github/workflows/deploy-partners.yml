@@ -23,6 +23,7 @@ on:
       - "mobile.css"
       - "mobile.js"
       - "iso3d.js"
+      - "cosmos.js"
       - "favicon.png"
       - "site/404.html"
       - "tools/build-partners.mjs"

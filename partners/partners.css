@@ -2,3 +2,27 @@
    Loads on top of styles.css, desktop path only. Every partner slide is an
    investor slide under its own id (how it works included, as s5), so only
    partner-specific overrides live here. */
+
+/* ── s4 (we're the new underground): no market sizing for partners — the
+   TAM diagram and its footnote go, and the claim (headline, paragraph,
+   stats) centers on the slide ── */
+#s4 .now-diagram,
+#s4 .now-note {
+  display: none;
+}
+#s4 .now-wrap {
+  justify-content: center;
+}
+#s4 .now-claim {
+  align-items: center;
+  width: 760px;
+  padding-right: 0;
+  text-align: center;
+}
+#s4 .now-hero .station-name {
+  text-align: center;
+  text-wrap: balance;
+}
+#s4 .now-body {
+  max-width: 620px;
+}

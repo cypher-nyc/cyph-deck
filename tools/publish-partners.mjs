@@ -33,7 +33,7 @@ const DIST_ID = process.env.PARTNERS_DISTRIBUTION_ID || CFG.distributionId;
 
 /* everything partners.html can request, by path from the repo root */
 const FILES = [
-  "auth.js", "base.css", "styles.css", "mobile.css", "mobile.js", "iso3d.js", "favicon.png",
+  "auth.js", "base.css", "styles.css", "mobile.css", "mobile.js", "iso3d.js", "cosmos.js", "favicon.png",
   "partners/partners.css", "partners/partners.js",
 ];
 const DIRS = ["assets"];
