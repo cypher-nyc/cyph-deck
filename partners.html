@@ -38,7 +38,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Nixie+One&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Nixie+One&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap"
       rel="stylesheet"
     />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
@@ -542,7 +542,7 @@
       </div>
 
       <div class="slide dark" id="s3">
-        <h2>but crisis always sparks counter culture.</h2>
+        <h2>but crisis always had an underground.</h2>
         <div class="crisis-canvas">
           <img
             class="crisis-float crisis-float-1"
@@ -596,34 +596,157 @@
         </div>
       </div>
 
-      <div
-        class="slide"
-        id="s4"
-        style="
-          align-items: flex-start;
-          background: url(&quot;assets/backgrounds/neon_lights.png&quot;)
-            center/cover no-repeat;
-        "
-      >
-        <h2 style="color: #fff">what about now?</h2>
-        <div class="station-sign" style="position: static">
-          <div class="station-name" style="font-size: 64px">
-            we're the new underground.
+      <div class="slide" id="s4" style="align-items: flex-start">
+        <div class="now-wrap">
+          <!-- left: the claim -->
+          <div class="now-claim">
+            <div class="now-hero">
+              <div class="station-name">
+                we're the new underground for the digital age.
+              </div>
+            </div>
+            <p class="deck-takeaway-body now-body">
+              the hunger for wisdom is everywhere. but no corner of the
+              internet is built purely for ideas.
+            </p>
+            <!-- the case in four stats, set like the crisis slide's cards
+                 (s2): headline, italic evidence line, source -->
+            <div class="now-stats">
+              <div class="crisis-card">
+                <h3>the feed has peaked.</h3>
+                <p class="crisis-quote">↓10% global time on social since 2022</p>
+                <p class="crisis-src"><img src="assets/brands/ft.svg" class="crisis-brand" alt="financial times" /><span>oct 2025</span></p>
+              </div>
+              <div class="crisis-card">
+                <h3>they want answers they can trust.</h3>
+                <p class="crisis-quote">94% don&#x27;t fully trust ai answers</p>
+                <p class="crisis-src"><img src="assets/brands/pew.png" class="crisis-brand" alt="pew research center" /><span>oct 2025</span></p>
+              </div>
+              <div class="crisis-card">
+                <h3>they&#x27;re gathering around ideas in person.</h3>
+                <p class="crisis-quote">+31% book club events, 2024</p>
+                <p class="crisis-src"><img src="assets/brands/nbc_news.png" class="crisis-brand" alt="nbc news" /><span>apr 2025</span></p>
+              </div>
+              <div class="crisis-card">
+                <h3>they&#x27;re paying for thinkers they trust.</h3>
+                <p class="crisis-quote">2.5x paid substack subs since 2023</p>
+                <p class="crisis-src"><img src="assets/brands/axios.png" class="crisis-brand" alt="axios" /><span>jul 2025</span></p>
+              </div>
+            </div>
           </div>
-          <div class="station-bullets">
-            <span class="station-bullet paprika">C</span
-            ><span class="station-bullet cornflower">Y</span
-            ><span class="station-bullet amber">P</span
-            ><span class="station-bullet amaranth">H</span>
+
+          <!-- right: three scattered audiences converging on cyph. s8's
+               row language (colored left rule / h4 / figures) around the
+               logo dots in the station-sign card; s8's floating brand logos
+               stand in for the platforms they're scattered across. -->
+          <div class="now-diagram">
+            <div class="now-group now-group--seek">
+              <div class="now-logos">
+                <img src="assets/brands/logos/image.png" alt="openai" style="animation: drift1 9s ease-in-out infinite" />
+                <img src="assets/brands/logos/Google_Favicon_2025.svg.png" alt="google" style="animation: drift2 11s ease-in-out infinite" />
+                <img src="assets/brands/logos/Amazon_Kindle_icon_2017.webp" alt="kindle" style="animation: drift3 10s ease-in-out infinite" />
+              </div>
+              <div class="now-persona">
+                <h4>seekers</h4>
+                <p>
+                  people who actively pursue depth, not just content
+                  consumption.
+                </p>
+                <p class="now-eg">
+                  (i.e. rabbit-hole divers, obsessive researchers)
+                </p>
+                <div class="now-nums">
+                  <span><small>tam</small><b>2B</b></span
+                  ><span><small>sam</small><b>400M</b></span
+                  ><span><small>som</small><b>15M</b></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="now-group now-group--spar">
+              <div class="now-logos">
+                <img src="assets/brands/logos/TikTok-Logo-2016-present.png" alt="tiktok" style="animation: drift4 8s ease-in-out infinite" />
+                <img src="assets/brands/logos/Discord-Emblem.png" alt="discord" style="animation: drift5 12s ease-in-out infinite" />
+                <img src="assets/brands/logos/Clubhouse_App_Logo.svg.png" alt="clubhouse" style="animation: drift6 9s ease-in-out infinite" />
+              </div>
+              <div class="now-persona">
+                <h4>sparrers</h4>
+                <p>
+                  people who enjoy testing ideas publicly and engaging in
+                  debate.
+                </p>
+                <p class="now-eg">
+                  (i.e. sport fans, pop culture enthusiasts)
+                </p>
+                <div class="now-nums">
+                  <span><small>tam</small><b>1.5B</b></span
+                  ><span><small>sam</small><b>250M</b></span
+                  ><span><small>som</small><b>12M</b></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="now-cyph">
+              <div class="station-bullets">
+                <span class="station-bullet paprika">C</span
+                ><span class="station-bullet cornflower">Y</span
+                ><span class="station-bullet amber">P</span
+                ><span class="station-bullet amaranth">H</span>
+              </div>
+            </div>
+            <p class="now-tagline">
+              on cyph, <strong class="now-seek">seekers</strong>,
+              <strong class="now-spar">sparrers</strong>, and
+              <strong class="now-auth">authorities</strong> meet to push
+              underground thought forward.
+            </p>
+
+            <div class="now-group now-group--auth">
+              <div class="now-persona">
+                <h4>"authorities"</h4>
+                <p>
+                  people with earned knowledge who want distribution +
+                  engagement beyond their niche.
+                </p>
+                <p class="now-eg">
+                  (i.e. substack essayists, new school professors)
+                </p>
+                <div class="now-nums">
+                  <span><small>tam</small><b>300M</b></span
+                  ><span><small>sam</small><b>50M</b></span
+                  ><span><small>som</small><b>4M</b></span>
+                </div>
+              </div>
+              <div class="now-logos">
+                <img src="assets/brands/logos/YouTube_full-color_icon_(2017).svg.png" alt="youtube" style="animation: drift1 11s ease-in-out infinite" />
+                <img src="assets/brands/logos/substack.png" alt="substack" style="animation: drift3 10s ease-in-out infinite" />
+                <img src="assets/brands/logos/Instagram_logo_2016.svg.png" alt="instagram" style="animation: drift5 9s ease-in-out infinite" />
+              </div>
+            </div>
           </div>
         </div>
+        <p class="now-note">
+          behaviors are not mutually exclusive. breakdown available upon
+          request.
+        </p>
       </div>
 
       <div class="slide" id="s5">
-        <h2>how it works</h2>
+        <h2>user journey</h2>
+        <a
+          class="hiw-trailer"
+          href="https://trailer.cyph.city"
+          target="_blank"
+          rel="noopener"
+          >see trailer here</a
+        >
         <div class="hiw-wrap">
-          <!-- same stack as s5: irl (top) / cyph / underground -->
+          <!-- the stack, top to bottom: cyphcard / irl / cyph / underground —
+               built from the ground up, so step 1 sits at the bottom -->
           <div class="layer-stack">
+            <div class="iso-layer" id="isoL4" data-step="4">
+              <canvas class="iso-canvas" id="isoCardCanvas"></canvas>
+            </div>
             <div class="iso-layer" id="isoL3" data-step="3">
               <img class="iso-polaroid" src="assets/irl/polaroid.jpg" alt="" draggable="false" />
             </div>
@@ -644,473 +767,11 @@
               <h3 class="layer-anno-title">underground</h3>
               <p class="layer-anno-sub">where you become dangerous.</p>
               <p class="layer-anno-desc">
-                swipe in. pick a route. uncover a living world of buried artifacts, and suppressed ideas. your cyphcard maps how you think over time.
+                swipe in. pick a route. uncover a living world of buried artifacts, and suppressed ideas.
               </p>
+              <!-- the resource cosmos (cosmos.js builds it) -->
               <div class="hiw-detail hiw-ug">
-                <div class="hiw-map">
-                  <svg
-              id="transitSvg"
-              viewBox="0 0 380 360"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              style="width: 100%; display: block"
-            >
-              <!-- ROUTE LINES (rendered first so labels sit on top) -->
-              <polyline
-                id="route-philosophy"
-                points="50,25 50,130 170,130 170,250 170,340"
-                stroke="#FBAF00"
-                stroke-width="6"
-                stroke-linejoin="round"
-                fill="none"
-                stroke-linecap="round"
-                style="stroke-dasharray: 900; stroke-dashoffset: 900"
-              />
-              <polyline
-                id="route-sports"
-                points="140,25 140,80 290,80 290,190 290,340"
-                stroke="#EC4E20"
-                stroke-width="6"
-                stroke-linejoin="round"
-                fill="none"
-                stroke-linecap="round"
-                style="stroke-dasharray: 900; stroke-dashoffset: 900"
-              />
-              <polyline
-                id="route-theology"
-                points="330,25 330,165 90,165 90,300 90,340"
-                stroke="#6D1A36"
-                stroke-width="6"
-                stroke-linejoin="round"
-                fill="none"
-                stroke-linecap="round"
-                style="stroke-dasharray: 900; stroke-dashoffset: 900"
-              />
-              <polyline
-                id="route-architecture"
-                points="240,25 240,270 360,270 360,340"
-                stroke="#608FE6"
-                stroke-width="6"
-                stroke-linejoin="round"
-                fill="none"
-                stroke-linecap="round"
-                style="stroke-dasharray: 900; stroke-dashoffset: 900"
-              />
-
-              <!-- PHILOSOPHY stops -->
-              <circle
-                cx="50"
-                cy="25"
-                r="5.5"
-                fill="#1a1a18"
-                stroke="#fff"
-                stroke-width="2.5"
-                class="stop"
-                data-route="philosophy"
-                style="opacity: 0"
-              />
-              <text
-                x="64"
-                y="29"
-                fill="rgba(255,255,255,0.65)"
-                font-size="11"
-                font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
-                class="stop-text"
-                data-route="philosophy"
-                style="opacity: 0"
-              >
-                plato
-              </text>
-              <circle
-                cx="50"
-                cy="130"
-                r="5.5"
-                fill="#1a1a18"
-                stroke="#fff"
-                stroke-width="2.5"
-                class="stop"
-                data-route="philosophy"
-                style="opacity: 0"
-              />
-              <text
-                x="30"
-                y="120"
-                fill="rgba(255,255,255,0.65)"
-                font-size="11"
-                font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
-                text-anchor="middle"
-                class="stop-text"
-                data-route="philosophy"
-                style="opacity: 0"
-              >
-                kant
-              </text>
-              <circle
-                cx="170"
-                cy="250"
-                r="5.5"
-                fill="#1a1a18"
-                stroke="#fff"
-                stroke-width="2.5"
-                class="stop"
-                data-route="philosophy"
-                style="opacity: 0"
-              />
-              <text
-                x="184"
-                y="245"
-                fill="rgba(255,255,255,0.65)"
-                font-size="11"
-                font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
-                class="stop-text"
-                data-route="philosophy"
-                style="opacity: 0"
-              >
-                baldwin
-              </text>
-              <circle
-                cx="170"
-                cy="340"
-                r="5.5"
-                fill="#1a1a18"
-                stroke="#fff"
-                stroke-width="2.5"
-                class="stop"
-                data-route="philosophy"
-                style="opacity: 0"
-              />
-              <text
-                x="184"
-                y="344"
-                fill="rgba(255,255,255,0.65)"
-                font-size="11"
-                font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
-                class="stop-text"
-                data-route="philosophy"
-                style="opacity: 0"
-              >
-                wynter
-              </text>
-
-              <!-- SPORTS stops -->
-              <circle
-                cx="140"
-                cy="25"
-                r="5.5"
-                fill="#1a1a18"
-                stroke="#fff"
-                stroke-width="2.5"
-                class="stop"
-                data-route="sports"
-                style="opacity: 0"
-              />
-              <text
-                x="154"
-                y="29"
-                fill="rgba(255,255,255,0.65)"
-                font-size="11"
-                font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
-                class="stop-text"
-                data-route="sports"
-                style="opacity: 0"
-              >
-                ali
-              </text>
-              <circle
-                cx="140"
-                cy="80"
-                r="5.5"
-                fill="#1a1a18"
-                stroke="#fff"
-                stroke-width="2.5"
-                class="stop"
-                data-route="sports"
-                style="opacity: 0"
-              />
-              <text
-                x="120"
-                y="70"
-                fill="rgba(255,255,255,0.65)"
-                font-size="11"
-                font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
-                text-anchor="middle"
-                class="stop-text"
-                data-route="sports"
-                style="opacity: 0"
-              >
-                iverson
-              </text>
-              <circle
-                cx="290"
-                cy="190"
-                r="5.5"
-                fill="#1a1a18"
-                stroke="#fff"
-                stroke-width="2.5"
-                class="stop"
-                data-route="sports"
-                style="opacity: 0"
-              />
-              <text
-                x="304"
-                y="186"
-                fill="rgba(255,255,255,0.65)"
-                font-size="11"
-                font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
-                class="stop-text"
-                data-route="sports"
-                style="opacity: 0"
-              >
-                osaka
-              </text>
-              <circle
-                cx="290"
-                cy="340"
-                r="5.5"
-                fill="#1a1a18"
-                stroke="#fff"
-                stroke-width="2.5"
-                class="stop"
-                data-route="sports"
-                style="opacity: 0"
-              />
-              <text
-                x="270"
-                y="335"
-                fill="rgba(255,255,255,0.65)"
-                font-size="11"
-                font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
-                text-anchor="end"
-                class="stop-text"
-                data-route="sports"
-                style="opacity: 0"
-              >
-                kaepernick
-              </text>
-
-              <!-- THEOLOGY stops -->
-              <circle
-                cx="330"
-                cy="25"
-                r="5.5"
-                fill="#1a1a18"
-                stroke="#fff"
-                stroke-width="2.5"
-                class="stop"
-                data-route="theology"
-                style="opacity: 0"
-              />
-              <text
-                x="310"
-                y="18"
-                fill="rgba(255,255,255,0.65)"
-                font-size="11"
-                font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
-                text-anchor="end"
-                class="stop-text"
-                data-route="theology"
-                style="opacity: 0"
-              >
-                aquinas
-              </text>
-              <circle
-                cx="330"
-                cy="165"
-                r="5.5"
-                fill="#1a1a18"
-                stroke="#fff"
-                stroke-width="2.5"
-                class="stop"
-                data-route="theology"
-                style="opacity: 0"
-              />
-              <text
-                x="344"
-                y="161"
-                fill="rgba(255,255,255,0.65)"
-                font-size="11"
-                font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
-                class="stop-text"
-                data-route="theology"
-                style="opacity: 0"
-              >
-                cone
-              </text>
-              <circle
-                cx="90"
-                cy="300"
-                r="5.5"
-                fill="#1a1a18"
-                stroke="#fff"
-                stroke-width="2.5"
-                class="stop"
-                data-route="theology"
-                style="opacity: 0"
-              />
-              <text
-                x="70"
-                y="295"
-                fill="rgba(255,255,255,0.65)"
-                font-size="11"
-                font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
-                text-anchor="end"
-                class="stop-text"
-                data-route="theology"
-                style="opacity: 0"
-              >
-                heschel
-              </text>
-              <circle
-                cx="90"
-                cy="340"
-                r="5.5"
-                fill="#1a1a18"
-                stroke="#fff"
-                stroke-width="2.5"
-                class="stop"
-                data-route="theology"
-                style="opacity: 0"
-              />
-              <text
-                x="70"
-                y="344"
-                fill="rgba(255,255,255,0.65)"
-                font-size="11"
-                font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
-                text-anchor="end"
-                class="stop-text"
-                data-route="theology"
-                style="opacity: 0"
-              >
-                sojourner
-              </text>
-
-              <!-- ARCHITECTURE stops -->
-              <circle
-                cx="240"
-                cy="25"
-                r="5.5"
-                fill="#1a1a18"
-                stroke="#fff"
-                stroke-width="2.5"
-                class="stop"
-                data-route="architecture"
-                style="opacity: 0"
-              />
-              <text
-                x="254"
-                y="29"
-                fill="rgba(255,255,255,0.65)"
-                font-size="11"
-                font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
-                class="stop-text"
-                data-route="architecture"
-                style="opacity: 0"
-              >
-                olmsted
-              </text>
-              <circle
-                cx="240"
-                cy="270"
-                r="5.5"
-                fill="#1a1a18"
-                stroke="#fff"
-                stroke-width="2.5"
-                class="stop"
-                data-route="architecture"
-                style="opacity: 0"
-              />
-              <text
-                x="224"
-                y="263"
-                fill="rgba(255,255,255,0.65)"
-                font-size="11"
-                font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
-                text-anchor="end"
-                class="stop-text"
-                data-route="architecture"
-                style="opacity: 0"
-              >
-                adjaye
-              </text>
-              <circle
-                cx="360"
-                cy="270"
-                r="5.5"
-                fill="#1a1a18"
-                stroke="#fff"
-                stroke-width="2.5"
-                class="stop"
-                data-route="architecture"
-                style="opacity: 0"
-              />
-              <text
-                x="350"
-                y="263"
-                fill="rgba(255,255,255,0.65)"
-                font-size="11"
-                font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
-                text-anchor="end"
-                class="stop-text"
-                data-route="architecture"
-                style="opacity: 0"
-              >
-                lin
-              </text>
-              <circle
-                cx="360"
-                cy="340"
-                r="5.5"
-                fill="#1a1a18"
-                stroke="#fff"
-                stroke-width="2.5"
-                class="stop"
-                data-route="architecture"
-                style="opacity: 0"
-              />
-              <text
-                x="350"
-                y="335"
-                fill="rgba(255,255,255,0.65)"
-                font-size="11"
-                font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
-                text-anchor="end"
-                class="stop-text"
-                data-route="architecture"
-                style="opacity: 0"
-              >
-                gang
-              </text>
-            </svg>
-                </div>
-                <div class="hiw-ug-side">
-                  <canvas
-                    id="cyphcardCanvas"
-                    class="cyphcard-3d"
-                    aria-label="cyphcard membership plate"
-                  ></canvas>
-                  <p class="hiw-card-cap">
-                    tap irl books, ideas & artifacts with cyphcard in apple wallet.
-                  </p>
-                  <!-- the investor deck's old s10 inventory collage, at column scale -->
-                  <div class="hiw-inventory">
-                    <img src="assets/artifacts/renaissance.jpg" alt="" style="animation: drift1 9s ease-in-out infinite" />
-                    <img src="assets/artifacts/goya.jpg" alt="" style="animation: drift4 11s ease-in-out infinite" />
-                    <img src="assets/artifacts/babylon_timbuktu.jpg" alt="" style="animation: drift2 10s ease-in-out infinite" />
-                    <img src="assets/artifacts/vanity_fair.jpg" alt="" style="animation: drift5 8.5s ease-in-out infinite" />
-                    <img src="assets/artifacts/films_joan_crawford.jpg" alt="" style="animation: drift3 10.5s ease-in-out infinite" />
-                    <img src="assets/artifacts/birth-of-mahavira.png" alt="" style="animation: drift6 9.5s ease-in-out infinite" />
-                    <img src="assets/artifacts/indian_art.png" alt="" style="animation: drift2 11.5s ease-in-out infinite" />
-                    <img src="assets/artifacts/crisis_black_white.jpg" alt="" style="animation: drift1 10s ease-in-out infinite" />
-                    <img src="assets/artifacts/history_of_bible.jpg" alt="" style="animation: drift4 9s ease-in-out infinite" />
-                    <img src="assets/artifacts/movie_monsters.jpg" alt="" style="animation: drift5 11s ease-in-out infinite" />
-                    <img src="assets/artifacts/sud_afrika.jpg" alt="" style="animation: drift3 8.5s ease-in-out infinite" />
-                    <img src="assets/artifacts/three_friends.jpg" alt="" style="animation: drift6 10s ease-in-out infinite" />
-                    <img src="assets/artifacts/new_age_yearbook.png" alt="" style="animation: drift2 9.5s ease-in-out infinite" />
-                    <img src="assets/artifacts/cool_collage_2.png" alt="" style="animation: drift1 11.5s ease-in-out infinite" />
-                    <img src="assets/artifacts/kid_collage.png" alt="" style="animation: drift4 10.5s ease-in-out infinite" />
-                  </div>
-                </div>
+                <div class="hiw-cosmos" id="hiwCosmos"></div>
               </div>
             </section>
 
@@ -1126,7 +787,7 @@
               </p>
               <div class="hiw-detail hiw-cy">
                 <!-- s8's two flyers, each with its office-hours lead (deck.js
-                     cyphFixtures host), then s8's cyph-type pills -->
+                     cyphFixtures host) -->
                 <div class="hiw-flyers">
                 <figure class="hiw-flyer">
                   <p class="hiw-kind">live</p>
@@ -1138,7 +799,6 @@
                   <div class="hiw-host">
                     <img src="assets/images/knicks_rockets/office_hours/chris_robinson.jpeg" alt="" />
                     <div>
-                      <p class="hiw-host-room">"shut up and dribble:" power in the nba</p>
                       <p class="hiw-host-name">hosted by chris robinson</p>
                     </div>
                   </div>
@@ -1153,20 +813,10 @@
                   <div class="hiw-host">
                     <img src="assets/images/soul_cartesian/office_hours/ian_mcgilchrist.png" alt="" />
                     <div>
-                      <p class="hiw-host-room">the ghost was never in the machine</p>
                       <p class="hiw-host-name">hosted by iain mcgilchrist</p>
                     </div>
                   </div>
                 </figure>
-                </div>
-                <div class="hiw-types">
-                  <p class="hiw-types-label">cyph types</p>
-                  <div class="hiw-pills">
-                    <span style="background: var(--yellow)">open mics</span>
-                    <span style="background: var(--blue)">supper clubs</span>
-                    <span style="background: var(--maroon)">debates</span>
-                    <span style="background: var(--orange)">office hours</span>
-                  </div>
                 </div>
               </div>
             </section>
@@ -1176,10 +826,10 @@
               <span class="layer-anno-num">03</span>
               <h3 class="layer-anno-title">irl</h3>
               <p class="layer-anno-desc">
-                no more screen addiction. close the laptop and enter our world
-                of IRL lectures, office hours, supper clubs, &amp; debates.
+                close the laptop and enter our world of IRL cyphs: lectures,
+                office hours, supper clubs, &amp; debates. the research from
+                the room is archived in our partner libraries.
               </p>
-              <p class="hiw-archive-note">the research from the room is archived in our partner libraries.</p>
               <div class="hiw-detail hiw-irl">
                 <div style="flex: 1; padding-left: 28px" class="room-col">
               <p class="room-eyebrow">our last cyph...</p>
@@ -1234,12 +884,500 @@
                 </div>
               </div>
             </section>
+
+            <!-- 04 how it all maps together: the route map beside the
+                 design system's DNA card (deck.js turns its
+                 orbit band by band while the step shows) -->
+            <section class="hiw-step hiw-step--map" data-step="4">
+              <span class="layer-anno-num">04</span>
+              <h3 class="layer-anno-title">how it all maps together</h3>
+              <p class="layer-anno-desc">
+                map the influence, and intersections of your ideas over time
+                with your cyphcard. everything on cyph has its own dna. with
+                every tap, you learn yours and your community’s.
+              </p>
+              <div class="hiw-detail hiw-maps">
+                <div class="hiw-maps-left">
+                  <div class="hiw-map">
+                    <svg
+                id="transitSvg"
+                viewBox="0 0 380 360"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                style="width: 100%; display: block"
+              >
+                <!-- ROUTE LINES (rendered first so labels sit on top) -->
+                <polyline
+                  id="route-philosophy"
+                  points="50,25 50,130 170,130 170,250 170,340"
+                  stroke="#FBAF00"
+                  stroke-width="6"
+                  stroke-linejoin="round"
+                  fill="none"
+                  stroke-linecap="round"
+                  style="stroke-dasharray: 900; stroke-dashoffset: 900"
+                />
+                <polyline
+                  id="route-sports"
+                  points="140,25 140,80 290,80 290,190 290,340"
+                  stroke="#EC4E20"
+                  stroke-width="6"
+                  stroke-linejoin="round"
+                  fill="none"
+                  stroke-linecap="round"
+                  style="stroke-dasharray: 900; stroke-dashoffset: 900"
+                />
+                <polyline
+                  id="route-theology"
+                  points="330,25 330,165 90,165 90,300 90,340"
+                  stroke="#6D1A36"
+                  stroke-width="6"
+                  stroke-linejoin="round"
+                  fill="none"
+                  stroke-linecap="round"
+                  style="stroke-dasharray: 900; stroke-dashoffset: 900"
+                />
+                <polyline
+                  id="route-architecture"
+                  points="240,25 240,270 360,270 360,340"
+                  stroke="#608FE6"
+                  stroke-width="6"
+                  stroke-linejoin="round"
+                  fill="none"
+                  stroke-linecap="round"
+                  style="stroke-dasharray: 900; stroke-dashoffset: 900"
+                />
+
+                <!-- PHILOSOPHY stops -->
+                <circle
+                  cx="50"
+                  cy="25"
+                  r="5.5"
+                  fill="#1a1a18"
+                  stroke="#fff"
+                  stroke-width="2.5"
+                  class="stop"
+                  data-route="philosophy"
+                  style="opacity: 0"
+                />
+                <text
+                  x="64"
+                  y="29"
+                  fill="rgba(255,255,255,0.65)"
+                  font-size="11"
+                  font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+                  class="stop-text"
+                  data-route="philosophy"
+                  style="opacity: 0"
+                >
+                  plato
+                </text>
+                <circle
+                  cx="50"
+                  cy="130"
+                  r="5.5"
+                  fill="#1a1a18"
+                  stroke="#fff"
+                  stroke-width="2.5"
+                  class="stop"
+                  data-route="philosophy"
+                  style="opacity: 0"
+                />
+                <text
+                  x="30"
+                  y="120"
+                  fill="rgba(255,255,255,0.65)"
+                  font-size="11"
+                  font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+                  text-anchor="middle"
+                  class="stop-text"
+                  data-route="philosophy"
+                  style="opacity: 0"
+                >
+                  kant
+                </text>
+                <circle
+                  cx="170"
+                  cy="250"
+                  r="5.5"
+                  fill="#1a1a18"
+                  stroke="#fff"
+                  stroke-width="2.5"
+                  class="stop"
+                  data-route="philosophy"
+                  style="opacity: 0"
+                />
+                <text
+                  x="184"
+                  y="245"
+                  fill="rgba(255,255,255,0.65)"
+                  font-size="11"
+                  font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+                  class="stop-text"
+                  data-route="philosophy"
+                  style="opacity: 0"
+                >
+                  baldwin
+                </text>
+                <circle
+                  cx="170"
+                  cy="340"
+                  r="5.5"
+                  fill="#1a1a18"
+                  stroke="#fff"
+                  stroke-width="2.5"
+                  class="stop"
+                  data-route="philosophy"
+                  style="opacity: 0"
+                />
+                <text
+                  x="184"
+                  y="344"
+                  fill="rgba(255,255,255,0.65)"
+                  font-size="11"
+                  font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+                  class="stop-text"
+                  data-route="philosophy"
+                  style="opacity: 0"
+                >
+                  wynter
+                </text>
+
+                <!-- SPORTS stops -->
+                <circle
+                  cx="140"
+                  cy="25"
+                  r="5.5"
+                  fill="#1a1a18"
+                  stroke="#fff"
+                  stroke-width="2.5"
+                  class="stop"
+                  data-route="sports"
+                  style="opacity: 0"
+                />
+                <text
+                  x="154"
+                  y="29"
+                  fill="rgba(255,255,255,0.65)"
+                  font-size="11"
+                  font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+                  class="stop-text"
+                  data-route="sports"
+                  style="opacity: 0"
+                >
+                  ali
+                </text>
+                <circle
+                  cx="140"
+                  cy="80"
+                  r="5.5"
+                  fill="#1a1a18"
+                  stroke="#fff"
+                  stroke-width="2.5"
+                  class="stop"
+                  data-route="sports"
+                  style="opacity: 0"
+                />
+                <text
+                  x="120"
+                  y="70"
+                  fill="rgba(255,255,255,0.65)"
+                  font-size="11"
+                  font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+                  text-anchor="middle"
+                  class="stop-text"
+                  data-route="sports"
+                  style="opacity: 0"
+                >
+                  iverson
+                </text>
+                <circle
+                  cx="290"
+                  cy="190"
+                  r="5.5"
+                  fill="#1a1a18"
+                  stroke="#fff"
+                  stroke-width="2.5"
+                  class="stop"
+                  data-route="sports"
+                  style="opacity: 0"
+                />
+                <text
+                  x="304"
+                  y="186"
+                  fill="rgba(255,255,255,0.65)"
+                  font-size="11"
+                  font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+                  class="stop-text"
+                  data-route="sports"
+                  style="opacity: 0"
+                >
+                  osaka
+                </text>
+                <circle
+                  cx="290"
+                  cy="340"
+                  r="5.5"
+                  fill="#1a1a18"
+                  stroke="#fff"
+                  stroke-width="2.5"
+                  class="stop"
+                  data-route="sports"
+                  style="opacity: 0"
+                />
+                <text
+                  x="270"
+                  y="335"
+                  fill="rgba(255,255,255,0.65)"
+                  font-size="11"
+                  font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+                  text-anchor="end"
+                  class="stop-text"
+                  data-route="sports"
+                  style="opacity: 0"
+                >
+                  kaepernick
+                </text>
+
+                <!-- THEOLOGY stops -->
+                <circle
+                  cx="330"
+                  cy="25"
+                  r="5.5"
+                  fill="#1a1a18"
+                  stroke="#fff"
+                  stroke-width="2.5"
+                  class="stop"
+                  data-route="theology"
+                  style="opacity: 0"
+                />
+                <text
+                  x="310"
+                  y="18"
+                  fill="rgba(255,255,255,0.65)"
+                  font-size="11"
+                  font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+                  text-anchor="end"
+                  class="stop-text"
+                  data-route="theology"
+                  style="opacity: 0"
+                >
+                  aquinas
+                </text>
+                <circle
+                  cx="330"
+                  cy="165"
+                  r="5.5"
+                  fill="#1a1a18"
+                  stroke="#fff"
+                  stroke-width="2.5"
+                  class="stop"
+                  data-route="theology"
+                  style="opacity: 0"
+                />
+                <text
+                  x="344"
+                  y="161"
+                  fill="rgba(255,255,255,0.65)"
+                  font-size="11"
+                  font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+                  class="stop-text"
+                  data-route="theology"
+                  style="opacity: 0"
+                >
+                  cone
+                </text>
+                <circle
+                  cx="90"
+                  cy="300"
+                  r="5.5"
+                  fill="#1a1a18"
+                  stroke="#fff"
+                  stroke-width="2.5"
+                  class="stop"
+                  data-route="theology"
+                  style="opacity: 0"
+                />
+                <text
+                  x="70"
+                  y="295"
+                  fill="rgba(255,255,255,0.65)"
+                  font-size="11"
+                  font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+                  text-anchor="end"
+                  class="stop-text"
+                  data-route="theology"
+                  style="opacity: 0"
+                >
+                  heschel
+                </text>
+                <circle
+                  cx="90"
+                  cy="340"
+                  r="5.5"
+                  fill="#1a1a18"
+                  stroke="#fff"
+                  stroke-width="2.5"
+                  class="stop"
+                  data-route="theology"
+                  style="opacity: 0"
+                />
+                <text
+                  x="70"
+                  y="344"
+                  fill="rgba(255,255,255,0.65)"
+                  font-size="11"
+                  font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+                  text-anchor="end"
+                  class="stop-text"
+                  data-route="theology"
+                  style="opacity: 0"
+                >
+                  sojourner
+                </text>
+
+                <!-- ARCHITECTURE stops -->
+                <circle
+                  cx="240"
+                  cy="25"
+                  r="5.5"
+                  fill="#1a1a18"
+                  stroke="#fff"
+                  stroke-width="2.5"
+                  class="stop"
+                  data-route="architecture"
+                  style="opacity: 0"
+                />
+                <text
+                  x="254"
+                  y="29"
+                  fill="rgba(255,255,255,0.65)"
+                  font-size="11"
+                  font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+                  class="stop-text"
+                  data-route="architecture"
+                  style="opacity: 0"
+                >
+                  olmsted
+                </text>
+                <circle
+                  cx="240"
+                  cy="270"
+                  r="5.5"
+                  fill="#1a1a18"
+                  stroke="#fff"
+                  stroke-width="2.5"
+                  class="stop"
+                  data-route="architecture"
+                  style="opacity: 0"
+                />
+                <text
+                  x="224"
+                  y="263"
+                  fill="rgba(255,255,255,0.65)"
+                  font-size="11"
+                  font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+                  text-anchor="end"
+                  class="stop-text"
+                  data-route="architecture"
+                  style="opacity: 0"
+                >
+                  adjaye
+                </text>
+                <circle
+                  cx="360"
+                  cy="270"
+                  r="5.5"
+                  fill="#1a1a18"
+                  stroke="#fff"
+                  stroke-width="2.5"
+                  class="stop"
+                  data-route="architecture"
+                  style="opacity: 0"
+                />
+                <text
+                  x="350"
+                  y="263"
+                  fill="rgba(255,255,255,0.65)"
+                  font-size="11"
+                  font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+                  text-anchor="end"
+                  class="stop-text"
+                  data-route="architecture"
+                  style="opacity: 0"
+                >
+                  lin
+                </text>
+                <circle
+                  cx="360"
+                  cy="340"
+                  r="5.5"
+                  fill="#1a1a18"
+                  stroke="#fff"
+                  stroke-width="2.5"
+                  class="stop"
+                  data-route="architecture"
+                  style="opacity: 0"
+                />
+                <text
+                  x="350"
+                  y="335"
+                  fill="rgba(255,255,255,0.65)"
+                  font-size="11"
+                  font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+                  text-anchor="end"
+                  class="stop-text"
+                  data-route="architecture"
+                  style="opacity: 0"
+                >
+                  gang
+                </text>
+              </svg>
+                  </div>
+                </div>
+                <div class="hiw-dna">
+                  <article class="dna-card" id="dnaCard">
+                    <header class="dna-head">
+                      <img class="dna-face dna-face--disc" src="assets/cosmos/blue_yodel.webp" alt="" />
+                      <div><p class="dna-kind">resource · record</p><h4 class="dna-title">blue yodel</h4><p class="dna-sub">jimmie rodgers · 1927</p></div>
+                    </header>
+                    <div class="dna-orbit">
+                      <span class="dna-guide" style="--r: 44px"></span>
+                      <span class="dna-guide" style="--r: 64px"></span>
+                      <span class="dna-guide" style="--r: 84px"></span>
+                      <span class="dna-guide" style="--r: 104px"></span>
+                      <span class="dna-nucleus"><img src="assets/cosmos/blue_yodel.webp" alt="" /></span>
+                      <span class="dna-node" data-band="0" title="bessie smith" style="--r: 44px; --dur: 70s; --delay: -0.0s; --dir: normal; --c: var(--yellow)"><span class="dna-upright person"><img src="assets/cosmos/bessie.webp" alt="" /></span></span>
+                      <span class="dna-node" data-band="0" title="st. louis blues" style="--r: 44px; --dur: 70s; --delay: -17.5s; --dir: normal; --c: var(--yellow)"><span class="dna-upright cover"><img src="assets/cosmos/st_louis_blues.webp" alt="" /></span></span>
+                      <span class="dna-node" data-band="0" title="appalachian ballads" style="--r: 44px; --dur: 70s; --delay: -35.0s; --dir: normal; --c: var(--yellow)"><span class="dna-upright cover typo"><b>appalachian ballads</b></span></span>
+                      <span class="dna-node" data-band="0" title="railroad work songs" style="--r: 44px; --dur: 70s; --delay: -52.5s; --dir: normal; --c: var(--yellow)"><span class="dna-upright cover typo"><b>railroad work songs</b></span></span>
+                      <span class="dna-node" data-band="1" title="the carter family" style="--r: 64px; --dur: 82s; --delay: -0.0s; --dir: reverse; --c: var(--blue)"><span class="dna-upright person"><img src="assets/cosmos/carter_family.webp" alt="" /></span></span>
+                      <span class="dna-node" data-band="1" title="louis armstrong" style="--r: 64px; --dur: 82s; --delay: -27.33s; --dir: reverse; --c: var(--blue)"><span class="dna-upright person"><img src="assets/cosmos/armstrong.webp" alt="" /></span></span>
+                      <span class="dna-node" data-band="1" title="the bristol sessions, 1927" style="--r: 64px; --dur: 82s; --delay: -54.67s; --dir: reverse; --c: var(--blue)"><span class="dna-upright cover typo"><b>the bristol sessions, 1927</b></span></span>
+                      <span class="dna-node" data-band="2" title="the nashville sound" style="--r: 84px; --dur: 94s; --delay: -0.0s; --dir: normal; --c: var(--maroon)"><span class="dna-upright cover typo"><b>the nashville sound</b></span></span>
+                      <span class="dna-node" data-band="2" title="tin pan alley" style="--r: 84px; --dur: 94s; --delay: -47.0s; --dir: normal; --c: var(--maroon)"><span class="dna-upright cover typo"><b>tin pan alley</b></span></span>
+                      <span class="dna-node" data-band="3" title="hank williams" style="--r: 104px; --dur: 106s; --delay: -0.0s; --dir: reverse; --c: var(--orange)"><span class="dna-upright person"><img src="assets/cosmos/hank.webp" alt="" /></span></span>
+                      <span class="dna-node" data-band="3" title="patsy cline" style="--r: 104px; --dur: 106s; --delay: -21.2s; --dir: reverse; --c: var(--orange)"><span class="dna-upright person"><img src="assets/cosmos/patsy.webp" alt="" /></span></span>
+                      <span class="dna-node" data-band="3" title="lovesick blues" style="--r: 104px; --dur: 106s; --delay: -42.4s; --dir: reverse; --c: var(--orange)"><span class="dna-upright cover typo"><b>lovesick blues</b></span></span>
+                      <span class="dna-node" data-band="3" title="three chords and the truth." style="--r: 104px; --dur: 106s; --delay: -63.6s; --dir: reverse; --c: var(--orange)"><span class="dna-upright cover typo quote"><b>“three chords and the truth.”</b><i>harlan howard</i></span></span>
+                      <span class="dna-node" data-band="3" title="find out who you are and do it on purpose." style="--r: 104px; --dur: 106s; --delay: -84.8s; --dir: reverse; --c: var(--orange)"><span class="dna-upright cover typo quote"><b>“find out who you are and do it on purpose.”</b><i>dolly parton</i></span></span>
+                    </div>
+                    <div class="dna-bands">
+                      <button class="dna-band" type="button" data-band="0" aria-pressed="true" style="--c: var(--yellow)"><i></i><span class="dna-band-label">influenced by</span><span class="dna-band-bar"><span style="width: 54%"></span></span><span class="dna-band-value">54% bessie smith</span></button>
+                      <button class="dna-band" type="button" data-band="1" aria-pressed="false" style="--c: var(--blue)"><i></i><span class="dna-band-label">parallel</span><span class="dna-band-bar"><span style="width: 47%"></span></span><span class="dna-band-value">47% the carter family</span></button>
+                      <button class="dna-band" type="button" data-band="2" aria-pressed="false" style="--c: var(--maroon)"><i></i><span class="dna-band-label">dissonance</span><span class="dna-band-bar"><span style="width: 58%"></span></span><span class="dna-band-value">58% the nashville sound</span></button>
+                      <button class="dna-band" type="button" data-band="3" aria-pressed="false" style="--c: var(--orange)"><i></i><span class="dna-band-label">influences</span><span class="dna-band-bar"><span style="width: 41%"></span></span><span class="dna-band-value">41% hank williams</span></button>
+                    </div>
+                  </article>
+                </div>
+              </div>
+            </section>
           </div>
         </div>
       </div>
 
-      <div class="slide" id="s10">
-        <h2>what real peeps have said.</h2>
+      <div class="slide" id="s9">
+        <h2>what real people have said.</h2>
         <div class="test-grid">
           <div class="test-bubble" style="background: #ec4e20">
             <div class="test-quote" style="color: #fff">
@@ -1289,10 +1427,10 @@
         </div>
       </div>
 
-      <!-- CLOSE — the investor deck's s12 (same id, so every #s12 rule
+      <!-- CLOSE — the investor deck's s11 (same id, so every #s11 rule
            applies: VHS backdrop, scrim, phone fallback) with the partner
            copy and no founder-bio sub-steps. -->
-      <div class="slide" id="s12">
+      <div class="slide" id="s11">
         <video
           class="demo-bg"
           autoplay
@@ -1404,6 +1542,12 @@
         s.src = phone ? "mobile.js" : "partners/partners.js";
         s.async = false;
         document.body.appendChild(s);
+        if (!phone) {
+          var c = document.createElement("script");
+          c.src = "cosmos.js";
+          c.async = false;
+          document.body.appendChild(c);
+        }
       })();
     </script>
     <script type="module">

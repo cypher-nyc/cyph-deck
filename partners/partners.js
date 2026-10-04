@@ -4,10 +4,10 @@
    drive it exactly the way they drive the investor deck.
 
    Slides are addressed by id, not by `s` + index: the reused investor slides
-   keep their own ids (s0..s5, s10, s12) so styles.css applies unchanged.
+   keep their own ids (s0..s5, s9, s11) so styles.css applies unchanged.
    The entrance animations for those slides are deck.js's, copied as-is. */
 
-const SLIDES = ["s0", "s1", "s2", "s3", "s4", "s5", "s10", "s12"];
+const SLIDES = ["s0", "s1", "s2", "s3", "s4", "s5", "s9", "s11"];
 const T = SLIDES.length;
 const HIW = SLIDES.indexOf("s5");
 let cur = 0;
@@ -55,7 +55,7 @@ function pad(n) {
   return String(n).padStart(2, "0");
 }
 
-/* ── how it works: 01 underground / 02 cyph / 03 irl ── */
+/* ── how it works: 01 underground / 02 cyph / 03 irl / 04 how it all maps together ── */
 function updateHiw(step) {
   busy = true;
   document.querySelectorAll("#s5 [data-step]").forEach(function (node) {
@@ -69,13 +69,50 @@ function updateHiw(step) {
   if (typeof window.setCyphDoorsActive === "function") {
     window.setCyphDoorsActive(step === 2);
   }
-  if (step === 1) drawRoutes();
+  /* the resource cosmos (cosmos.js) runs only while 01 shows */
+  if (typeof window.setCosmosActive === "function") {
+    window.setCosmosActive(step === 1);
+  }
+  setDnaActive(step === 4);
+  /* the cyphcard tile sways only while it is the selected layer */
+  if (typeof window.setIsoCardActive === "function") {
+    window.setIsoCardActive(step === 4);
+  }
+  if (step === 4) drawRoutes();
   setTimeout(function () {
     busy = false;
   }, 400);
 }
 
-/* 01's route draw, all four lines at once so it lands inside the settle gate */
+/* 04's DNA card: a band turns the orbit a quarter turn per index; while
+   04 shows, the bands take turns (same as deck.js) */
+var dnaBand = 0;
+var dnaTimer = null;
+function dnaFocus(i) {
+  var orbit = document.querySelector("#s5 .dna-orbit");
+  if (!orbit) return;
+  dnaBand = i;
+  orbit.style.setProperty("--turn", -90 * i + "deg");
+  orbit.dataset.focus = String(i);
+  document.querySelectorAll("#s5 .dna-band").forEach(function (b) {
+    b.setAttribute("aria-pressed", +b.dataset.band === i ? "true" : "false");
+  });
+}
+function setDnaActive(on) {
+  clearInterval(dnaTimer);
+  dnaTimer = null;
+  if (!on) return;
+  dnaTimer = setInterval(function () {
+    dnaFocus((dnaBand + 1) % 4);
+  }, 2600);
+}
+function stopHiw() {
+  if (typeof window.setCosmosActive === "function") window.setCosmosActive(false);
+  setDnaActive(false);
+  if (typeof window.setIsoCardActive === "function") window.setIsoCardActive(false);
+}
+
+/* 04's route draw, all four lines at once so it lands inside the settle gate */
 function drawRoutes() {
   var lines = document.querySelectorAll("#s5 #transitSvg polyline");
   var stops = document.querySelectorAll("#s5 .stop, #s5 .stop-text");
@@ -124,7 +161,7 @@ function paint(i) {
 function go(i) {
   if (busy || i === cur) return;
   if (cur === HIW) {
-    if (i > cur && layerStep < 3) {
+    if (i > cur && layerStep < 4) {
       updateHiw(++layerStep);
       return;
     }
@@ -228,6 +265,15 @@ onReady(function () {
     });
   }
 
+  /* 04's bands turn the orbit by hand too */
+  document.querySelectorAll("#s5 .dna-band").forEach(function (b) {
+    b.addEventListener("click", function () {
+      dnaFocus(+b.dataset.band);
+      setDnaActive(cur === HIW && layerStep === 4);
+    });
+  });
+  dnaFocus(0);
+
   /* layers on how it works jump straight to their step */
   document
     .querySelectorAll("#s5 .iso-layer")
@@ -259,6 +305,7 @@ document.getElementById("navPrev").addEventListener("click", function () {
 
 /* ── per-slide entrance animations (deck.js's, by slide id) ── */
 function runA(i) {
+  if (SLIDES[i] !== "s5") stopHiw();
   const B = "easeOutBack",
     C = "easeOutCubic";
   switch (SLIDES[i]) {
@@ -374,13 +421,13 @@ function runA(i) {
       });
       break;
     case "s5":
-      layerStep = _prevCur > HIW ? 3 : 1;
+      layerStep = _prevCur > HIW ? 4 : 1;
       anime({
         targets: "#s5 .iso-layer",
         translateY: [40, 0],
         opacity: [0, 1],
         duration: 500,
-        delay: anime.stagger(120, { from: "last" }),
+        delay: anime.stagger(120, { from: "last" }), // bottom tile (step 1) first: built from the ground up
         easing: B,
       });
       anime({
@@ -395,9 +442,9 @@ function runA(i) {
         updateHiw(layerStep);
       }, 100);
       break;
-    case "s10":
+    case "s9":
       anime({
-        targets: "#s10 .test-bubble",
+        targets: "#s9 .test-bubble",
         scale: [0.85, 1],
         opacity: [0, 1],
         duration: 350,
@@ -405,16 +452,16 @@ function runA(i) {
         easing: B,
       });
       break;
-    case "s12":
+    case "s11":
       anime({
-        targets: "#s12 h1",
+        targets: "#s11 h1",
         translateY: [12, 0],
         opacity: [0, 1],
         duration: 600,
         easing: C,
       });
       anime({
-        targets: "#s12 .sub",
+        targets: "#s11 .sub",
         opacity: [0, 1],
         duration: 500,
         delay: 300,

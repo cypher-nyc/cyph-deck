@@ -602,14 +602,14 @@
    after "ready for a demo?" — step 1 jalen, step 2 bryan (see go() in
    deck.js). the demo video/scrim/overlay fade out underneath so the bios
    sit straight on black. newspaper register: no boxes, text on black. ── */
-#s12 .demo-bg,
-#s12 .demo-scrim,
-#s12 .demo-overlay {
+#s11 .demo-bg,
+#s11 .demo-scrim,
+#s11 .demo-overlay {
   transition: opacity 0.5s ease;
 }
-#s12.bio-active .demo-bg,
-#s12.bio-active .demo-scrim,
-#s12.bio-active .demo-overlay {
+#s11.bio-active .demo-bg,
+#s11.bio-active .demo-scrim,
+#s11.bio-active .demo-overlay {
   opacity: 0;
   pointer-events: none;
 }
@@ -628,6 +628,15 @@
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.5s ease;
+}
+/* the bios' header: top-left, where every other slide's h2 sits */
+.founder-bio-hdr {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  margin: 0;
+  text-align: left;
+  color: var(--charcoal);
 }
 .founder-bio.active {
   opacity: 1;
@@ -902,8 +911,7 @@
 #s7 h2,
 #s8 h2,
 #s9 h2,
-#s10 h2,
-#s11 h2 {
+#s10 h2 {
   color: var(--charcoal);
   position: absolute;
   top: 24px;
@@ -911,6 +919,193 @@
   text-align: left;
   z-index: 10;
   margin: 0;
+}
+
+/* ── s4: what about now? — the claim (left) beside three scattered
+   audiences around the C-Y-P-H dots (right), all straight on the
+   background with no containers. Each persona is a name, its s8 copy, and its
+   tam/sam/som figures in the persona color, with s8's brand logos
+   drifting beside it as the platforms they're scattered across today. Persona colors are s8's:
+   seekers yellow, sparrers orange, authorities blue. ── */
+#s4 .now-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  width: 100%;
+  height: 100%;
+  padding-top: 40px;
+}
+#s4 .now-claim {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 600px;
+  padding-right: 48px;
+}
+#s4 .now-hero .station-name {
+  font-size: 52px;
+  white-space: normal;
+}
+/* the four stats: s2's crisis cards (bold headline, italic evidence line,
+   source) in a 2x2 grid, the column's width; they wrap here, where s2's
+   run one line */
+#s4 .now-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 24px;
+  margin: 0 -20px;
+}
+#s4 .now-stats .crisis-card {
+  padding: 12px 20px;
+  cursor: default;
+}
+#s4 .now-stats .crisis-card h3,
+#s4 .now-stats .crisis-quote {
+  white-space: normal;
+}
+#s4 .now-stats .crisis-card h3 {
+  line-height: 1.25;
+}
+/* the source logo, as on s2, at a height that suits each mark's shape,
+   with the date beside it */
+#s4 .now-stats .crisis-src {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#s4 .now-stats .crisis-brand {
+  height: 30px;
+}
+#s4 .now-stats .crisis-brand[alt="pew research center"] {
+  height: 24px;
+}
+#s4 .now-stats .crisis-brand[alt="axios"] {
+  height: 18px;
+}
+#s4 .now-body {
+  max-width: 540px;
+}
+#s4 .now-seek { color: var(--yellow); }
+#s4 .now-spar { color: var(--orange); }
+#s4 .now-auth { color: var(--blue); }
+
+#s4 .now-diagram {
+  position: relative;
+  flex: none;
+  width: 660px;
+  height: 640px;
+  margin-left: 48px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+#s4 .now-group {
+  position: absolute;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+#s4 .now-group--seek { --persona: var(--yellow); top: 26px; left: 0; }
+#s4 .now-group--spar { --persona: var(--orange); top: 26px; left: 360px; }
+#s4 .now-group--auth { --persona: var(--blue); top: 424px; left: 180px; }
+
+/* the s8 logo row, laid flat */
+#s4 .now-logos {
+  display: flex;
+  gap: 14px;
+}
+#s4 .now-logos img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  display: block;
+}
+#s4 .now-group--auth .now-logos {
+  justify-content: center;
+}
+
+#s4 .now-persona h4 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--persona);
+}
+#s4 .now-persona p {
+  margin: 4px 0 0;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--charcoal-muted);
+}
+#s4 .now-persona .now-eg {
+  margin: 2px 0 10px;
+  font-style: italic;
+}
+#s4 .now-nums {
+  display: flex;
+  gap: 24px;
+}
+#s4 .now-nums span {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 4px;
+}
+#s4 .now-nums small {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--charcoal-muted);
+}
+#s4 .now-nums b {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--persona);
+}
+#s4 .now-group--auth .now-nums {
+  justify-content: center;
+}
+#s4 .now-group--auth .now-persona {
+  text-align: center;
+}
+
+#s4 .now-cyph {
+  position: absolute;
+  top: 290px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+#s4 .now-cyph .station-bullets {
+  margin-top: 0;
+  gap: 12px;
+}
+#s4 .now-cyph .station-bullet {
+  width: 56px;
+  height: 56px;
+  font-size: 28px;
+}
+/* the claim's last line, moved under the circles */
+#s4 .now-tagline {
+  position: absolute;
+  top: 362px;
+  left: 50%;
+  width: 380px;
+  transform: translateX(-50%);
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.4;
+  text-align: center;
+  color: var(--charcoal-muted);
+}
+
+#s4 .now-note {
+  position: absolute;
+  left: 24px;
+  bottom: 16px;
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 11px;
+  font-style: italic;
+  color: var(--orange);
+  letter-spacing: 0.02em;
 }
 
 /* ── s1: advisory board — a second section beneath the founder cards.
@@ -1031,14 +1226,130 @@
   width: auto;
   opacity: 0.9;
 }
+/* ── s6: traction — three columns ruled apart (the deck's vertical
+   column dividers), each in its route color: the count, the name, a
+   visual, then a stat with an arrow down into its impact (eyebrow voice) ── */
+.traction {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 1160px;
+  max-width: 100%;
+  margin-top: 40px;
+}
+.traction-col {
+  display: flex;
+  flex-direction: column;
+  padding: 0 32px;
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.traction-col:first-child {
+  border-left: none;
+}
+.traction-num {
+  margin: 0;
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--tr);
+}
+.traction-title {
+  margin: 8px 0 0;
+  min-height: 44px;
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--charcoal);
+}
+.traction-visual {
+  height: 150px;
+  margin: 18px 0 22px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+}
+.traction-faces {
+  gap: 10px;
+}
+.traction-faces img {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.05);
+  box-shadow: 0 0 0 2px var(--tr);
+}
+.traction-logos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px 14px;
+}
+.traction-logos img {
+  max-width: 100%;
+  max-height: 40px;
+  margin: 0 auto;
+  object-fit: contain;
+}
+.traction-arts {
+  gap: 8px;
+}
+.traction-arts img {
+  height: 64px;
+  width: auto;
+  object-fit: contain;
+}
+/* the stat that leads to the impact (placeholder until the numbers are
+   in), with a hairline arrow down into it */
+.traction-stat {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--charcoal);
+}
+.traction-arrow {
+  position: relative;
+  display: block;
+  width: 1px;
+  height: 34px;
+  margin: 10px 0 0 12px;
+  background: var(--charcoal-muted);
+}
+.traction-arrow::after {
+  content: "";
+  position: absolute;
+  left: -4px;
+  bottom: -1px;
+  border-left: 4.5px solid transparent;
+  border-right: 4.5px solid transparent;
+  border-top: 7px solid var(--charcoal-muted);
+}
+.traction-eyebrow {
+  margin: 12px 0 4px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--tr);
+}
+.traction-impact {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--charcoal);
+}
+
 /* ── s7: how we make money ── */
 .money-table {
   width: 1120px;
   max-width: 100%;
-  margin-top: 20px;
+  margin-top: 52px;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 12px;
 }
 .money-row {
   display: grid;
@@ -1071,14 +1382,14 @@
   justify-content: center;
   gap: 6px;
   /* floor matches the tallest graphic so every row keeps one rhythm */
-  min-height: 96px;
+  min-height: 84px;
 }
 /* every graphic is capped the same way so no row outgrows the others —
    wide screenshots and tall cards both land inside the same 94px band. */
 .money-graphic img {
   height: auto;
   width: auto;
-  max-height: 94px;
+  max-height: 80px;
   max-width: 100%;
   object-fit: contain;
 }
@@ -1090,8 +1401,8 @@
 /* one shared 16:10 frame per still, cover-cropped so mixed aspect ratios
    land the same size; static, no drift. */
 .money-graphic .money-ads-img {
-  width: 150px;
-  height: 94px;
+  width: 128px;
+  height: 80px;
   max-height: none;
   object-fit: cover;
   border-radius: 5px;
@@ -1100,11 +1411,126 @@
 /* live 3d object at row scale — same builder, smaller footprint */
 .money-card-3d {
   display: block;
-  width: 180px;
-  height: 115px;
+  width: 160px;
+  height: 100px;
 }
-/* closing takeaway — ruled off from the rows it summarises. shared by
-   s10 (how we make money) and s11 (user behavior size). */
+/* each row's analogy: who already charges this way, logo + name, in the
+   deck's italic aside voice */
+.money-text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.money-analog {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 14px;
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-style: italic;
+  color: var(--charcoal-muted);
+}
+/* "think :" — marks the logos after it as comparisons, not partners */
+.money-think {
+  font-style: normal;
+  font-weight: 700;
+  margin-right: -6px;
+}
+.money-co {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.money-co img {
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  object-fit: contain;
+}
+/* the revenue trajectory: each stream in its row's color, the total
+   (green) thicker and filled over them. Identity never rests on color
+   alone: every line is named at its 2030 end. */
+.money-trajectory {
+  margin-top: 6px;
+}
+.money-chart {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.money-grid {
+  stroke: rgba(255, 255, 255, 0.1);
+  stroke-width: 1;
+}
+.money-axis {
+  font-size: 10px;
+  fill: var(--charcoal-muted);
+}
+.money-area {
+  fill: rgba(47, 191, 113, 0.12);
+}
+.money-line {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.money-line--total {
+  stroke-width: 3;
+}
+.money-dot {
+  fill: var(--line);
+  stroke: #000;
+  stroke-width: 2;
+}
+.money-line--total,
+.money-dot--total,
+.money-end--total {
+  --line: #2fbf71;
+}
+.money-line--card,
+.money-dot--card,
+.money-end--card {
+  --line: var(--yellow);
+}
+.money-line--edu,
+.money-dot--edu,
+.money-end--edu {
+  --line: var(--orange);
+}
+.money-line--ads,
+.money-dot--ads,
+.money-end--ads {
+  --line: var(--blue);
+}
+/* the end labels: value in ink, the stream's name muted (text wears text
+   tokens; the line beside it carries the color) */
+.money-end {
+  font-size: 11px;
+  fill: var(--charcoal-muted);
+}
+.money-end-val {
+  font-weight: 700;
+  fill: var(--charcoal);
+}
+.money-end--total {
+  font-size: 13px;
+}
+.money-hit {
+  fill: transparent;
+  cursor: default;
+}
+.money-pt:hover .money-dot {
+  r: 6.5;
+}
+
+/* closing takeaway — ruled off from the rows it summarises (s7, how we
+   make money). */
 .deck-takeaway {
   margin-top: 4px;
   padding-top: 18px;
@@ -1122,7 +1548,7 @@
   font-weight: 700;
 }
 
-/* ── s11: the raise ── */
+/* ── s10: the raise ── */
 .raise-canvas {
   display: flex;
   flex-direction: column;
@@ -1234,118 +1660,24 @@
   font-size: 12.5px;
   margin-top: 2px;
 }
-.raise-gantt {
-  position: relative;
-  width: 420px;
-  max-width: 100%;
-  padding-bottom: 42px;
-}
-.gantt-rows {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.gantt-axis {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 14px;
-  height: 12px;
-}
-.gantt-axis span {
-  position: absolute;
-  top: 0;
-  left: calc(var(--m) * 100% / 15);
-  transform: translateX(-50%);
-  font-size: 9px;
-  line-height: 1;
+.raise-leg-def {
+  display: block;
+  width: max-content;
+  max-width: 380px;
+  white-space: normal;
+  font-size: 10.5px;
+  line-height: 1.35;
   color: var(--charcoal-muted);
+  opacity: 0.75;
+  margin-top: 3px;
 }
-.gantt-axis-title {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  text-align: center;
-  font-size: 9px;
-  letter-spacing: 0.14em;
-  color: var(--charcoal-muted);
+.raise-leg-def i {
+  font-style: normal;
+  font-weight: 700;
+  margin-right: 4px;
 }
-.gantt-row {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-.gantt-label {
-  font-size: 12px;
-  line-height: 1.1;
-  color: var(--charcoal);
-  white-space: nowrap;
-}
-.gantt-note {
-  font-size: 11px;
-  color: var(--charcoal-muted);
-}
-.gantt-track {
-  position: relative;
-  width: 100%;
-  height: 11px;
-}
-.gantt-bar {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: var(--s);
-  width: calc(var(--e) - var(--s));
-  background: var(--c);
-  border-radius: 3px;
-  transform-origin: left center;
-}
-/* bars that run past the 15-month window: clean left, then trail off into a
-   fade just past the axis end to signal they continue indefinitely */
-.gantt-bar--continues {
-  border-radius: 3px 0 0 3px;
-}
-.gantt-bar--continues::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 100%;
-  width: 26px;
-  background: linear-gradient(to right, var(--c), transparent);
-}
-/* go-live: point-in-time inflection — the app's glossy paprika route-strip
-   "bead" (PAPRIKA_BEAD from cyph-design-system-fe/routeStripMap), with an
-   added outer glow so it reads as the inflection marker */
-.gantt-milestone {
-  position: absolute;
-  top: 50%;
-  left: var(--at);
-  width: 15px;
-  height: 15px;
-  /* center via margins (not transform) so the scale-in animation,
-     which rebuilds transform, can't knock the dot off its month mark */
-  margin-top: -7.5px;
-  margin-left: -7.5px;
-  border-radius: 50%;
-  background:
-    radial-gradient(
-      ellipse 52% 38% at 32% 24%,
-      rgba(255, 255, 255, 0.6) 0%,
-      rgba(255, 255, 255, 0.16) 26%,
-      rgba(255, 255, 255, 0) 48%
-    ),
-    radial-gradient(130% 130% at 50% 30%, #ff6f47 0%, #ec4e20 50%, #b23a15 100%);
-  box-shadow:
-    inset 0 2px 3px rgba(255, 255, 255, 0.45),
-    inset 0 -4px 6px rgba(0, 0, 0, 0.28),
-    0 0 11px 2px rgba(236, 78, 32, 0.6);
-}
-
-/* ── s12: demo close — full-bleed VHS backdrop ── */
-#s12 {
+/* ── s11: demo close — full-bleed VHS backdrop ── */
+#s11 {
   padding: 0;
 }
 .demo-bg {
@@ -1377,8 +1709,8 @@
   text-align: center;
   text-shadow: 0 2px 24px rgba(0, 0, 0, 0.7);
 }
-#s12 .demo-overlay .sub,
-#s12 .demo-overlay .sub a {
+#s11 .demo-overlay .sub,
+#s11 .demo-overlay .sub a {
   color: #fff;
 }
 .demo-overlay .sub a {
@@ -1387,8 +1719,8 @@
 /* mobile / touch: skip the background video (autoplay is unreliable + heavy on
    phones, esp. iOS Low Power Mode) — show just the text on the black slide */
 @media (max-width: 820px), (hover: none) and (pointer: coarse) {
-  #s12 .demo-bg,
-  #s12 .demo-scrim {
+  #s11 .demo-bg,
+  #s11 .demo-scrim {
     display: none;
   }
 }
@@ -1744,31 +2076,163 @@ img[src*="3rdspace"] {
   filter: brightness(0) invert(1) !important;
 }
 
-#s9 .crisis-card h3 {
-  white-space: normal;
+/* ═══ GTM (s8) — three lanes on one timeline → cyph live ═══
+   A 1296x640 stage. Three lanes (irl / marketing / software): the work is
+   listed in the left column; each lane's line starts before the
+   white "we are here" hairline (x 600) and runs through the green go-live line
+   (x 1100), fading out past it. The trigger conditions stack under the
+   go-live line, under a "trigger points" label.
+   Every piece sits by its top-left corner (anime.js owns transform). */
+.gtm-stage {
+  position: relative;
+  width: 1296px;
+  height: 640px;
+  margin-top: 40px;
+  flex-shrink: 0;
+  --gtm-go: #2fbf71;
+}
+.gtm-today,
+.gtm-gate {
+  position: absolute;
+  z-index: 1;
+  width: 1px;
+  opacity: 0;
+}
+.gtm-today {
+  background: #fff;
+}
+.gtm-today span {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+}
+.gtm-gate {
+  background: var(--gtm-go);
+}
+/* the go-live line's label, like today's: the cyph logo + "live" */
+.gtm-gate-lbl {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+}
+.gtm-gate-lbl .station-bullets {
+  margin: 0;
+  gap: 3px;
+}
+.gtm-gate-lbl .station-bullet {
+  width: 18px;
+  height: 18px;
+  font-size: 10px;
+}
+.gtm-lane {
+  position: absolute;
+  left: 0;
+  width: 1296px;
+  height: 92px;
+  opacity: 0;
+}
+/* the left column: the lane's name, then its work in sequence order,
+   centred on the bar */
+.gtm-key {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 232px;
+  transform: translateY(-50%);
+}
+.gtm-lane-name {
+  margin: 0 0 4px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  text-transform: lowercase;
+  color: var(--gtm-c);
+}
+.gtm-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.gtm-items h4 {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 16px;
+  text-transform: lowercase;
+  color: #fff;
+  margin: 0;
+}
+.gtm-items p {
+  font-size: 10.5px;
+  line-height: 14px;
+  font-style: italic;
+  color: var(--charcoal-muted);
+  margin: 0;
+}
+/* the lane's line: x 250 to past the go-live line, fading out after it */
+.gtm-bar {
+  position: absolute;
+  left: 250px;
+  top: 44.5px;
+  width: 970px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--gtm-c);
+  -webkit-mask-image: linear-gradient(to left, transparent, #000 90px);
+  mask-image: linear-gradient(to left, transparent, #000 90px);
+}
+/* the trigger conditions, stacked under the go-live line */
+.gtm-golive {
+  position: absolute;
+  opacity: 0;
+}
+.gtm-conds-lbl {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+  color: var(--gtm-go);
+  margin: 0 0 12px;
+}
+.gtm-conds {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.gtm-conds li {
+  margin-bottom: 12px;
+  text-align: center;
+  opacity: 0;
+}
+.gtm-conds h4 {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: lowercase;
   color: var(--charcoal);
+  margin: 0 0 4px;
 }
-#s9 .crisis-card .crisis-quote {
-  white-space: normal;
-}
-
-/* GTM floating assets — reuses .crisis-canvas dimensions */
-#s9 .crisis-canvas {
-  margin-top: 60px;
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  width: 1300px;
-  height: 200px;
-}
-.gtm-float-group {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex: 1;
-  min-width: 0;
-  padding-left: 20px;
-  height: 200px;
+.gtm-conds p {
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--charcoal-muted);
+  margin: 0;
 }
 /* ═══ CRISIS (legacy — unused) ═══ */
 .crisis-panel {
@@ -2158,90 +2622,6 @@ img[src*="3rdspace"] {
   color: rgba(255, 255, 255, 0.5);
 }
 
-/* ═══ USER SIZE ═══ */
-.user-table {
-  width: 100%;
-  margin-top: 0;
-}
-.user-row {
-  display: flex;
-  align-items: center;
-  padding: 12px 10px;
-  margin-bottom: 4px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-}
-.user-info {
-  width: 260px;
-}
-.user-logos {
-  width: 44px;
-  margin-right: 12px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  flex-shrink: 0;
-}
-.user-logos img {
-  width: 36px;
-  height: 36px;
-  object-fit: contain;
-  display: block;
-}
-.user-row-inner {
-  display: flex;
-  align-items: center;
-  flex: 1;
-}
-.user-info h4 {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 700;
-  font-size: 28px;
-  color: var(--charcoal);
-}
-.user-info p {
-  font-size: 13px;
-  color: var(--charcoal-muted);
-  line-height: 1.3;
-}
-.user-eg {
-  margin-top: 4px;
-  font-size: 12px;
-  font-style: italic;
-  color: var(--charcoal-muted);
-  opacity: 0.85;
-  white-space: nowrap;
-}
-.user-nums {
-  display: flex;
-  flex: 1;
-}
-.user-num {
-  flex: 1;
-  text-align: center;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 700;
-  font-size: 20px;
-  color: var(--charcoal);
-}
-.col-hdr {
-  display: flex;
-  padding: 0 10px 6px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-.col-hdr span {
-  flex: 1;
-  text-align: center;
-  font-weight: 700;
-  font-size: 28px;
-  text-transform: lowercase;
-  color: var(--charcoal);
-}
-.col-hdr .spacer {
-  width: 334px;
-  flex: none;
-}
-
 /* ═══ QUEST (glossy circles with ring borders) ═══ */
 .quest-chain {
   display: flex;
@@ -2578,13 +2958,6 @@ img[src*="3rdspace"] {
 /* Swaying 3D cyphcard on the underground slide (replaces the static
    card image). Footprint roughly matches the old img (75% column,
    centered); the extra aspect headroom gives the ±30° sway room. */
-.cyphcard-3d {
-  display: block;
-  width: 88%;
-  aspect-ratio: 480 / 303;
-  align-self: center;
-  margin-bottom: 6px;
-}
 
 .layer-stack {
   display: flex;
@@ -3056,6 +3429,24 @@ body.locked #deck-controls button {
 }
 #s5 .iso-layer {
   cursor: pointer;
+  width: 200px;
+  height: 173px;
+}
+#s5 .layer-stack {
+  gap: 8px;
+}
+/* trailer link under the h2, in the s2 pulse-check link's voice */
+.hiw-trailer {
+  position: absolute;
+  top: 58px;
+  left: 24px;
+  z-index: 10;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 11px;
+  font-style: italic;
+  color: var(--orange);
+  letter-spacing: 0.02em;
+  text-decoration: underline;
 }
 
 /* one step visible at a time; all three share the panel */
@@ -3102,14 +3493,6 @@ body.locked #deck-controls button {
   margin-top: 26px;
   padding-top: 22px;
 }
-/* 03's quiet aside under the description */
-.hiw-archive-note {
-  margin-top: 8px;
-  font-size: 15px;
-  line-height: 1.55;
-  color: var(--charcoal);
-  max-width: 620px;
-}
 .hiw-head {
   font-weight: 700;
   font-size: 16px;
@@ -3126,15 +3509,164 @@ body.locked #deck-controls button {
   color: var(--charcoal);
 }
 
-/* 01 underground: the route map + the cyphcard column */
+/* 01 underground: the resource cosmos (cosmos.js) — the design
+   system's ResourceCosmos at panel scale. Tunnel in CSS 3D the camera
+   glides through at a steady speed; cards breathe + drift on their own
+   phase, covers carry the pulse streak. */
 .hiw-ug {
-  gap: 28px;
-  align-items: stretch;
+  padding-top: 0;
+}
+.hiw-cosmos {
+  position: relative;
+  width: 800px;
+  height: 420px;
+  overflow: hidden;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+/* the tunnel fades out at its edges; the HUD sits outside the fade */
+.cosmos-scene {
+  position: absolute;
+  inset: 0;
+  perspective-origin: 50% 50%;
+  -webkit-mask-image: radial-gradient(ellipse 60% 64% at 50% 50%, black 72%, transparent 100%);
+  mask-image: radial-gradient(ellipse 60% 64% at 50% 50%, black 72%, transparent 100%);
+}
+.cosmos-world {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+.cosmos-ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform-style: preserve-3d;
+}
+.cosmos-card {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: 50% 50%;
+  transform-style: preserve-3d;
+  pointer-events: none;
+  opacity: var(--o, 1);
+}
+.cosmos-tendril {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 1px;
+  background: var(--charcoal-muted);
+  opacity: calc(var(--o, 1) * 0.55);
+  transform-origin: 0 50%;
+}
+/* Breathe, flat (the DS float: scale pulse + Y drift, out of phase) */
+.cosmos-breathe {
+  animation:
+    cosmos-breathe 4500ms ease-in-out infinite,
+    cosmos-drift 6000ms ease-in-out infinite;
+}
+@keyframes cosmos-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.016);
+  }
+}
+@keyframes cosmos-drift {
+  0%,
+  100% {
+    translate: 0 -4px;
+  }
+  50% {
+    translate: 0 4px;
+  }
+}
+.cosmos-cover {
+  position: relative;
+  display: block;
+}
+.cosmos-cover img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+/* a transparent cutout is drawn bare */
+.cosmos-cover.cut img {
+  border-radius: 0;
+  box-shadow: none;
+}
+/* the pulse streak: a quarter turn of the pulse's color runs the rim */
+@property --cyph-streak {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@keyframes cosmos-streak {
+  to {
+    --cyph-streak: 360deg;
+  }
+}
+.cosmos-cover[data-pulse="for_you"] {
+  --lens-color: var(--blue);
+}
+.cosmos-cover[data-pulse="challenges_you"] {
+  --lens-color: var(--orange);
+}
+.cosmos-cover[data-pulse]::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 4px;
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--cyph-streak),
+    transparent 0turn,
+    transparent 0.6turn,
+    color-mix(in srgb, var(--lens-color) 55%, transparent) 0.72turn,
+    var(--lens-color) 0.86turn,
+    transparent 1turn
+  );
+  -webkit-mask:
+    linear-gradient(black 0 0) content-box,
+    linear-gradient(black 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  animation: cosmos-streak 14s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cosmos-breathe,
+  .cosmos-cover[data-pulse]::after {
+    animation: none;
+  }
+}
+
+/* 04 how it all maps together: the route map and the DNA card side by
+   side at one height (--maps-h) */
+.hiw-step--map {
+  --hiw-accent: var(--charcoal);
+}
+.hiw-maps {
+  --maps-h: 430px;
+  gap: 36px;
+  align-items: flex-start;
+}
+.hiw-maps-left {
+  width: 360px;
+  flex-shrink: 0;
+}
+.hiw-maps .hiw-map {
+  width: 360px;
+  height: var(--maps-h);
+  box-sizing: border-box;
 }
 .hiw-map {
-  width: 400px;
-  height: 360px;
-  flex-shrink: 0;
   background: rgba(20, 18, 15, 0.9);
   border-radius: 14px;
   border: 2px solid rgba(242, 140, 40, 0.15);
@@ -3145,43 +3677,260 @@ body.locked #deck-controls button {
   width: 100%;
   height: 100%;
 }
-.hiw-ug-side {
-  flex: 1;
+
+/* the DNA card (design system theme/dna): glass panel, the item's face
+   and title, its orbit — four bands of rings, the item's own face at
+   the nucleus — and the band rows. A band turns the orbit a quarter
+   turn per index (640ms); faces counter-rotate to stay upright. */
+.hiw-dna {
+  flex: none;
+}
+.dna-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 400px;
+  height: var(--maps-h);
+  box-sizing: border-box;
+  padding: 16px;
+  border-radius: 14px;
+  background: rgba(14, 14, 16, 0.86);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  color: var(--charcoal);
+}
+.dna-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+/* the record: a disc */
+.dna-face--disc {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+}
+.dna-face--cover {
+  width: 40px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+.dna-kind {
+  margin: 0;
+  font-size: 10px;
+  color: var(--charcoal-muted);
+}
+.dna-title {
+  margin: 2px 0 0;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.15;
+}
+.dna-sub {
+  margin: 2px 0 0;
+  font-size: 11px;
+  color: var(--charcoal-muted);
+}
+.dna-orbit {
+  --turn: 0deg;
+  position: relative;
+  width: 250px;
+  height: 250px;
+  margin: 4px auto;
+  flex: none;
+  transform: rotate(var(--turn));
+  transition: transform 640ms cubic-bezier(0.16, 0.84, 0.24, 1);
+}
+.dna-guide {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(var(--r) * 2);
+  height: calc(var(--r) * 2);
+  margin: calc(var(--r) * -1) 0 0 calc(var(--r) * -1);
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-sizing: border-box;
+}
+.dna-nucleus {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 0 0 1.5px var(--orange);
+  transform: rotate(calc(var(--turn) * -1));
+  transition: transform 640ms cubic-bezier(0.16, 0.84, 0.24, 1);
+}
+.dna-nucleus img,
+.dna-upright img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 15%;
+  display: block;
+}
+.dna-node {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  animation: dna-revolve var(--dur) linear infinite;
+  animation-delay: var(--delay);
+  animation-direction: var(--dir);
+}
+@keyframes dna-revolve {
+  from {
+    transform: rotate(0deg) translateX(var(--r)) rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg) translateX(var(--r)) rotate(-360deg);
+  }
+}
+/* a face on the orbit: a person is a circle, a work a square cover —
+   its image, or a typographic cover (its title, or a quote, set in type)
+   when it has none, as the design system draws coverless works */
+.dna-upright {
+  position: absolute;
+  left: -15px;
+  top: -15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: rgba(30, 30, 35, 1);
+  box-shadow: 0 0 0 1.5px var(--c);
+  transform: rotate(calc(var(--turn) * -1));
+  scale: 0.86;
+  transition:
+    transform 640ms cubic-bezier(0.16, 0.84, 0.24, 1),
+    scale 640ms cubic-bezier(0.16, 0.84, 0.24, 1);
+}
+.dna-upright.cover {
+  left: -18px;
+  top: -18px;
+  width: 36px;
+  height: 36px;
+  border-radius: 3px;
+}
+.dna-upright.typo {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 1px;
+  padding: 4px;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--c) 28%, rgba(20, 20, 24, 1));
+}
+.dna-upright.typo b {
+  font-size: 5.5px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--charcoal);
+}
+/* a quote's cover is a size up, so its words fit whole */
+.dna-upright.quote {
+  left: -22px;
+  top: -22px;
+  width: 44px;
+  height: 44px;
+  justify-content: center;
+}
+.dna-upright.quote b {
+  font-size: 5.5px;
+  font-weight: 400;
+  font-style: italic;
+}
+.dna-upright.quote i {
+  font-size: 4.5px;
+  font-style: normal;
+  color: var(--charcoal-muted);
+}
+.dna-orbit[data-focus="0"] .dna-node[data-band="0"] .dna-upright,
+.dna-orbit[data-focus="1"] .dna-node[data-band="1"] .dna-upright,
+.dna-orbit[data-focus="2"] .dna-node[data-band="2"] .dna-upright,
+.dna-orbit[data-focus="3"] .dna-node[data-band="3"] .dna-upright {
+  scale: 1.08;
+}
+.dna-bands {
   display: flex;
   flex-direction: column;
 }
-.hiw-card-cap {
-  font-size: 11px;
-  font-style: italic;
-  text-align: center;
-  line-height: 1.5;
-  color: var(--charcoal);
-  margin: 0 0 14px;
-}
-.hiw-stamp {
-  margin-top: 14px;
-}
-/* the old inventory collage, filling the column under the caption
-   (drift keyframes are set inline per image) */
-.hiw-inventory {
-  flex: 1;
-  min-height: 0;
+.dna-band {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-content: center;
-  gap: 6px;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  margin: 0;
+  padding: 3px 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 11px;
+  color: var(--charcoal-muted);
+  text-align: left;
 }
-.hiw-inventory img {
-  height: 34px;
-  width: auto;
-  border-radius: 2px;
-  box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.35);
+.dna-band i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--c);
+  flex: none;
+}
+.dna-band-label {
+  width: 80px;
+  flex: none;
+}
+.dna-band-bar {
+  flex: 1;
+  height: 5px;
+  border-radius: 3px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.12);
+}
+.dna-band-bar span {
+  display: block;
+  height: 100%;
+  border-radius: 5px;
+  background: var(--c);
+  opacity: 0.6;
+  transition: opacity 200ms ease;
+}
+.dna-band-value {
+  min-width: 128px;
+  text-align: right;
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+}
+.dna-band[aria-pressed="true"] {
+  color: var(--charcoal);
+}
+.dna-band[aria-pressed="true"] .dna-band-label {
+  font-weight: 700;
+}
+.dna-band[aria-pressed="true"] .dna-band-bar span {
+  opacity: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .dna-node {
+    animation: none;
+  }
 }
 
 /* 02 cyph: the two flyers (the star: as tall as the panel allows, at the
    poster's own 3:4),
-   each over its office-hours lead, then the cyph-type pills in one row */
+   each over its office-hours lead */
 .hiw-cy {
   flex-direction: column;
   gap: 10px;
@@ -3236,34 +3985,9 @@ body.locked #deck-controls button {
   object-fit: cover;
   filter: grayscale(100%) contrast(1.05);
 }
-.hiw-host-room {
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 1.25;
-  color: var(--charcoal);
-}
 .hiw-host-name {
-  margin-top: 2px;
   font-size: 11px;
   color: var(--charcoal-muted);
-}
-/* the cyph-type pills, one row under the leads */
-.hiw-types-label {
-  font-size: 10px;
-  color: var(--charcoal-muted);
-  margin-bottom: 4px;
-}
-.hiw-pills {
-  display: grid;
-  grid-template-columns: repeat(4, 140px);
-  gap: 10px;
-}
-.hiw-pills span {
-  font-size: 14px;
-  color: #fff;
-  padding: 5px 14px;
-  border-radius: 20px;
-  text-align: center;
 }
 
 /* 03 irl: one container — the press hit with "in the room" beside it —

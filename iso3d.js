@@ -608,12 +608,21 @@ function buildCyphcard(canvas) {
   const amplitudeRad = (CARD_SWAY_AMPLITUDE_DEG * Math.PI) / 180;
   const angularFrequency = (Math.PI * 2) / CARD_SWAY_PERIOD_SEC;
   let phase = 0;
+  // setActive(false) eases the swing down to rest (and back up on true),
+  // so a card can hold still while it isn't the selected thing.
+  let gain = 1;
+  let active = true;
   const tick = (dt) => {
-    phase += dt;
-    swayGroup.rotation.y = Math.sin(phase * angularFrequency) * amplitudeRad;
+    gain += ((active ? 1 : 0) - gain) * Math.min(1, dt * 3);
+    if (gain > 0.001) phase += dt;
+    swayGroup.rotation.y =
+      Math.sin(phase * angularFrequency) * amplitudeRad * gain;
+  };
+  const setActive = (on) => {
+    active = !!on;
   };
 
-  return { renderer, scene, camera, tick };
+  return { renderer, scene, camera, tick, setActive };
 }
 
 // ═════════════════════════════════════════════════════════════════════
@@ -729,9 +738,19 @@ function init() {
   // Used by tools/export-pdf.mjs to freeze the doorway open for a capture.
   window.holdCyphDoorsOpen = () => doors.holdOpen();
 
-  // Swaying membership plate on how it works (s5, 01 underground), if present.
+  // Swaying membership plate on how it works (s5): the cyphcard tile at
+  // the bottom of the layer stack (and 04's panel, if one is added back).
   const cyphcardCanvas = document.getElementById("cyphcardCanvas");
   if (cyphcardCanvas) scenes.push(buildCyphcard(cyphcardCanvas));
+  const isoCardCanvas = document.getElementById("isoCardCanvas");
+  if (isoCardCanvas) {
+    // the stack's cyphcard tile sways only while step 04 is selected
+    // (deck.js's updateHiw drives it); it starts at rest
+    const isoCard = buildCyphcard(isoCardCanvas);
+    isoCard.setActive(false);
+    window.setIsoCardActive = (on) => isoCard.setActive(on);
+    scenes.push(isoCard);
+  }
 
   // "how we make money" (s7) row objects: the swaying advanced cyphcard
   // (cyphcard+) and the syllabus paper (commissions), at row scale.
