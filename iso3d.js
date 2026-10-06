@@ -734,18 +734,20 @@ function buildSyllabusPaper(canvas) {
 function init() {
   const ugCanvas = document.getElementById("ugCanvas");
   const doorsCanvas = document.getElementById("doorsCanvas");
-  if (!ugCanvas || !doorsCanvas) return;
-
-  const ug = buildUnderground(ugCanvas);
-  const doors = buildCyphDoors(doorsCanvas);
-  const scenes = [ug, doors];
-
-  // Driven by deck.js's updateLayerStack — doors loop only while the
-  // cyph layer is selected, otherwise they hold closed.
-  window.setCyphDoorsActive = (on) => doors.setActive(!!on);
-
-  // Used by tools/export-pdf.mjs to freeze the doorway open for a capture.
-  window.holdCyphDoorsOpen = () => doors.holdOpen();
+  // the investor deck's 01 and 02 tiles are flat images now (the
+  // underground and cyph dashboards); the slab and the doors still build
+  // wherever a deck keeps #ugCanvas / #doorsCanvas
+  const scenes = [];
+  if (ugCanvas) scenes.push(buildUnderground(ugCanvas));
+  if (doorsCanvas) {
+    const doors = buildCyphDoors(doorsCanvas);
+    scenes.push(doors);
+    // Driven by deck.js's updateLayerStack — doors loop only while the
+    // cyph layer is selected, otherwise they hold closed.
+    window.setCyphDoorsActive = (on) => doors.setActive(!!on);
+    // Used by tools/export-pdf.mjs to freeze the doorway open for a capture.
+    window.holdCyphDoorsOpen = () => doors.holdOpen();
+  }
 
   // Swaying membership plate on how it works (s5): the cyphcard tile at
   // the bottom of the layer stack (and 04's panel, if one is added back).

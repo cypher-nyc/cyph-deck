@@ -228,7 +228,9 @@ const btnChapterMap = {
   founders: "founders",
   problem: "crisis",
   solution: "solution",
-  underground: "underground",
+  /* the button reads "traction"; its chapter keeps the underground id,
+     which also picks s7's background */
+  traction: "underground",
   "the cyph": "arena",
   irl: "irl",
   business: "business",
