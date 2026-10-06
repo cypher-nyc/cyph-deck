@@ -1096,12 +1096,6 @@
 #s4 .crisis-src a {
   display: flex;
 }
-/* patreon over substack */
-#s4 .now-src-stack {
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
-}
 /* outside a card, so it takes the card's source type here */
 #s4 .now-size .crisis-src {
   margin-top: 6px;
@@ -1188,7 +1182,7 @@
   color: var(--charcoal-muted);
 }
 
-/* ── s5 (03 irl): the press hit + "in the room". The article is a real
+/* ── s6 (03 irl): the press hit + "in the room". The article is a real
    link — Chrome carries the href into the PDF export as a clickable
    annotation. Logo heights are the optically-balanced values from the cyph
    002 recap deck (deck.json, "in the room"), scaled 1.15× for this slide; the
@@ -1258,7 +1252,7 @@
   width: auto;
   opacity: 0.9;
 }
-/* ── s6: traction — one three-column grid, no rules, each column in its
+/* ── s7: traction — one three-column grid, no rules, each column in its
    route color. Each column is a subgrid of the eight rows (count, name,
    e.g. line, visual, then a label and a value for each of the two rows
    under them), so every row lines up across the three whatever wraps. ── */
@@ -1354,7 +1348,7 @@
   color: var(--tr);
 }
 
-/* ── s7: how we make money ── */
+/* ── s8: how we make money ── */
 .money-table {
   width: 1120px;
   max-width: 100%;
@@ -1537,7 +1531,7 @@
   r: 6.5;
 }
 
-/* closing takeaway — ruled off from the rows it summarises (s7, how we
+/* closing takeaway — ruled off from the rows it summarises (s8, how we
    make money). */
 .deck-takeaway {
   margin-top: 4px;
@@ -1556,7 +1550,7 @@
   font-weight: 700;
 }
 
-/* ── s10: the raise ── */
+/* ── s11: the raise ── */
 .raise-canvas {
   display: flex;
   flex-direction: column;
@@ -1684,7 +1678,7 @@
   font-weight: 700;
   margin-right: 4px;
 }
-/* ── s11: demo close — full-bleed VHS backdrop ── */
+/* ── s12: demo close — full-bleed VHS backdrop ── */
 #s12 {
   padding: 0;
 }
@@ -2105,7 +2099,7 @@ img[src*="3rdspace"] {
   filter: brightness(0) invert(1) !important;
 }
 
-/* ═══ GTM (s8) — three lanes on one quarter timeline → exclusive launch ═══
+/* ═══ GTM (s9) — three lanes on one quarter timeline → exclusive launch ═══
    A 1296x640 stage on one grid of x positions: four equal 190px quarters
    from x 250 (q3 '26), the white "we are here" hairline at the start of
    q4 '26 (x 440) and the green launch line at the end of q2 '27 (x 1010).
@@ -3022,7 +3016,7 @@ img[src*="3rdspace"] {
   }
 }
 
-/* ═══ ISOMETRIC LAYER STACK (s5) ═══ */
+/* ═══ ISOMETRIC LAYER STACK (s6) ═══ */
 #s6 h2 {
   color: var(--charcoal) !important;
 }
@@ -3061,6 +3055,13 @@ img[src*="3rdspace"] {
   display: block;
   width: 100%;
   height: 100%;
+}
+/* 01's tile: the underground dashboard, flat, whole */
+.iso-layer .iso-dashboard {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 .iso-layer .iso-polaroid {
   position: absolute;
@@ -3486,7 +3487,7 @@ body.locked #deck-controls button {
   transition: opacity 0.2s !important;
 }
 
-/* ═══ HOW IT WORKS (s5) ═══
+/* ═══ HOW IT WORKS (s6) ═══
    The isometric stack (.layer-stack / .iso-layer above) beside one panel per
    layer, one visible at a time. Number / title / subtitle / description reuse
    the .layer-anno-* type. The partner deck lifts this slide unchanged. */
@@ -3543,7 +3544,7 @@ body.locked #deck-controls button {
   bottom: 16px;
   text-decoration: none;
 }
-/* trailer link under the h2, in the s2 pulse-check link's voice */
+/* the trailer link (s5's footnote): the deck's footnote voice */
 .hiw-trailer {
   position: absolute;
   top: 58px;
@@ -3661,6 +3662,10 @@ body.locked #deck-controls button {
   height: 300px;
   object-fit: contain;
   object-position: center top;
+}
+/* the route cards sit flush under their line (Cash, 2026-10-06) */
+.hiw-ug-shot--routes {
+  object-position: left top;
 }
 /* the asterisk on "all human made" and its footnote, in the deck's
    footnote voice (11px italic paprika), bottom right like the others;
