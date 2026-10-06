@@ -1,4 +1,4 @@
-/* ═══ resource cosmos — how it works (s5), 01 underground ═══
+/* ═══ resource cosmos — how it works (s6), 01 underground ═══
    A vanilla port of the design system's ResourceCosmos
    (cyph-web/packages/design-system/src/theme/ResourceCosmos): a tunnel of
    rings in CSS 3D, each ring a set of clusters — a person at the center,
@@ -320,8 +320,8 @@
       !!on && !window.matchMedia("(prefers-reduced-motion: reduce)").matches,
     );
   };
-  var s5 = document.getElementById("s5");
-  if (s5 && s5.classList.contains("active") && typeof layerStep !== "undefined" && layerStep === 1) {
+  var s6 = document.getElementById("s6");
+  if (s6 && s6.classList.contains("active") && typeof layerStep !== "undefined" && layerStep === 1) {
     window.setCosmosActive(true);
   }
 })();

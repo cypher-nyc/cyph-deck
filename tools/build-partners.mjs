@@ -4,7 +4,7 @@
    Nothing in it is authored twice. Seven of its eight slides are lifted out
    of index.html verbatim, by id, and keep that id — so every `#sN` rule in
    styles.css applies to them unchanged. The eighth is partners/close.html
-   (s11 with the partner copy). A partial can pull pieces of index.html in through
+   (s12 with the partner copy). A partial can pull pieces of index.html in through
    `<!-- @include index.html <selector> -->` lines.
 
    The shell (head, router, HUD, gate, loaders) is index.html's own, edited in
@@ -23,7 +23,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const read = (p) => fs.readFileSync(path.join(ROOT, p), "utf8");
 
 /* the partner running order: investor slide ids, or a partial in partners/ */
-const ORDER = ["s0", "s1", "s2", "s3", "s4", "s5", "s9", "partners/close.html"];
+const ORDER = ["s0", "s1", "s2", "s3", "s4", "s5", "s6", "s10", "partners/close.html"];
 
 const src = read("index.html");
 
@@ -105,7 +105,7 @@ const nav = [
   ["founders", 1],
   ["problem", 2],
   ["solution", 4],
-  ["close", 7],
+  ["close", 8],
 ]
   .map(([label, i]) => `          <button class="hud-nav-btn" onclick="goTo(${i})">${label}</button>`)
   .join('\n          <span class="hud-nav-sep">/</span>\n');
@@ -114,8 +114,8 @@ out =
   `<nav class="hud-nav">\n${nav.replace('class="hud-nav-btn"', 'class="hud-nav-btn active"')}\n        </nav>` +
   out.slice(navEnd);
 
-swap('<div class="hud-counter" id="hudCtr">01/12</div>', '<div class="hud-counter" id="hudCtr">01/08</div>', "hud counter");
-swap('<div class="bhud-counter" id="bhudCtr">01/12</div>', '<div class="bhud-counter" id="bhudCtr">01/08</div>', "bhud counter");
+swap('<div class="hud-counter" id="hudCtr">01/13</div>', '<div class="hud-counter" id="hudCtr">01/09</div>', "hud counter");
+swap('<div class="bhud-counter" id="bhudCtr">01/13</div>', '<div class="bhud-counter" id="bhudCtr">01/09</div>', "bhud counter");
 
 /* no revenue bar on the partner deck */
 const revLabel = out.indexOf('<div class="hud-bar-label">revenue</div>');

@@ -602,14 +602,14 @@
    after "ready for a demo?" — step 1 jalen, step 2 bryan (see go() in
    deck.js). the demo video/scrim/overlay fade out underneath so the bios
    sit straight on black. newspaper register: no boxes, text on black. ── */
-#s11 .demo-bg,
-#s11 .demo-scrim,
-#s11 .demo-overlay {
+#s12 .demo-bg,
+#s12 .demo-scrim,
+#s12 .demo-overlay {
   transition: opacity 0.5s ease;
 }
-#s11.bio-active .demo-bg,
-#s11.bio-active .demo-scrim,
-#s11.bio-active .demo-overlay {
+#s12.bio-active .demo-bg,
+#s12.bio-active .demo-scrim,
+#s12.bio-active .demo-overlay {
   opacity: 0;
   pointer-events: none;
 }
@@ -865,9 +865,12 @@
   align-items: center;
   gap: 8px;
 }
+/* wide enough that the longest label ("institution building") stays on
+   one line */
 .badge-stat-label {
-  width: 85px;
-  min-width: 85px;
+  width: 120px;
+  min-width: 120px;
+  white-space: nowrap;
   font-size: 11px;
   font-weight: 600;
   color: #fff;
@@ -911,7 +914,8 @@
 #s7 h2,
 #s8 h2,
 #s9 h2,
-#s10 h2 {
+#s10 h2,
+#s11 h2 {
   color: var(--charcoal);
   position: absolute;
   top: 24px;
@@ -947,8 +951,8 @@
 
 #s4 .now-grid {
   display: grid;
-  grid-template-columns: 300px 220px 190px 1px 1fr;
-  grid-template-rows: auto repeat(3, auto);
+  grid-template-columns: 280px 220px 210px 1px 1fr;
+  grid-template-rows: auto repeat(3, auto) auto;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 /* the header row: every label the same size and bottom-aligned, so the
@@ -957,7 +961,7 @@
   grid-row: 1;
   align-self: end;
   padding-bottom: 10px;
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0.08em;
   color: var(--charcoal-muted);
 }
@@ -999,7 +1003,7 @@
 
 #s4 .now-persona h4 {
   margin: 0;
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 700;
   line-height: 1.1;
   color: var(--persona);
@@ -1007,13 +1011,13 @@
 #s4 .now-persona p,
 #s4 .now-size p {
   margin: 4px 0 0;
-  font-size: 13px;
+  font-size: 15px;
   line-height: 1.4;
   color: var(--charcoal-muted);
 }
 #s4 .now-size b {
   display: block;
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 700;
   line-height: 1.1;
   color: var(--persona);
@@ -1025,8 +1029,8 @@
   gap: 14px;
 }
 #s4 .now-logos img {
-  width: 36px;
-  height: 36px;
+  width: 42px;
+  height: 42px;
   object-fit: contain;
   display: block;
 }
@@ -1055,13 +1059,17 @@
   white-space: normal;
 }
 #s4 .crisis-card h3 {
+  font-size: 19px;
   line-height: 1.25;
 }
+#s4 .crisis-card .crisis-quote {
+  font-size: 14px;
+}
 /* each claim with its source logo beside it */
+/* the claim's text runs inline, so its logo follows the last word even
+   when the claim wraps */
 #s4 .now-claim {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  display: block;
 }
 /* a claim with an article is a link to it, set like the rest */
 #s4 a.now-claim {
@@ -1069,7 +1077,7 @@
   text-decoration: none;
 }
 #s4 .now-claim .crisis-quote {
-  flex: 0 1 auto;
+  display: inline;
 }
 #s4 .now-claim + .now-claim {
   margin-top: 8px;
@@ -1081,8 +1089,9 @@
   margin-top: 4px;
 }
 #s4 .now-claim .crisis-src {
-  flex: none;
-  margin-top: 0;
+  display: inline-flex;
+  vertical-align: middle;
+  margin: 0 0 0 10px;
 }
 #s4 .crisis-src a {
   display: flex;
@@ -1096,25 +1105,39 @@
 /* outside a card, so it takes the card's source type here */
 #s4 .now-size .crisis-src {
   margin-top: 6px;
-  font-size: 11px;
+  font-size: 12px;
   color: rgba(255, 255, 255, 0.5);
 }
 /* the source logos: symbols where the mark has one, at one height; the
    wordmarks that have none sized to match their weight */
 #s4 .crisis-brand {
-  height: 16px;
+  height: 19px;
 }
 #s4 .crisis-brand[alt="nbc news"] {
-  height: 20px;
+  height: 24px;
 }
 #s4 .crisis-brand[alt="vogue"] {
-  height: 13px;
+  height: 16px;
 }
 #s4 .crisis-brand[alt="ssense"] {
-  height: 10px;
+  height: 12px;
+}
+/* the two takeaways share the row under the table and the insights: the
+   claim under the persona columns, the AI line under the insights */
+#s4 .now-closer {
+  grid-row: 5;
+  margin-top: 22px;
+}
+#s4 .now-lead {
+  grid-column: 1 / 4;
+  margin-right: 40px;
+}
+#s4 .now-tail {
+  grid-column: 5;
+  margin-left: 40px;
 }
 #s4 .now-closer .deck-takeaway-body {
-  font-size: 26px;
+  font-size: 22px;
 }
 
 /* ── s1: advisory board — a second section beneath the founder cards.
@@ -1662,7 +1685,7 @@
   margin-right: 4px;
 }
 /* ── s11: demo close — full-bleed VHS backdrop ── */
-#s11 {
+#s12 {
   padding: 0;
 }
 .demo-bg {
@@ -1694,8 +1717,8 @@
   text-align: center;
   text-shadow: 0 2px 24px rgba(0, 0, 0, 0.7);
 }
-#s11 .demo-overlay .sub,
-#s11 .demo-overlay .sub a {
+#s12 .demo-overlay .sub,
+#s12 .demo-overlay .sub a {
   color: #fff;
 }
 .demo-overlay .sub a {
@@ -1704,8 +1727,8 @@
 /* mobile / touch: skip the background video (autoplay is unreliable + heavy on
    phones, esp. iOS Low Power Mode) — show just the text on the black slide */
 @media (max-width: 820px), (hover: none) and (pointer: coarse) {
-  #s11 .demo-bg,
-  #s11 .demo-scrim {
+  #s12 .demo-bg,
+  #s12 .demo-scrim {
     display: none;
   }
 }
@@ -1910,8 +1933,8 @@
   }
   /* Gate the money-slide artifact drift behind reduced-motion (the
      inline `animation: driftN ...` styles aren't gated on their own;
-     scoped to #s7 so other slides' drift usage is untouched). */
-  #s7 .money-graphic img {
+     scoped to #s8 so other slides' drift usage is untouched). */
+  #s8 .money-graphic img {
     animation: none !important;
   }
 }
@@ -2021,6 +2044,27 @@ a.crisis-card:hover {
 #s2 .crisis-card h3 {
   color: #fff;
 }
+/* the three stats, set larger here than the shared cards: headline,
+   quote and logo scaled together; the quotes wrap at this size */
+#s2 .crisis-card h3 {
+  font-size: 20px;
+}
+#s2 .crisis-card .crisis-quote {
+  font-size: 15px;
+  white-space: normal;
+}
+#s2 .crisis-brand {
+  height: 50px;
+}
+/* the logos share one line whatever the quote above wraps to */
+#s2 .crisis-card {
+  display: flex;
+  flex-direction: column;
+}
+#s2 .crisis-card .crisis-src {
+  margin-top: auto;
+  padding-top: 10px;
+}
 #s3 .crisis-card h3 {
   color: #fff;
 }
@@ -2103,19 +2147,21 @@ img[src*="3rdspace"] {
 .gtm-gate {
   background: var(--gtm-go);
 }
-/* the launch line's label, like today's: the cyph logo + "exclusive public launch" */
+/* the launch label: the CYPH chips sit on top of the line, "exclusive
+   public launch" above them, in the launch green */
 .gtm-gate-lbl {
   position: absolute;
-  bottom: calc(100% + 8px);
+  bottom: calc(100% + 4px);
   left: 50%;
   transform: translateX(-50%);
   display: flex;
+  flex-direction: column-reverse;
   align-items: center;
   gap: 6px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 15px;
   font-weight: 700;
-  color: #fff;
+  color: var(--gtm-go);
   white-space: nowrap;
 }
 .gtm-gate-lbl .station-bullets {
@@ -2214,6 +2260,7 @@ img[src*="3rdspace"] {
 /* the trigger points: three equal columns, the first from today's line */
 .gtm-triggers .gtm-conds-lbl {
   padding-left: 14px;
+  color: var(--blue);
 }
 .gtm-conds {
   list-style: none;
@@ -2247,10 +2294,10 @@ img[src*="3rdspace"] {
   color: var(--charcoal-muted);
   margin: 0;
 }
-/* the footnote, bottom-left, in the deck's footnote voice */
+/* the footnote, bottom right like the deck's others, in its footnote voice */
 .gtm-note {
   position: absolute;
-  left: 24px;
+  right: 24px;
   bottom: 16px;
   margin: 0;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -2976,7 +3023,7 @@ img[src*="3rdspace"] {
 }
 
 /* ═══ ISOMETRIC LAYER STACK (s5) ═══ */
-#s5 h2 {
+#s6 h2 {
   color: var(--charcoal) !important;
 }
 
@@ -3452,13 +3499,49 @@ body.locked #deck-controls button {
   height: 100%;
   padding-top: 40px;
 }
-#s5 .iso-layer {
+#s6 .iso-layer {
   cursor: pointer;
   width: 200px;
   height: 173px;
 }
-#s5 .layer-stack {
+#s6 .layer-stack {
   gap: 8px;
+}
+/* s5: cyph city — the city street full-bleed, the title over it in white */
+.city-hub-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+/* a black shade over the street so the title reads */
+.city-hub-shade {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+/* the title centred on the image and set low, on the street, as a hero
+   line (Helvetica Neue stops at bold, so size is what reads bolder) */
+#s5 h2 {
+  top: 72%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 44px;
+  line-height: 1.05;
+  white-space: nowrap;
+  text-align: center;
+  color: #fff;
+}
+/* the trailer link as the slide's footnote: bottom right, in the deck's
+   footnote voice */
+#s5 .hiw-trailer {
+  top: auto;
+  left: auto;
+  right: 24px;
+  bottom: 16px;
+  text-decoration: none;
 }
 /* trailer link under the h2, in the s2 pulse-check link's voice */
 .hiw-trailer {
@@ -3501,7 +3584,7 @@ body.locked #deck-controls button {
   --hiw-accent: var(--blue);
 }
 .hiw-step--irl {
-  --hiw-accent: var(--yellow);
+  --hiw-accent: var(--maroon);
 }
 .hiw-step .layer-anno-num,
 .hiw-step .layer-anno-title,
@@ -3540,6 +3623,66 @@ body.locked #deck-controls button {
    phase, covers carry the pulse streak. */
 .hiw-ug {
   padding-top: 0;
+}
+/* three equal lanes on one grid: the three lines across the top row, the
+   visuals across the second (tops aligned). The cosmos keeps its 800x420
+   build, scaled into its lane. */
+.hiw-detail.hiw-ug {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto auto auto;
+  column-gap: 24px;
+  row-gap: 18px;
+  align-items: start;
+}
+.hiw-ug .layer-anno-desc {
+  grid-row: 1;
+  margin: 0;
+}
+/* the three visuals share one box: a lane wide, 300px tall */
+.hiw-ug-cosmos {
+  grid-row: 2;
+  grid-column: 1;
+  height: 300px;
+  overflow: hidden;
+}
+/* scaled to 0.45 (360x189) and centred in the box; the tunnel already
+   fades out at its edges */
+.hiw-ug-cosmos .hiw-cosmos {
+  margin: 55px 0 0 -55px;
+  transform: scale(0.45);
+  transform-origin: top left;
+}
+/* the screenshots shown whole, never cropped */
+.hiw-ug-shot {
+  grid-row: 2;
+  display: block;
+  width: 100%;
+  height: 300px;
+  object-fit: contain;
+  object-position: center top;
+}
+/* the asterisk on "all human made" and its footnote, in the deck's
+   footnote voice (11px italic paprika), bottom right like the others;
+   it shows while step 01 does */
+.hiw-fn-mark {
+  color: var(--orange);
+}
+#s6:has(.hiw-step--ug.on) .hiw-ug-seed {
+  opacity: 1;
+}
+.hiw-ug-seed {
+  position: absolute;
+  right: 24px;
+  bottom: 16px;
+  margin: 0;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 11px;
+  font-style: italic;
+  color: var(--orange);
+  letter-spacing: 0.02em;
 }
 .hiw-cosmos {
   position: relative;
@@ -3683,7 +3826,7 @@ body.locked #deck-controls button {
 /* 04 how it all maps together: the route map and the DNA card side by
    side at one height (--maps-h) */
 .hiw-step--map {
-  --hiw-accent: var(--charcoal);
+  --hiw-accent: var(--yellow);
 }
 .hiw-maps {
   --maps-h: 430px;
@@ -4041,11 +4184,12 @@ body.locked #deck-controls button {
   align-items: baseline;
   gap: 12px;
 }
+/* in its step's accent, as the irl heading is */
 .hiw-stat b {
   font-size: 44px;
   font-weight: 700;
   line-height: 1;
-  color: var(--orange);
+  color: var(--hiw-accent);
 }
 .hiw-stat b span {
   font-size: 24px;
@@ -4055,7 +4199,7 @@ body.locked #deck-controls button {
   color: var(--charcoal);
 }
 /* eyebrow + images in the left column, label + logos in the right */
-#s5 .room-col {
+#s6 .room-col {
   display: grid;
   grid-template-columns: auto 1fr;
   column-gap: 28px;
@@ -4063,29 +4207,29 @@ body.locked #deck-controls button {
   text-align: left;
   padding-left: 0 !important; /* beats index.html's inline padding-left */
 }
-#s5 .room-eyebrow {
+#s6 .room-eyebrow {
   grid-column: 1;
   grid-row: 1;
 }
-#s5 .room-press {
+#s6 .room-press {
   grid-column: 1;
   grid-row: 2;
   height: 300px;
   width: auto;
 }
-#s5 .room-conductors,
-#s5 .room-article,
-#s5 .room-article img {
+#s6 .room-conductors,
+#s6 .room-article,
+#s6 .room-article img {
   width: auto;
   height: 100%;
 }
-#s5 .room-label {
+#s6 .room-label {
   grid-column: 2;
   grid-row: 1;
   margin: 0 0 10px;
   font-size: 13px;
 }
-#s5 .room-logos {
+#s6 .room-logos {
   grid-column: 2;
   grid-row: 2;
   justify-content: flex-start;
@@ -4095,40 +4239,40 @@ body.locked #deck-controls button {
 /* the same drift cycle as 01's inventory collage (set inline there; the logos
    are shared markup, so it is set here), but float only: hiw-float1-6 are
    drift1-6's translate paths without the rotate */
-#s5 .room-logos img:nth-child(12n + 1) {
+#s6 .room-logos img:nth-child(12n + 1) {
   animation: hiw-float1 9s ease-in-out infinite;
 }
-#s5 .room-logos img:nth-child(12n + 2) {
+#s6 .room-logos img:nth-child(12n + 2) {
   animation: hiw-float4 11s ease-in-out infinite;
 }
-#s5 .room-logos img:nth-child(12n + 3) {
+#s6 .room-logos img:nth-child(12n + 3) {
   animation: hiw-float2 10s ease-in-out infinite;
 }
-#s5 .room-logos img:nth-child(12n + 4) {
+#s6 .room-logos img:nth-child(12n + 4) {
   animation: hiw-float5 8.5s ease-in-out infinite;
 }
-#s5 .room-logos img:nth-child(12n + 5) {
+#s6 .room-logos img:nth-child(12n + 5) {
   animation: hiw-float3 10.5s ease-in-out infinite;
 }
-#s5 .room-logos img:nth-child(12n + 6) {
+#s6 .room-logos img:nth-child(12n + 6) {
   animation: hiw-float6 9.5s ease-in-out infinite;
 }
-#s5 .room-logos img:nth-child(12n + 7) {
+#s6 .room-logos img:nth-child(12n + 7) {
   animation: hiw-float2 11.5s ease-in-out infinite;
 }
-#s5 .room-logos img:nth-child(12n + 8) {
+#s6 .room-logos img:nth-child(12n + 8) {
   animation: hiw-float1 10s ease-in-out infinite;
 }
-#s5 .room-logos img:nth-child(12n + 9) {
+#s6 .room-logos img:nth-child(12n + 9) {
   animation: hiw-float4 9s ease-in-out infinite;
 }
-#s5 .room-logos img:nth-child(12n + 10) {
+#s6 .room-logos img:nth-child(12n + 10) {
   animation: hiw-float5 11s ease-in-out infinite;
 }
-#s5 .room-logos img:nth-child(12n + 11) {
+#s6 .room-logos img:nth-child(12n + 11) {
   animation: hiw-float3 8.5s ease-in-out infinite;
 }
-#s5 .room-logos img:nth-child(12n + 12) {
+#s6 .room-logos img:nth-child(12n + 12) {
   animation: hiw-float6 10s ease-in-out infinite;
 }
 @keyframes hiw-float1 {

@@ -1,4 +1,4 @@
-const T = 12;
+const T = 13;
 let cur = 0;
 let busy = false;
 let goTimer = null;
@@ -11,7 +11,7 @@ let _prevCur = 0;
    pair gets .active / .on. ── */
 function updateHiw(step) {
   busy = true;
-  document.querySelectorAll("#s5 [data-step]").forEach(function (node) {
+  document.querySelectorAll("#s6 [data-step]").forEach(function (node) {
     var on = +node.dataset.step === step;
     node.classList.toggle(
       node.classList.contains("hiw-step") ? "on" : "active",
@@ -42,12 +42,12 @@ function updateHiw(step) {
 var dnaBand = 0;
 var dnaTimer = null;
 function dnaFocus(i) {
-  var orbit = document.querySelector("#s5 .dna-orbit");
+  var orbit = document.querySelector("#s6 .dna-orbit");
   if (!orbit) return;
   dnaBand = i;
   orbit.style.setProperty("--turn", -90 * i + "deg");
   orbit.dataset.focus = String(i);
-  document.querySelectorAll("#s5 .dna-band").forEach(function (b) {
+  document.querySelectorAll("#s6 .dna-band").forEach(function (b) {
     b.setAttribute("aria-pressed", +b.dataset.band === i ? "true" : "false");
   });
 }
@@ -69,8 +69,8 @@ function stopHiw() {
 /* 04's route draw, all four lines at once so it lands inside the export's
    settle gate */
 function drawRoutes() {
-  var lines = document.querySelectorAll("#s5 #transitSvg polyline");
-  var stops = document.querySelectorAll("#s5 .stop, #s5 .stop-text");
+  var lines = document.querySelectorAll("#s6 #transitSvg polyline");
+  var stops = document.querySelectorAll("#s6 .stop, #s6 .stop-text");
   anime.remove(lines);
   anime.remove(stops);
   if (lockActive) {
@@ -98,14 +98,14 @@ function drawRoutes() {
   });
 }
 
-/* ── founder bio sub-steps (s11, after "ready for a demo?"): 0 = demo
+/* ── founder bio sub-steps (s12, after "ready for a demo?"): 0 = demo
    view, 1 = jalen's dedicated full-slide bio, 2 = bryan's. each advance
    crossfades the previous view out and the next in (CSS opacity
-   transitions on .founder-bio / #s11.bio-active). ── */
+   transitions on .founder-bio / #s12.bio-active). ── */
 function updateFounderBio(step) {
   busy = true;
-  var s11 = document.getElementById("s11");
-  if (s11) s11.classList.toggle("bio-active", step > 0);
+  var s12 = document.getElementById("s12");
+  if (s12) s12.classList.toggle("bio-active", step > 0);
   var bioA = document.getElementById("bioA");
   var bioB = document.getElementById("bioB");
   if (bioA) bioA.classList.toggle("active", step === 1);
@@ -142,12 +142,13 @@ const ch = {
   3: "crisis",
   4: "solution",
   5: "solution",
-  6: "underground",
-  7: "business",
+  6: "solution",
+  7: "underground",
   8: "business",
   9: "business",
   10: "business",
-  11: "close",
+  11: "business",
+  12: "close",
 };
 
 const bars = [
@@ -156,6 +157,7 @@ const bars = [
   [15, 15, 5, 8],
   [18, 18, 5, 10],
   [22, 22, 8, 12],
+  [23, 23, 9, 13],
   [25, 25, 10, 15],
   [80, 35, 15, 20],
   [90, 74, 71, 66],
@@ -246,10 +248,10 @@ function updateNav(chapter) {
 const SKIP = []; // hidden slides
 function go(i) {
   if (busy || i === cur) return;
-  /* sub-step: founder bios on slide 11. checked BEFORE the bounds guard —
-     advancing on the last slide calls go(12), which must step through the
+  /* sub-step: founder bios on slide 12. checked BEFORE the bounds guard —
+     advancing on the last slide calls go(13), which must step through the
      bios instead of returning early. */
-  if (cur === 11) {
+  if (cur === 12) {
     if (i > cur && founderStep < 2) {
       founderStep++;
       updateFounderBio(founderStep);
@@ -262,8 +264,8 @@ function go(i) {
     }
   }
   if (i < 0 || i >= T) return;
-  /* sub-step: how it works layers on slide 5 */
-  if (cur === 5) {
+  /* sub-step: how it works layers on slide 6 */
+  if (cur === 6) {
     if (i > cur && layerStep < 4) {
       layerStep++;
       updateHiw(layerStep);
@@ -436,18 +438,18 @@ onReady(() => {
   }
 
   /* 04's bands turn the orbit by hand too */
-  document.querySelectorAll("#s5 .dna-band").forEach(function (b) {
+  document.querySelectorAll("#s6 .dna-band").forEach(function (b) {
     b.addEventListener("click", function () {
       dnaFocus(+b.dataset.band);
-      setDnaActive(cur === 5 && layerStep === 4);
+      setDnaActive(cur === 6 && layerStep === 4);
     });
   });
   dnaFocus(0);
 
   /* layers on how it works (s5) jump straight to their step */
-  document.querySelectorAll("#s5 .iso-layer").forEach(function (node) {
+  document.querySelectorAll("#s6 .iso-layer").forEach(function (node) {
     node.addEventListener("click", function () {
-      if (cur !== 5) return;
+      if (cur !== 6) return;
       layerStep = +node.dataset.step;
       updateHiw(layerStep);
     });
@@ -484,7 +486,7 @@ document.getElementById("navPrev").addEventListener("click", () => go(cur - 1));
 
 /* ── per-slide animations ── */
 function runA(i) {
-  if (i !== 5) stopHiw();
+  if (i !== 6) stopHiw();
   if (lockActive) return;
   const B = "easeOutBack",
     C = "easeOutCubic";
@@ -599,10 +601,10 @@ function runA(i) {
         easing: C,
       });
       break;
-    case 5: {
-      layerStep = _prevCur > 5 ? 4 : 1;
+    case 6: {
+      layerStep = _prevCur > 6 ? 4 : 1;
       anime({
-        targets: "#s5 .iso-layer",
+        targets: "#s6 .iso-layer",
         translateY: [40, 0],
         opacity: [0, 1],
         duration: 500,
@@ -610,7 +612,7 @@ function runA(i) {
         easing: B,
       });
       anime({
-        targets: "#s5 .hiw-anno",
+        targets: "#s6 .hiw-anno",
         opacity: [0, 1],
         translateX: [20, 0],
         duration: 500,
@@ -622,10 +624,10 @@ function runA(i) {
       }, 100);
       break;
     }
-    case 6:
+    case 7:
       /* traction: the three columns rise in, left to right */
       anime({
-        targets: "#s6 .traction-col",
+        targets: "#s7 .traction-col",
         opacity: [0, 1],
         translateY: [14, 0],
         duration: 500,
@@ -633,18 +635,18 @@ function runA(i) {
         easing: C,
       });
       break;
-    case 7: {
+    case 8: {
       var s7Reduce = window.matchMedia(
         "(prefers-reduced-motion: reduce)"
       ).matches;
       if (s7Reduce) {
-        document.querySelectorAll("#s7 .money-row, #s7 .money-trajectory, #s7 .deck-takeaway").forEach(function (el) {
+        document.querySelectorAll("#s8 .money-row, #s8 .money-trajectory, #s8 .deck-takeaway").forEach(function (el) {
           el.style.opacity = "1";
           el.style.transform = "none";
         });
       } else {
         anime({
-          targets: "#s7 .money-row, #s7 .money-trajectory, #s7 .deck-takeaway",
+          targets: "#s8 .money-row, #s8 .money-trajectory, #s8 .deck-takeaway",
           translateX: [-12, 0],
           opacity: [0, 1],
           duration: 420,
@@ -654,18 +656,18 @@ function runA(i) {
       }
       break;
     }
-    case 8: {
+    case 9: {
       /* today lands, the lanes slide in one by one, the go-live line
          follows, then its title and the trigger conditions. */
       anime({
-        targets: "#s8 .gtm-today",
+        targets: "#s9 .gtm-today",
         opacity: [0, 1],
         duration: 400,
         delay: 150,
         easing: "linear",
       });
       anime({
-        targets: "#s8 .gtm-lane",
+        targets: "#s9 .gtm-lane",
         translateX: [-16, 0],
         opacity: [0, 1],
         duration: 520,
@@ -673,14 +675,14 @@ function runA(i) {
         easing: B,
       });
       anime({
-        targets: "#s8 .gtm-gate",
+        targets: "#s9 .gtm-gate",
         opacity: [0, 1],
         duration: 450,
         delay: 950,
         easing: "linear",
       });
       anime({
-        targets: "#s8 .gtm-golive",
+        targets: "#s9 .gtm-golive",
         translateX: [12, 0],
         opacity: [0, 1],
         duration: 500,
@@ -688,7 +690,7 @@ function runA(i) {
         easing: B,
       });
       anime({
-        targets: "#s8 .gtm-conds li",
+        targets: "#s9 .gtm-conds li",
         translateY: [6, 0],
         opacity: [0, 1],
         duration: 400,
@@ -697,9 +699,9 @@ function runA(i) {
       });
       break;
     }
-    case 9:
+    case 10:
       anime({
-        targets: "#s9 .test-bubble",
+        targets: "#s10 .test-bubble",
         scale: [0.85, 1],
         opacity: [0, 1],
         duration: 350,
@@ -707,9 +709,9 @@ function runA(i) {
         easing: B,
       });
       break;
-    case 10:
+    case 11:
       anime({
-        targets: "#s10 .raise-term",
+        targets: "#s11 .raise-term",
         translateY: [14, 0],
         opacity: [0, 1],
         duration: 500,
@@ -718,7 +720,7 @@ function runA(i) {
       });
       /* pie grows in */
       anime({
-        targets: "#s10 .raise-pie",
+        targets: "#s11 .raise-pie",
         scale: [0.55, 1],
         opacity: [0, 1],
         duration: 700,
@@ -726,7 +728,7 @@ function runA(i) {
         easing: B,
       });
       anime({
-        targets: "#s10 .raise-legend li",
+        targets: "#s11 .raise-legend li",
         translateX: [10, 0],
         opacity: [0, 1],
         duration: 420,
@@ -734,20 +736,20 @@ function runA(i) {
         easing: C,
       });
       break;
-    case 11:
+    case 12:
       /* arriving always lands on the demo view; the bios only appear by
-         advancing (s11 is the last slide, so there is no from-future entry) */
+         advancing (s12 is the last slide, so there is no from-future entry) */
       founderStep = 0;
       updateFounderBio(founderStep);
       anime({
-        targets: "#s11 h1",
+        targets: "#s12 h1",
         translateY: [12, 0],
         opacity: [0, 1],
         duration: 600,
         easing: C,
       });
       anime({
-        targets: "#s11 .sub",
+        targets: "#s12 .sub",
         opacity: [0, 1],
         duration: 500,
         delay: 300,
@@ -781,7 +783,7 @@ function toggleLock() {
     });
 
     /* ensure s5's panel is visible at the current step */
-    var anno = document.querySelector("#s5 .hiw-anno");
+    var anno = document.querySelector("#s6 .hiw-anno");
     if (anno) {
       anno.style.opacity = "1";
       anno.style.transform = "none";
@@ -829,7 +831,7 @@ function toggleLock() {
       el.style.transform = "none";
     });
     document
-      .querySelectorAll("#s6 .traction-col")
+      .querySelectorAll("#s7 .traction-col")
       .forEach(function (el) {
         el.style.opacity = "1";
         el.style.transform = "none";
@@ -838,23 +840,23 @@ function toggleLock() {
       el.style.opacity = "1";
       el.style.transform = "none";
     });
-    document.querySelectorAll("#s7 .money-row, #s7 .money-trajectory, #s7 .deck-takeaway").forEach(function (el) {
+    document.querySelectorAll("#s8 .money-row, #s8 .money-trajectory, #s8 .deck-takeaway").forEach(function (el) {
       el.style.opacity = "1";
       el.style.transform = "none";
     });
     document
-      .querySelectorAll("#s8 .gtm-today, #s8 .gtm-lane, #s8 .gtm-gate, #s8 .gtm-golive, #s8 .gtm-conds li")
+      .querySelectorAll("#s9 .gtm-today, #s9 .gtm-lane, #s9 .gtm-gate, #s9 .gtm-golive, #s9 .gtm-conds li")
       .forEach(function (el) {
         el.style.opacity = "1";
         el.style.transform = "none";
       });
-    document.querySelectorAll("#s9 .test-bubble").forEach(function (el) {
+    document.querySelectorAll("#s10 .test-bubble").forEach(function (el) {
       el.style.opacity = "1";
       el.style.transform = "none";
     });
     document
       .querySelectorAll(
-        "#s10 .raise-term, #s10 .raise-pie, #s10 .raise-legend li, #s11 h1, #s11 .sub",
+        "#s11 .raise-term, #s11 .raise-pie, #s11 .raise-legend li, #s12 h1, #s12 .sub",
       )
       .forEach(function (el) {
         el.style.opacity = "1";
