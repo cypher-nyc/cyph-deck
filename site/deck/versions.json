@@ -2,6 +2,12 @@
   "current": "sept26",
   "versions": [
     {
+      "id": "oct26",
+      "label": "october 2026",
+      "live": true,
+      "published": "2026-10-06"
+    },
+    {
       "id": "sept26",
       "label": "september 2026",
       "live": true,
