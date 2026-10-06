@@ -921,106 +921,80 @@
   margin: 0;
 }
 
-/* ── s4: what about now? — the claim (left) beside three scattered
-   audiences around the C-Y-P-H dots (right), all straight on the
-   background with no containers. Each persona is a name, its s8 copy, and its
-   tam/sam/som figures in the persona color, with s8's brand logos
-   drifting beside it as the platforms they're scattered across today. Persona colors are s8's:
-   seekers yellow, sparrers orange, authorities blue. ── */
+/* ── s4: the headline full width, then one grid: the three personas as a
+   table (who / size benchmark / tools, each row ruled in its persona
+   color) beside the key insights, set as s2's crisis cards, then the
+   closing line. Persona colors are s8's: seekers yellow, sparrers orange,
+   authorities blue. Type sizes are the slide's previous ones, unchanged. ── */
 #s4 .now-wrap {
   display: flex;
-  align-items: center;
-  gap: 0;
+  flex-direction: column;
+  justify-content: center;
+  gap: 28px;
   width: 100%;
   height: 100%;
-  padding-top: 40px;
+  padding: 40px 24px 0;
 }
-#s4 .now-claim {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-  width: 600px;
-  padding-right: 48px;
+#s4 .now-seek {
+  color: var(--yellow);
 }
-#s4 .now-hero .station-name {
-  font-size: 52px;
-  white-space: normal;
+#s4 .now-spar {
+  color: var(--orange);
 }
-/* the four stats: s2's crisis cards (bold headline, italic evidence line,
-   source) in a 2x2 grid, the column's width; they wrap here, where s2's
-   run one line */
-#s4 .now-stats {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4px 24px;
-  margin: 0 -20px;
+#s4 .now-auth {
+  color: var(--blue);
 }
-#s4 .now-stats .crisis-card {
-  padding: 12px 20px;
-  cursor: default;
-}
-#s4 .now-stats .crisis-card h3,
-#s4 .now-stats .crisis-quote {
-  white-space: normal;
-}
-#s4 .now-stats .crisis-card h3 {
-  line-height: 1.25;
-}
-/* the source logo, as on s2, at a height that suits each mark's shape,
-   with the date beside it */
-#s4 .now-stats .crisis-src {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-#s4 .now-stats .crisis-brand {
-  height: 30px;
-}
-#s4 .now-stats .crisis-brand[alt="pew research center"] {
-  height: 24px;
-}
-#s4 .now-stats .crisis-brand[alt="axios"] {
-  height: 18px;
-}
-#s4 .now-body {
-  max-width: 540px;
-}
-#s4 .now-seek { color: var(--yellow); }
-#s4 .now-spar { color: var(--orange); }
-#s4 .now-auth { color: var(--blue); }
 
-#s4 .now-diagram {
-  position: relative;
-  flex: none;
-  width: 660px;
-  height: 640px;
-  margin-left: 48px;
+#s4 .now-grid {
+  display: grid;
+  grid-template-columns: 300px 220px 190px 1px 1fr;
+  grid-template-rows: auto repeat(3, auto);
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-#s4 .now-group {
-  position: absolute;
-  width: 300px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+/* the header row: every label the same size and bottom-aligned, so the
+   table's headers and "key insights" share one baseline */
+#s4 .now-th {
+  grid-row: 1;
+  align-self: end;
+  padding-bottom: 10px;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--charcoal-muted);
 }
-#s4 .now-group--seek { --persona: var(--yellow); top: 26px; left: 0; }
-#s4 .now-group--spar { --persona: var(--orange); top: 26px; left: 360px; }
-#s4 .now-group--auth { --persona: var(--blue); top: 424px; left: 180px; }
+#s4 .now-th--insights {
+  grid-column: 5;
+  padding-left: 40px;
+}
 
-/* the s8 logo row, laid flat */
-#s4 .now-logos {
-  display: flex;
-  gap: 14px;
+/* a row is its three cells, each ruled on top in the persona color */
+#s4 .now-row {
+  display: contents;
 }
-#s4 .now-logos img {
-  width: 36px;
-  height: 36px;
-  object-fit: contain;
-  display: block;
+#s4 .now-row--seek {
+  --persona: var(--yellow);
 }
-#s4 .now-group--auth .now-logos {
-  justify-content: center;
+#s4 .now-row--spar {
+  --persona: var(--orange);
+}
+#s4 .now-row--auth {
+  --persona: var(--blue);
+}
+#s4 .now-row--seek > * {
+  grid-row: 2;
+}
+#s4 .now-row--spar > * {
+  grid-row: 3;
+}
+#s4 .now-row--auth > * {
+  grid-row: 4;
+}
+#s4 .now-row > * {
+  padding: 14px 24px 18px 0;
+  border-top: 1px solid var(--persona);
+}
+/* the last cell stops short of the divider */
+#s4 .now-row > .now-logos {
+  margin-right: 40px;
 }
 
 #s4 .now-persona h4 {
@@ -1030,82 +1004,117 @@
   line-height: 1.1;
   color: var(--persona);
 }
-#s4 .now-persona p {
+#s4 .now-persona p,
+#s4 .now-size p {
   margin: 4px 0 0;
   font-size: 13px;
   line-height: 1.4;
   color: var(--charcoal-muted);
 }
-#s4 .now-persona .now-eg {
-  margin: 2px 0 10px;
-  font-style: italic;
-}
-#s4 .now-nums {
-  display: flex;
-  gap: 24px;
-}
-#s4 .now-nums span {
-  display: flex;
-  flex-direction: column-reverse;
-  align-items: center;
-  gap: 4px;
-}
-#s4 .now-nums small {
-  font-size: 10px;
-  letter-spacing: 0.08em;
-  color: var(--charcoal-muted);
-}
-#s4 .now-nums b {
+#s4 .now-size b {
+  display: block;
   font-size: 24px;
   font-weight: 700;
+  line-height: 1.1;
   color: var(--persona);
 }
-#s4 .now-group--auth .now-nums {
-  justify-content: center;
+
+#s4 .now-logos {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
 }
-#s4 .now-group--auth .now-persona {
-  text-align: center;
+#s4 .now-logos img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  display: block;
 }
 
-#s4 .now-cyph {
-  position: absolute;
-  top: 290px;
-  left: 50%;
-  transform: translateX(-50%);
+/* the divider and the insights both span the three persona rows */
+#s4 .now-rule {
+  grid-column: 4;
+  grid-row: 2 / 5;
+  background: rgba(255, 255, 255, 0.16);
 }
-#s4 .now-cyph .station-bullets {
-  margin-top: 0;
+#s4 .now-insights {
+  grid-column: 5;
+  grid-row: 2 / 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+  padding-left: 40px;
+}
+#s4 .crisis-card {
+  padding: 0;
+  cursor: default;
+}
+#s4 .crisis-card h3,
+#s4 .crisis-quote {
+  white-space: normal;
+}
+#s4 .crisis-card h3 {
+  line-height: 1.25;
+}
+/* each claim with its source logo beside it */
+#s4 .now-claim {
+  display: flex;
+  align-items: center;
   gap: 12px;
 }
-#s4 .now-cyph .station-bullet {
-  width: 56px;
-  height: 56px;
-  font-size: 28px;
+/* a claim with an article is a link to it, set like the rest */
+#s4 a.now-claim {
+  color: inherit;
+  text-decoration: none;
 }
-/* the claim's last line, moved under the circles */
-#s4 .now-tagline {
-  position: absolute;
-  top: 362px;
-  left: 50%;
-  width: 380px;
-  transform: translateX(-50%);
-  margin: 0;
-  font-size: 13px;
-  line-height: 1.4;
-  text-align: center;
-  color: var(--charcoal-muted);
+#s4 .now-claim .crisis-quote {
+  flex: 0 1 auto;
 }
-
-#s4 .now-note {
-  position: absolute;
-  left: 24px;
-  bottom: 16px;
-  margin: 0;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+#s4 .now-claim + .now-claim {
+  margin-top: 8px;
+}
+#s4 .crisis-src {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+}
+#s4 .now-claim .crisis-src {
+  flex: none;
+  margin-top: 0;
+}
+#s4 .crisis-src a {
+  display: flex;
+}
+/* patreon over substack */
+#s4 .now-src-stack {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+/* outside a card, so it takes the card's source type here */
+#s4 .now-size .crisis-src {
+  margin-top: 6px;
   font-size: 11px;
-  font-style: italic;
-  color: var(--orange);
-  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.5);
+}
+/* the source logos: symbols where the mark has one, at one height; the
+   wordmarks that have none sized to match their weight */
+#s4 .crisis-brand {
+  height: 16px;
+}
+#s4 .crisis-brand[alt="nbc news"] {
+  height: 20px;
+}
+#s4 .crisis-brand[alt="vogue"] {
+  height: 13px;
+}
+#s4 .crisis-brand[alt="ssense"] {
+  height: 10px;
+}
+#s4 .now-closer .deck-takeaway-body {
+  font-size: 26px;
 }
 
 /* ── s1: advisory board — a second section beneath the founder cards.
@@ -1226,25 +1235,24 @@
   width: auto;
   opacity: 0.9;
 }
-/* ── s6: traction — three columns ruled apart (the deck's vertical
-   column dividers), each in its route color: the count, the name, a
-   visual, then a stat with an arrow down into its impact (eyebrow voice) ── */
+/* ── s6: traction — one three-column grid, no rules, each column in its
+   route color. Each column is a subgrid of the eight rows (count, name,
+   e.g. line, visual, then a label and a value for each of the two rows
+   under them), so every row lines up across the three whatever wraps. ── */
 .traction {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(8, auto);
   width: 1160px;
   max-width: 100%;
   margin-top: 40px;
 }
 .traction-col {
-  display: flex;
-  flex-direction: column;
+  grid-row: span 8;
+  display: grid;
+  grid-template-rows: subgrid;
   padding: 0 32px;
-  border-left: 1px solid rgba(255, 255, 255, 0.15);
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-.traction-col:first-child {
-  border-left: none;
 }
 .traction-num {
   margin: 0;
@@ -1256,13 +1264,13 @@
 }
 .traction-title {
   margin: 8px 0 0;
-  min-height: 44px;
   font-size: 19px;
   font-weight: 700;
   line-height: 1.2;
   color: var(--charcoal);
 }
 .traction-visual {
+  align-self: start;
   height: 150px;
   margin: 18px 0 22px;
   display: flex;
@@ -1301,45 +1309,26 @@
   width: auto;
   object-fit: contain;
 }
-/* the stat that leads to the impact (placeholder until the numbers are
-   in), with a hairline arrow down into it */
-.traction-stat {
+/* the e.g. line, in s4's old i.e.-line voice (13px italic, muted) */
+.traction-eg {
+  margin: 4px 0 0;
+  font-size: 13px;
+  line-height: 1.4;
+  font-style: italic;
+  color: var(--charcoal-muted);
+}
+.traction-row-lbl {
   margin: 0;
-  font-size: 32px;
-  font-weight: 700;
-  line-height: 1;
-  color: var(--charcoal);
+  padding: 14px 0 0;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--charcoal-muted);
 }
-.traction-arrow {
-  position: relative;
-  display: block;
-  width: 1px;
-  height: 34px;
-  margin: 10px 0 0 12px;
-  background: var(--charcoal-muted);
-}
-.traction-arrow::after {
-  content: "";
-  position: absolute;
-  left: -4px;
-  bottom: -1px;
-  border-left: 4.5px solid transparent;
-  border-right: 4.5px solid transparent;
-  border-top: 7px solid var(--charcoal-muted);
-}
-.traction-eyebrow {
-  margin: 12px 0 4px;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--tr);
-}
-.traction-impact {
-  margin: 0;
+.traction-row-val {
+  margin: 4px 0 18px;
   font-size: 15px;
   line-height: 1.45;
-  color: var(--charcoal);
+  color: var(--tr);
 }
 
 /* ── s7: how we make money ── */
@@ -1432,22 +1421,11 @@
   font-style: italic;
   color: var(--charcoal-muted);
 }
-/* "think :" — marks the logos after it as comparisons, not partners */
+/* "think :" — marks the pairing after it as a comparison, not partners */
 .money-think {
   font-style: normal;
   font-weight: 700;
   margin-right: -6px;
-}
-.money-co {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-.money-co img {
-  width: 22px;
-  height: 22px;
-  border-radius: 4px;
-  object-fit: contain;
 }
 /* the revenue trajectory: each stream in its row's color, the total
    (green) thicker and filled over them. Identity never rests on color
@@ -1505,8 +1483,15 @@
 }
 .money-line--ads,
 .money-dot--ads,
-.money-end--ads {
+.money-end--ads,
+.money-line--com,
+.money-dot--com,
+.money-end--com {
   --line: var(--blue);
+}
+/* commerce shares the ads + commerce row's blue, dashed to tell it apart */
+.money-line--com {
+  stroke-dasharray: 4 4;
 }
 /* the end labels: value in ink, the stream's name muted (text wears text
    tokens; the line beside it carries the color) */
@@ -2076,13 +2061,16 @@ img[src*="3rdspace"] {
   filter: brightness(0) invert(1) !important;
 }
 
-/* ═══ GTM (s8) — three lanes on one timeline → cyph live ═══
-   A 1296x640 stage. Three lanes (irl / marketing / software): the work is
-   listed in the left column; each lane's line starts before the
-   white "we are here" hairline (x 600) and runs through the green go-live line
-   (x 1100), fading out past it. The trigger conditions stack under the
-   go-live line, under a "trigger points" label.
-   Every piece sits by its top-left corner (anime.js owns transform). */
+/* ═══ GTM (s8) — three lanes on one quarter timeline → exclusive launch ═══
+   A 1296x640 stage on one grid of x positions: four equal 190px quarters
+   from x 250 (q3 '26), the white "we are here" hairline at the start of
+   q4 '26 (x 440) and the green launch line at the end of q2 '27 (x 1010).
+   Each lane's line runs from its start (irl and software x 250, marketing
+   x 440) to the launch line, its work set above it in the lane's color.
+   The trigger points sit in three equal columns from today to launch;
+   "after launch" sits right of the launch line, centred on the lanes.
+   Every animated piece sits by its top-left corner (anime.js owns
+   transform). */
 .gtm-stage {
   position: relative;
   width: 1296px;
@@ -2115,7 +2103,7 @@ img[src*="3rdspace"] {
 .gtm-gate {
   background: var(--gtm-go);
 }
-/* the go-live line's label, like today's: the cyph logo + "live" */
+/* the launch line's label, like today's: the cyph logo + "exclusive public launch" */
 .gtm-gate-lbl {
   position: absolute;
   bottom: calc(100% + 8px);
@@ -2139,15 +2127,41 @@ img[src*="3rdspace"] {
   height: 18px;
   font-size: 10px;
 }
+/* the subtitle under the h2, in the slide's secondary voice */
+.gtm-sub {
+  position: absolute;
+  top: 60px;
+  left: 24px;
+  z-index: 10;
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--charcoal-muted);
+}
+/* the quarters: four equal columns, muted, ruled beneath */
+.gtm-axis {
+  position: absolute;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.4;
+  text-align: center;
+  color: var(--charcoal-muted);
+}
+/* above the marker lines, so each lane's work can break them */
 .gtm-lane {
   position: absolute;
+  z-index: 2;
   left: 0;
   width: 1296px;
   height: 92px;
   opacity: 0;
 }
-/* the left column: the lane's name, then its work in sequence order,
-   centred on the bar */
+/* the left column: the lane's name, centred on its line */
 .gtm-key {
   position: absolute;
   left: 0;
@@ -2156,7 +2170,7 @@ img[src*="3rdspace"] {
   transform: translateY(-50%);
 }
 .gtm-lane-name {
-  margin: 0 0 4px;
+  margin: 0;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 16px;
   font-weight: 700;
@@ -2164,40 +2178,28 @@ img[src*="3rdspace"] {
   text-transform: lowercase;
   color: var(--gtm-c);
 }
-.gtm-items {
-  list-style: none;
+/* the lane's work, directly above its line from the line's start; it
+   sits over the "we are here" line on the slide's own black, so the
+   marker breaks behind the words instead of striking through them */
+.gtm-work {
+  position: absolute;
+  bottom: 56px;
   margin: 0;
-  padding: 0;
-}
-.gtm-items h4 {
+  padding-right: 4px;
+  background: #000;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 12.5px;
-  font-weight: 600;
-  line-height: 16px;
-  text-transform: lowercase;
-  color: #fff;
-  margin: 0;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--gtm-c);
 }
-.gtm-items p {
-  font-size: 10.5px;
-  line-height: 14px;
-  font-style: italic;
-  color: var(--charcoal-muted);
-  margin: 0;
-}
-/* the lane's line: x 250 to past the go-live line, fading out after it */
+/* the lane's line: from its start to the launch line */
 .gtm-bar {
   position: absolute;
-  left: 250px;
   top: 44.5px;
-  width: 970px;
   height: 3px;
   border-radius: 2px;
   background: var(--gtm-c);
-  -webkit-mask-image: linear-gradient(to left, transparent, #000 90px);
-  mask-image: linear-gradient(to left, transparent, #000 90px);
 }
-/* the trigger conditions, stacked under the go-live line */
 .gtm-golive {
   position: absolute;
   opacity: 0;
@@ -2206,18 +2208,22 @@ img[src*="3rdspace"] {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 13px;
   font-weight: 700;
-  text-align: center;
   color: var(--gtm-go);
   margin: 0 0 12px;
+}
+/* the trigger points: three equal columns, the first from today's line */
+.gtm-triggers .gtm-conds-lbl {
+  padding-left: 14px;
 }
 .gtm-conds {
   list-style: none;
   margin: 0;
   padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }
 .gtm-conds li {
-  margin-bottom: 12px;
-  text-align: center;
+  padding: 0 16px 0 14px;
   opacity: 0;
 }
 .gtm-conds h4 {
@@ -2233,6 +2239,25 @@ img[src*="3rdspace"] {
   line-height: 1.4;
   color: var(--charcoal-muted);
   margin: 0;
+}
+.gtm-after-body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--charcoal-muted);
+  margin: 0;
+}
+/* the footnote, bottom-left, in the deck's footnote voice */
+.gtm-note {
+  position: absolute;
+  left: 24px;
+  bottom: 16px;
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 11px;
+  font-style: italic;
+  color: var(--orange);
+  letter-spacing: 0.02em;
 }
 /* ═══ CRISIS (legacy — unused) ═══ */
 .crisis-panel {
@@ -3528,8 +3553,16 @@ body.locked #deck-controls button {
   position: absolute;
   inset: 0;
   perspective-origin: 50% 50%;
-  -webkit-mask-image: radial-gradient(ellipse 60% 64% at 50% 50%, black 72%, transparent 100%);
-  mask-image: radial-gradient(ellipse 60% 64% at 50% 50%, black 72%, transparent 100%);
+  -webkit-mask-image: radial-gradient(
+    ellipse 60% 64% at 50% 50%,
+    black 72%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    ellipse 60% 64% at 50% 50%,
+    black 72%,
+    transparent 100%
+  );
 }
 .cosmos-world {
   position: absolute;
