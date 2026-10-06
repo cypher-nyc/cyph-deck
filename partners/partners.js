@@ -4,12 +4,12 @@
    drive it exactly the way they drive the investor deck.
 
    Slides are addressed by id, not by `s` + index: the reused investor slides
-   keep their own ids (s0..s5, s9, s11) so styles.css applies unchanged.
+   keep their own ids (s0..s6, s10, s12) so styles.css applies unchanged.
    The entrance animations for those slides are deck.js's, copied as-is. */
 
-const SLIDES = ["s0", "s1", "s2", "s3", "s4", "s5", "s9", "s11"];
+const SLIDES = ["s0", "s1", "s2", "s3", "s4", "s5", "s6", "s10", "s12"];
 const T = SLIDES.length;
-const HIW = SLIDES.indexOf("s5");
+const HIW = SLIDES.indexOf("s6");
 let cur = 0;
 let busy = false;
 let goTimer = null;
@@ -24,6 +24,7 @@ const ch = [
   "solution",
   "solution",
   "solution",
+  "solution",
   "close",
 ];
 
@@ -34,6 +35,7 @@ const bars = [
   [15, 15, 8],
   [18, 18, 10],
   [22, 22, 12],
+  [23, 23, 13],
   [25, 25, 15],
   [95, 88, 80],
   [100, 100, 100],
@@ -58,7 +60,7 @@ function pad(n) {
 /* ── how it works: 01 underground / 02 cyph / 03 irl / 04 how it all maps together ── */
 function updateHiw(step) {
   busy = true;
-  document.querySelectorAll("#s5 [data-step]").forEach(function (node) {
+  document.querySelectorAll("#s6 [data-step]").forEach(function (node) {
     var on = +node.dataset.step === step;
     node.classList.toggle(
       node.classList.contains("hiw-step") ? "on" : "active",
@@ -89,12 +91,12 @@ function updateHiw(step) {
 var dnaBand = 0;
 var dnaTimer = null;
 function dnaFocus(i) {
-  var orbit = document.querySelector("#s5 .dna-orbit");
+  var orbit = document.querySelector("#s6 .dna-orbit");
   if (!orbit) return;
   dnaBand = i;
   orbit.style.setProperty("--turn", -90 * i + "deg");
   orbit.dataset.focus = String(i);
-  document.querySelectorAll("#s5 .dna-band").forEach(function (b) {
+  document.querySelectorAll("#s6 .dna-band").forEach(function (b) {
     b.setAttribute("aria-pressed", +b.dataset.band === i ? "true" : "false");
   });
 }
@@ -114,8 +116,8 @@ function stopHiw() {
 
 /* 04's route draw, all four lines at once so it lands inside the settle gate */
 function drawRoutes() {
-  var lines = document.querySelectorAll("#s5 #transitSvg polyline");
-  var stops = document.querySelectorAll("#s5 .stop, #s5 .stop-text");
+  var lines = document.querySelectorAll("#s6 #transitSvg polyline");
+  var stops = document.querySelectorAll("#s6 .stop, #s6 .stop-text");
   anime.remove(lines);
   anime.remove(stops);
   anime({
@@ -266,7 +268,7 @@ onReady(function () {
   }
 
   /* 04's bands turn the orbit by hand too */
-  document.querySelectorAll("#s5 .dna-band").forEach(function (b) {
+  document.querySelectorAll("#s6 .dna-band").forEach(function (b) {
     b.addEventListener("click", function () {
       dnaFocus(+b.dataset.band);
       setDnaActive(cur === HIW && layerStep === 4);
@@ -276,7 +278,7 @@ onReady(function () {
 
   /* layers on how it works jump straight to their step */
   document
-    .querySelectorAll("#s5 .iso-layer")
+    .querySelectorAll("#s6 .iso-layer")
     .forEach(function (node) {
       node.addEventListener("click", function () {
         if (cur !== HIW) return;
@@ -305,7 +307,7 @@ document.getElementById("navPrev").addEventListener("click", function () {
 
 /* ── per-slide entrance animations (deck.js's, by slide id) ── */
 function runA(i) {
-  if (SLIDES[i] !== "s5") stopHiw();
+  if (SLIDES[i] !== "s6") stopHiw();
   const B = "easeOutBack",
     C = "easeOutCubic";
   switch (SLIDES[i]) {
@@ -420,10 +422,10 @@ function runA(i) {
         easing: C,
       });
       break;
-    case "s5":
+    case "s6":
       layerStep = _prevCur > HIW ? 4 : 1;
       anime({
-        targets: "#s5 .iso-layer",
+        targets: "#s6 .iso-layer",
         translateY: [40, 0],
         opacity: [0, 1],
         duration: 500,
@@ -431,7 +433,7 @@ function runA(i) {
         easing: B,
       });
       anime({
-        targets: "#s5 .hiw-anno",
+        targets: "#s6 .hiw-anno",
         opacity: [0, 1],
         translateX: [20, 0],
         duration: 500,
@@ -442,9 +444,9 @@ function runA(i) {
         updateHiw(layerStep);
       }, 100);
       break;
-    case "s9":
+    case "s10":
       anime({
-        targets: "#s9 .test-bubble",
+        targets: "#s10 .test-bubble",
         scale: [0.85, 1],
         opacity: [0, 1],
         duration: 350,
@@ -452,16 +454,16 @@ function runA(i) {
         easing: B,
       });
       break;
-    case "s11":
+    case "s12":
       anime({
-        targets: "#s11 h1",
+        targets: "#s12 h1",
         translateY: [12, 0],
         opacity: [0, 1],
         duration: 600,
         easing: C,
       });
       anime({
-        targets: "#s11 .sub",
+        targets: "#s12 .sub",
         opacity: [0, 1],
         duration: 500,
         delay: 300,

@@ -260,9 +260,12 @@ const DOOR_VERTICAL_LIFT = CAMERA_Y * PARALLAX_FACTOR;
    at CYPH_FLYER_DIM; as the doors part it brightens to full. */
 const CYPH_FLYER_ART = "assets/cards/archive_memory_ai.jpg";
 /* a deck can put different art back there with `data-flyer` on the canvas
-   (the partner deck shows the live cyph car around the same flyer); it must
-   be square like the default */
-const CYPH_FLYER_SIZE = (DOORWAY_HEIGHT / PARALLAX_T) * 0.86;
+   (the decks show the live cyph call around the same flyer). The plane takes
+   the art's own aspect and its alpha, so a cut-out floats in the doorway
+   with no backdrop; `data-flyer-size` sets its height as a fraction of the
+   aperture (default 0.86) */
+const CYPH_FLYER_APERTURE = DOORWAY_HEIGHT / PARALLAX_T;
+const CYPH_FLYER_SIZE = CYPH_FLYER_APERTURE * 0.86;
 const CYPH_FLYER_DIM = 0.5;
 const CYPH_FLYER_LIT = 1.0;
 
@@ -387,9 +390,13 @@ function buildCyphDoors(canvas) {
   const flyerMat = new THREE.MeshBasicMaterial({
     color: new THREE.Color().setScalar(CYPH_FLYER_DIM),
     toneMapped: false,
+    transparent: true,
   });
+  const flyerSize = canvas.dataset.flyerSize
+    ? CYPH_FLYER_APERTURE * parseFloat(canvas.dataset.flyerSize)
+    : CYPH_FLYER_SIZE;
   const flyer = new THREE.Mesh(
-    new THREE.PlaneGeometry(CYPH_FLYER_SIZE, CYPH_FLYER_SIZE),
+    new THREE.PlaneGeometry(flyerSize, flyerSize),
     flyerMat,
   );
   flyer.position.set(0, 0, PARALLAX_TARGET_Z);
@@ -400,6 +407,8 @@ function buildCyphDoors(canvas) {
     tex.needsUpdate = true;
     flyerMat.map = tex;
     flyerMat.needsUpdate = true;
+    // the art's own aspect, its height held
+    flyer.scale.x = tex.image.width / tex.image.height;
   });
 
   // Bottom sill — the only car-wall chrome that stays visible.
