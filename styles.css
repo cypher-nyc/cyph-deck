@@ -1433,11 +1433,13 @@
   flex-direction: column;
   gap: 8px;
 }
+/* label ("think :" / "unlock :") in a fixed column, its line wrapping
+   beside it, so both lines start at the same x */
 .money-analog {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 6px 14px;
+  display: grid;
+  grid-template-columns: 54px 1fr;
+  column-gap: 6px;
+  align-items: baseline;
   margin: 0;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 12px;
@@ -1448,7 +1450,6 @@
 .money-think {
   font-style: normal;
   font-weight: 700;
-  margin-right: -6px;
 }
 /* the revenue trajectory: each stream in its row's color, the total
    (green) thicker and filled over them. Identity never rests on color
