@@ -925,6 +925,12 @@
   margin: 0;
 }
 
+/* the s4 title is the cyph line itself: it runs the slide's width inside
+   the same 24px margin on both sides and wraps where it falls */
+#s4 h2 {
+  right: 24px;
+}
+
 /* ── s4: the headline full width, then one grid: the three personas as a
    table (who / size benchmark / tools, each row ruled in its persona
    color) beside the key insights, set as s2's crisis cards, then the
@@ -1117,7 +1123,7 @@
   height: 12px;
 }
 /* the two takeaways share the row under the table and the insights: the
-   claim under the persona columns, the AI line under the insights */
+   persona line under the persona columns, the AI line under the insights */
 #s4 .now-closer {
   grid-row: 5;
   margin-top: 22px;
@@ -3535,6 +3541,18 @@ body.locked #deck-controls button {
   text-align: center;
   color: #fff;
 }
+/* the swaying cyphcard, centred over the title with its bottom 80px above
+   the title's top (the title is 44px, centred on 72%), see-through enough
+   that the crosswalk behind it reads */
+#s5 .city-card {
+  position: absolute;
+  top: 72%;
+  left: calc(50% + 24px);
+  width: 300px;
+  transform: translate(-50%, calc(-100% - 102px));
+  opacity: 0.8;
+  z-index: 10;
+}
 /* the trailer link as the slide's footnote: bottom right, in the deck's
    footnote voice */
 #s5 .hiw-trailer {
@@ -3585,7 +3603,7 @@ body.locked #deck-controls button {
   --hiw-accent: var(--blue);
 }
 .hiw-step--irl {
-  --hiw-accent: var(--maroon);
+  --hiw-accent: var(--maroon-bright);
 }
 .hiw-step .layer-anno-num,
 .hiw-step .layer-anno-title,

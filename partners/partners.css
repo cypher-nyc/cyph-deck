@@ -3,14 +3,24 @@
    investor slide under its own id (how it works included, as s6), so only
    partner-specific overrides live here. */
 
-/* ── s4: for partners, only the claim — the left column's takeaway (the
-   cyph line), centred on the slide at the title's size, its persona words
-   in the title's own color; the title, table, insights and AI line go ── */
-#s4 h2,
+/* ── s4: for partners, only the claim — the title (the cyph line) over
+   the left column's takeaway (the persona line), centred on the slide at
+   the title's size, the persona words in the title's own color; the
+   table, insights and AI line go ── */
+#s4 {
+  align-items: center !important;
+}
+#s4 h2 {
+  position: static;
+  text-align: center;
+  line-height: 1.15;
+}
 #s4 .now-grid > :not(.now-lead) {
   display: none;
 }
 #s4 .now-wrap {
+  height: auto;
+  padding: 0;
   justify-content: center;
   align-items: center;
 }

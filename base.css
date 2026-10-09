@@ -52,6 +52,8 @@ body {
   --red: #ec4e20;
   --yellow: #fbaf00;
   --maroon: #6d1a36;
+  /* amaranth lifted for text on black: same hue, readable */
+  --maroon-bright: #bd2d5e;
   --panel: rgba(255, 255, 255, 0.92);
   --panel-dark: rgba(40, 35, 30, 0.92);
   --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
