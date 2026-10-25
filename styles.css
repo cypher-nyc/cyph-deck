@@ -598,18 +598,18 @@
   align-items: stretch;
 }
 
-/* ── founder bio sub-steps (s12): dedicated full-slide bios that fade in
+/* ── founder bio sub-steps (s13): dedicated full-slide bios that fade in
    after "ready for a demo?" — step 1 jalen, step 2 bryan (see go() in
    deck.js). the demo video/scrim/overlay fade out underneath so the bios
    sit straight on black. newspaper register: no boxes, text on black. ── */
-#s12 .demo-bg,
-#s12 .demo-scrim,
-#s12 .demo-overlay {
+#s13 .demo-bg,
+#s13 .demo-scrim,
+#s13 .demo-overlay {
   transition: opacity 0.5s ease;
 }
-#s12.bio-active .demo-bg,
-#s12.bio-active .demo-scrim,
-#s12.bio-active .demo-overlay {
+#s13.bio-active .demo-bg,
+#s13.bio-active .demo-scrim,
+#s13.bio-active .demo-overlay {
   opacity: 0;
   pointer-events: none;
 }
@@ -915,7 +915,8 @@
 #s8 h2,
 #s9 h2,
 #s10 h2,
-#s11 h2 {
+#s11 h2,
+#s12 h2 {
   color: var(--charcoal);
   position: absolute;
   top: 24px;
@@ -925,18 +926,19 @@
   margin: 0;
 }
 
-/* the s4 title is the cyph line itself: it runs the slide's width inside
-   the same 24px margin on both sides and wraps where it falls */
+/* the s3 and s4 titles run the slide's width inside the same 24px margin
+   on both sides and wrap where they fall */
+#s3 h2,
 #s4 h2 {
   right: 24px;
 }
 
-/* ── s4: the headline full width, then one grid: the three personas as a
+/* ── s3: the headline full width, then one grid: the three personas as a
    table (who / size benchmark / tools, each row ruled in its persona
    color) beside the key insights, set as s2's crisis cards, then the
-   closing line. Persona colors are s8's: seekers yellow, sparrers orange,
+   closing line. Persona colors are s9's: seekers yellow, sparrers orange,
    authorities blue. Type sizes are the slide's previous ones, unchanged. ── */
-#s4 .now-wrap {
+#s3 .now-wrap {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -945,25 +947,25 @@
   height: 100%;
   padding: 40px 24px 0;
 }
-#s4 .now-seek {
+#s3 .now-seek {
   color: var(--yellow);
 }
-#s4 .now-spar {
+#s3 .now-spar {
   color: var(--orange);
 }
-#s4 .now-auth {
+#s3 .now-auth {
   color: var(--blue);
 }
 
-#s4 .now-grid {
+#s3 .now-grid {
   display: grid;
   grid-template-columns: 280px 220px 210px 1px 1fr;
-  grid-template-rows: auto repeat(3, auto) auto;
+  grid-template-rows: auto repeat(3, auto);
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 /* the header row: every label the same size and bottom-aligned, so the
    table's headers and "key insights" share one baseline */
-#s4 .now-th {
+#s3 .now-th {
   grid-row: 1;
   align-self: end;
   padding-bottom: 10px;
@@ -971,57 +973,57 @@
   letter-spacing: 0.08em;
   color: var(--charcoal-muted);
 }
-#s4 .now-th--insights {
+#s3 .now-th--insights {
   grid-column: 5;
   padding-left: 40px;
 }
 
 /* a row is its three cells, each ruled on top in the persona color */
-#s4 .now-row {
+#s3 .now-row {
   display: contents;
 }
-#s4 .now-row--seek {
+#s3 .now-row--seek {
   --persona: var(--yellow);
 }
-#s4 .now-row--spar {
+#s3 .now-row--spar {
   --persona: var(--orange);
 }
-#s4 .now-row--auth {
+#s3 .now-row--auth {
   --persona: var(--blue);
 }
-#s4 .now-row--seek > * {
+#s3 .now-row--seek > * {
   grid-row: 2;
 }
-#s4 .now-row--spar > * {
+#s3 .now-row--spar > * {
   grid-row: 3;
 }
-#s4 .now-row--auth > * {
+#s3 .now-row--auth > * {
   grid-row: 4;
 }
-#s4 .now-row > * {
+#s3 .now-row > * {
   padding: 14px 24px 18px 0;
   border-top: 1px solid var(--persona);
 }
 /* the last cell stops short of the divider */
-#s4 .now-row > .now-logos {
+#s3 .now-row > .now-logos {
   margin-right: 40px;
 }
 
-#s4 .now-persona h4 {
+#s3 .now-persona h4 {
   margin: 0;
   font-size: 28px;
   font-weight: 700;
   line-height: 1.1;
   color: var(--persona);
 }
-#s4 .now-persona p,
-#s4 .now-size p {
+#s3 .now-persona p,
+#s3 .now-size p {
   margin: 4px 0 0;
   font-size: 15px;
   line-height: 1.4;
   color: var(--charcoal-muted);
 }
-#s4 .now-size b {
+#s3 .now-size b {
   display: block;
   font-size: 28px;
   font-weight: 700;
@@ -1029,12 +1031,12 @@
   color: var(--persona);
 }
 
-#s4 .now-logos {
+#s3 .now-logos {
   display: flex;
   align-items: flex-start;
   gap: 14px;
 }
-#s4 .now-logos img {
+#s3 .now-logos img {
   width: 42px;
   height: 42px;
   object-fit: contain;
@@ -1042,12 +1044,12 @@
 }
 
 /* the divider and the insights both span the three persona rows */
-#s4 .now-rule {
+#s3 .now-rule {
   grid-column: 4;
   grid-row: 2 / 5;
   background: rgba(255, 255, 255, 0.16);
 }
-#s4 .now-insights {
+#s3 .now-insights {
   grid-column: 5;
   grid-row: 2 / 5;
   display: flex;
@@ -1056,88 +1058,248 @@
   gap: 24px;
   padding-left: 40px;
 }
+#s3 .crisis-card,
 #s4 .crisis-card {
   padding: 0;
   cursor: default;
 }
+#s3 .crisis-card h3,
 #s4 .crisis-card h3,
+#s3 .crisis-quote,
 #s4 .crisis-quote {
   white-space: normal;
 }
+#s3 .crisis-card h3,
 #s4 .crisis-card h3 {
   font-size: 19px;
   line-height: 1.25;
 }
+#s3 .crisis-card .crisis-quote,
 #s4 .crisis-card .crisis-quote {
   font-size: 14px;
 }
 /* each claim with its source logo beside it */
 /* the claim's text runs inline, so its logo follows the last word even
    when the claim wraps */
+#s3 .now-claim,
 #s4 .now-claim {
   display: block;
 }
 /* a claim with an article is a link to it, set like the rest */
+#s3 a.now-claim,
 #s4 a.now-claim {
   color: inherit;
   text-decoration: none;
 }
+#s3 .now-claim .crisis-quote,
 #s4 .now-claim .crisis-quote {
   display: inline;
 }
+#s3 .now-claim + .now-claim,
 #s4 .now-claim + .now-claim {
   margin-top: 8px;
 }
+#s3 .crisis-src,
 #s4 .crisis-src {
   display: flex;
   align-items: center;
   gap: 10px;
   margin-top: 4px;
 }
+#s3 .now-claim .crisis-src,
 #s4 .now-claim .crisis-src {
   display: inline-flex;
   vertical-align: middle;
   margin: 0 0 0 10px;
 }
-#s4 .crisis-src a {
+#s3 .crisis-src a {
   display: flex;
 }
 /* outside a card, so it takes the card's source type here */
-#s4 .now-size .crisis-src {
+#s3 .now-size .crisis-src {
   margin-top: 6px;
   font-size: 12px;
   color: rgba(255, 255, 255, 0.5);
 }
 /* the source logos: symbols where the mark has one, at one height; the
    wordmarks that have none sized to match their weight */
-#s4 .crisis-brand {
+#s3 .crisis-brand {
   height: 19px;
 }
-#s4 .crisis-brand[alt="nbc news"] {
+#s3 .crisis-brand[alt="nbc news"] {
   height: 24px;
 }
-#s4 .crisis-brand[alt="vogue"] {
+#s3 .crisis-brand[alt="vogue"] {
   height: 16px;
 }
-#s4 .crisis-brand[alt="ssense"] {
+#s3 .crisis-brand[alt="ssense"] {
   height: 12px;
 }
-/* the two takeaways share the row under the table and the insights: the
-   persona line under the persona columns, the AI line under the insights */
-#s4 .now-closer {
-  grid-row: 5;
-  margin-top: 22px;
+/* ── s4: institutions — the expert-interview count on the left, centred
+   in its column, beside the key insights in two columns, set as s3's
+   insight cards (the card rules above carry both slides) ── */
+#s4 .inst-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 40px 24px 0;
 }
-#s4 .now-lead {
-  grid-column: 1 / 4;
-  margin-right: 40px;
+#s4 .inst-grid {
+  display: grid;
+  grid-template-columns: 400px 1px 1fr;
+  align-items: stretch;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-#s4 .now-tail {
-  grid-column: 5;
-  margin-left: 40px;
+#s4 .inst-experts {
+  align-self: center;
+  padding: 0 40px 0 24px;
 }
-#s4 .now-closer .deck-takeaway-body {
+#s4 .inst-experts b {
+  display: block;
+  font-size: 72px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--orange);
+}
+#s4 .inst-experts > p {
+  margin: 8px 0 0;
   font-size: 22px;
+  line-height: 1.3;
+  color: var(--charcoal);
+}
+#s4 .inst-archetypes {
+  list-style: none;
+  margin: 22px 0 0;
+  padding: 0;
+}
+#s4 .inst-archetypes li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 5px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--charcoal);
+}
+#s4 .inst-archetypes em {
+  font-style: normal;
+  color: var(--charcoal-muted);
+}
+#s4 .now-rule {
+  background: rgba(255, 255, 255, 0.16);
+}
+#s4 .inst-insights {
+  align-self: center;
+  padding-left: 48px;
+}
+#s4 .now-th {
+  display: block;
+  padding-bottom: 14px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--charcoal-muted);
+}
+/* the three stages of an idea, read left to right: a numbered line runs
+   from each stage into the next, and the whole row lands on the result */
+#s4 .now-insights {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0 40px;
+}
+#s4 .idea-step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 -40px 16px 0;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--orange);
+}
+#s4 .idea-step::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.16);
+}
+#s4 .idea-stage:last-child .idea-step {
+  margin-right: 0;
+}
+#s4 .idea-stage:last-child .idea-step::after {
+  display: none;
+}
+/* every stage shares one set of rows, so the stats and their logos line
+   up across the three: a two-line headline, three-line stats */
+#s4 .crisis-card h3 {
+  min-height: calc(2 * 1.25em);
+  margin-bottom: 14px;
+}
+#s4 .now-claim {
+  display: block;
+}
+#s4 .now-claim + .now-claim {
+  margin-top: 18px;
+}
+#s4 .now-claim .crisis-quote {
+  display: block;
+  min-height: calc(3 * 1.45em);
+  font-size: 14px;
+  line-height: 1.45;
+  font-style: normal;
+  color: var(--charcoal);
+}
+/* the logo sits under its stat, left-aligned, in one 30px row */
+#s4 .now-claim .crisis-src {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  margin: 8px 0 0;
+}
+/* the source logos, sized by eye to one optical weight */
+#s4 .crisis-brand {
+  height: 20px;
+}
+#s4 .crisis-brand[alt="fire"] {
+  height: 28px;
+}
+#s4 .crisis-brand[alt="national archives"] {
+  height: 30px;
+}
+#s4 .crisis-brand[alt="knight foundation"] {
+  height: 22px;
+}
+#s4 .crisis-brand[alt="rand"] {
+  height: 22px;
+}
+#s4 .crisis-brand[alt="peerj"] {
+  height: 18px;
+}
+#s4 .crisis-brand[alt="gallup"] {
+  height: 16px;
+}
+
+/* where it all lands: the four limits, one row under a rule */
+#s4 .idea-result {
+  margin-top: 36px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
+#s4 .idea-result ul {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+}
+#s4 .idea-result li {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--charcoal);
 }
 
 /* ── s1: advisory board — a second section beneath the founder cards.
@@ -1188,7 +1350,7 @@
   color: var(--charcoal-muted);
 }
 
-/* ── s6 (03 irl): the press hit + "in the room". The article is a real
+/* ── s7 (03 irl): the press hit + "in the room". The article is a real
    link — Chrome carries the href into the PDF export as a clickable
    annotation. Logo heights are the optically-balanced values from the cyph
    002 recap deck (deck.json, "in the room"), scaled 1.15× for this slide; the
@@ -1258,7 +1420,7 @@
   width: auto;
   opacity: 0.9;
 }
-/* ── s7: traction — one three-column grid, no rules, each column in its
+/* ── s8: traction — one three-column grid, no rules, each column in its
    route color. Each column is a subgrid of the eight rows (count, name,
    e.g. line, visual, then a label and a value for each of the two rows
    under them), so every row lines up across the three whatever wraps. ── */
@@ -1332,7 +1494,7 @@
   width: auto;
   object-fit: contain;
 }
-/* the e.g. line, in s4's old i.e.-line voice (13px italic, muted) */
+/* the e.g. line, in s3's old i.e.-line voice (13px italic, muted) */
 .traction-eg {
   margin: 4px 0 0;
   font-size: 13px;
@@ -1354,7 +1516,7 @@
   color: var(--tr);
 }
 
-/* ── s8: how we make money ── */
+/* ── s9: how we make money ── */
 .money-table {
   width: 1120px;
   max-width: 100%;
@@ -1538,7 +1700,7 @@
   r: 6.5;
 }
 
-/* closing takeaway — ruled off from the rows it summarises (s8, how we
+/* closing takeaway — ruled off from the rows it summarises (s9, how we
    make money). */
 .deck-takeaway {
   margin-top: 4px;
@@ -1557,7 +1719,7 @@
   font-weight: 700;
 }
 
-/* ── s11: the raise ── */
+/* ── s12: the raise ── */
 .raise-canvas {
   display: flex;
   flex-direction: column;
@@ -1685,8 +1847,8 @@
   font-weight: 700;
   margin-right: 4px;
 }
-/* ── s12: demo close — full-bleed VHS backdrop ── */
-#s12 {
+/* ── s13: demo close — full-bleed VHS backdrop ── */
+#s13 {
   padding: 0;
 }
 .demo-bg {
@@ -1718,8 +1880,8 @@
   text-align: center;
   text-shadow: 0 2px 24px rgba(0, 0, 0, 0.7);
 }
-#s12 .demo-overlay .sub,
-#s12 .demo-overlay .sub a {
+#s13 .demo-overlay .sub,
+#s13 .demo-overlay .sub a {
   color: #fff;
 }
 .demo-overlay .sub a {
@@ -1728,8 +1890,8 @@
 /* mobile / touch: skip the background video (autoplay is unreliable + heavy on
    phones, esp. iOS Low Power Mode) — show just the text on the black slide */
 @media (max-width: 820px), (hover: none) and (pointer: coarse) {
-  #s12 .demo-bg,
-  #s12 .demo-scrim {
+  #s13 .demo-bg,
+  #s13 .demo-scrim {
     display: none;
   }
 }
@@ -1770,11 +1932,11 @@
   animation: drift3 10s ease-in-out infinite;
 }
 
-#s3 .crisis-canvas {
+#s5 .crisis-canvas {
   margin-top: 60px;
   width: 1300px;
 }
-#s3 .crisis-float {
+#s5 .crisis-float {
   width: 400px;
   max-width: 417px;
   border-radius: 24px;
@@ -1783,15 +1945,15 @@
   border: none;
   padding: 0;
 }
-#s3 .crisis-float-1 {
+#s5 .crisis-float-1 {
   left: 9px;
   transform: translateX(0) rotate(-6deg);
 }
-#s3 .crisis-float-2 {
+#s5 .crisis-float-2 {
   left: 441px;
   transform: translateX(0) rotate(4deg);
 }
-#s3 .crisis-float-3 {
+#s5 .crisis-float-3 {
   top: 60px;
   left: 873px;
   right: auto;
@@ -1934,8 +2096,8 @@
   }
   /* Gate the money-slide artifact drift behind reduced-motion (the
      inline `animation: driftN ...` styles aren't gated on their own;
-     scoped to #s8 so other slides' drift usage is untouched). */
-  #s8 .money-graphic img {
+     scoped to #s10 so other slides' drift usage is untouched). */
+  #s9 .money-graphic img {
     animation: none !important;
   }
 }
@@ -2066,13 +2228,13 @@ a.crisis-card:hover {
   margin-top: auto;
   padding-top: 10px;
 }
-#s3 .crisis-card h3 {
+#s5 .crisis-card h3 {
   color: #fff;
 }
-#s3 .crisis-card .crisis-quote {
+#s5 .crisis-card .crisis-quote {
   color: rgba(255, 255, 255, 0.9);
 }
-#s3 .crisis-card .crisis-src {
+#s5 .crisis-card .crisis-src {
   color: rgba(255, 255, 255, 0.7) !important;
 }
 .crisis-card .crisis-quote {
@@ -2106,7 +2268,7 @@ img[src*="3rdspace"] {
   filter: brightness(0) invert(1) !important;
 }
 
-/* ═══ GTM (s9) — three lanes on one quarter timeline → exclusive launch ═══
+/* ═══ GTM (s10) — three lanes on one quarter timeline → exclusive launch ═══
    A 1296x640 stage on one grid of x positions: four equal 190px quarters
    from x 250 (q3 '26), the white "we are here" hairline at the start of
    q4 '26 (x 440) and the green launch line at the end of q2 '27 (x 1010).
@@ -3023,8 +3185,8 @@ img[src*="3rdspace"] {
   }
 }
 
-/* ═══ ISOMETRIC LAYER STACK (s6) ═══ */
-#s6 h2 {
+/* ═══ ISOMETRIC LAYER STACK (s7) ═══ */
+#s7 h2 {
   color: var(--charcoal) !important;
 }
 
@@ -3155,7 +3317,7 @@ img[src*="3rdspace"] {
   background: rgba(0, 0, 0, 0.5);
 }
 
-/* ═══ CYPH FLYER (formerly the s8 cyph slide) — flyer + arena-fe-style detail panel ═══
+/* ═══ CYPH FLYER (formerly the s9 cyph slide) — flyer + arena-fe-style detail panel ═══
    single floating flyer card on the left cycles through 6 flyers
    (3 live → 3 conceptual). right side shows the underground artifacts +
    office hours related to the active flyer, mirroring arena-fe's
@@ -3494,7 +3656,7 @@ body.locked #deck-controls button {
   transition: opacity 0.2s !important;
 }
 
-/* ═══ HOW IT WORKS (s6) ═══
+/* ═══ HOW IT WORKS (s7) ═══
    The isometric stack (.layer-stack / .iso-layer above) beside one panel per
    layer, one visible at a time. Number / title / subtitle / description reuse
    the .layer-anno-* type. The partner deck lifts this slide unchanged. */
@@ -3507,15 +3669,15 @@ body.locked #deck-controls button {
   height: 100%;
   padding-top: 40px;
 }
-#s6 .iso-layer {
+#s7 .iso-layer {
   cursor: pointer;
   width: 200px;
   height: 173px;
 }
-#s6 .layer-stack {
+#s7 .layer-stack {
   gap: 8px;
 }
-/* s5: cyph city — the city street full-bleed, the title over it in white */
+/* s6: cyph city — the city street, the corner title as on every slide */
 .city-hub-bg {
   position: absolute;
   inset: 0;
@@ -3524,46 +3686,53 @@ body.locked #deck-controls button {
   object-fit: cover;
   object-position: center;
 }
+/* pulled back: the street at 94% of the slide's width, filling the space
+   under the corner title, its edges faded into the black so the signs read
+   at their natural size, never blown up */
+#s6 .city-hub-bg {
+  inset: auto;
+  top: calc(50% + 28px);
+  left: 50%;
+  width: 94%;
+  height: calc(100% - 88px);
+  transform: translate(-50%, -50%);
+  -webkit-mask-image:
+    linear-gradient(to right, transparent, #000 7%, #000 93%, transparent),
+    linear-gradient(to bottom, transparent, #000 9%, #000 91%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to right, transparent, #000 7%, #000 93%, transparent),
+    linear-gradient(to bottom, transparent, #000 9%, #000 91%, transparent);
+  mask-composite: intersect;
+}
 /* a black shade over the street so the title reads */
 .city-hub-shade {
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.4);
 }
-/* the title centred on the image and set low, on the street, as a hero
-   line (Helvetica Neue stops at bold, so size is what reads bolder) */
-#s5 h2 {
-  top: 72%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 44px;
-  line-height: 1.05;
-  white-space: nowrap;
-  text-align: center;
-  color: #fff;
-}
-/* the swaying cyphcard, centred over the title with its bottom 80px above
-   the title's top (the title is 44px, centred on 72%), see-through enough
-   that the crosswalk behind it reads */
-#s5 .city-card {
+/* the swaying cyphcard, centred low on the street, see-through enough
+   that the crosswalk behind it reads; the title is the corner title, as on
+   every other slide */
+#s6 .city-card {
   position: absolute;
   top: 72%;
   left: calc(50% + 24px);
-  width: 300px;
+  width: 280px; /* scaled with the street */
   transform: translate(-50%, calc(-100% - 102px));
   opacity: 0.8;
   z-index: 10;
 }
 /* the trailer link as the slide's footnote: bottom right, in the deck's
    footnote voice */
-#s5 .hiw-trailer {
+#s6 .hiw-trailer {
   top: auto;
   left: auto;
   right: 24px;
   bottom: 16px;
   text-decoration: none;
 }
-/* the trailer link (s5's footnote): the deck's footnote voice */
+/* the trailer link (s6's footnote): the deck's footnote voice */
 .hiw-trailer {
   position: absolute;
   top: 58px;
@@ -3692,7 +3861,7 @@ body.locked #deck-controls button {
 .hiw-fn-mark {
   color: var(--orange);
 }
-#s6:has(.hiw-step--ug.on) .hiw-ug-seed {
+#s7:has(.hiw-step--ug.on) .hiw-ug-seed {
   opacity: 1;
 }
 .hiw-ug-seed {
@@ -4223,7 +4392,7 @@ body.locked #deck-controls button {
   color: var(--charcoal);
 }
 /* eyebrow + images in the left column, label + logos in the right */
-#s6 .room-col {
+#s7 .room-col {
   display: grid;
   grid-template-columns: auto 1fr;
   column-gap: 28px;
@@ -4231,29 +4400,29 @@ body.locked #deck-controls button {
   text-align: left;
   padding-left: 0 !important; /* beats index.html's inline padding-left */
 }
-#s6 .room-eyebrow {
+#s7 .room-eyebrow {
   grid-column: 1;
   grid-row: 1;
 }
-#s6 .room-press {
+#s7 .room-press {
   grid-column: 1;
   grid-row: 2;
   height: 300px;
   width: auto;
 }
-#s6 .room-conductors,
-#s6 .room-article,
-#s6 .room-article img {
+#s7 .room-conductors,
+#s7 .room-article,
+#s7 .room-article img {
   width: auto;
   height: 100%;
 }
-#s6 .room-label {
+#s7 .room-label {
   grid-column: 2;
   grid-row: 1;
   margin: 0 0 10px;
   font-size: 13px;
 }
-#s6 .room-logos {
+#s7 .room-logos {
   grid-column: 2;
   grid-row: 2;
   justify-content: flex-start;
@@ -4263,40 +4432,40 @@ body.locked #deck-controls button {
 /* the same drift cycle as 01's inventory collage (set inline there; the logos
    are shared markup, so it is set here), but float only: hiw-float1-6 are
    drift1-6's translate paths without the rotate */
-#s6 .room-logos img:nth-child(12n + 1) {
+#s7 .room-logos img:nth-child(12n + 1) {
   animation: hiw-float1 9s ease-in-out infinite;
 }
-#s6 .room-logos img:nth-child(12n + 2) {
+#s7 .room-logos img:nth-child(12n + 2) {
   animation: hiw-float4 11s ease-in-out infinite;
 }
-#s6 .room-logos img:nth-child(12n + 3) {
+#s7 .room-logos img:nth-child(12n + 3) {
   animation: hiw-float2 10s ease-in-out infinite;
 }
-#s6 .room-logos img:nth-child(12n + 4) {
+#s7 .room-logos img:nth-child(12n + 4) {
   animation: hiw-float5 8.5s ease-in-out infinite;
 }
-#s6 .room-logos img:nth-child(12n + 5) {
+#s7 .room-logos img:nth-child(12n + 5) {
   animation: hiw-float3 10.5s ease-in-out infinite;
 }
-#s6 .room-logos img:nth-child(12n + 6) {
+#s7 .room-logos img:nth-child(12n + 6) {
   animation: hiw-float6 9.5s ease-in-out infinite;
 }
-#s6 .room-logos img:nth-child(12n + 7) {
+#s7 .room-logos img:nth-child(12n + 7) {
   animation: hiw-float2 11.5s ease-in-out infinite;
 }
-#s6 .room-logos img:nth-child(12n + 8) {
+#s7 .room-logos img:nth-child(12n + 8) {
   animation: hiw-float1 10s ease-in-out infinite;
 }
-#s6 .room-logos img:nth-child(12n + 9) {
+#s7 .room-logos img:nth-child(12n + 9) {
   animation: hiw-float4 9s ease-in-out infinite;
 }
-#s6 .room-logos img:nth-child(12n + 10) {
+#s7 .room-logos img:nth-child(12n + 10) {
   animation: hiw-float5 11s ease-in-out infinite;
 }
-#s6 .room-logos img:nth-child(12n + 11) {
+#s7 .room-logos img:nth-child(12n + 11) {
   animation: hiw-float3 8.5s ease-in-out infinite;
 }
-#s6 .room-logos img:nth-child(12n + 12) {
+#s7 .room-logos img:nth-child(12n + 12) {
   animation: hiw-float6 10s ease-in-out infinite;
 }
 @keyframes hiw-float1 {

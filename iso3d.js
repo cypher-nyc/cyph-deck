@@ -1,5 +1,5 @@
 /**
- * iso3d.js — "how it works" (s5) layer visuals, ported 1:1 from the app's
+ * iso3d.js — "how it works" (s7) layer visuals, ported 1:1 from the app's
  * live nav icons (cyph-design-system-3d-fe/src/theme/*Icon3D.tsx) so the deck
  * matches exactly what users see after opening the cyph card:
  *
@@ -749,7 +749,7 @@ function init() {
     window.holdCyphDoorsOpen = () => doors.holdOpen();
   }
 
-  // Swaying membership plate on how it works (s5): the cyphcard tile at
+  // Swaying membership plate on how it works (s7): the cyphcard tile at
   // the bottom of the layer stack (and 04's panel, if one is added back).
   const cyphcardCanvas = document.getElementById("cyphcardCanvas");
   if (cyphcardCanvas) scenes.push(buildCyphcard(cyphcardCanvas));
@@ -763,7 +763,7 @@ function init() {
     scenes.push(isoCard);
   }
 
-  // "how we make money" (s7) row objects: the swaying advanced cyphcard
+  // "how we make money" (s9) row objects: the swaying advanced cyphcard
   // (cyphcard+) and the syllabus paper (commissions), at row scale.
   const reachDoorsCanvas = document.getElementById("reachDoorsCanvas");
   if (reachDoorsCanvas) {

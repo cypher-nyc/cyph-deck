@@ -3,7 +3,7 @@
    waits for every animation on each state to land, screenshots it, and packs
    the frames into cyph-deck.pdf.
 
-   Sub-steps count as their own page — the how-it-works layers on s5
+   Sub-steps count as their own page — the how-it-works layers on s7
    (01/02/03) and the two founder bios after "ready for a demo?" — because
    that is what the viewer actually sees.
 
@@ -289,7 +289,7 @@ for (let i = 0; i < MAX_STATES; i++) {
       slide: active ? active.id : "?",
       /* the cyph layer is the doorway; it is showing on step 02. the
          .active class outlives the slide, so gate on the stack being on
-         the active slide (s5, on both decks) — otherwise every later page
+         the active slide (s7, on both decks) — otherwise every later page
          reports doors. */
       doorsOpen: !!(
         active &&
