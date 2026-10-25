@@ -535,9 +535,105 @@
         </div>
       </div>
 
-      <!-- LEVEL 3: THE SEARCH FOR HUMAN WISDOM -->
+      <!-- LEVEL 3: UNIVERSITIES — what we heard across the expert interviews.
+           Left, the hero: the trust collapse (57% → 38%) and its line chart.
+           Right, the three pillars stacked, each ruled in
+           its own colour (yellow · orange · blue, the deck's three lanes):
+           a number, a claim and one source (a link to it, named by logo).
+           Under both, the slide's takeaway across the full width. -->
       <div class="slide" id="s3" style="align-items: flex-start">
-        <h2>as ai fills the internet, people are searching harder for human wisdom.</h2>
+        <h2>universities were once built for world changing ideas. now they block them.</h2>
+        <p class="inst-sub">what we heard across <b>450+</b> expert interviews.</p>
+        <div class="inst-wrap">
+          <a class="inst-hero" href="https://news.gallup.com/poll/712322/confidence-higher-education-slips-back-slightly.aspx" target="_blank" rel="noopener">
+            <p class="inst-hero-label">public trust in higher ed</p>
+            <div class="inst-hero-stat">
+              <s>57%</s>
+              <svg class="inst-hero-arrow" viewBox="0 0 26 14" aria-label="fell to"><path d="M2 7h21M17 1.5 23 7l-6 5.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" /></svg>
+              <b>38%</b>
+              <span>2015</span>
+              <span></span>
+              <span>2026</span>
+            </div>
+            <!-- gallup's confidence in higher education ("a great deal" or
+                 "quite a lot"), every year gallup has asked it: 2015 = 57,
+                 2018 = 48, 2023 = 36, 2024 = 36, 2025 = 42, 2026 = 38
+                 (news.gallup.com 2018, 2023, 2024, 2025 and 2026 releases).
+                 plot: x 44–560 over 2015–2026, y 16–216 over 60%–30%; the line is
+                 a monotone cubic through the points, so it never overshoots a
+                 reading -->
+            <svg class="inst-chart" viewBox="0 0 580 250" aria-label="public trust in higher ed: 57% in 2015, 48% in 2018, 36% in 2023, 36% in 2024, 42% in 2025, 38% in 2026">
+              <defs>
+                <linearGradient id="instChartFill" x1="0" y1="0" x2="0" y2="1">
+                  <stop class="ch-g1" offset="0" />
+                  <stop class="ch-g2" offset="1" />
+                </linearGradient>
+              </defs>
+              <g class="ch-grid">
+                <line x1="44" y1="16" x2="560" y2="16" />
+                <line x1="44" y1="82.7" x2="560" y2="82.7" />
+                <line x1="44" y1="149.3" x2="560" y2="149.3" />
+              </g>
+              <g class="ch-axis">
+                <text x="34" y="20" text-anchor="end">60%</text>
+                <text x="34" y="86.7" text-anchor="end">50%</text>
+                <text x="34" y="153.3" text-anchor="end">40%</text>
+                <text x="44" y="242" text-anchor="middle">2015</text>
+                <text x="184.7" y="242" text-anchor="middle">2018</text>
+                <text x="419.3" y="242" text-anchor="middle">2023</text>
+                <text x="466.2" y="242" text-anchor="middle">2024</text>
+                <text x="513.1" y="242" text-anchor="middle">2025</text>
+                <text x="560" y="242" text-anchor="middle">2026</text>
+              </g>
+              <path class="ch-area" d="M44,36 C90.9,56 137.8,78 184.7,96 C262.9,126 341.1,176 419.3,176 C434.9,176 450.6,176 466.2,176 C481.8,176 497.5,136 513.1,136 C528.7,136 544.4,153.8 560,162.7 L560,216 L44,216 Z" />
+              <path class="ch-line" d="M44,36 C90.9,56 137.8,78 184.7,96 C262.9,126 341.1,176 419.3,176 C434.9,176 450.6,176 466.2,176 C481.8,176 497.5,136 513.1,136 C528.7,136 544.4,153.8 560,162.7" />
+              <circle class="ch-halo" cx="44" cy="36" r="16" />
+              <circle class="ch-dot ch-dot-end" cx="44" cy="36" r="8" />
+              <circle class="ch-dot" cx="184.7" cy="96" r="4" />
+              <circle class="ch-dot" cx="419.3" cy="176" r="4" />
+              <circle class="ch-dot" cx="466.2" cy="176" r="4" />
+              <circle class="ch-dot" cx="513.1" cy="136" r="4" />
+              <circle class="ch-halo" cx="560" cy="162.7" r="16" />
+              <circle class="ch-dot ch-dot-end" cx="560" cy="162.7" r="8" />
+            </svg>
+          </a>
+          <div class="inst-rule"></div>
+          <div class="inst-pillars">
+            <a class="inst-pillar" style="--pillar: var(--yellow)" href="https://www.theatlantic.com/ideas/archive/2019/05/college-students-arent-checking-out-books/590305/" target="_blank" rel="noopener">
+              <p class="idea-step">01</p>
+              <div>
+                <h3>the most treasured sources are buried.</h3>
+                <p class="inst-stat">&ldquo;The Books of College Libraries Are Turning Into Wallpaper&rdquo;</p>
+                <p class="inst-src"><img src="assets/brands/the_atlantic_mark.svg" class="crisis-brand" alt="the atlantic" /></p>
+              </div>
+            </a>
+            <a class="inst-pillar" style="--pillar: var(--orange)" href="https://www.insidehighered.com/news/faculty/academic-freedom/2026/04/20/faculty-defect-texas-publics-citing-censorship" target="_blank" rel="noopener">
+              <p class="idea-step">02</p>
+              <div>
+                <h3>the boldest ideas are punished.</h3>
+                <p class="inst-stat">&ldquo;Texas A&amp;M professor barred from teaching Plato&rsquo;s Symposium&rdquo;</p>
+                <p class="inst-src"><img src="assets/brands/inside_higher_ed.svg" class="crisis-brand" alt="inside higher ed" /></p>
+              </div>
+            </a>
+            <a class="inst-pillar" style="--pillar: var(--blue)" href="https://news.wisc.edu/land-grant-faculty-prioritize-public-engagement-but-feel-isolated/" target="_blank" rel="noopener">
+              <p class="idea-step">03</p>
+              <div>
+                <h3>the best research never leaves campus.</h3>
+                <p class="inst-stat">&ldquo;most scholars want to share their work with the public, but get no support to do it&rdquo;</p>
+                <p class="inst-src"><img src="assets/brands/uw_madison.svg" class="crisis-brand" alt="uw madison" /><span>6,200 faculty</span></p>
+              </div>
+            </a>
+          </div>
+          <a class="inst-result" href="https://news.gallup.com/poll/712322/confidence-higher-education-slips-back-slightly.aspx" target="_blank" rel="noopener">
+            <p class="inst-result-line">the answers to our most pressing problems are collecting dust.</p>
+            <p class="inst-src inst-foot"><img src="assets/brands/gallup.svg" class="crisis-brand" alt="gallup" /><img src="assets/brands/lumina.svg" class="crisis-brand" alt="lumina foundation" /></p>
+          </a>
+        </div>
+      </div>
+
+      <!-- LEVEL 4: THE SEARCH FOR HUMAN WISDOM -->
+      <div class="slide" id="s4" style="align-items: flex-start">
+        <h2>and as ai fills the internet, people are searching harder for human wisdom.</h2>
         <div class="now-wrap">
 
           <!-- one grid for the persona table, the divider and the key
@@ -600,128 +696,44 @@
               </div>
             </div>
 
+            <p class="now-takeaway">no single home for ideas</p>
+
             <div class="now-rule"></div>
 
-            <!-- the insights, one block per headline, set as s2's crisis cards:
-                 bold headline, then each article's italic stat line with its
-                 source logo beside it -->
+            <!-- the insights, one row each: a big stat on the left, then the
+                 claim, the supporting fact with its source logo, and where
+                 there is one a dimmer second line with its own logo -->
             <div class="now-insights">
-              <div class="crisis-card">
-                <h3>people crave verified, human-made material.</h3>
-                <a class="now-claim" href="https://www.pewresearch.org/science/2025/09/17/how-americans-view-ai-and-its-impact-on-people-and-society/" target="_blank" rel="noopener">
-                  <p class="crisis-quote">76% need to know if it&#x27;s human-made</p>
-                  <p class="crisis-src"><img src="assets/brands/pew_mark.png" class="crisis-brand" alt="pew research center" /></p>
-                </a>
-                <a class="now-claim" href="https://www.washingtonpost.com/technology/2026/01/27/anthropic-ai-scan-destroy-books/" target="_blank" rel="noopener">
-                  <p class="crisis-quote">AI labs scanned millions of pre-AI books to train on</p>
-                  <p class="crisis-src"><img src="assets/brands/wapo_mark.png" class="crisis-brand" alt="the washington post" /></p>
-                </a>
-              </div>
-              <div class="crisis-card">
-                <h3>people want to unlock their inner scholar.</h3>
-                <a class="now-claim" href="https://www.theatlantic.com/ideas/2026/06/ai-open-ai-anthropic/687689/" target="_blank" rel="noopener">
-                  <p class="crisis-quote">the AI age will reward people who choose mental effort</p>
-                  <p class="crisis-src"><img src="assets/brands/the_atlantic_mark.svg" class="crisis-brand" alt="the atlantic" /></p>
-                </a>
-                <a class="now-claim" href="https://www.ssense.com/en-us/editorial/culture/intellectual-clout" target="_blank" rel="noopener">
-                  <p class="crisis-quote">knowledge is the new clout: 2.5M+ follow 2-hour lectures on Plato and history</p>
-                  <p class="crisis-src"><img src="assets/brands/ssense.svg" class="crisis-brand" alt="ssense" /></p>
-                </a>
-              </div>
-              <div class="crisis-card">
-                <h3>people want to think together, not in isolation.</h3>
-                <a class="now-claim" href="https://www.nbcnews.com/pop-culture/pop-culture-news/book-clubs-social-scenes-gen-z-millennials-rcna200328" target="_blank" rel="noopener">
-                  <p class="crisis-quote">+31% book club &amp; &quot;salon&quot; events</p>
-                  <p class="crisis-src"><img src="assets/brands/nbc_news.png" class="crisis-brand" alt="nbc news" /></p>
-                </a>
-              </div>
-              <div class="crisis-card">
-                <h3>people crave masters, not influencers.</h3>
-                <a class="now-claim" href="https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2025/dnr-executive-summary" target="_blank" rel="noopener">
-                  <p class="crisis-quote">47% call influencers a top misinfo source</p>
-                  <p class="crisis-src"><img src="assets/brands/reuters_institute_mark.svg" class="crisis-brand" alt="reuters institute" /></p>
-                </a>
-                <div class="now-claim">
-                  <p class="crisis-quote">bookish creators lead the anti-slop wave</p>
-                  <p class="crisis-src"><img src="assets/brands/vogue.svg" class="crisis-brand" alt="vogue" /></p>
+              <div class="ins-row">
+                <b class="ins-stat">76%</b>
+                <div>
+                  <h3>people crave verified, human-made material.</h3>
+                  <a class="ins-fact" href="https://www.pewresearch.org/science/2025/09/17/how-americans-view-ai-and-its-impact-on-people-and-society/" target="_blank" rel="noopener">need to know if what they read is human-made <img src="assets/brands/pew_mark.png" class="crisis-brand" alt="pew research center" /></a>
+                  <a class="ins-fact ins-fact--2" href="https://www.washingtonpost.com/technology/2026/01/27/anthropic-ai-scan-destroy-books/" target="_blank" rel="noopener">ai labs scanned millions of pre-ai books to train on <img src="assets/brands/wapo_mark.png" class="crisis-brand" alt="the washington post" /></a>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- LEVEL 4: INSTITUTIONS — the expert-interview count and the 14 archetypes
-           (interviews each, from the live sheet's Coverage tab) on the left,
-           the key insights in two columns on the right, set as s3's insight
-           cards; each claim links to its source, named by logo -->
-      <div class="slide" id="s4" style="align-items: flex-start">
-        <h2>institutions used to be for ideas.</h2>
-        <div class="inst-wrap">
-          <div class="inst-grid">
-            <div class="inst-experts">
-              <b>450+</b>
-              <p>expert interviews</p>
-              <ul class="inst-archetypes">
-                <li><span>University Staff</span><em>96</em></li>
-                <li><span>University Students</span><em>26</em></li>
-                <li><span>Archivists &amp; Collectors</span><em>150</em></li>
-                <li><span>Seekers, Sparrers, &amp; Authorities</span><em>81</em></li>
-                <li><span>Commerce Partners</span><em>66</em></li>
-                <li><span>Trust &amp; Safety Experts</span><em>20</em></li>
-                <li><span>Comparable Operators</span><em>14</em></li>
-              </ul>
-            </div>
-
-            <div class="now-rule"></div>
-
-            <div class="inst-insights">
-              <div class="now-insights">
-              <div class="crisis-card idea-stage">
-                <p class="idea-step">01</p>
-                <h3>getting the idea.</h3>
-                <a class="now-claim" href="https://www.rand.org/pubs/research_reports/RRA4742-1.html" target="_blank" rel="noopener">
-                  <p class="crisis-quote">67% of students say using AI for schoolwork harms their critical thinking</p>
-                  <p class="crisis-src"><img src="assets/brands/rand.svg" class="crisis-brand" alt="rand" /></p>
-                </a>
-                <a class="now-claim" href="https://www.archives.gov/about/speeches/2024/expanding-access-at-national-archives-0" target="_blank" rel="noopener">
-                  <p class="crisis-quote">the National Archives has digitized only about 2% of its historic holdings</p>
-                  <p class="crisis-src"><img src="assets/brands/national_archives.svg" class="crisis-brand" alt="national archives" /></p>
-                </a>
+              <div class="ins-row">
+                <b class="ins-stat">2.5M+</b>
+                <div>
+                  <h3>people want to unlock their inner scholar.</h3>
+                  <a class="ins-fact" href="https://www.ssense.com/en-us/editorial/culture/intellectual-clout" target="_blank" rel="noopener">follow 2-hour lectures on plato and history <img src="assets/brands/ssense.svg" class="crisis-brand" alt="ssense" /></a>
+                  <a class="ins-fact ins-fact--2" href="https://www.theatlantic.com/ideas/2026/06/ai-open-ai-anthropic/687689/" target="_blank" rel="noopener">the ai age will reward people who choose mental effort <img src="assets/brands/the_atlantic_mark.svg" class="crisis-brand" alt="the atlantic" /></a>
+                </div>
               </div>
-              <div class="crisis-card idea-stage">
-                <p class="idea-step">02</p>
-                <h3>can&#x27;t pursue the idea.</h3>
-                <a class="now-claim" href="https://expression.fire.org/p/faculty-censorship-hits-record-high" target="_blank" rel="noopener">
-                  <p class="crisis-quote">a record 525 attempts to sanction scholars in 2025, including 29 firings</p>
-                  <p class="crisis-src"><img src="assets/brands/fire.svg" class="crisis-brand" alt="fire" /></p>
-                </a>
-                <a class="now-claim" href="https://knightfoundation.org/articles/research/college-students-views-on-free-expression/" target="_blank" rel="noopener">
-                  <p class="crisis-quote">2 in 3 students self-censor in classroom discussions</p>
-                  <p class="crisis-src"><img src="assets/brands/knight_foundation.svg" class="crisis-brand" alt="knight foundation" /></p>
-                </a>
+              <div class="ins-row">
+                <b class="ins-stat">+31%</b>
+                <div>
+                  <h3>people want to think together, not in isolation.</h3>
+                  <a class="ins-fact" href="https://www.nbcnews.com/pop-culture/pop-culture-news/book-clubs-social-scenes-gen-z-millennials-rcna200328" target="_blank" rel="noopener">growth in book club and &ldquo;salon&rdquo; events <img src="assets/brands/nbc_news.png" class="crisis-brand" alt="nbc news" /></a>
+                </div>
               </div>
-              <div class="crisis-card idea-stage">
-                <p class="idea-step">03</p>
-                <h3>disseminating and contesting the idea.</h3>
-                <a class="now-claim" href="https://peerj.com/articles/4375/" target="_blank" rel="noopener">
-                  <p class="crisis-quote">up to 72% of scholarly research is paywalled from the public</p>
-                  <p class="crisis-src"><img src="assets/brands/peerj.svg" class="crisis-brand" alt="peerj" /></p>
-                </a>
-                <a class="now-claim" href="https://news.gallup.com/poll/712322/confidence-higher-education-slips-back-slightly.aspx" target="_blank" rel="noopener">
-                  <p class="crisis-quote">public confidence in higher education fell from 57% in 2015 to 38% in 2026</p>
-                  <p class="crisis-src"><img src="assets/brands/gallup.svg" class="crisis-brand" alt="gallup" /></p>
-                </a>
-              </div>
-              </div>
-              <div class="idea-result">
-                <span class="now-th">as a result</span>
-                <ul>
-                  <li>limited ideas and intellectual vitality</li>
-                  <li>limited trust and connectivity</li>
-                  <li>limited discovery</li>
-                  <li>loss of wins (e.g., curing cancer)</li>
-                </ul>
+              <div class="ins-row">
+                <b class="ins-stat">47%</b>
+                <div>
+                  <h3>people crave masters, not influencers.</h3>
+                  <a class="ins-fact" href="https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2025/dnr-executive-summary" target="_blank" rel="noopener">call influencers a top source of misinformation <img src="assets/brands/reuters_institute_mark.svg" class="crisis-brand" alt="reuters institute" /></a>
+                  <span class="ins-fact ins-fact--2">bookish creators lead the anti-slop wave <img src="assets/brands/vogue.svg" class="crisis-brand" alt="vogue" /></span>
+                </div>
               </div>
             </div>
           </div>
@@ -856,8 +868,7 @@
                   suppressed ideas — all human made.<span class="hiw-fn-mark">*</span>
                 </p>
                 <p class="layer-anno-desc">
-                  publish your own &#x27;routes&#x27; to intellectual
-                  destinations.
+                  publish or explore routes to intellectual destinations.
                 </p>
                 <p class="layer-anno-desc">
                   teach a cohort learning sesh based on syllabi you design.

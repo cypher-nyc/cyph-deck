@@ -588,16 +588,16 @@ function runA(i) {
         easing: B,
       });
       break;
-    case 3:
+    case 4:
       anime({
-        targets: "#s3 h1",
+        targets: "#s4 h1",
         translateY: [-20, 0],
         opacity: [0, 1],
         duration: 600,
         easing: B,
       });
       anime({
-        targets: "#s3 .sub",
+        targets: "#s4 .sub",
         translateY: [12, 0],
         opacity: [0, 1],
         duration: 500,
@@ -605,9 +605,9 @@ function runA(i) {
         easing: C,
       });
       break;
-    case 4:
+    case 3:
       anime({
-        targets: "#s4 .inst-experts, #s4 .now-insights .crisis-card, #s4 .idea-result",
+        targets: "#s3 .inst-sub, #s3 .inst-hero, #s3 .inst-pillar, #s3 .inst-result",
         translateY: [15, 0],
         opacity: [0, 1],
         duration: 400,
@@ -836,7 +836,7 @@ function toggleLock() {
       el.style.opacity = "1";
       el.style.transform = "none";
     });
-    document.querySelectorAll("#s3 h1, #s3 .sub, #s4 .inst-experts, #s4 .now-insights .crisis-card, #s4 .idea-result").forEach(function (el) {
+    document.querySelectorAll("#s4 h1, #s4 .sub, #s3 .inst-sub, #s3 .inst-hero, #s3 .inst-pillar, #s3 .inst-result").forEach(function (el) {
       el.style.opacity = "1";
       el.style.transform = "none";
     });

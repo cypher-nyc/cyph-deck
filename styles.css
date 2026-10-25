@@ -907,8 +907,8 @@
 
 #s1 h2,
 #s2 h2,
-#s3 h2,
 #s4 h2,
+#s3 h2,
 #s5 h2,
 #s6 h2,
 #s7 h2,
@@ -926,19 +926,19 @@
   margin: 0;
 }
 
-/* the s3 and s4 titles run the slide's width inside the same 24px margin
+/* the s4 and s3 titles run the slide's width inside the same 24px margin
    on both sides and wrap where they fall */
-#s3 h2,
-#s4 h2 {
+#s4 h2,
+#s3 h2 {
   right: 24px;
 }
 
-/* ── s3: the headline full width, then one grid: the three personas as a
+/* ── s4: the headline full width, then one grid: the three personas as a
    table (who / size benchmark / tools, each row ruled in its persona
    color) beside the key insights, set as s2's crisis cards, then the
    closing line. Persona colors are s9's: seekers yellow, sparrers orange,
    authorities blue. Type sizes are the slide's previous ones, unchanged. ── */
-#s3 .now-wrap {
+#s4 .now-wrap {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -947,25 +947,25 @@
   height: 100%;
   padding: 40px 24px 0;
 }
-#s3 .now-seek {
+#s4 .now-seek {
   color: var(--yellow);
 }
-#s3 .now-spar {
+#s4 .now-spar {
   color: var(--orange);
 }
-#s3 .now-auth {
+#s4 .now-auth {
   color: var(--blue);
 }
 
-#s3 .now-grid {
+#s4 .now-grid {
   display: grid;
   grid-template-columns: 280px 220px 210px 1px 1fr;
-  grid-template-rows: auto repeat(3, auto);
+  grid-template-rows: auto repeat(4, auto);
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 /* the header row: every label the same size and bottom-aligned, so the
    table's headers and "key insights" share one baseline */
-#s3 .now-th {
+#s4 .now-th {
   grid-row: 1;
   align-self: end;
   padding-bottom: 10px;
@@ -973,57 +973,57 @@
   letter-spacing: 0.08em;
   color: var(--charcoal-muted);
 }
-#s3 .now-th--insights {
+#s4 .now-th--insights {
   grid-column: 5;
   padding-left: 40px;
 }
 
 /* a row is its three cells, each ruled on top in the persona color */
-#s3 .now-row {
+#s4 .now-row {
   display: contents;
 }
-#s3 .now-row--seek {
+#s4 .now-row--seek {
   --persona: var(--yellow);
 }
-#s3 .now-row--spar {
+#s4 .now-row--spar {
   --persona: var(--orange);
 }
-#s3 .now-row--auth {
+#s4 .now-row--auth {
   --persona: var(--blue);
 }
-#s3 .now-row--seek > * {
+#s4 .now-row--seek > * {
   grid-row: 2;
 }
-#s3 .now-row--spar > * {
+#s4 .now-row--spar > * {
   grid-row: 3;
 }
-#s3 .now-row--auth > * {
+#s4 .now-row--auth > * {
   grid-row: 4;
 }
-#s3 .now-row > * {
+#s4 .now-row > * {
   padding: 14px 24px 18px 0;
   border-top: 1px solid var(--persona);
 }
 /* the last cell stops short of the divider */
-#s3 .now-row > .now-logos {
+#s4 .now-row > .now-logos {
   margin-right: 40px;
 }
 
-#s3 .now-persona h4 {
+#s4 .now-persona h4 {
   margin: 0;
   font-size: 28px;
   font-weight: 700;
   line-height: 1.1;
   color: var(--persona);
 }
-#s3 .now-persona p,
-#s3 .now-size p {
+#s4 .now-persona p,
+#s4 .now-size p {
   margin: 4px 0 0;
   font-size: 15px;
   line-height: 1.4;
   color: var(--charcoal-muted);
 }
-#s3 .now-size b {
+#s4 .now-size b {
   display: block;
   font-size: 28px;
   font-weight: 700;
@@ -1031,12 +1031,12 @@
   color: var(--persona);
 }
 
-#s3 .now-logos {
+#s4 .now-logos {
   display: flex;
   align-items: flex-start;
   gap: 14px;
 }
-#s3 .now-logos img {
+#s4 .now-logos img {
   width: 42px;
   height: 42px;
   object-fit: contain;
@@ -1044,262 +1044,392 @@
 }
 
 /* the divider and the insights both span the three persona rows */
-#s3 .now-rule {
+#s4 .now-rule {
   grid-column: 4;
-  grid-row: 2 / 5;
+  grid-row: 2 / 6;
   background: rgba(255, 255, 255, 0.16);
 }
-#s3 .now-insights {
+/* the table's takeaway, under the three persona rows */
+#s4 .now-takeaway {
+  grid-column: 1 / 4;
+  grid-row: 5;
+  margin: 0 40px 0 0;
+  padding-top: 22px;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--charcoal);
+}
+/* the key insights: four equal rows split by hairlines, each a big stat
+   in a common left-aligned column beside its claim, its supporting fact
+   with the source logo, and a dimmer second line where there is one.
+   The stats stay white: the persona table already carries the slide's
+   three colours, and an orange stat would read as a fourth persona. */
+#s4 .now-insights {
   grid-column: 5;
-  grid-row: 2 / 5;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 24px;
+  grid-row: 2 / 6;
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
   padding-left: 40px;
 }
-#s3 .crisis-card,
-#s4 .crisis-card {
+#s4 .ins-row {
+  display: grid;
+  grid-template-columns: 132px 1fr;
+  gap: 0 20px;
+  align-items: start;
+  padding: 16px 0;
+}
+#s4 .ins-row + .ins-row {
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
+#s4 .ins-row:first-child {
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
+#s4 .ins-stat {
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--charcoal);
+}
+#s4 .ins-row h3 {
+  margin: 0 0 6px;
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--charcoal);
+}
+#s4 .ins-fact {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--charcoal-muted);
+  text-decoration: none;
+}
+/* the second line: a step down, smaller and dimmer, with its own logo */
+#s4 .ins-fact--2 {
+  margin-top: 4px;
+  font-size: 12px;
+  opacity: 0.6;
+}
+#s4 .ins-fact--2 .crisis-brand {
+  height: 15px;
+}
+#s4 .crisis-card,
+#s3 .crisis-card {
   padding: 0;
   cursor: default;
 }
-#s3 .crisis-card h3,
 #s4 .crisis-card h3,
-#s3 .crisis-quote,
-#s4 .crisis-quote {
+#s3 .crisis-card h3,
+#s4 .crisis-quote,
+#s3 .crisis-quote {
   white-space: normal;
 }
-#s3 .crisis-card h3,
-#s4 .crisis-card h3 {
+#s4 .crisis-card h3,
+#s3 .crisis-card h3 {
   font-size: 19px;
   line-height: 1.25;
 }
-#s3 .crisis-card .crisis-quote,
-#s4 .crisis-card .crisis-quote {
+#s4 .crisis-card .crisis-quote,
+#s3 .crisis-card .crisis-quote {
   font-size: 14px;
 }
 /* each claim with its source logo beside it */
 /* the claim's text runs inline, so its logo follows the last word even
    when the claim wraps */
-#s3 .now-claim,
-#s4 .now-claim {
+#s4 .now-claim,
+#s3 .now-claim {
   display: block;
 }
 /* a claim with an article is a link to it, set like the rest */
-#s3 a.now-claim,
-#s4 a.now-claim {
+#s4 a.now-claim,
+#s3 a.now-claim {
   color: inherit;
   text-decoration: none;
 }
-#s3 .now-claim .crisis-quote,
-#s4 .now-claim .crisis-quote {
+#s4 .now-claim .crisis-quote,
+#s3 .now-claim .crisis-quote {
   display: inline;
 }
-#s3 .now-claim + .now-claim,
-#s4 .now-claim + .now-claim {
+#s4 .now-claim + .now-claim,
+#s3 .now-claim + .now-claim {
   margin-top: 8px;
 }
-#s3 .crisis-src,
-#s4 .crisis-src {
+#s4 .crisis-src,
+#s3 .crisis-src {
   display: flex;
   align-items: center;
   gap: 10px;
   margin-top: 4px;
 }
-#s3 .now-claim .crisis-src,
-#s4 .now-claim .crisis-src {
+#s4 .now-claim .crisis-src,
+#s3 .now-claim .crisis-src {
   display: inline-flex;
   vertical-align: middle;
   margin: 0 0 0 10px;
 }
-#s3 .crisis-src a {
+#s4 .crisis-src a {
   display: flex;
 }
 /* outside a card, so it takes the card's source type here */
-#s3 .now-size .crisis-src {
+#s4 .now-size .crisis-src {
   margin-top: 6px;
   font-size: 12px;
   color: rgba(255, 255, 255, 0.5);
 }
 /* the source logos: symbols where the mark has one, at one height; the
    wordmarks that have none sized to match their weight */
-#s3 .crisis-brand {
+#s4 .crisis-brand {
   height: 19px;
 }
-#s3 .crisis-brand[alt="nbc news"] {
+#s4 .crisis-brand[alt="nbc news"] {
   height: 24px;
 }
-#s3 .crisis-brand[alt="vogue"] {
+#s4 .crisis-brand[alt="vogue"] {
   height: 16px;
 }
-#s3 .crisis-brand[alt="ssense"] {
+#s4 .crisis-brand[alt="ssense"] {
   height: 12px;
 }
-/* ── s4: institutions — the expert-interview count on the left, centred
-   in its column, beside the key insights in two columns, set as s3's
-   insight cards (the card rules above carry both slides) ── */
-#s4 .inst-wrap {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+/* ── s3: universities — the subtitle under the corner title, then two
+   zones split by a hairline: left (45%) the hero, the trust collapse as
+   57% → 38% and a line chart over the result; right (55%) the three
+   pillars stacked, each ruled in its own colour (s4's lanes: yellow,
+   orange, blue), its number in that colour beside its claim and source ── */
+#s3 .inst-sub {
+  position: absolute;
+  top: 62px;
+  left: 24px;
+  margin: 0;
+  font-size: 17px;
+  color: var(--charcoal-muted);
+}
+#s3 .inst-sub b {
+  font-size: 22px;
+  color: var(--orange);
+}
+#s3 .inst-wrap {
+  display: grid;
+  grid-template-columns: 45fr 1px 55fr;
+  grid-template-rows: 1fr auto;
+  gap: 0 56px;
   width: 100%;
   height: 100%;
-  padding: 40px 24px 0;
-}
-#s4 .inst-grid {
-  display: grid;
-  grid-template-columns: 400px 1px 1fr;
-  align-items: stretch;
+  padding: 124px 0 36px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-#s4 .inst-experts {
-  align-self: center;
-  padding: 0 40px 0 24px;
-}
-#s4 .inst-experts b {
-  display: block;
-  font-size: 72px;
-  font-weight: 700;
-  line-height: 1;
-  color: var(--orange);
-}
-#s4 .inst-experts > p {
-  margin: 8px 0 0;
-  font-size: 22px;
-  line-height: 1.3;
-  color: var(--charcoal);
-}
-#s4 .inst-archetypes {
-  list-style: none;
-  margin: 22px 0 0;
-  padding: 0;
-}
-#s4 .inst-archetypes li {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 5px 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.16);
-  font-size: 14px;
-  line-height: 1.4;
-  color: var(--charcoal);
-}
-#s4 .inst-archetypes em {
-  font-style: normal;
-  color: var(--charcoal-muted);
-}
-#s4 .now-rule {
+#s3 .inst-rule {
   background: rgba(255, 255, 255, 0.16);
 }
-#s4 .inst-insights {
-  align-self: center;
-  padding-left: 48px;
-}
-#s4 .now-th {
-  display: block;
-  padding-bottom: 14px;
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  color: var(--charcoal-muted);
-}
-/* the three stages of an idea, read left to right: a numbered line runs
-   from each stage into the next, and the whole row lands on the result */
-#s4 .now-insights {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0 40px;
-}
-#s4 .idea-step {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 0 -40px 16px 0;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  color: var(--orange);
-}
-#s4 .idea-step::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.16);
-}
-#s4 .idea-stage:last-child .idea-step {
-  margin-right: 0;
-}
-#s4 .idea-stage:last-child .idea-step::after {
-  display: none;
-}
-/* every stage shares one set of rows, so the stats and their logos line
-   up across the three: a two-line headline, three-line stats */
-#s4 .crisis-card h3 {
-  min-height: calc(2 * 1.25em);
-  margin-bottom: 14px;
-}
-#s4 .now-claim {
-  display: block;
-}
-#s4 .now-claim + .now-claim {
-  margin-top: 18px;
-}
-#s4 .now-claim .crisis-quote {
-  display: block;
-  min-height: calc(3 * 1.45em);
-  font-size: 14px;
-  line-height: 1.45;
-  font-style: normal;
-  color: var(--charcoal);
-}
-/* the logo sits under its stat, left-aligned, in one 30px row */
-#s4 .now-claim .crisis-src {
-  display: flex;
-  align-items: center;
-  height: 30px;
-  margin: 8px 0 0;
-}
-/* the source logos, sized by eye to one optical weight */
-#s4 .crisis-brand {
-  height: 20px;
-}
-#s4 .crisis-brand[alt="fire"] {
-  height: 28px;
-}
-#s4 .crisis-brand[alt="national archives"] {
-  height: 30px;
-}
-#s4 .crisis-brand[alt="knight foundation"] {
-  height: 22px;
-}
-#s4 .crisis-brand[alt="rand"] {
-  height: 22px;
-}
-#s4 .crisis-brand[alt="peerj"] {
-  height: 18px;
-}
-#s4 .crisis-brand[alt="gallup"] {
-  height: 16px;
+#s3 a {
+  color: inherit;
+  text-decoration: none;
 }
 
-/* where it all lands: the four limits, one row under a rule */
-#s4 .idea-result {
-  margin-top: 36px;
-  padding-top: 20px;
+/* the hero: label, 57% → 38% with their years under them, the chart,
+   the result */
+/* the hero centres in its zone */
+#s3 .inst-hero {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+#s3 .inst-hero-label {
+  margin: auto 0 6px;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: var(--charcoal-muted);
+}
+#s3 .inst-hero-stat {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  justify-content: start;
+  align-items: baseline;
+  column-gap: 22px;
+  margin: 0 0 10px;
+  line-height: 1;
+}
+#s3 .inst-hero-stat s {
+  font-size: 80px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  text-decoration: none;
+  color: var(--charcoal);
+}
+#s3 .inst-hero-arrow {
+  width: 44px;
+  height: 24px;
+  align-self: center;
+  color: var(--charcoal-muted);
+}
+#s3 .inst-hero-stat b {
+  font-size: 112px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: var(--orange);
+}
+#s3 .inst-hero-stat span {
+  margin-top: 10px;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: var(--charcoal-muted);
+}
+#s3 .inst-hero-stat span:last-child {
+  color: var(--orange);
+}
+#s3 .inst-chart {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-bottom: auto;
+  overflow: visible;
+}
+#s3 .ch-grid line {
+  stroke: rgba(255, 255, 255, 0.12);
+  stroke-width: 1;
+}
+#s3 .ch-axis text {
+  font-size: 12px;
+  fill: var(--charcoal-muted);
+}
+/* the fill runs from paprika under the line down to white */
+#s3 .ch-g1 {
+  stop-color: var(--orange);
+  stop-opacity: 0.55;
+}
+#s3 .ch-g2 {
+  stop-color: var(--charcoal);
+  stop-opacity: 0.08;
+}
+#s3 .ch-area {
+  fill: url(#instChartFill);
+}
+/* the decline, through every year gallup asked */
+#s3 .ch-line {
+  fill: none;
+  stroke: var(--charcoal);
+  stroke-width: 3.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+#s3 .ch-dot {
+  fill: var(--charcoal);
+}
+#s3 .ch-halo {
+  fill: var(--orange);
+  opacity: 0.25;
+}
+/* the two ends, 2015 and 2026: paprika, ringed in black, haloed */
+#s3 .ch-dot-end {
+  fill: var(--orange);
+  stroke: #000;
+  stroke-width: 3;
+}
+/* both ends' labels in paprika */
+/* the slide's takeaway: across both zones under a rule, its source
+   logos as a footnote at the right end */
+#s3 .inst-result {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  margin-top: 28px;
+  padding-top: 22px;
   border-top: 1px solid rgba(255, 255, 255, 0.16);
 }
-#s4 .idea-result ul {
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+#s3 .inst-result-line {
   margin: 0;
-  padding: 0;
-}
-#s4 .idea-result li {
-  font-size: 15px;
+  font-size: 21px;
   font-weight: 700;
-  line-height: 1.3;
+  line-height: 1.25;
   color: var(--charcoal);
+}
+#s3 .inst-foot {
+  margin: 0;
+  height: auto;
+  opacity: 0.7;
+}
+#s3 .inst-foot .crisis-brand[alt="gallup"] {
+  height: 11px;
+}
+#s3 .inst-foot .crisis-brand[alt="lumina foundation"] {
+  height: 19px;
+}
+
+/* the pillars: three equal rows, each ruled in its colour, the number in
+   that colour in its own column beside the text */
+#s3 .inst-pillars {
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  min-width: 0;
+}
+#s3 .inst-pillar {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 0 24px;
+  align-items: center;
+  padding: 22px 0;
+  border-top: 2px solid var(--pillar);
+}
+#s3 .idea-step {
+  align-self: start;
+  margin: 0;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--pillar);
+}
+#s3 .inst-pillar h3 {
+  margin: 0 0 10px;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--charcoal);
+}
+#s3 .inst-stat {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.45;
+  font-style: italic;
+  color: var(--charcoal-light);
+  text-wrap: balance;
+}
+/* the source line: its logo, then any qualifier in muted caps */
+#s3 .inst-src {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 30px;
+  margin: 8px 0 0;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--charcoal-muted);
+}
+/* the source logos, sized by eye to one optical weight */
+#s3 .crisis-brand {
+  height: 20px;
+}
+#s3 .crisis-brand[alt="the atlantic"] {
+  height: 24px;
+}
+#s3 .crisis-brand[alt="inside higher ed"] {
+  height: 30px;
+}
+#s3 .crisis-brand[alt="uw madison"] {
+  height: 18px;
+}
+#s3 .crisis-brand[alt="gallup"] {
+  height: 14px;
+}
+#s3 .crisis-brand[alt="lumina foundation"] {
+  height: 24px;
 }
 
 /* ── s1: advisory board — a second section beneath the founder cards.
@@ -1494,7 +1624,7 @@
   width: auto;
   object-fit: contain;
 }
-/* the e.g. line, in s3's old i.e.-line voice (13px italic, muted) */
+/* the e.g. line, in s4's old i.e.-line voice (13px italic, muted) */
 .traction-eg {
   margin: 4px 0 0;
   font-size: 13px;
