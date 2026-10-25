@@ -1,47 +1,5 @@
 /* ═══ CYPH partner deck ═══
    Loads on top of styles.css, desktop path only. Every partner slide is an
-   investor slide under its own id (how it works included, as s6), so only
-   partner-specific overrides live here. */
-
-/* ── s4: for partners, only the claim — the title (the cyph line) over
-   the left column's takeaway (the persona line), centred on the slide at
-   the title's size, the persona words in the title's own color; the
-   table, insights and AI line go ── */
-#s4 {
-  align-items: center !important;
-}
-#s4 h2 {
-  position: static;
-  text-align: center;
-  line-height: 1.15;
-}
-#s4 .now-grid > :not(.now-lead) {
-  display: none;
-}
-#s4 .now-wrap {
-  height: auto;
-  padding: 0;
-  justify-content: center;
-  align-items: center;
-}
-#s4 .now-grid {
-  display: block;
-  width: 1000px;
-}
-#s4 .now-lead {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  text-align: center;
-}
-#s4 .now-lead .deck-takeaway-body {
-  font-size: 26px;
-  font-weight: 700;
-  line-height: 1.15;
-  text-wrap: balance;
-}
-#s4 .now-lead .now-seek,
-#s4 .now-lead .now-spar,
-#s4 .now-lead .now-auth {
-  color: inherit;
-}
+   investor slide under its own id (how it works included, as s7), so only
+   partner-specific overrides live here. None at the moment: the two
+   problem slides (s3, s4) stay investor-only, so nothing needs hiding. */
