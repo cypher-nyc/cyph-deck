@@ -8,7 +8,7 @@
    host must never carry the investor deck (index.html, deck.js,
    cyph-deck.pdf, assets/deck-pages/), so only what partners.html loads is
    copied. partners.html lands as index.html; 404.html + /common/ come from
-   site/ exactly as on investors.cyph.city.
+   site/ (the shared 404 and viewer).
 
    The bucket belongs to this deck alone, so the sync deletes whatever the
    stage no longer carries.

@@ -205,29 +205,22 @@ The file map lives in `README.md` (Layout). Rules that go with it:
   Never hand-edit, never hand-add — `npm run pdf` owns this directory.
 - `assets/videos/` — `s13` demo-montage clips, web `.mp4` only (H.264, **no audio**). Source `.mov` masters are **not** kept in-repo: transcode with `ffmpeg -i in.mov -an -vf "scale=960:-2" -c:v libx264 -pix_fmt yuv420p -crf 28 -preset fast -movflags +faststart out.mp4`, wire the `.mp4` into the grid, then delete the master. (VHS/grain-heavy clips compress poorly — bump `-crf` if a file is disproportionately large.)
 
-## investors.cyph.city (S3 + CloudFront), beside GitHub Pages
+## investors.cyph.city is not this deck's any more
 
-GitHub Pages keeps serving `main:/` untouched. The same deck is also published
-as frozen, hand-named versions at `investors.cyph.city/deck/<version>/`, next
-to the one-pager at `/onepager/`. Everything under `site/` is that host:
+Since 2026-11-10 investors.cyph.city is the investors' research dashboard, a
+page of cyph-web's build (`apps/web/investors.html`, deployed by cyph-web's
+`deploy-dev-site.yml`). The versioned deck and one-pager that lived there were
+removed from the bucket, and their publisher (`tools/publish-investors.mjs`,
+`deploy-investors.yml`, `tools/investors.json`) is gone. **Never publish
+anything from this repo to `cyph-investors-prod`.** GitHub Pages keeps serving
+`main:/` untouched.
 
-- `site/deck/versions.json`: the version list. A version must be listed and
-  `live` to publish; flipping `live:false` and republishing `site` retires it
-  (auth.js shows the retired placard instead of the gate). `/deck/latest/` is
-  the link we hand out: it resolves to `current`, so the sheet still records
-  the exact version each viewer saw. The root does the same.
-- `site/onepager/`: `cyph-onepager.pdf` (a copied export of the InDesign
-  one-pager, compressed with Ghostscript) + `pages/` from
-  `node tools/onepager-pages.mjs [new.pdf]`. Committed like `assets/deck-pages`.
-- `site/common/viewer.js` + `viewer.css`: mobile.js generalized, for any
-  page-image column. The published `/common/` bundle is these plus `auth.js`,
-  `base.css`, `favicon.png` from the repo root; event-decks builds its site
-  from the same files.
-- `tools/publish-investors.mjs deck --version <id>` / `site` (`--dry-run`
-  prints the staged tree). The deck sync deletes only inside its own version
-  prefix; the site sync never deletes. `tools/investors.json` holds the bucket
-  and distribution id (not secrets). `.github/workflows/deploy-investors.yml`
-  republishes `site` on push and publishes a deck version on manual dispatch.
+What stays under `site/` is shared by the other hosts: `site/404.html` and
+`site/common/viewer.js` + `viewer.css` (mobile.js generalized, for any
+page-image column). partners.cyph.city and trailer.cyph.city publish them with
+`auth.js`, `base.css`, `favicon.png` from the repo root as `/common/`;
+event-decks builds its site from the same files. `site/onepager/cyph-onepager.pdf`
+is kept as the one-pager's export (no longer served anywhere).
 
 **auth.js is shared** by every surface. It reads `data-mode`, `data-viewed`,
 `data-meta`, `data-versions` off its script tag and sends `viewed` + `meta` in
